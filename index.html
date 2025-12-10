@@ -486,3 +486,83 @@
   </script>
 </body>
 </html>
+// Fixed Calculator Functions
+    const countries = {
+      Portugal: 1,
+      Spain: 1.2,
+      UAE: 1.5,
+      Thailand: 0.6,
+      Cyprus: 1.0,
+      Greece: 1.1,
+      Italy: 1.3,
+      France: 1.4,
+      Poland: 0.5,
+      Latvia: 0.55,
+      "Costa Rica": 0.7,
+      Malta: 1.1,
+      Hungary: 0.8,
+      Argentina: 0.4,
+      USA: 1.8
+    };
+
+    function changeCountry() {
+      const c = document.getElementById('country').value;
+      document.getElementById('retCountry').textContent = c;
+      calc();
+    }
+
+    function calc() {
+      const pension = parseInt(document.getElementById('pension').value);
+      const property = parseInt(document.getElementById('property').value);
+      const c = document.getElementById('country').value;
+
+      const multiplier = countries[c] || 1;
+      const save = Math.round((pension * 0.3 + property * 0.005) * multiplier);
+
+      document.getElementById('pensionVal').textContent = pension.toLocaleString();
+      document.getElementById('propertyVal').textContent = property.toLocaleString();
+      document.getElementById('result').textContent = `You could save £${save.toLocaleString()}/year!`;
+    }
+
+    function checkVisa() {
+      const income = parseInt(document.getElementById('q1').value);
+      const remote = parseInt(document.getElementById('q2').value);
+      const family = parseInt(document.getElementById('q4').value);
+
+      let visa = "D7 Passive Income (Portugal)";
+      if (income === 2 && remote === 1) visa = "Digital Nomad Visa";
+      if (income === 0) visa = "Low Income Visa Options: Poland, Argentina";
+      if (family === 1) visa += " – Family Included";
+
+      document.getElementById('visaResult').textContent = visa;
+    }
+
+    function calcShipping() {
+      const v = parseInt(document.getElementById('shipping').value);
+      document.getElementById('shippingResult').textContent = `Shipping cost: £${v.toLocaleString()}`;
+    }
+
+    function completeJourney() {
+      alert("🎉 Congratulations – your relocation plan is complete! 🎉");
+    }
+
+    // Countdown – NI Top-Up Window (fixed)
+    function updateCountdown() {
+      const deadline = new Date("2025-04-05");
+      const now = new Date();
+      const diff = deadline - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').textContent = "NI Top-Up Window: CLOSED";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById('countdown').textContent = `NI Top-Up Window: ${days} days left`;
+    }
+
+    setInterval(updateCountdown, 60000);
+    updateCountdown();
+  </script>
+</body>
+</html>
