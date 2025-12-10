@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRITS ABROAD 2025 – Your Relocation Journey</title>
+<title>BRITS ABROAD 2025 – Retirement Roadmap</title>
 <style>
   body {font-family: 'Inter', Arial, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #e6f2ff); color: #00247d; text-align: center; margin: 0; padding: 20px; line-height: 1.6;}
   h1 {font-size: 2.8em; color: #00247d; margin: 20px; font-weight: 700;}
@@ -27,14 +27,19 @@
   .phase-icon {font-size: 1.8em; margin-bottom: 5px;}
   .progress-bar {width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; margin: 20px 0; overflow: hidden;}
   .progress-fill {height: 100%; background: #c8102e; transition: width 0.5s; border-radius: 5px;}
+  .retirement-table {margin: 20px 0;}
+  .retirement-table tr:hover {background: #f0f8ff; animation: slideIn 0.3s;}
+  .detail {display: none; background: #e6f2ff; padding: 10px; border-radius: 8px; margin: 5px 0;}
+  .detail.show {display: block; animation: fadeIn 0.3s;}
   @keyframes fadeIn {from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);}}
   @keyframes pulse {0% {transform: scale(1);} 50% {transform: scale(1.05);} 100% {transform: scale(1);}}
+  @keyframes slideIn {from {transform: translateX(-10px);} to {transform: translateX(0);}}
   @media (prefers-color-scheme: dark) {body {background: #121212; color: #f0f8ff;} .card {background: #1e1e1e;}}
 </style>
 </head>
 <body>
 <h1>BRITS ABROAD 2025</h1>
-<p class="subtitle">Escape the 2025 Budget squeeze – Your 10-Phase Relocation Journey</p>
+<p class="subtitle">Escape the 2025 Budget squeeze – Your Retirement Roadmap</p>
 
 <div class="progress-bar">
   <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
@@ -80,6 +85,10 @@
   <div class="phase" onclick="selectPhase(10)" data-phase="10">
     <div class="phase-icon">🎉</div>
     <div>Celebration Station</div>
+  </div>
+  <div class="phase" onclick="selectPhase(11)" data-phase="11">
+    <div class="phase-icon">👴</div>
+    <div>Retirement Roadmap</div>
   </div>
 </div>
 
@@ -164,13 +173,210 @@
     <p>You did it! Welcome to your new life abroad 🎉</p>
     <button onclick="completeJourney()">Celebrate Your Move!</button>
   </div>
+
+  <div class="card" id="phase11" style="display:none;">
+    <h2>Phase 11: Retirement Roadmap</h2>
+    <p>Retirement Score for <span id="retCountry">Portugal</span>: <span id="retScore">85%</span> match</p>
+    <table class="retirement-table">
+      <tr onclick="toggleDetail('portugal')">
+        <th>Country</th>
+        <th>Retirement Visa</th>
+        <th>Min Income (per month)</th>
+        <th>Age Req.</th>
+        <th>Insurance</th>
+        <th>Renewal</th>
+        <th>PR/Citizenship Path</th>
+      </tr>
+      <tr>
+        <td>Portugal</td>
+        <td>D7 Passive Income</td>
+        <td>€870</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>1 year, then 2 years</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="portugal-detail" class="detail">
+        <td colspan="7">Detailed: Pension tax at 10%; family included; Golden Visa option for €250k investment. <a href="https://www.portugal.gov.pt/en">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('spain')">
+        <td>Spain</td>
+        <td>Non-Lucrative</td>
+        <td>€2,400</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>1 year, then 2 years</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="spain-detail" class="detail">
+        <td colspan="7">Detailed: Foreign pension tax credit; no work allowed; Golden Visa €500k investment. <a href="https://www.exteriores.gob.es/en">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('uae')">
+        <td>UAE</td>
+        <td>Retirement Visa</td>
+        <td>AED 20,000 (~£4,200)</td>
+        <td>55+</td>
+        <td>Private</td>
+        <td>5 years</td>
+        <td>No PR</td>
+      </tr>
+      <tr id="uae-detail" class="detail">
+        <td colspan="7">Detailed: No income tax; property investment AED 1M option; family included. <a href="https://u.ae/en">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('thailand')">
+        <td>Thailand</td>
+        <td>O-A Retirement</td>
+        <td>THB 65,000 (~£1,500)</td>
+        <td>50+</td>
+        <td>Private</td>
+        <td>1 year, renewable</td>
+        <td>No PR</td>
+      </tr>
+      <tr id="thailand-detail" class="detail">
+        <td colspan="7">Detailed: Elite Visa for £15k fee; pension deposit option; family under separate rules. <a href="https://www.thaievisa.go.th">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('cyprus')">
+        <td>Cyprus</td>
+        <td>Category F</td>
+        <td>€10,000 (~£8,400)</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>Renewable</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="cyprus-detail" class="detail">
+        <td colspan="7">Detailed: Permanent Residence for €300k investment; EU access. <a href="https://www.moi.gov.cy">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('greece')">
+        <td>Greece</td>
+        <td>FIP (Financially Independent)</td>
+        <td>€3,500</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>2 years</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="greece-detail" class="detail">
+        <td colspan="7">Detailed: Golden Visa €250k investment; pension tax breaks. <a href="https://www.migration.gov.gr">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('italy')">
+        <td>Italy</td>
+        <td>Elective Residence</td>
+        <td>€31,000/year</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>1 year, renewable</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="italy-detail" class="detail">
+        <td colspan="7">Detailed: Stable pension proof; no work; family included. <a href="https://vistoperitalia.esteri.it">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('france')">
+        <td>France</td>
+        <td>Visitor (Long-Stay)</td>
+        <td>€1,800/month</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>1 year, renewable</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="france-detail" class="detail">
+        <td colspan="7">Detailed: Pension tax treaty with UK; family visa extension. <a href="https://france-visas.gouv.fr">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('poland')">
+        <td>Poland</td>
+        <td>Temporary Residence</td>
+        <td>PLN 800 (~£160)</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>3 years</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="poland-detail" class="detail">
+        <td colspan="7">Detailed: Low cost, EU access; pension deposit option. <a href="https://www.gov.pl/udsc">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('latvia')">
+        <td>Latvia</td>
+        <td>Temporary Residence</td>
+        <td>€800</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>1 year, renewable</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="latvia-detail" class="detail">
+        <td colspan="7">Detailed: Low taxes on pensions; family included. <a href="https://www.pmlp.gov.lv">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('costa-rica')">
+        <td>Costa Rica</td>
+        <td>Pensionado</td>
+        <td>$1,000</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>2 years</td>
+        <td>PR after 3 years</td>
+      </tr>
+      <tr id="costa-rica-detail" class="detail">
+        <td colspan="7">Detailed: 50% discount on utilities; family included. <a href="https://www.migracion.go.cr">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('malta')">
+        <td>Malta</td>
+        <td>Malta Retirement Programme</td>
+        <td>€10,000/year</td>
+        <td>55+</td>
+        <td>Private</td>
+        <td>Renewable</td>
+        <td>PR after 5 years</td>
+      </tr>
+      <tr id="malta-detail" class="detail">
+        <td colspan="7">Detailed: 15% tax on foreign income; EU access. <a href="https://identitymalta.com">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('hungary')">
+        <td>Hungary</td>
+        <td>Residence Permit</td>
+        <td>HUF 800,000 (~£1,700)</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>1 year, renewable</td>
+        <td>PR after 8 years</td>
+      </tr>
+      <tr id="hungary-detail" class="detail">
+        <td colspan="7">Detailed: Golden Visa €250k investment; low pension tax. <a href="https://enterhungary.gov.hu">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('argentina')">
+        <td>Argentina</td>
+        <td>Pensionado</td>
+        <td>$500</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>3 years</td>
+        <td>Citizenship after 2 years</td>
+      </tr>
+      <tr id="argentina-detail" class="detail">
+        <td colspan="7">Detailed: Fast citizenship; family included. <a href="https://www.argentina.gob.ar">Apply here</a></td>
+      </tr>
+      <tr onclick="toggleDetail('usa')">
+        <td>USA</td>
+        <td>EB-5 Investor</td>
+        <td>$800,000</td>
+        <td>None</td>
+        <td>Private</td>
+        <td>2 years, renewable</td>
+        <td>PR after 2 years</td>
+      </tr>
+      <tr id="usa-detail" class="detail">
+        <td colspan="7">Detailed: Investor visa for retirees; no pension visa but EB-5 for wealth. <a href="https://www.uscis.gov">Apply here</a></td>
+      </tr>
+    </table>
+    <button onclick="completePhase(11)">Complete Retirement Roadmap</button>
+  </div>
 </div>
 
 <div class="countdown" id="countdown">NI Top-Up Window: calculating...</div>
 
 <script>
   let currentPhase = 1;
-  const phases = ['phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'phase9', 'phase10'];
+  const phases = ['phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'phase9', 'phase10', 'phase11'];
 
   function selectPhase(n) {
     if (n > currentPhase) return;
@@ -178,29 +384,30 @@
     document.querySelector(`[data-phase="${n}"]`).classList.add('active');
     phases.forEach(p => document.getElementById(p).style.display = 'none');
     document.getElementById(phases[n-1]).style.display = 'block';
-    document.getElementById('progressFill').style.width = (n / 10 * 100) + '%';
+    document.getElementById('progressFill').style.width = (n / 11 * 100) + '%';
+    if (n === 11) updateRetirementScore();
   }
 
   function completePhase(n) {
     if (n < currentPhase) return;
     currentPhase = n + 1;
     document.querySelector(`[data-phase="${n}"]`).classList.add('completed');
-    if (currentPhase <= 10) selectPhase(currentPhase);
-    else alert('Congratulations – your relocation journey is complete! 🎉');
+    if (currentPhase <= 11) selectPhase(currentPhase);
+    else alert('Congratulations – your retirement journey is complete! 🎉');
   }
 
-  function completeJourney() {
-    // Confetti animation
-    for (let i = 0; i < 100; i++) {
-      const conf = document.createElement('div');
-      conf.style.position = 'fixed'; conf.style.left = Math.random() * window.innerWidth + 'px';
-      conf.style.top = '-10px'; conf.style.width = '10px'; conf.style.height = '10px';
-      conf.style.background = ['#c8102e', '#00247d', '#f0f8ff'][Math.floor(Math.random() * 3)];
-      conf.style.pointerEvents = 'none'; conf.style.zIndex = '9999';
-      document.body.appendChild(conf);
-      conf.animate([{top: '100vh'}, {transform: `translateX(${Math.random() * 200 - 100}px)`}], {duration: 2000, easing: 'linear'});
-      setTimeout(() => conf.remove(), 2000);
-    }
+  function toggleDetail(country) {
+    const detail = document.getElementById(country + '-detail');
+    detail.classList.toggle('show');
+  }
+
+  function updateRetirementScore() {
+    const c = document.getElementById('country').value || 'Portugal';
+    document.getElementById('retCountry').textContent = c;
+    // Simple score based on income from quiz
+    const income = parseInt(document.getElementById('q1').value || 0);
+    const score = income >= 2 ? 95 : income >= 1 ? 85 : 70;
+    document.getElementById('retScore').textContent = score + '%';
   }
 
   // Fixed Calculator Functions
