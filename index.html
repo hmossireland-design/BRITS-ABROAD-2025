@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRITS ABROAD 2025 – Escape the Budget Squeeze</title>
-  <link rel="manifest" href="/BRITS-ABROAD-2025/manifest.json">
-  <style>
-    body {font-family: 'Inter', Arial, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #e6f2ff); color: #00247d; text-align: center; margin:0; padding:20px; line-height:1.5;}
-    h1 {font-size:3em; margin:20px;}
-    select, input[type=range] {width:100%; padding:15px; margin:15px 0; border-radius:15px; font-size:1.2em;}
-    input[type=range]::-webkit-slider-thumb {background:#c8102e; width:30px; height:30px; border-radius:50%;}
-    .result {font-size:2.5em; background:#c8102e; color:white; padding:25px; border-radius:20px; margin:30px 0; font-weight:bold;}
-    button.buy {background:gold; color:#c8102e; font-size:2.2em; padding:20px 60px; border:none; border-radius:50px; margin:30px 0; font-weight:bold; box-shadow:0 10px 30px rgba(0,0,0,0.4);}
-    button.buy:hover {transform:scale(1.05);}
-    .progress {height:10px; background:#ddd; border-radius:5px; overflow:hidden; margin:20px 0;}
-    .fill {height:100%; background:#c8102e; width:0%; transition:width 0.6s;}
-    .phase {background:#00247d; color:white; border-radius:50%; width:70px; height:70px; margin:10px; display:inline-flex; align-items:center; justify-content:center; font-size:2em;}
-    .phase.active {background:#c8102e; transform:scale(1.2);}
-    .phase.completed {background:#28a745;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRITS ABROAD 2025 – Escape the Budget Squeeze</title>
+<link rel="manifest" href="/BRITS-ABROAD-2025/manifest.json">
+<style>
+  body {font-family:Arial,sans-serif;background:#f0f8ff;color:#00247d;margin:0;padding:20px;line-height:1.5;}
+  h1{font-size:2.8em;margin:20px;}
+  .card{background:white;border-radius:20px;padding:25px;margin:20px auto;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+  select,input[type=range]{width:100%;padding:15px;margin:15px 0;border-radius:15px;font-size:1.2em;}
+  input[type=range]::-webkit-slider-thumb{background:#c8102e;width:30px;height:30px;border-radius:50%;}
+  .result{font-size:2.2em;background:#c8102e;color:white;padding:25px;border-radius:20px;margin:30px 0;}
+  button{background:#c8102e;color:white;padding:16px 40px;border:none;border-radius:50px;font-size:1.4em;margin:10px;cursor:pointer;}
+  button.buy{background:gold;color:#c8102e;font-size:2.2em;padding:20px 60px;box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+  .phase{width:70px;height:70px;background:#00247d;color:white;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:10px;font-size:2em;}
+  .phase.active{background:#c8102e;transform:scale(1.2);}
+  .phase.completed{background:#28a745;}
+  .progress{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:30px 0;}
+  .fill{height:100%;background:#c8102e;width:0%;transition:width 0.6s;}
+</style>
 </head>
 <body>
-  <h1>BRITS ABROAD 2025</h1>
-  <p style="font-size:1.6em;">Escape the 2025 Budget squeeze</p>
+<h1>BRITS ABROAD 2025</h1>
+<p style="font-size:1.6em;">Escape the 2025 Budget squeeze</p>
 
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<div>
+  <div class="phase completed">1</div>
+  <div class="phase active" id="p2">2</div>
+  <div class="phase" id="p3">3</div>
+  <div class="phase" id="p4">4</div>
+  <div class="phase" id="p5">5</div>
+  <div class="phase" id="p6">6</div>
+  <div class="phase" id="p7">7</div>
+  <div class="phase" id="p8">8</div>
+  <div class="phase" id="p9">9</div>
+  <div class="phase" id="p10">10</div>
+  <div class="phase" id="p11">11</div>
+</div>
+
+<div class="card">
   <select id="country" onchange="calc()">
-    <option value="Portugal">Portugal</option>
-    <option value="Spain">Spain</option>
-    <option value="UAE">UAE</option>
-    <option value="Thailand">Thailand</option>
-    <option value="Cyprus">Cyprus</option>
-    <option value="Greece">Greece</option>
-    <option value="Italy">Italy</option>
-    <option value="France">France</option>
-    <option value="Poland">Poland</option>
-    <option value="Malta">Malta</option>
+    <option>Portugal</option><option>Spain</option><option>UAE</option><option>Thailand</option><option>Cyprus</option>
+    <option>Greece</option><option>Italy</option><option>France</option><option>Poland</option><option>Malta</option>
   </select>
 
   <label>Annual Pension: £<span id="pensionVal">25,000</span></label>
@@ -45,27 +55,16 @@
 
   <div class="result" id="result">You could save <strong>£15,625</strong>/year abroad!</div>
 
-  <div class="progress"><div class="fill" id="progressFill" style="width:0%"></div></div>
-
-  <div>
-    <span class="phase completed">1</span>
-    <span class="phase active" id="phase2">2</span>
-    <span class="phase" id="phase3">3</span>
-    <span class="phase" id="phase4">4</span>
-    <span class="phase" id="phase5">5</span>
-  </div>
-
   <button class="buy" onclick="window.location.href='https://buy.stripe.com/28o8x57XJ5rT8w8fYY'">
     UNLOCK FULL PACK – ONLY £9.97
   </button>
-
   <p>30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
-
-  <button onclick="shareResult()" style="background:#1877F2;color:white;padding:15px 30px;border-radius:50px;margin-top:20px;">
-    Share My Savings on Facebook
-  </button>
+</div>
 
 <script>
+let phase = 1;
+const totalPhases = 11;
+
 function calc() {
   const pension = parseInt(document.getElementById('pension').value) || 0;
   const property = parseInt(document.getElementById('property').value) || 0;
@@ -78,20 +77,39 @@ function calc() {
   document.getElementById('result').innerHTML = 
     `You could save <strong>£\( {savings.toLocaleString()}</strong>/year in \){country}!`;
 
-  const progress = Math.min(100, (pension/100000 + property/3000000)*50 + 50);
+  // Update progress
+  const progress = Math.min(100, phase / totalPhases * 100);
   document.getElementById('progressFill').style.width = progress + '%';
 }
 calc();
 
-function shareResult() {
-  const text = document.getElementById('result').innerText;
-  const url = window.location.href;
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=\( {url}&quote= \){text}`, '_blank');
+// Phase completion (you can add more logic later)
+function nextPhase() {
+  if (phase < totalPhases) {
+    phase++;
+    document.getElementById('p'+(phase-1)).classList.replace('active','completed');
+    document.getElementById('p'+phase).classList.add('active');
+    calc();
+    if (phase === totalPhases) confetti();
+  }
 }
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
+// Simple confetti
+function confetti() {
+  for(let i=0;i<100;i++){
+    const c=document.createElement('div');
+    c.style.position='fixed';c.style.left=Math.random()*100+'vw';
+    c.style.top='-10px';c.style.width='10px';c.style.height='10px';
+    c.style.background=['#c8102e','#00247d','gold'][i%3];
+    c.style.pointerEvents='none';c.style.zIndex='9999';
+    document.body.appendChild(c);
+    c.animate([{top:'100vh'},{transform:`translateX(${Math.random()*200-100}px)`}],{duration:3000});
+    setTimeout(()=>c.remove(),3000);
+  }
 }
+
+// PWA
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
 </script>
 </body>
 </html>
