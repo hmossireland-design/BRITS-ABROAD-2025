@@ -3,67 +3,74 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>BRITS ABROAD 2025 — Retirement Roadmap</title>
-<meta name="theme-color" content="#00247d">
+<meta name="theme-color" content="#0b0b0b"/>
+<title>BRITS ABROAD 2025 — Luxury Relocation</title>
 
-<!-- Fallback favicon (inline SVG) -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%2300247d'/%3E%3C/svg%3E" type="image/svg+xml">
+<!-- Inline favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%230b0b0b'/%3E%3Ccircle cx='96' cy='96' r='72' fill='%23d4af37'/%3E%3C/svg%3E" type="image/svg+xml">
 
 <style>
+/* ===== Luxury theme: black, white, gold ===== */
 :root{
-  --bg1:#f0f8ff; --bg2:#e6f2ff; --blue:#00247d; --red:#c8102e;
-  --muted:#eef8ff; --card:#ffffff; --success:#28a745; --glass: rgba(255,255,255,0.6);
-  --radius:14px; --shadow:0 10px 30px rgba(0,0,0,0.07);
+  --bg:#070707;
+  --panel:#0f0f10;
+  --muted:#1b1b1b;
+  --text:#f6f6f6;
+  --accent:#d4af37; /* gold */
+  --accent-dark:#b98f2a;
+  --glass: rgba(255,255,255,0.03);
+  --card-radius:16px;
+  --shadow: 0 12px 40px rgba(0,0,0,0.6);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-  -webkit-font-smoothing:antialiased; background:linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--blue); display:flex; justify-content:center; padding:18px; line-height:1.45;
+  margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased; background: linear-gradient(180deg,#050505 0%, #0b0b0b 100%);
+  color:var(--text); display:flex; justify-content:center; padding:18px; line-height:1.45;
 }
-.app { width:100%; max-width:980px; }
-.header { text-align:center; margin-bottom:10px; }
-.h1 { font-size:1.9rem; margin:6px 0; font-weight:800; color:var(--blue); }
-.lead { color:rgba(0,36,125,0.88); margin:0 0 12px; }
+.app{width:100%;max-width:980px}
+.header{text-align:center;margin-bottom:12px}
+.h1{font-size:1.9rem;margin:6px 0;font-weight:800;letter-spacing:-0.02em}
+.lead{color:rgba(246,246,246,0.85);margin:0 0 12px;font-size:1rem}
 
-/* cards */
-.card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:14px;}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
-.controls{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
-.small{font-size:.92rem;color:#445}
+/* card */
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--card-radius);padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.controls{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.small{font-size:.92rem;color:rgba(246,246,246,0.75)}
 
-/* progress & phases */
-.progress{height:12px;background:#eef6ff;border-radius:999px;overflow:hidden;margin:12px 0;}
-.fill{height:100%;background:var(--red);width:0%;transition:width .45s;}
-.phases{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
-.phase{width:76px;height:76px;border-radius:12px;background:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,0.04)}
-.phase .icon{font-size:1.4rem;margin-bottom:6px}
-.phase .label{font-size:.82rem;text-align:center}
-.phase.active{background:var(--red);color:#fff;transform:scale(1.04)}
-.phase.completed{background:var(--success);color:#fff}
+/* progress / phases */
+.progress{height:12px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin:12px 0}
+.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-dark));width:0%;transition:width .45s}
+.phases{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+.phase{width:84px;height:84px;border-radius:14px;background:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.5);transition:transform .14s, background .14s}
+.phase .icon{font-size:1.4rem;margin-bottom:8px}
+.phase .label{font-size:.8rem;text-align:center;color:var(--text)}
+.phase.active{background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:#0b0b0b;transform:scale(1.04)}
+.phase.completed{background:linear-gradient(180deg,#2b2b2b,#111);color:var(--accent)}
 
 /* inputs */
 select,input[type=range],input[type=file],button{font-family:inherit;font-size:1rem}
-select{padding:10px;border-radius:10px;border:2px solid var(--red);background:#fff;min-width:160px}
-input[type=range]{width:100%;height:8px;background:#eef6ff;border-radius:8px}
-input[type=range]::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;background:var(--red);-webkit-appearance:none;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
-.result{background:var(--red);color:#fff;padding:12px 14px;border-radius:10px;font-weight:700;margin-top:12px}
+select{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:var(--text);min-width:160px}
+input[type=range]{width:100%;height:8px;background:rgba(255,255,255,0.02);border-radius:8px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,0.6);cursor:pointer}
 
-/* buttons & CTA */
-.btn{background:var(--red);color:#fff;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
-.btn.ghost{background:transparent;color:var(--red);border:2px solid var(--red)}
-.buy{background:gold;color:var(--red);padding:12px 18px;border-radius:28px;font-weight:800;text-decoration:none;display:inline-block;box-shadow:0 8px 22px rgba(0,0,0,0.12)}
+/* result / CTA */
+.result{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#0b0b0b;padding:12px 14px;border-radius:10px;font-weight:800;margin-top:12px;display:inline-block}
+.btn{background:transparent;color:var(--accent);padding:10px 14px;border-radius:10px;border:2px solid rgba(212,175,55,0.12);cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#0b0b0b;border:none;padding:12px 16px}
+.buy{background:#111;color:var(--accent);padding:12px 18px;border-radius:28px;font-weight:800;text-decoration:none;border:1px solid rgba(212,175,55,0.12)}
 
 /* table */
 table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.95rem}
-th,td{padding:10px;text-align:left;border-bottom:1px solid #eef6ff}
-th{background:var(--blue);color:#fff;font-weight:700}
-.detail{display:none;background:#f8fbff;padding:10px;border-radius:8px;margin-top:6px}
+th,td{padding:10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03)}
+th{background:transparent;color:var(--accent);font-weight:700}
+.detail{display:none;background:rgba(255,255,255,0.015);padding:10px;border-radius:8px;margin-top:6px}
 .detail.show{display:block}
 
 /* responsive */
-@media(max-width:640px){.phase{width:68px;height:68px}.h1{font-size:1.6rem}.card{padding:14px}}
+@media(max-width:640px){.phase{width:72px;height:72px}.h1{font-size:1.6rem}.card{padding:14px}}
 </style>
 </head>
 <body>
@@ -71,7 +78,7 @@ th{background:var(--blue);color:#fff;font-weight:700}
 
   <header class="header">
     <div class="h1">BRITS ABROAD 2025</div>
-    <div class="lead">Escape the 2025 Budget squeeze — your professional relocation roadmap</div>
+    <div class="lead">Luxury relocation — tailored roadmaps, visas & budgets</div>
   </header>
 
   <div class="card">
@@ -79,174 +86,145 @@ th{background:var(--blue);color:#fff;font-weight:700}
     <div id="phases" class="phases" aria-hidden="false"></div>
   </div>
 
-  <!-- Main interactive -->
   <section class="card" id="mainCard" aria-live="polite">
     <div class="row controls" style="align-items:flex-end;">
-      <div style="flex:1;min-width:140px;">
-        <label class="small" for="country">Destination</label>
-        <select id="country" aria-label="Destination country"></select>
+      <div style="flex:1;min-width:140px">
+        <label class="small">Destination</label>
+        <select id="country" aria-label="Destination"></select>
       </div>
 
-      <div style="flex:1;min-width:160px;">
+      <div style="flex:1;min-width:160px">
         <label class="small">Annual Pension: £<span id="pensionVal">25,000</span></label>
         <input id="pension" type="range" min="0" max="100000" step="1000" value="25000" />
       </div>
 
-      <div style="flex:1;min-width:160px;">
-        <label class="small">UK Property Value: £<span id="propertyVal">500,000</span></label>
+      <div style="flex:1;min-width:160px">
+        <label class="small">UK Property: £<span id="propertyVal">500,000</span></label>
         <input id="property" type="range" min="0" max="3000000" step="10000" value="500000" />
       </div>
     </div>
 
-    <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+    <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
       <div id="result" class="result">You could save <strong>£15,625</strong>/year</div>
-      <button id="nextBtn" class="btn">Next Phase</button>
+      <button id="nextBtn" class="btn primary">Next Phase</button>
       <a id="buyBtn" class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">UNLOCK FULL PACK £9.97</a>
     </div>
-    <div class="small" style="margin-top:10px;color:#556">Values saved locally on this device only.</div>
+    <div class="small" style="margin-top:10px;color:rgba(246,246,246,0.7)">Values saved locally only — stored in your device.</div>
   </section>
 
-  <!-- Phase cards (hidden/shown as user progresses) -->
-  <!-- Phase 1 -->
+  <!-- Phase sections -->
   <section id="phase1" class="card">
-    <h2 style="margin:0 0 8px">Phase 1 — Dream Destination</h2>
-    <p class="small">Choose your preferred destination to tailor the plan.</p>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(1)">Complete Phase 1</button></div>
+    <h2 style="margin:0 0 6px">Phase 1 — Dream Destination</h2>
+    <p class="small">Choose a country in the main controls to preview costs & visas.</p>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(1)">Complete Phase 1</button></div>
   </section>
 
-  <!-- Phase 2 -->
   <section id="phase2" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 2 — Financial Freedom</h2>
-    <p class="small">Adjust pension & property to see estimated savings.</p>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(2)">Complete Phase 2</button></div>
+    <h2 style="margin:0 0 6px">Phase 2 — Financial Freedom</h2>
+    <p class="small">Use the sliders above to model savings and cashflow.</p>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(2)">Complete Phase 2</button></div>
   </section>
 
-  <!-- Phase 3 -->
   <section id="phase3" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 3 — Visa Victory</h2>
+    <h2 style="margin:0 0 6px">Phase 3 — Visa Victory</h2>
     <div class="row" style="margin-top:8px;">
-      <select id="q1" aria-label="Monthly income">
-        <option value="">Monthly income?</option>
-        <option value="0">Under €870</option>
-        <option value="1">€870–€3,279</option>
-        <option value="2">€3,280+</option>
-      </select>
-      <select id="q2" aria-label="Remote work">
-        <option value="">Remote work?</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
-      <select id="q4" aria-label="Family joining">
-        <option value="">Family joining?</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-      </select>
+      <select id="q1"><option value="">Monthly income?</option><option value="0">Under €870</option><option value="1">€870–€3,279</option><option value="2">€3,280+</option></select>
+      <select id="q2"><option value="">Remote work?</option><option value="0">No</option><option value="1">Yes</option></select>
+      <select id="q4"><option value="">Family joining?</option><option value="0">No</option><option value="1">Yes</option></select>
     </div>
-    <div style="margin-top:10px"><button class="btn" onclick="checkVisa()">Show my best visa</button></div>
-    <div id="visaResult" class="small" style="margin-top:10px">Answer above</div>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(3)">Complete Phase 3</button></div>
+    <div style="margin-top:10px"><button class="btn primary" onclick="checkVisa()">Show my best visa</button></div>
+    <div id="visaResult" class="small" style="margin-top:12px">Answer above</div>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(3)">Complete Phase 3</button></div>
   </section>
 
-  <!-- Phase 4 -->
   <section id="phase4" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 4 — Document Dynasty</h2>
-    <div class="small">Upload documents (names only checked locally)</div>
-    <div style="margin-top:8px">
-      <input id="files" type="file" multiple aria-label="Upload documents" />
-    </div>
+    <h2 style="margin:0 0 6px">Phase 4 — Document Dynasty</h2>
+    <div class="small">Upload files (names checked locally only)</div>
+    <div style="margin-top:8px"><input id="files" type="file" multiple/></div>
     <div id="docResult" class="small" style="margin-top:8px">No files chosen</div>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(4)">Complete Phase 4</button></div>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(4)">Complete Phase 4</button></div>
   </section>
 
-  <!-- Phase 5 -->
   <section id="phase5" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 5 — Budget Blueprint</h2>
+    <h2 style="margin:0 0 6px">Phase 5 — Budget Blueprint</h2>
     <table>
-      <thead><tr><th>Item</th><th>UK</th><th>Selected Country</th><th>Save</th></tr></thead>
+      <thead><tr><th>Item</th><th>UK</th><th>Selected</th><th>Save</th></tr></thead>
       <tbody>
         <tr><td>Rent</td><td>£1,300</td><td>£720</td><td>£580</td></tr>
         <tr><td>Groceries</td><td>£400</td><td>£240</td><td>£160</td></tr>
         <tr><td><strong>Total</strong></td><td>£2,085</td><td>£1,160</td><td>£925</td></tr>
       </tbody>
     </table>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(5)">Complete Phase 5</button></div>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(5)">Complete Phase 5</button></div>
   </section>
 
-  <!-- Phase 6 -->
   <section id="phase6" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 6 — Move Mastery</h2>
-    <div class="small">Estimate shipping cost</div>
+    <h2 style="margin:0 0 6px">Phase 6 — Move Mastery</h2>
+    <div class="small">Estimate shipping</div>
     <div style="margin-top:8px">
       <label class="small">Shipping £<span id="shippingVal">2000</span></label>
-      <input id="shipping" type="range" min="0" max="5000" value="2000" oninput="calcShipping()" />
+      <input id="shipping" type="range" min="0" max="5000" value="2000" oninput="calcShipping()"/>
     </div>
     <div id="shippingResult" class="small" style="margin-top:8px">Shipping cost: £2,000</div>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(6)">Complete Phase 6</button></div>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(6)">Complete Phase 6</button></div>
   </section>
 
-  <!-- Phase 7 -->
   <section id="phase7" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 7 — Settlement Success</h2>
-    <p class="small">Bank setup, healthcare, local community — you're nearly there.</p>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(7)">Complete Phase 7</button></div>
+    <h2 style="margin:0 0 6px">Phase 7 — Settlement Success</h2>
+    <p class="small">Banking, health, local community — set up key services.</p>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(7)">Complete Phase 7</button></div>
   </section>
 
-  <!-- Phase 8 -->
   <section id="phase8" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 8 — Community Connections</h2>
-    <p class="small">Expat groups, language classes, events.</p>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(8)">Complete Phase 8</button></div>
+    <h2 style="margin:0 0 6px">Phase 8 — Community Connections</h2>
+    <p class="small">Language classes, expat groups, meetups.</p>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(8)">Complete Phase 8</button></div>
   </section>
 
-  <!-- Phase 9 -->
   <section id="phase9" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 9 — Tax Triumph</h2>
-    <p class="small">Understand filing, treaties, accountant tips.</p>
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(9)">Complete Phase 9</button></div>
+    <h2 style="margin:0 0 6px">Phase 9 — Tax Triumph</h2>
+    <p class="small">Tax filing, treaties, accountant tips.</p>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(9)">Complete Phase 9</button></div>
   </section>
 
-  <!-- Phase 10 -->
   <section id="phase10" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 10 — Celebration Station</h2>
-    <p class="small">You did it — welcome to your new life abroad 🎉</p>
-    <div style="margin-top:12px"><button class="btn" onclick="completeJourney()">Celebrate</button></div>
+    <h2 style="margin:0 0 6px">Phase 10 — Celebration Station</h2>
+    <p class="small">Congrats! Prepare to celebrate 🎉</p>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completeJourney()">Celebrate</button></div>
   </section>
 
-  <!-- Phase 11 -->
   <section id="phase11" class="card" style="display:none">
-    <h2 style="margin:0 0 8px">Phase 11 — Retirement Roadmap</h2>
+    <h2 style="margin:0 0 6px">Phase 11 — Retirement Roadmap</h2>
     <p class="small">Retirement score for <strong id="retCountry">Portugal</strong>: <strong id="retScore">85%</strong></p>
     <table>
-      <thead><tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr></thead>
+      <thead><tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR</th></tr></thead>
       <tbody>
         <tr class="tog" data-id="portugal"><td>Portugal</td><td>D7</td><td>€870</td><td>—</td><td>5 yrs</td></tr>
-        <tr id="portugal" class="detail"><td colspan="5">10% flat pension tax (NHR options). Family included. Golden Visa options exist.</td></tr>
+        <tr id="portugal" class="detail"><td colspan="5">10% pension tax (NHR). Family included. Golden Visa options.</td></tr>
 
         <tr class="tog" data-id="spain"><td>Spain</td><td>Non-Lucrative</td><td>€2,400</td><td>—</td><td>5 yrs</td></tr>
-        <tr id="spain" class="detail"><td colspan="5">No work allowed; private insurance required.</td></tr>
+        <tr id="spain" class="detail"><td colspan="5">No work allowed. Private insurance required.</td></tr>
 
-        <tr class="tog" data-id="uae"><td>UAE</td><td>Retirement Visa</td><td>AED20,000</td><td>55+</td><td>No PR</td></tr>
-        <tr id="uae" class="detail"><td colspan="5">Property purchase or savings options.</td></tr>
+        <tr class="tog" data-id="uae"><td>UAE</td><td>Retirement</td><td>AED20,000</td><td>55+</td><td>No PR</td></tr>
+        <tr id="uae" class="detail"><td colspan="5">Property or savings routes; 0% income tax.</td></tr>
 
         <tr class="tog" data-id="thailand"><td>Thailand</td><td>O-A/Elite</td><td>THB65,000</td><td>50+</td><td>No</td></tr>
-        <tr id="thailand" class="detail"><td colspan="5">Elite long-stay options available for fees.</td></tr>
+        <tr id="thailand" class="detail"><td colspan="5">Elite options for long stays.</td></tr>
 
         <tr class="tog" data-id="cyprus"><td>Cyprus</td><td>Category F</td><td>€10,000</td><td>—</td><td>5 yrs</td></tr>
         <tr id="cyprus" class="detail"><td colspan="5">PR via investment purchase options.</td></tr>
       </tbody>
     </table>
-
-    <div style="margin-top:12px"><button class="btn" onclick="completePhase(11)">Complete Retirement Roadmap</button></div>
+    <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(11)">Complete Retirement Roadmap</button></div>
   </section>
 
-  <!-- CTA + countdown -->
-  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px;">
-    <div class="card" style="text-align:center;min-width:220px;">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+    <div class="card" style="min-width:220px;text-align:center">
       <div id="countdown" class="small" style="font-weight:700">NI Top-Up Window: calculating...</div>
     </div>
-    <div class="card cta" style="text-align:center;min-width:260px;">
+    <div class="card" style="min-width:240px;text-align:center">
       <div style="font-weight:800">Unlock the Full Relocation Pack</div>
-      <div style="margin:8px 0;font-size:.95rem">30-page PDF • Visa templates • Lawyer contacts • Checklists</div>
+      <div style="margin:8px 0;font-size:.95rem">30-page PDF • Visa templates • Lawyer contacts</div>
       <a class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">BUY NOW £9.97</a>
     </div>
   </div>
@@ -254,21 +232,20 @@ th{background:var(--blue);color:#fff;font-weight:700}
 </main>
 
 <script>
-/* ===== Data & state ===== */
+/* ===== App state & constants ===== */
 const PHASES = [
   {id:1,title:'Dream',icon:'🌍'},{id:2,title:'Finance',icon:'💰'},{id:3,title:'Visa',icon:'📋'},
   {id:4,title:'Docs',icon:'📁'},{id:5,title:'Budget',icon:'📊'},{id:6,title:'Move',icon:'🚚'},
   {id:7,title:'Settle',icon:'🏠'},{id:8,title:'Community',icon:'👥'},{id:9,title:'Tax',icon:'💼'},
   {id:10,title:'Celebrate',icon:'🎉'},{id:11,title:'Retire',icon:'👴'}
 ];
-
 const COUNTRIES = { Portugal:1, Spain:1.05, UAE:1.6, Thailand:0.6, Cyprus:1, Greece:1.1, Italy:1.2, France:1.25, Poland:0.5, Malta:1.05 };
-
 const LS = { phase:'ba_phase', pension:'ba_pension', property:'ba_property', country:'ba_country', completed:'ba_completed' };
+
 let currentPhase = parseInt(localStorage.getItem(LS.phase) || '1', 10);
 let completed = JSON.parse(localStorage.getItem(LS.completed) || '[]');
 
-/* ===== DOM refs ===== */
+/* ===== DOM ===== */
 const phasesEl = document.getElementById('phases');
 const progressFill = document.getElementById('progressFill');
 const countryEl = document.getElementById('country');
@@ -281,75 +258,74 @@ const nextBtn = document.getElementById('nextBtn');
 const phase11Card = document.getElementById('phase11');
 const countdownEl = document.getElementById('countdown');
 
-/* ===== Build UI ===== */
+/* ===== Build phases UI ===== */
 function buildPhases(){
   phasesEl.innerHTML = '';
   PHASES.forEach(p=>{
-    const d = document.createElement('div');
-    d.className = 'phase' + (completed.includes(p.id) ? ' completed' : '') + (p.id===currentPhase ? ' active' : '');
-    d.dataset.phase = p.id;
-    d.innerHTML = `<div class="icon">${p.icon}</div><div class="label">${p.title}</div>`;
-    d.addEventListener('click', ()=>selectPhase(p.id));
-    phasesEl.appendChild(d);
+    const el = document.createElement('div');
+    el.className = 'phase' + (completed.includes(p.id) ? ' completed' : '') + (p.id===currentPhase ? ' active' : '');
+    el.dataset.phase = p.id;
+    el.innerHTML = '<div class="icon">'+p.icon+'</div><div class="label">'+p.title+'</div>';
+    el.addEventListener('click', ()=> selectPhase(p.id));
+    phasesEl.appendChild(el);
   });
   updateProgress();
 }
 
+/* populate countries */
 function populateCountries(){
   countryEl.innerHTML = '';
   Object.keys(COUNTRIES).forEach(c=>{
-    const o = document.createElement('option'); o.value=c; o.textContent=c; countryEl.appendChild(o);
+    const opt = document.createElement('option'); opt.value = c; opt.textContent = c; countryEl.appendChild(opt);
   });
   countryEl.value = localStorage.getItem(LS.country) || 'Portugal';
   document.getElementById('retCountry').textContent = countryEl.value || 'Portugal';
 }
 
-/* ===== Phase logic ===== */
+/* update progress bar */
 function updateProgress(){
   const pct = Math.round((currentPhase / PHASES.length) * 100);
   progressFill.style.width = pct + '%';
   document.querySelectorAll('.phase').forEach(el=>el.classList.toggle('active', parseInt(el.dataset.phase,10)===currentPhase));
 }
 
+/* show/hide content for phases (sections are present with ids phase1..phase11) */
+function showPhase(n){
+  for(let i=1;i<=11;i++){
+    const s = document.getElementById('phase'+i);
+    if(s) s.style.display = (i===n ? 'block' : 'none');
+  }
+  phase11Card.style.display = (n>=11 ? 'block' : 'none');
+  localStorage.setItem(LS.phase, String(n));
+}
+
+/* select phase (no skipping forward) */
 function selectPhase(n){
-  if(n > currentPhase) return; // prevent skipping ahead
+  if(n > currentPhase) return;
   currentPhase = n;
   showPhase(n);
   updateProgress();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function showPhase(n){
-  PHASES.forEach(p=>{
-    const el = document.getElementById('phase' + p.id);
-    if(el) el.style.display = (p.id===n ? 'block' : 'none');
-  });
-  phase11Card.style.display = (n >= 11 ? 'block' : 'none');
-  localStorage.setItem(LS.phase, String(n));
-}
-
-/* ===== Complete phase ===== */
+/* complete phase and move forward */
 function completePhase(n){
   if(n < currentPhase) return;
   if(!completed.includes(n)) completed.push(n);
   localStorage.setItem(LS.completed, JSON.stringify(completed));
-  // build phases to reflect completed
   buildPhases();
-  // advance
-  const next = n+1;
+  const next = n + 1;
   if(next <= PHASES.length){
     currentPhase = next;
     localStorage.setItem(LS.phase, String(currentPhase));
+    showPhase(currentPhase);
     updateProgress();
-    if(currentPhase >= 11) phase11Card.style.display = 'block';
-    // show the next logical section (scroll)
-    window.scrollTo({top:0,behavior:'smooth'});
   } else {
     celebrate();
   }
 }
 
-/* ===== Calculations ===== */
+/* calculations */
 function calc(){
   const p = parseInt(pensionEl.value || '0',10);
   const r = parseInt(propertyEl.value || '0',10);
@@ -358,7 +334,7 @@ function calc(){
   const c = countryEl.value || 'Portugal';
   const mult = COUNTRIES[c] || 1;
   const savings = Math.round((p * 0.35 + r * 0.0025) * mult);
-  resultEl.innerHTML = `You could save <strong>£${savings.toLocaleString()}</strong>/year in ${c}!`;
+  resultEl.innerHTML = 'You could save <strong>£' + savings.toLocaleString() + '</strong>/year in ' + c + '!';
   localStorage.setItem(LS.pension, String(p));
   localStorage.setItem(LS.property, String(r));
   localStorage.setItem(LS.country, c);
@@ -371,42 +347,43 @@ function calc(){
 function calcShipping(){
   const v = parseInt(document.getElementById('shipping').value || '2000',10);
   document.getElementById('shippingVal').textContent = v.toLocaleString();
-  document.getElementById('shippingResult').textContent = `Shipping cost: £${v.toLocaleString()}`;
+  document.getElementById('shippingResult').textContent = 'Shipping cost: £' + v.toLocaleString();
 }
 
-/* visa logic */
+/* visa helper */
 function checkVisa(){
   const c = countryEl.value;
   const income = parseInt(document.getElementById('q1').value || '-1',10);
   const remote = parseInt(document.getElementById('q2').value || '0',10);
   const family = parseInt(document.getElementById('q4').value || '0',10);
-  let visa;
-  if(income === -1) visa = 'Select income bracket to get visa guidance';
-  else if(income === 2 && remote === 1) visa = 'Digital Nomad: good fit';
-  else if(income === 2) visa = 'Investor or high-income routes likely';
-  else if(income === 1) visa = (c==='Portugal') ? 'D7 likely' : 'Non-lucrative/financially independent';
-  else visa = 'Lower-income routes or temporary residence';
-  if(family===1) visa += ' — Family may be included';
+  let visa = '';
+  if(income === -1) visa = 'Select income bracket to get guidance';
+  else if(income === 2 && remote === 1) visa = 'Digital Nomad likely';
+  else if(income === 2) visa = 'High-income or investor routes likely';
+  else if(income === 1) visa = (c==='Portugal') ? 'D7 likely' : 'Non-lucrative / FIP likely';
+  else visa = 'Lower-income/temporary routes';
+  if(family===1) visa += ' — family options may apply';
   document.getElementById('visaResult').textContent = visa;
 }
 
-/* file hints */
-document.getElementById('files').addEventListener('change', e=>{
+/* files check */
+document.getElementById('files').addEventListener('change', function(e){
   const needed = ['passport','criminal','bank','income'];
   const files = Array.from(e.target.files || []);
-  const found = needed.map(k => files.some(f=>f.name.toLowerCase().includes(k)));
+  const found = needed.map(k => files.some(f => f.name.toLowerCase().includes(k)));
   let html = '';
-  needed.forEach((k,i)=> html += (found[i] ? '✓ ' : '❌ ') + k + '<br>');
+  needed.forEach((k,i) => html += (found[i] ? '✓ ' : '❌ ') + k + '<br>');
   html += found.every(Boolean) ? '<br><strong>Ready to apply</strong>' : '';
   document.getElementById('docResult').innerHTML = html || 'No files chosen';
 });
 
-/* toggle retirement details */
-document.addEventListener('click', (ev)=>{
+/* toggle details */
+document.addEventListener('click', function(ev){
   const row = ev.target.closest('.tog');
   if(row){
     const id = row.dataset.id;
-    document.getElementById(id).classList.toggle('show');
+    const det = document.getElementById(id);
+    if(det) det.classList.toggle('show');
   }
 });
 
@@ -414,113 +391,103 @@ document.addEventListener('click', (ev)=>{
 function updateCountdown(){
   const deadline = new Date('2025-04-05T00:00:00Z');
   const diff = deadline - new Date();
-  if(diff <= 0) { countdownEl.textContent = 'NI Top-Up Window: CLOSED'; return; }
+  if(diff <= 0){ countdownEl.textContent = 'NI Top-Up Window: CLOSED'; return; }
   const days = Math.floor(diff / (1000*60*60*24));
   const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
-  countdownEl.innerHTML = `NI Top-Up Window: <strong>${days} days ${hours} hours left</strong>`;
+  countdownEl.innerHTML = 'NI Top-Up Window: <strong>' + days + ' days ' + hours + ' hours left</strong>';
 }
 setInterval(updateCountdown, 60*60*1000);
 updateCountdown();
 
-/* celebration confetti */
+/* celebrate confetti */
 function celebrate(){
-  for(let i=0;i<70;i++){
-    const dot = document.createElement('div');
-    dot.style.position='fixed'; dot.style.left = Math.random()*100 + '%'; dot.style.top='-8px';
-    dot.style.width = (6 + Math.random()*10)+'px'; dot.style.height = dot.style.width;
-    dot.style.background = ['#c8102e','#00247d','#ffd700'][Math.floor(Math.random()*3)];
-    dot.style.borderRadius='50%'; dot.style.zIndex=9999; dot.style.pointerEvents='none';
-    document.body.appendChild(dot);
-    const endX = (Math.random()*200)-100;
+  for(let i=0;i<60;i++){
+    const d = document.createElement('div');
+    d.style.position='fixed'; d.style.left = Math.random()*100 + '%'; d.style.top='-6px';
+    const s = (6 + Math.random()*12) + 'px';
+    d.style.width = s; d.style.height = s; d.style.borderRadius='50%';
+    d.style.background = ['#d4af37','#ffffff','#b98f2a'][Math.floor(Math.random()*3)];
+    d.style.zIndex = 9999; d.style.pointerEvents='none';
+    document.body.appendChild(d);
+    const tx = (Math.random()*200)-100;
     const dur = 1400 + Math.random()*1600;
-    dot.animate([{transform:'translateY(0) translateX(0)', opacity:1},{transform:`translateY(${window.innerHeight+200}px) translateX(${endX}px) rotate(${Math.random()*720}deg)`, opacity:0.8}], {duration:dur, easing:'linear'});
-    setTimeout(()=>dot.remove(), dur+200);
+    d.animate([{transform:'translateY(0) translateX(0)', opacity:1},{transform:'translateY(' + (window.innerHeight+200) + 'px) translateX(' + tx + 'px) rotate(' + (Math.random()*720) + 'deg)', opacity:0.9}], {duration:dur, easing:'linear'});
+    setTimeout(()=>d.remove(), dur+200);
   }
 }
 
-/* next button */
-nextBtn.addEventListener('click', ()=>{
+/* next phase button */
+nextBtn.addEventListener('click', function(){
   if(currentPhase < PHASES.length){
     if(!completed.includes(currentPhase)) completed.push(currentPhase);
     localStorage.setItem(LS.completed, JSON.stringify(completed));
     currentPhase++;
     localStorage.setItem(LS.phase, String(currentPhase));
-    buildPhases(); updateProgress();
+    buildPhases(); updateProgress(); showPhase(currentPhase);
     if(currentPhase >= 11) phase11Card.style.display = 'block';
-  } else {
-    celebrate();
-  }
+  } else celebrate();
 });
 
 /* init */
 function init(){
   buildPhases(); populateCountries();
-  const savedP = parseInt(localStorage.getItem(LS.pension) || '25000',10);
-  const savedR = parseInt(localStorage.getItem(LS.property) || '500000',10);
-  pensionEl.value = savedP; propertyEl.value = savedR;
+  const sp = parseInt(localStorage.getItem(LS.pension) || '25000',10);
+  const sr = parseInt(localStorage.getItem(LS.property) || '500000',10);
+  pensionEl.value = sp; propertyEl.value = sr;
   calc();
-  const savedPhase = parseInt(localStorage.getItem(LS.phase) || '1',10);
-  currentPhase = savedPhase || currentPhase;
   if(currentPhase >= 11) phase11Card.style.display = 'block';
+  showPhase(currentPhase);
   updateProgress();
 }
 init();
 
-/* persist before unload */
-window.addEventListener('beforeunload', ()=>{ localStorage.setItem(LS.phase, String(currentPhase)); localStorage.setItem(LS.completed, JSON.stringify(completed)); });
+/* persist on unload */
+window.addEventListener('beforeunload', function(){ localStorage.setItem(LS.phase, String(currentPhase)); localStorage.setItem(LS.completed, JSON.stringify(completed)); });
 
+/* expose some for console if needed */
+window.completePhase = completePhase; window.calc = calc; window.checkVisa = checkVisa; window.completeJourney = celebrate; window.calcShipping = calcShipping;
 </script>
 
-<!-- ===== Inline manifest (created dynamically and attached) ===== -->
+<!-- Inline manifest (attached dynamically) -->
 <script>
 (function attachManifest(){
-  const manifest = {
+  var manifest = {
     name: "BRITS ABROAD 2025",
     short_name: "BritsAbroad",
     start_url: ".",
     display: "standalone",
-    background_color: "#f0f8ff",
-    theme_color: "#00247d",
+    background_color: "#0b0b0b",
+    theme_color: "#0b0b0b",
     icons: [
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%2300247d'/%3E%3C/svg%3E", sizes:"192x192", type:"image/svg+xml" },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect width='512' height='512' fill='%2300247d'/%3E%3C/svg%3E", sizes:"512x512", type:"image/svg+xml" }
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%230b0b0b'/%3E%3Ccircle cx='96' cy='96' r='72' fill='%23d4af37'/%3E%3C/svg%3E", sizes:"192x192", type:"image/svg+xml" },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect width='512' height='512' fill='%230b0b0b'/%3E%3Ccircle cx='256' cy='256' r='180' fill='%23d4af37'/%3E%3C/svg%3E", sizes:"512x512", type:"image/svg+xml" }
     ]
   };
-  const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  let link = document.querySelector('link[rel="manifest"]');
+  var blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var link = document.querySelector('link[rel="manifest"]');
   if(!link){ link = document.createElement('link'); link.rel='manifest'; document.head.appendChild(link); }
   link.href = url;
 })();
 </script>
 
-<!-- ===== Inline Service Worker registration using a blob URL ===== -->
+<!-- Inline Service Worker registration via blob -->
 <script>
 (function registerSW(){
   if(!('serviceWorker' in navigator)) return;
-  // Inline service worker source
-  const swSrc = `
-  const CACHE_NAME = 'brits-abroad-v1';
-  const FILES = ['.','index.html'];
-  self.addEventListener('install', e=>{
-    e.waitUntil(
-      caches.open(CACHE_NAME).then(c => c.addAll(FILES)).then(()=>self.skipWaiting())
-    );
-  });
-  self.addEventListener('activate', e=>{
-    e.waitUntil(
-      caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())
-    );
-  });
-  self.addEventListener('fetch', e=>{
-    e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)).catch(()=>{}));
-  });
-  `;
-  try{
-    const blob = new Blob([swSrc], {type:'application/javascript'});
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).then(reg=>console.log('Inline SW registered', reg)).catch(err=>console.warn('SW register failed', err));
-  }catch(e){ console.warn('SW blob registration failed', e); }
+  // Service worker source as plain string
+  var swSrc = "const CACHE_NAME='brits-abroad-v1';" +
+    "const FILES=['.','index.html'];" +
+    "self.addEventListener('install',function(e){ e.waitUntil(caches.open(CACHE_NAME).then(function(c){ return c.addAll(FILES);}).then(function(){ return self.skipWaiting(); })); });" +
+    "self.addEventListener('activate',function(e){ e.waitUntil(caches.keys().then(function(keys){ return Promise.all(keys.filter(function(k){ return k!==CACHE_NAME; }).map(function(k){ return caches.delete(k); })); }).then(function(){ return self.clients.claim(); })); });" +
+    "self.addEventListener('fetch',function(e){ e.respondWith(caches.match(e.request).then(function(r){ return r||fetch(e.request); }).catch(function(){}) ); });";
+  try {
+    var blob = new Blob([swSrc], {type:'application/javascript'});
+    var swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl).then(function(reg){ console.log('Inline SW registered', reg); }).catch(function(err){ console.warn('SW register failed', err); });
+  } catch(err){
+    console.warn('SW creation failed', err);
+  }
 })();
 </script>
 
