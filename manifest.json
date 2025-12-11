@@ -1,2 +1,26 @@
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./icons/icon-192.svg" type="image/svg+xml">
+{
+  "name": "BRITS ABROAD 2025",
+  "short_name": "BritsAbroad",
+  "start_url": "/BRITS-ABROAD-2025/",
+  "display": "standalone",
+  "background_color": "#00247d",
+  "theme_color": "#c8102e",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/4pY7K7k/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/0jG4X5q/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/4pY7K7k/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}
