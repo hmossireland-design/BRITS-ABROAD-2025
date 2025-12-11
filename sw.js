@@ -1,4 +1,4 @@
-const CACHE = 'brits-v1';
+const CACHE = 'brits-abroad-v1';
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll([
   '/BRITS-ABROAD-2025/',
   '/BRITS-ABROAD-2025/index.html',
