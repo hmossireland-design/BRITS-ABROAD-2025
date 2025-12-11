@@ -1,89 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#00247d" />
-  <title>BRITS ABROAD 2025 – Escape the Budget Squeeze</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="manifest" href="manifest.json">
+  <title>BRITS ABROAD 2025</title>
 
-  <!-- favicon / icon (optional) -->
-  <link rel="icon" href="icons/icon-192.png">
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="./manifest.json">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main id="app">
-    <header>
-      <h1>BRITS ABROAD 2025</h1>
-      <p class="lead">Escape the 2025 Budget squeeze</p>
-    </header>
+  <!-- Icons -->
+  <link rel="icon" href="./icons/icon-192.png">
 
-    <section class="card progress-card">
-      <div class="progress"><div class="fill" id="progressFill" style="width:0%"></div></div>
-      <div id="phasesContainer" class="phases"></div>
-    </section>
+  <!-- iOS support -->
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <section class="card">
-      <label for="country">Destination</label>
-      <select id="country" aria-label="Select destination"></select>
+  <!-- Theme colour -->
+  <meta name="theme-color" content="#003366">
 
-      <label>Annual Pension: £<span id="pensionVal">25,000</span></label>
-      <input id="pension" type="range" min="0" max="100000" value="25000" step="1000">
-
-      <label>UK Property Value: £<span id="propertyVal">500,000</span></label>
-      <input id="property" type="range" min="0" max="3000000" value="500000" step="10000">
-
-      <div class="result" id="result">You could save <strong>£15,625</strong>/year abroad!</div>
-
-      <a class="buy" id="buyBtn" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">UNLOCK FULL PACK – ONLY £9.97</a>
-      <p class="muted">30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
-    </section>
-
-    <!-- Phase 11 card, revealed when user reaches last phase -->
-    <section class="card" id="phase11" style="display:none;">
-      <h2>Phase 11 – Retirement Visa Comparison</h2>
-      <table>
-        <thead><tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr></thead>
-        <tbody>
-          <tr class="toggle"><td>Portugal</td><td>D7</td><td>€870/mo</td><td>None</td><td>5 yrs</td></tr>
-          <tr class="detail"><td colspan="5">10% flat tax on pensions • Family included • Golden Visa €250k option</td></tr>
-
-          <tr class="toggle"><td>Spain</td><td>Non-Lucrative</td><td>€2,400/mo</td><td>None</td><td>5 yrs</td></tr>
-          <tr class="detail"><td colspan="5">No work allowed • Golden Visa €500k property</td></tr>
-
-          <tr class="toggle"><td>UAE</td><td>Retirement Visa</td><td>£4,200/mo</td><td>55+</td><td>No</td></tr>
-          <tr class="detail"><td colspan="5">0% income tax • Property purchase AED 1M</td></tr>
-
-          <tr class="toggle"><td>Thailand</td><td>O-A / Elite</td><td>£1,500/mo</td><td>50+</td><td>No</td></tr>
-          <tr class="detail"><td colspan="5">Elite Visa £15k one-off • Popular with Brits</td></tr>
-
-          <tr class="toggle"><td>Cyprus</td><td>Category F</td><td>£8,400/yr</td><td>None</td><td>5 yrs</td></tr>
-          <tr class="detail"><td colspan="5">Permanent residency via purchase • EU access</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-  </main>
-
-  <!-- Scripts -->
-  <script src="script.js"></script>
-
-  <!-- Register service worker (relative path) -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(()=>console.log('SW registered'))
-        .catch(err=>console.warn('SW failed', err));
+  <style>
+    body {
+      background: #f9f9f9;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
     }
-  </script>
-</body>
-<<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(() => console.log('Service Worker registered'))
-    .catch(err => console.log('SW registration failed', err));
+
+    h1 {
+      color: #003366;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>BRITS ABROAD 2025</h1>
+    <p>The ultimate relocation helper for UK expats.</p>
+
+    <button onclick="installPWA()">Install App</button>
+  </div>
+
+<script>
+let deferredPrompt = null;
+
+// Listen for install event
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+// Install function
+function installPWA() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  } else {
+    alert("App is already installed or not supported.");
+  }
 }
-</script>html>
+
+// SERVICE WORKER REGISTRATION
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js")
+    .then(() => console.log("Service Worker registered"))
+    .catch(err => console.log("SW registration failed", err));
+}
+
+</script>
+
+</body>
+</html>
