@@ -1,34 +1,94 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#00247d"/>
-  <title>BRITS ABROAD 2025 – Retirement Roadmap</title>
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192'><rect width='192' height='192' fill='%2300247d'/></svg>">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#00247d"/>
+<title>BRITS ABROAD 2025 – Retirement Roadmap</title>
 
-  <style>
-    /* Base styling and layout omitted for brevity, use your current styles */
-  </style>
+<!-- Manifest embedded -->
+<script type="application/manifest+json">
+{
+  "name": "BRITS ABROAD 2025",
+  "short_name": "BRITSABROAD",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#00247d",
+  "theme_color": "#00247d",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192'><rect width='192' height='192' fill='%2300247d'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='512' height='512' fill='%2300247d'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+</script>
+
+<!-- Favicon inline SVG -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192'><rect width='192' height='192' fill='%2300247d'/></svg>" type="image/svg+xml">
+
+<style>
+/* ---------- Your previous CSS here ---------- */
+:root{--blue:#00247d;--red:#c8102e;--muted:#e6f2ff;--card-bg:#fff;--success:#28a745;--glass:rgba(255,255,255,0.6);}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:linear-gradient(180deg,#f0f8ff 0%,#e6f2ff 100%);color:var(--blue);text-align:center;padding:18px;line-height:1.45;display:flex;flex-direction:column;align-items:center;}
+/* ---------- App container ---------- */
+.app{width:100%;max-width:980px;margin:0 auto;flex:1;display:flex;flex-direction:column;gap:18px;}
+header{padding:8px 10px}h1{font-size:1.9rem;margin:10px 0 6px;letter-spacing:-0.02em;font-weight:800}p.subtitle{margin:0 0 10px;font-size:1rem;color:var(--blue);opacity:0.9}
+/* ---------- Progress ---------- */
+.progress-wrap{width:100%;padding:6px 0}.progress-bar{height:10px;background:#e9eef8;border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0%;background:var(--red);transition:width .45s ease}
+/* ---------- Phases ---------- */
+.phases{display:flex;gap:10px;padding:10px 6px;justify-content:center;flex-wrap:wrap}.phase{width:84px;min-width:84px;height:84px;border-radius:16px;background:var(--muted);display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:transform .18s ease, background .18s ease, box-shadow .18s ease;font-size:0.86rem;box-shadow:0 6px 18px rgba(0,0,0,0.06)}.phase:hover{transform:translateY(-4px)}.phase .phase-icon{font-size:1.4rem}.phase.active{background:var(--red);color:#fff;transform:scale(1.04)}.phase.completed{background:var(--success);color:#fff}
+/* ---------- Cards ---------- */
+.card{background:var(--card-bg);border-radius:14px;padding:20px;max-width:760px;margin:0 auto;box-shadow:0 10px 30px rgba(0,0,0,0.07);animation:fadeIn .35s ease}.card h2{margin:0 0 12px;font-size:1.2rem}select,input[type=range],input[type=file],.btn{font-size:1rem;outline:none;}select{padding:10px 12px;border-radius:10px;border:2px solid var(--red);background:#fff;min-width:180px}.row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}.muted{color:#445;opacity:.75;font-size:.95rem}input[type=range]{width:100%;accent-color:var(--red);margin:8px 0;}.range-labels{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px}.result,.visaResult,.docResult{display:inline-block;font-size:1rem;background:var(--red);color:#fff;padding:12px 14px;border-radius:10px;margin-top:12px;min-width:160px}table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.95rem}th,td{padding:10px;text-align:left;border-bottom:1px solid #ecf0f6}th{background:var(--blue);color:#fff;font-weight:600}tr:hover td{background:#f4fbff}.detail{display:none;background:#f8fbff;padding:10px;border-radius:8px;margin-top:6px}.detail.show{display:block}.countdown{font-weight:700;color:var(--red);padding:12px 16px;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.06)}.cta{background:var(--red);color:#fff;padding:22px;border-radius:14px;box-shadow:0 15px 40px rgba(200,16,46,0.18)}.cta .buy{background:#fff;color:var(--red);padding:14px 28px;border-radius:40px;font-weight:700;text-decoration:none;display:inline-block;margin-top:10px}@media(max-width:640px){.phase{width:72px;height:72px;font-size:.78rem}.card{padding:14px}h1{font-size:1.6rem}}@media(prefers-color-scheme:dark){body{background:#081024;color:#f3f7ff}.card{background:#0f1724}table th{background:#071133}.detail{background:#071133}}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-  <div class="app" role="application" aria-label="Brits Abroad 2025">
-    <!-- Your full app content (header, phases, cards, tables, countdown, CTA) goes here -->
-    <!-- Keep your full HTML from the previous index.html here -->
-  </div>
+<div class="app" role="application" aria-label="Brits Abroad 2025">
+<header>
+<h1>BRITS ABROAD 2025</h1>
+<p class="subtitle">Escape the 2025 Budget squeeze — Your Retirement Roadmap</p>
+</header>
+<div class="progress-wrap card" aria-hidden="false">
+<div class="progress-bar" aria-hidden="true"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+</div>
+<nav class="phases" id="phases" aria-label="Phases navigation"></nav>
+<section id="phaseContent" aria-live="polite">
+<!-- Your phase cards go here (phase1→phase11) -->
+</section>
+<div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center">
+<div class="countdown" id="countdown">NI Top-Up Window: calculating...</div>
+<div class="card cta" style="max-width:460px">
+<h3 style="margin:0">Unlock the Full 2025 Relocation Pack</h3>
+<p style="margin:8px 0 10px">30-page premium PDF • Visa templates • Lawyer contacts • Checklists</p>
+<a class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">BUY NOW – ONLY £9.97</a>
+</div>
+</div>
+</div>
 
-  <script>
-    // === Service Worker Registration ===
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js')
-        .then(reg => console.log('SW registered', reg))
-        .catch(err => console.warn('SW registration failed', err));
-    }
+<script>
+// ===== Your full JS logic (phases, calc, visa, files, countdown, completeJourney) =====
+</script>
 
-    // === App Core JS ===
-    // Include your full JS logic: PHASES, COUNTRIES, buildPhases(), showPhase(), completePhase(), checkVisa(), calc(), etc.
-    // Copy all functions exactly from your current index.html script
-  </script>
+<!-- Inline Service Worker -->
+<script>
+const CACHE_NAME = 'brits-abroad-v1';
+const FILES_TO_CACHE = [
+  '.',
+  'index.html'
+];
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([`
+    const CACHE='${CACHE_NAME}';
+    self.addEventListener('install', e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(${JSON.stringify(FILES_TO_CACHE)}))));
+    self.addEventListener('fetch', e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});
+  `],{type:'application/javascript'}))).catch(console.warn);
+}
+</script>
 </body>
 </html>
