@@ -4,7 +4,7 @@
   "start_url": "/BRITS-ABROAD-2025/",
   "display": "standalone",
   "background_color": "#00247d",
-  "theme_color": "#00247d",
+  "theme_color": "#c8102e",
   "icons": [
     {
       "src": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f1ec-1f1e7.png",
