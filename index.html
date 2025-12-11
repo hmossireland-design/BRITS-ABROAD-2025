@@ -3,86 +3,67 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<meta name="theme-color" content="#00247d"/>
 <title>BRITS ABROAD 2025 — Retirement Roadmap</title>
+<meta name="theme-color" content="#00247d">
+
+<!-- Fallback favicon (inline SVG) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%2300247d'/%3E%3C/svg%3E" type="image/svg+xml">
 
 <style>
-/* ---- Theme / base ---- */
 :root{
-  --bg1: #f0f8ff;
-  --bg2: #e6f2ff;
-  --blue: #00247d;
-  --red: #c8102e;
-  --muted: #eaf4ff;
-  --card: #ffffff;
-  --accent: #c8102e;
-  --success: #28a745;
-  --shadow: 0 10px 30px rgba(0,0,0,0.07);
-  --radius: 14px;
-  --maxw: 980px;
+  --bg1:#f0f8ff; --bg2:#e6f2ff; --blue:#00247d; --red:#c8102e;
+  --muted:#eef8ff; --card:#ffffff; --success:#28a745; --glass: rgba(255,255,255,0.6);
+  --radius:14px; --shadow:0 10px 30px rgba(0,0,0,0.07);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  -webkit-font-smoothing:antialiased;
-  background: linear-gradient(180deg,var(--bg1),var(--bg2));
-  color:var(--blue);
-  display:flex;
-  justify-content:center;
-  padding:18px;
-  line-height:1.45;
+  margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  -webkit-font-smoothing:antialiased; background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--blue); display:flex; justify-content:center; padding:18px; line-height:1.45;
 }
-
-/* ---- layout ---- */
-.app { width:100%; max-width:var(--maxw); }
+.app { width:100%; max-width:980px; }
 .header { text-align:center; margin-bottom:10px; }
-.h1 { font-size:1.9rem; margin:6px 0; font-weight:800; letter-spacing:-0.01em; color:var(--blue); }
-.lead { color: rgba(0,36,125,0.9); margin:0 0 12px; }
+.h1 { font-size:1.9rem; margin:6px 0; font-weight:800; color:var(--blue); }
+.lead { color:rgba(0,36,125,0.88); margin:0 0 12px; }
 
-/* ---- cards ---- */
-.card { background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:14px; }
-.row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-.controls { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+/* cards */
+.card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:14px;}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.controls{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.small{font-size:.92rem;color:#445}
 
-/* ---- progress / phases ---- */
-.progress { height:12px; background:#eef6ff; border-radius:999px; overflow:hidden; margin:12px 0; }
-.progress .fill { height:100%; background:var(--accent); width:0%; transition:width .45s ease; }
-.phases { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:6px; }
-.phase { width:76px; height:76px; border-radius:12px; background:var(--muted); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,0.04); }
-.phase .icon { font-size:1.4rem; margin-bottom:6px; }
-.phase .label { font-size:0.82rem; text-align:center; }
-.phase.active { background:var(--accent); color:#fff; transform:scale(1.04); }
-.phase.completed { background:var(--success); color:#fff; }
+/* progress & phases */
+.progress{height:12px;background:#eef6ff;border-radius:999px;overflow:hidden;margin:12px 0;}
+.fill{height:100%;background:var(--red);width:0%;transition:width .45s;}
+.phases{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;}
+.phase{width:76px;height:76px;border-radius:12px;background:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,0.04)}
+.phase .icon{font-size:1.4rem;margin-bottom:6px}
+.phase .label{font-size:.82rem;text-align:center}
+.phase.active{background:var(--red);color:#fff;transform:scale(1.04)}
+.phase.completed{background:var(--success);color:#fff}
 
-/* ---- form controls ---- */
-select, input[type=range], input[type=file], button { font-family:inherit; font-size:1rem; }
-select { padding:10px; border-radius:10px; border:2px solid var(--accent); background:#fff; min-width:160px; }
-input[type=range] { width:100%; -webkit-appearance:none; height:8px; background:#eef6ff; border-radius:8px; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; background:var(--accent); border-radius:50%; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-.small { font-size:.9rem; color:#445; }
+/* inputs */
+select,input[type=range],input[type=file],button{font-family:inherit;font-size:1rem}
+select{padding:10px;border-radius:10px;border:2px solid var(--red);background:#fff;min-width:160px}
+input[type=range]{width:100%;height:8px;background:#eef6ff;border-radius:8px}
+input[type=range]::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;background:var(--red);-webkit-appearance:none;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.result{background:var(--red);color:#fff;padding:12px 14px;border-radius:10px;font-weight:700;margin-top:12px}
 
-/* ---- result / CTA ---- */
-.result { background:var(--accent); color:#fff; padding:12px 14px; border-radius:10px; display:inline-block; font-weight:700; margin-top:12px; }
-.btn { background:var(--accent); color:#fff; padding:12px 16px; border-radius:10px; border:0; cursor:pointer; font-weight:700; }
-.btn.ghost { background:transparent; color:var(--accent); border:2px solid var(--accent); }
-.buy { background:gold; color:var(--accent); padding:14px 20px; border-radius:30px; font-weight:800; box-shadow:0 8px 26px rgba(0,0,0,0.12); text-decoration:none; display:inline-block; }
+/* buttons & CTA */
+.btn{background:var(--red);color:#fff;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+.btn.ghost{background:transparent;color:var(--red);border:2px solid var(--red)}
+.buy{background:gold;color:var(--red);padding:12px 18px;border-radius:28px;font-weight:800;text-decoration:none;display:inline-block;box-shadow:0 8px 22px rgba(0,0,0,0.12)}
 
-/* ---- tables ---- */
-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.95rem; }
-th, td { padding:10px; border-bottom:1px solid #eef6ff; text-align:left; }
-th { background:var(--blue); color:#fff; font-weight:700; }
+/* table */
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.95rem}
+th,td{padding:10px;text-align:left;border-bottom:1px solid #eef6ff}
+th{background:var(--blue);color:#fff;font-weight:700}
+.detail{display:none;background:#f8fbff;padding:10px;border-radius:8px;margin-top:6px}
+.detail.show{display:block}
 
-/* ---- small screens ---- */
-@media (max-width:640px){
-  .phase { width:68px; height:68px; }
-  .h1 { font-size:1.6rem; }
-  .card { padding:14px; }
-}
-
-/* ---- animations ---- */
-@keyframes floatUp { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+/* responsive */
+@media(max-width:640px){.phase{width:68px;height:68px}.h1{font-size:1.6rem}.card{padding:14px}}
 </style>
 </head>
 <body>
@@ -94,71 +75,178 @@ th { background:var(--blue); color:#fff; font-weight:700; }
   </header>
 
   <div class="card">
-    <div class="progress"><div class="fill" id="progressFill" style="width:0%"></div></div>
-    <div class="phases" id="phases" aria-hidden="false"></div>
+    <div class="progress"><div id="progressFill" class="fill" style="width:0%"></div></div>
+    <div id="phases" class="phases" aria-hidden="false"></div>
   </div>
 
-  <!-- MAIN INTERACTIVE CARD -->
+  <!-- Main interactive -->
   <section class="card" id="mainCard" aria-live="polite">
-
-    <div class="row" style="justify-content:space-between;align-items:flex-end;">
-      <div style="flex:1; min-width:160px;">
+    <div class="row controls" style="align-items:flex-end;">
+      <div style="flex:1;min-width:140px;">
         <label class="small" for="country">Destination</label>
         <select id="country" aria-label="Destination country"></select>
       </div>
 
-      <div style="flex:1; min-width:160px;">
+      <div style="flex:1;min-width:160px;">
         <label class="small">Annual Pension: £<span id="pensionVal">25,000</span></label>
         <input id="pension" type="range" min="0" max="100000" step="1000" value="25000" />
       </div>
 
-      <div style="flex:1; min-width:180px;">
+      <div style="flex:1;min-width:160px;">
         <label class="small">UK Property Value: £<span id="propertyVal">500,000</span></label>
         <input id="property" type="range" min="0" max="3000000" step="10000" value="500000" />
       </div>
     </div>
 
-    <div style="margin-top:12px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-      <div class="result" id="result">You could save <strong>£15,625</strong>/year</div>
-      <button class="btn" id="nextBtn">Next Phase</button>
-      <a class="buy" id="buyBtn" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">UNLOCK FULL PACK £9.97</a>
+    <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+      <div id="result" class="result">You could save <strong>£15,625</strong>/year</div>
+      <button id="nextBtn" class="btn">Next Phase</button>
+      <a id="buyBtn" class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">UNLOCK FULL PACK £9.97</a>
     </div>
-    <div class="small" style="margin-top:10px; color:#556">Your entered values are stored locally on this device only.</div>
+    <div class="small" style="margin-top:10px;color:#556">Values saved locally on this device only.</div>
   </section>
 
-  <!-- PHASE 11: retirement table (revealed when reached) -->
-  <section class="card" id="phase11" style="display:none;">
-    <h2 style="margin:0 0 8px;">Retirement Visa Comparison</h2>
-    <div class="small">Tap a row for details</div>
+  <!-- Phase cards (hidden/shown as user progresses) -->
+  <!-- Phase 1 -->
+  <section id="phase1" class="card">
+    <h2 style="margin:0 0 8px">Phase 1 — Dream Destination</h2>
+    <p class="small">Choose your preferred destination to tailor the plan.</p>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(1)">Complete Phase 1</button></div>
+  </section>
+
+  <!-- Phase 2 -->
+  <section id="phase2" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 2 — Financial Freedom</h2>
+    <p class="small">Adjust pension & property to see estimated savings.</p>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(2)">Complete Phase 2</button></div>
+  </section>
+
+  <!-- Phase 3 -->
+  <section id="phase3" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 3 — Visa Victory</h2>
+    <div class="row" style="margin-top:8px;">
+      <select id="q1" aria-label="Monthly income">
+        <option value="">Monthly income?</option>
+        <option value="0">Under €870</option>
+        <option value="1">€870–€3,279</option>
+        <option value="2">€3,280+</option>
+      </select>
+      <select id="q2" aria-label="Remote work">
+        <option value="">Remote work?</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <select id="q4" aria-label="Family joining">
+        <option value="">Family joining?</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+    </div>
+    <div style="margin-top:10px"><button class="btn" onclick="checkVisa()">Show my best visa</button></div>
+    <div id="visaResult" class="small" style="margin-top:10px">Answer above</div>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(3)">Complete Phase 3</button></div>
+  </section>
+
+  <!-- Phase 4 -->
+  <section id="phase4" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 4 — Document Dynasty</h2>
+    <div class="small">Upload documents (names only checked locally)</div>
+    <div style="margin-top:8px">
+      <input id="files" type="file" multiple aria-label="Upload documents" />
+    </div>
+    <div id="docResult" class="small" style="margin-top:8px">No files chosen</div>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(4)">Complete Phase 4</button></div>
+  </section>
+
+  <!-- Phase 5 -->
+  <section id="phase5" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 5 — Budget Blueprint</h2>
+    <table>
+      <thead><tr><th>Item</th><th>UK</th><th>Selected Country</th><th>Save</th></tr></thead>
+      <tbody>
+        <tr><td>Rent</td><td>£1,300</td><td>£720</td><td>£580</td></tr>
+        <tr><td>Groceries</td><td>£400</td><td>£240</td><td>£160</td></tr>
+        <tr><td><strong>Total</strong></td><td>£2,085</td><td>£1,160</td><td>£925</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(5)">Complete Phase 5</button></div>
+  </section>
+
+  <!-- Phase 6 -->
+  <section id="phase6" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 6 — Move Mastery</h2>
+    <div class="small">Estimate shipping cost</div>
+    <div style="margin-top:8px">
+      <label class="small">Shipping £<span id="shippingVal">2000</span></label>
+      <input id="shipping" type="range" min="0" max="5000" value="2000" oninput="calcShipping()" />
+    </div>
+    <div id="shippingResult" class="small" style="margin-top:8px">Shipping cost: £2,000</div>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(6)">Complete Phase 6</button></div>
+  </section>
+
+  <!-- Phase 7 -->
+  <section id="phase7" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 7 — Settlement Success</h2>
+    <p class="small">Bank setup, healthcare, local community — you're nearly there.</p>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(7)">Complete Phase 7</button></div>
+  </section>
+
+  <!-- Phase 8 -->
+  <section id="phase8" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 8 — Community Connections</h2>
+    <p class="small">Expat groups, language classes, events.</p>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(8)">Complete Phase 8</button></div>
+  </section>
+
+  <!-- Phase 9 -->
+  <section id="phase9" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 9 — Tax Triumph</h2>
+    <p class="small">Understand filing, treaties, accountant tips.</p>
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(9)">Complete Phase 9</button></div>
+  </section>
+
+  <!-- Phase 10 -->
+  <section id="phase10" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 10 — Celebration Station</h2>
+    <p class="small">You did it — welcome to your new life abroad 🎉</p>
+    <div style="margin-top:12px"><button class="btn" onclick="completeJourney()">Celebrate</button></div>
+  </section>
+
+  <!-- Phase 11 -->
+  <section id="phase11" class="card" style="display:none">
+    <h2 style="margin:0 0 8px">Phase 11 — Retirement Roadmap</h2>
+    <p class="small">Retirement score for <strong id="retCountry">Portugal</strong>: <strong id="retScore">85%</strong></p>
     <table>
       <thead><tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr></thead>
       <tbody>
         <tr class="tog" data-id="portugal"><td>Portugal</td><td>D7</td><td>€870</td><td>—</td><td>5 yrs</td></tr>
-        <tr id="portugal" class="detail"><td colspan="5">10% flat pension tax (NHR options). Family included. Apply via official portal.</td></tr>
+        <tr id="portugal" class="detail"><td colspan="5">10% flat pension tax (NHR options). Family included. Golden Visa options exist.</td></tr>
 
         <tr class="tog" data-id="spain"><td>Spain</td><td>Non-Lucrative</td><td>€2,400</td><td>—</td><td>5 yrs</td></tr>
-        <tr id="spain" class="detail"><td colspan="5">No work allowed. Health insurance required. Golden visa options exist for investors.</td></tr>
+        <tr id="spain" class="detail"><td colspan="5">No work allowed; private insurance required.</td></tr>
 
-        <tr class="tog" data-id="uae"><td>UAE</td><td>Retirement Visa</td><td>AED 20,000</td><td>55+</td><td>No PR</td></tr>
-        <tr id="uae" class="detail"><td colspan="5">Property investment or savings route; no personal income tax.</td></tr>
+        <tr class="tog" data-id="uae"><td>UAE</td><td>Retirement Visa</td><td>AED20,000</td><td>55+</td><td>No PR</td></tr>
+        <tr id="uae" class="detail"><td colspan="5">Property purchase or savings options.</td></tr>
 
-        <tr class="tog" data-id="thailand"><td>Thailand</td><td>O-A / Elite</td><td>THB 65,000</td><td>50+</td><td>No</td></tr>
-        <tr id="thailand" class="detail"><td colspan="5">Elite fast-track for long stays available for fees.</td></tr>
+        <tr class="tog" data-id="thailand"><td>Thailand</td><td>O-A/Elite</td><td>THB65,000</td><td>50+</td><td>No</td></tr>
+        <tr id="thailand" class="detail"><td colspan="5">Elite long-stay options available for fees.</td></tr>
 
         <tr class="tog" data-id="cyprus"><td>Cyprus</td><td>Category F</td><td>€10,000</td><td>—</td><td>5 yrs</td></tr>
-        <tr id="cyprus" class="detail"><td colspan="5">Permanent residency via investment purchase options available.</td></tr>
+        <tr id="cyprus" class="detail"><td colspan="5">PR via investment purchase options.</td></tr>
       </tbody>
     </table>
+
+    <div style="margin-top:12px"><button class="btn" onclick="completePhase(11)">Complete Retirement Roadmap</button></div>
   </section>
 
   <!-- CTA + countdown -->
-  <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:12px;">
-    <div class="card" style="min-width:240px; text-align:center;">
-      <div id="countdown" class="countdown">NI Top-Up Window: calculating...</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px;">
+    <div class="card" style="text-align:center;min-width:220px;">
+      <div id="countdown" class="small" style="font-weight:700">NI Top-Up Window: calculating...</div>
     </div>
-    <div class="card cta" style="min-width:260px; text-align:center;">
-      <div style="font-weight:800; font-size:1rem;">Unlock the Full Relocation Pack</div>
-      <div style="margin:8px 0; font-size:.95rem;">30-page PDF • Visa templates • Lawyer contacts • Checklists</div>
+    <div class="card cta" style="text-align:center;min-width:260px;">
+      <div style="font-weight:800">Unlock the Full Relocation Pack</div>
+      <div style="margin:8px 0;font-size:.95rem">30-page PDF • Visa templates • Lawyer contacts • Checklists</div>
       <a class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">BUY NOW £9.97</a>
     </div>
   </div>
@@ -166,43 +254,21 @@ th { background:var(--blue); color:#fff; font-weight:700; }
 </main>
 
 <script>
-/* ============================
-   App data & state
-   ============================ */
+/* ===== Data & state ===== */
 const PHASES = [
-  {id:1,title:'Dream',icon:'🌍'},
-  {id:2,title:'Finance',icon:'💰'},
-  {id:3,title:'Visa',icon:'📋'},
-  {id:4,title:'Docs',icon:'📁'},
-  {id:5,title:'Budget',icon:'📊'},
-  {id:6,title:'Move',icon:'🚚'},
-  {id:7,title:'Settle',icon:'🏠'},
-  {id:8,title:'Community',icon:'👥'},
-  {id:9,title:'Tax',icon:'💼'},
-  {id:10,title:'Celebrate',icon:'🎉'},
-  {id:11,title:'Retire',icon:'👴'}
+  {id:1,title:'Dream',icon:'🌍'},{id:2,title:'Finance',icon:'💰'},{id:3,title:'Visa',icon:'📋'},
+  {id:4,title:'Docs',icon:'📁'},{id:5,title:'Budget',icon:'📊'},{id:6,title:'Move',icon:'🚚'},
+  {id:7,title:'Settle',icon:'🏠'},{id:8,title:'Community',icon:'👥'},{id:9,title:'Tax',icon:'💼'},
+  {id:10,title:'Celebrate',icon:'🎉'},{id:11,title:'Retire',icon:'👴'}
 ];
 
-// country multipliers (simple)
-const COUNTRIES = {
-  Portugal:1, Spain:1.05, UAE:1.6, Thailand:0.6, Cyprus:1, Greece:1.1,
-  Italy:1.2, France:1.25, Poland:0.5, Malta:1.05
-};
+const COUNTRIES = { Portugal:1, Spain:1.05, UAE:1.6, Thailand:0.6, Cyprus:1, Greece:1.1, Italy:1.2, France:1.25, Poland:0.5, Malta:1.05 };
 
-const LS = {
-  phase:'ba_phase',
-  pension:'ba_pension',
-  property:'ba_property',
-  country:'ba_country',
-  completed:'ba_completed'
-};
-
-let currentPhase = parseInt(localStorage.getItem(LS.phase) || '1');
+const LS = { phase:'ba_phase', pension:'ba_pension', property:'ba_property', country:'ba_country', completed:'ba_completed' };
+let currentPhase = parseInt(localStorage.getItem(LS.phase) || '1', 10);
 let completed = JSON.parse(localStorage.getItem(LS.completed) || '[]');
 
-/* ============================
-   DOM refs
-   ============================ */
+/* ===== DOM refs ===== */
 const phasesEl = document.getElementById('phases');
 const progressFill = document.getElementById('progressFill');
 const countryEl = document.getElementById('country');
@@ -215,9 +281,7 @@ const nextBtn = document.getElementById('nextBtn');
 const phase11Card = document.getElementById('phase11');
 const countdownEl = document.getElementById('countdown');
 
-/* ============================
-   Build UI
-   ============================ */
+/* ===== Build UI ===== */
 function buildPhases(){
   phasesEl.innerHTML = '';
   PHASES.forEach(p=>{
@@ -225,7 +289,7 @@ function buildPhases(){
     d.className = 'phase' + (completed.includes(p.id) ? ' completed' : '') + (p.id===currentPhase ? ' active' : '');
     d.dataset.phase = p.id;
     d.innerHTML = `<div class="icon">${p.icon}</div><div class="label">${p.title}</div>`;
-    d.addEventListener('click', ()=> selectPhase(p.id));
+    d.addEventListener('click', ()=>selectPhase(p.id));
     phasesEl.appendChild(d);
   });
   updateProgress();
@@ -234,69 +298,58 @@ function buildPhases(){
 function populateCountries(){
   countryEl.innerHTML = '';
   Object.keys(COUNTRIES).forEach(c=>{
-    const opt = document.createElement('option');
-    opt.value = c; opt.textContent = c;
-    countryEl.appendChild(opt);
+    const o = document.createElement('option'); o.value=c; o.textContent=c; countryEl.appendChild(o);
   });
-  const saved = localStorage.getItem(LS.country) || 'Portugal';
-  countryEl.value = saved;
+  countryEl.value = localStorage.getItem(LS.country) || 'Portugal';
+  document.getElementById('retCountry').textContent = countryEl.value || 'Portugal';
 }
 
-/* ============================
-   Phase controls
-   ============================ */
+/* ===== Phase logic ===== */
 function updateProgress(){
   const pct = Math.round((currentPhase / PHASES.length) * 100);
   progressFill.style.width = pct + '%';
-  document.querySelectorAll('.phase').forEach(el=>{
-    el.classList.toggle('active', parseInt(el.dataset.phase) === currentPhase);
-  });
+  document.querySelectorAll('.phase').forEach(el=>el.classList.toggle('active', parseInt(el.dataset.phase,10)===currentPhase));
+}
+
+function selectPhase(n){
+  if(n > currentPhase) return; // prevent skipping ahead
+  currentPhase = n;
+  showPhase(n);
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function showPhase(n){
   PHASES.forEach(p=>{
     const el = document.getElementById('phase' + p.id);
-    if(el) el.style.display = (p.id === n ? 'block' : 'none');
+    if(el) el.style.display = (p.id===n ? 'block' : 'none');
   });
-  // show/hide phase11
   phase11Card.style.display = (n >= 11 ? 'block' : 'none');
   localStorage.setItem(LS.phase, String(n));
-  currentPhase = n;
-  updateProgress();
 }
 
-function selectPhase(n){
-  // prevent jumping ahead
-  if(n > currentPhase) return;
-  currentPhase = n;
-  updateProgress();
-  // scroll to main card for mobile
-  window.scrollTo({top:0, behavior:'smooth'});
-  if(currentPhase >= 11) phase11Card.style.display = 'block';
-}
-
-/* Move to next phase (button) */
-nextBtn.addEventListener('click', ()=>{
-  if(currentPhase < PHASES.length){
-    // mark current completed
-    if(!completed.includes(currentPhase)) completed.push(currentPhase);
-    localStorage.setItem(LS.completed, JSON.stringify(completed));
-    // advance
-    currentPhase++;
+/* ===== Complete phase ===== */
+function completePhase(n){
+  if(n < currentPhase) return;
+  if(!completed.includes(n)) completed.push(n);
+  localStorage.setItem(LS.completed, JSON.stringify(completed));
+  // build phases to reflect completed
+  buildPhases();
+  // advance
+  const next = n+1;
+  if(next <= PHASES.length){
+    currentPhase = next;
     localStorage.setItem(LS.phase, String(currentPhase));
-    buildPhases();
     updateProgress();
     if(currentPhase >= 11) phase11Card.style.display = 'block';
-    // small float animation
-    nextBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'}],{duration:260,iterations:1});
+    // show the next logical section (scroll)
+    window.scrollTo({top:0,behavior:'smooth'});
   } else {
     celebrate();
   }
-});
+}
 
-/* ============================
-   Calculations & controls
-   ============================ */
+/* ===== Calculations ===== */
 function calc(){
   const p = parseInt(pensionEl.value || '0',10);
   const r = parseInt(propertyEl.value || '0',10);
@@ -306,40 +359,62 @@ function calc(){
   const mult = COUNTRIES[c] || 1;
   const savings = Math.round((p * 0.35 + r * 0.0025) * mult);
   resultEl.innerHTML = `You could save <strong>£${savings.toLocaleString()}</strong>/year in ${c}!`;
-  // persist
   localStorage.setItem(LS.pension, String(p));
   localStorage.setItem(LS.property, String(r));
   localStorage.setItem(LS.country, c);
+  const retScore = p > 30000 ? 95 : p > 15000 ? 85 : 70;
+  document.getElementById('retScore').textContent = retScore + '%';
+  document.getElementById('retCountry').textContent = c;
 }
 
-pensionEl.addEventListener('input', calc);
-propertyEl.addEventListener('input', calc);
-countryEl.addEventListener('change', calc);
+/* shipping */
+function calcShipping(){
+  const v = parseInt(document.getElementById('shipping').value || '2000',10);
+  document.getElementById('shippingVal').textContent = v.toLocaleString();
+  document.getElementById('shippingResult').textContent = `Shipping cost: £${v.toLocaleString()}`;
+}
 
-/* ============================
-   Toggle details in retirement table
-   ============================ */
-document.addEventListener('click', (ev) => {
-  const t = ev.target.closest('.tog');
-  if(t){
-    const id = t.dataset.id;
-    const detail = document.getElementById(id);
-    if(detail) detail.classList.toggle('show');
+/* visa logic */
+function checkVisa(){
+  const c = countryEl.value;
+  const income = parseInt(document.getElementById('q1').value || '-1',10);
+  const remote = parseInt(document.getElementById('q2').value || '0',10);
+  const family = parseInt(document.getElementById('q4').value || '0',10);
+  let visa;
+  if(income === -1) visa = 'Select income bracket to get visa guidance';
+  else if(income === 2 && remote === 1) visa = 'Digital Nomad: good fit';
+  else if(income === 2) visa = 'Investor or high-income routes likely';
+  else if(income === 1) visa = (c==='Portugal') ? 'D7 likely' : 'Non-lucrative/financially independent';
+  else visa = 'Lower-income routes or temporary residence';
+  if(family===1) visa += ' — Family may be included';
+  document.getElementById('visaResult').textContent = visa;
+}
+
+/* file hints */
+document.getElementById('files').addEventListener('change', e=>{
+  const needed = ['passport','criminal','bank','income'];
+  const files = Array.from(e.target.files || []);
+  const found = needed.map(k => files.some(f=>f.name.toLowerCase().includes(k)));
+  let html = '';
+  needed.forEach((k,i)=> html += (found[i] ? '✓ ' : '❌ ') + k + '<br>');
+  html += found.every(Boolean) ? '<br><strong>Ready to apply</strong>' : '';
+  document.getElementById('docResult').innerHTML = html || 'No files chosen';
+});
+
+/* toggle retirement details */
+document.addEventListener('click', (ev)=>{
+  const row = ev.target.closest('.tog');
+  if(row){
+    const id = row.dataset.id;
+    document.getElementById(id).classList.toggle('show');
   }
 });
 
-/* ============================
-   Countdown
-   ============================ */
+/* countdown */
 function updateCountdown(){
-  // Example NI top-up deadline used earlier
   const deadline = new Date('2025-04-05T00:00:00Z');
-  const now = new Date();
-  const diff = deadline - now;
-  if(diff <= 0){
-    countdownEl.textContent = 'NI Top-Up Window: CLOSED';
-    return;
-  }
+  const diff = deadline - new Date();
+  if(diff <= 0) { countdownEl.textContent = 'NI Top-Up Window: CLOSED'; return; }
   const days = Math.floor(diff / (1000*60*60*24));
   const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
   countdownEl.innerHTML = `NI Top-Up Window: <strong>${days} days ${hours} hours left</strong>`;
@@ -347,75 +422,58 @@ function updateCountdown(){
 setInterval(updateCountdown, 60*60*1000);
 updateCountdown();
 
-/* ============================
-   Confetti / celebration
-   ============================ */
+/* celebration confetti */
 function celebrate(){
   for(let i=0;i<70;i++){
     const dot = document.createElement('div');
-    dot.style.position='fixed';
-    dot.style.left = Math.random()*100 + '%';
-    dot.style.top = '-6px';
-    dot.style.width = (6 + Math.random()*10) + 'px';
-    dot.style.height = dot.style.width;
+    dot.style.position='fixed'; dot.style.left = Math.random()*100 + '%'; dot.style.top='-8px';
+    dot.style.width = (6 + Math.random()*10)+'px'; dot.style.height = dot.style.width;
     dot.style.background = ['#c8102e','#00247d','#ffd700'][Math.floor(Math.random()*3)];
-    dot.style.borderRadius = '50%';
-    dot.style.zIndex = 9999;
-    dot.style.pointerEvents = 'none';
+    dot.style.borderRadius='50%'; dot.style.zIndex=9999; dot.style.pointerEvents='none';
     document.body.appendChild(dot);
-    const endX = (Math.random()*200) - 100;
+    const endX = (Math.random()*200)-100;
     const dur = 1400 + Math.random()*1600;
-    dot.animate([
-      { transform: 'translateY(0) translateX(0)', opacity:1 },
-      { transform: `translateY(${window.innerHeight + 200}px) translateX(${endX}px) rotate(${Math.random()*720}deg)`, opacity:0.8 }
-    ], { duration: dur, easing:'linear' });
-    setTimeout(()=> dot.remove(), dur+200);
+    dot.animate([{transform:'translateY(0) translateX(0)', opacity:1},{transform:`translateY(${window.innerHeight+200}px) translateX(${endX}px) rotate(${Math.random()*720}deg)`, opacity:0.8}], {duration:dur, easing:'linear'});
+    setTimeout(()=>dot.remove(), dur+200);
   }
 }
 
-/* ============================
-   File input hint checker
-   ============================ */
-const filesInput = document.createElement('input');
-filesInput.type = 'file';
-filesInput.multiple = true;
-// reuse previous DOM file input if you add one in the full cards; this is an example hook
+/* next button */
+nextBtn.addEventListener('click', ()=>{
+  if(currentPhase < PHASES.length){
+    if(!completed.includes(currentPhase)) completed.push(currentPhase);
+    localStorage.setItem(LS.completed, JSON.stringify(completed));
+    currentPhase++;
+    localStorage.setItem(LS.phase, String(currentPhase));
+    buildPhases(); updateProgress();
+    if(currentPhase >= 11) phase11Card.style.display = 'block';
+  } else {
+    celebrate();
+  }
+});
 
-/* ============================
-   Init
-   ============================ */
+/* init */
 function init(){
-  buildPhases();
-  populateCountries();
-  // restore saved values
-  const sP = parseInt(localStorage.getItem(LS.pension) || '25000',10);
-  const sR = parseInt(localStorage.getItem(LS.property) || '500000',10);
-  pensionEl.value = sP;
-  propertyEl.value = sR;
+  buildPhases(); populateCountries();
+  const savedP = parseInt(localStorage.getItem(LS.pension) || '25000',10);
+  const savedR = parseInt(localStorage.getItem(LS.property) || '500000',10);
+  pensionEl.value = savedP; propertyEl.value = savedR;
   calc();
-  // show retirement if complete
+  const savedPhase = parseInt(localStorage.getItem(LS.phase) || '1',10);
+  currentPhase = savedPhase || currentPhase;
   if(currentPhase >= 11) phase11Card.style.display = 'block';
-  // expose for debugging / shortcuts
-  window.completeJourney = celebrate;
+  updateProgress();
 }
-
 init();
 
-/* ============================
-   Persist on unload
-   ============================ */
-window.addEventListener('beforeunload', ()=>{
-  localStorage.setItem(LS.phase, String(currentPhase));
-  localStorage.setItem(LS.completed, JSON.stringify(completed));
-});
+/* persist before unload */
+window.addEventListener('beforeunload', ()=>{ localStorage.setItem(LS.phase, String(currentPhase)); localStorage.setItem(LS.completed, JSON.stringify(completed)); });
+
 </script>
 
-<!-- =========================
-     Inline manifest creation (so no separate manifest file required)
-     This creates a blob manifest and attaches it to the page as <link rel="manifest">
-     ========================= -->
+<!-- ===== Inline manifest (created dynamically and attached) ===== -->
 <script>
-(function createManifest(){
+(function attachManifest(){
   const manifest = {
     name: "BRITS ABROAD 2025",
     short_name: "BritsAbroad",
@@ -424,56 +482,45 @@ window.addEventListener('beforeunload', ()=>{
     background_color: "#f0f8ff",
     theme_color: "#00247d",
     icons: [
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%2300247d'/%3E%3C/svg%3E", sizes: "192x192", type: "image/svg+xml" },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect width='512' height='512' fill='%2300247d'/%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml" }
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%2300247d'/%3E%3C/svg%3E", sizes:"192x192", type:"image/svg+xml" },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect width='512' height='512' fill='%2300247d'/%3E%3C/svg%3E", sizes:"512x512", type:"image/svg+xml" }
     ]
   };
-  const s = JSON.stringify(manifest);
-  const blob = new Blob([s], {type: 'application/json'});
+  const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   let link = document.querySelector('link[rel="manifest"]');
-  if(!link){
-    link = document.createElement('link');
-    link.rel = 'manifest';
-    document.head.appendChild(link);
-  }
+  if(!link){ link = document.createElement('link'); link.rel='manifest'; document.head.appendChild(link); }
   link.href = url;
 })();
 </script>
 
-<!-- =========================
-     Inline Service Worker registration using a blob script
-     This keeps everything in one file for easy upload. On GitHub Pages this works
-     because the script is same-origin (blob). Keep CACHE name change to update cache.
-     ========================= -->
+<!-- ===== Inline Service Worker registration using a blob URL ===== -->
 <script>
-(function registerInlineSW(){
+(function registerSW(){
   if(!('serviceWorker' in navigator)) return;
-  // service worker source
-  const swSource = `
+  // Inline service worker source
+  const swSrc = `
   const CACHE_NAME = 'brits-abroad-v1';
   const FILES = ['.','index.html'];
   self.addEventListener('install', e=>{
     e.waitUntil(
-      caches.open(CACHE_NAME).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())
+      caches.open(CACHE_NAME).then(c => c.addAll(FILES)).then(()=>self.skipWaiting())
     );
   });
   self.addEventListener('activate', e=>{
     e.waitUntil(
-      caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())
+      caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())
     );
   });
   self.addEventListener('fetch', e=>{
     e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)).catch(()=>{}));
   });
   `;
-  const blob = new Blob([swSource], {type:'application/javascript'});
-  const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).then(reg=>{
-    console.log('Inline SW registered', reg);
-  }).catch(err=>{
-    console.warn('SW register failed', err);
-  });
+  try{
+    const blob = new Blob([swSrc], {type:'application/javascript'});
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl).then(reg=>console.log('Inline SW registered', reg)).catch(err=>console.warn('SW register failed', err));
+  }catch(e){ console.warn('SW blob registration failed', e); }
 })();
 </script>
 
