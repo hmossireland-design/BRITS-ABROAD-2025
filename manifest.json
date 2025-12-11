@@ -1,12 +1,10 @@
 {
   "name": "BRITS ABROAD 2025",
-  "short_name": "Brits Abroad",
+  "short_name": "BRITSABROAD",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#003366",
-  "orientation": "portrait-primary",
+  "background_color": "#f0f8ff",
+  "theme_color": "#c8102e",
   "icons": [
     {
       "src": "./icons/icon-192.png",
