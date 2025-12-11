@@ -19,11 +19,11 @@
   .phase{width:70px;height:70px;background:#00247d;color:white;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:8px;font-size:2em;}
   .phase.active{background:#c8102e;transform:scale(1.2);}
   .phase.completed{background:#28a745;}
-  table{width:100%;border-collapse:collapse;margin:20px 0;}
-  th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left;}
-  th{background:#00247d;color:white;}
+  table{width:100%;border-collapse:collapse;margin:20px 0;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+  th{background:#00247d;color:white;padding:15px;text-align:left;}
+  td{padding:15px;border-bottom:1px solid #ddd;cursor:pointer;}
   tr:hover{background:#f0f8ff;}
-  .detail{display:none;background:#e6f2ff;padding:10px;border-radius:8px;}
+  .detail{background:#e6f2ff;display:none;padding:15px;border-radius:8px;}
   .detail.show{display:table-row;}
 </style>
 </head>
@@ -34,17 +34,10 @@
 <div class="progress"><div class="fill" id="progressFill"></div></div>
 
 <div>
-  <div class="phase completed">1</div>
-  <div class="phase active" id="p2">2</div>
-  <div class="phase" id="p3">3</div>
-  <div class="phase" id="p4">4</div>
-  <div class="phase" id="p5">5</div>
-  <div class="phase" id="p6">6</div>
-  <div class="phase" id="p7">7</div>
-  <div class="phase" id="p8">8</div>
-  <div class="phase" id="p9">9</div>
-  <div class="phase" id="p10">10</div>
-  <div class="phase" id="p11">11</div>
+  <div class="phase completed">1</div><div class="phase active" id="p2">2</div><div class="phase" id="p3">3</div>
+  <div class="phase" id="p4">4</div><div class="phase" id="p5">5</div><div class="phase" id="p6">6</div>
+  <div class="phase" id="p7">7</div><div class="phase" id="p8">8</div><div class="phase" id="p9">9</div>
+  <div class="phase" id="p10">10</div><div class="phase" id="p11">11</div>
 </div>
 
 <div class="card">
@@ -67,11 +60,12 @@
   <p>30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
 </div>
 
-<!-- PHASE 11 — RETIREMENT VISA TABLE -->
+<!-- PHASE 11 – RETIREMENT VISA TABLE (PERFECTLY FORMATTED) -->
 <div class="card" id="phase11" style="display:none;">
   <h2>Phase 11 – Retirement Visa Comparison</h2>
   <table>
     <tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr>
+
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
       <td>Portugal</td><td>D7</td><td>€870/mo</td><td>None</td><td>5 yrs</td>
     </tr>
@@ -95,22 +89,22 @@
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
       <td>Cyprus</td><td>Category F</td><td>£8,400/yr</td><td>None</td><td>5 yrs</td>
     </tr>
-    <tr class="detail"><td colspan="5">Permanent residency €300k property</td></tr>
+    <tr class="detail"><td colspan="5">Permanent residency €300k property • EU access</td></tr>
 
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
-      <td>Greece</td><td>FIP</td><td><td>€3,500/mo</td><td>None</td><td>5 yrs</td>
+      <td>Greece</td><td>FIP</td><td>€3,500/mo</td><td>None</td><td>5 yrs</td>
     </tr>
-    <tr class="detail"><td colspan="5">Golden Visa €250k • Lovely islands</td></tr>
+    <tr class="detail"><td colspan="5">Golden Visa €250k • Beautiful islands</td></tr>
 
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
       <td>Italy</td><td>Elective Residence</td><td>€31k/yr</td><td>None</td><td>5 yrs</td>
     </tr>
-    <tr class="detail"><td colspan="5">Beautiful lifestyle • Flat 7% tax option in south</td></tr>
+    <tr class="detail"><td colspan="5">Flat 7% tax in south Italy • Lifestyle heaven</td></tr>
 
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
       <td>France</td><td>Long-Stay Visitor</td><td>€1,800/mo</td><td>None</td><td>5 yrs</td>
     </tr>
-    <tr class="detail"><td colspan="5">UK pension tax treaty • Healthcare via S1</td></tr>
+    <tr class="detail"><td colspan="5">UK pension tax treaty • Free healthcare via S1</td></tr>
 
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
       <td>Malta</td><td>Retirement Programme</td><td>€10k/yr</td><td>55+</td><td>5 yrs</td>
@@ -120,7 +114,7 @@
     <tr onclick="this.nextElementSibling.classList.toggle('show')">
       <td>Poland</td><td>Temporary Residence</td><td>£160/mo</td><td>None</td><td>5 yrs</td>
     </tr>
-    <tr class="detail"><td colspan="5">Cheapest in EU • Very low cost of living</td></tr>
+    <tr class="detail"><td colspan="5">Cheapest in EU • Low cost of living</td></tr>
   </table>
 </div>
 
@@ -140,32 +134,10 @@ function calc() {
 }
 calc();
 
-function nextPhase() {
-  if (phase < total) {
-    phase++;
-    document.getElementById('p'+(phase-1)).classList.replace('active','completed');
-    document.getElementById('p'+phase).classList.add('active');
-    calc();
-    if (phase === 11) document.getElementById('phase11').style.display = 'block';
-    if (phase === total) confetti();
-  }
-}
-
-function confetti() {
-  for(let i=0;i<120;i++){
-    const c=document.createElement('div');
-    c.style.position='fixed';c.style.left=Math.random()*100+'vw';
-    c.style.top='-10px';c.style.width='12px';c.style.height='12px';
-    c.style.background=['#c8102e','#00247d','gold'][i%3];
-    c.style.pointerEvents='none';c.style.zIndex='9999';
-    document.body.appendChild(c);
-    c.animate([{top:'100vh'},{transform:`translateX(\( {Math.random()*200-100}px) rotate( \){Math.random()*360}deg)`}],{duration:3000});
-    setTimeout(()=>c.remove(),3000);
-  }
-}
-
-// Auto-advance example (remove if you want manual buttons)
-setTimeout(()=>nextPhase(),2000); // remove this line if you want users to click
+// Auto-show Phase 11 when user reaches the end (remove if you want manual)
+setTimeout(() => {
+  if (phase >= 11) document.getElementById('phase11').style.display = 'block';
+}, 1000);
 
 if('serviceWorker' in navigator) navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
 </script>
