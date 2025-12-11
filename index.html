@@ -500,5 +500,9 @@
       navigator.serviceWorker.register('sw.js').catch(err=>console.warn('SW failed', err));
     }
   </script>
-</body>
+</body><script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
+  }
+</script>
 </html>
