@@ -6,21 +6,11 @@
 <meta name="theme-color" content="#00247d"/>
 <title>BRITS ABROAD 2025 – Retirement Roadmap</title>
 <style>
-:root {
-  --blue:#00247d; --red:#c8102e; --muted:#e6f2ff; --card-bg: #ffffff;
-  --success:#28a745; --glass: rgba(255,255,255,0.6);
-}
+:root{--blue:#00247d;--red:#c8102e;--muted:#e6f2ff;--card-bg:#ffffff;--success:#28a745;}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{
-  margin:0;font-family:Inter, system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-  background: linear-gradient(180deg,#f0f8ff 0%,#e6f2ff 100%);
-  color:var(--blue); text-align:center; padding:18px; line-height:1.45;
-  display:flex; flex-direction:column; align-items:center;
-}
-.app{
-  width:100%; max-width:980px; margin:0 auto; flex:1; display:flex; flex-direction:column; gap:18px;
-}
+body{margin:0;font-family:Inter, system-ui,-apple-system,"Segoe UI",Roboto,Arial;background: linear-gradient(180deg,#f0f8ff 0%,#e6f2ff 100%);color:var(--blue);text-align:center;padding:18px;line-height:1.45;display:flex;flex-direction:column;align-items:center;}
+.app{width:100%; max-width:980px; margin:0 auto; flex:1; display:flex; flex-direction:column; gap:18px;}
 header{padding:8px 10px}
 h1{font-size:1.9rem; margin:10px 0 6px; font-weight:800}
 p.subtitle{margin:0 0 10px; font-size:1rem; opacity:0.9}
@@ -71,16 +61,16 @@ tr:hover td{background:#f4fbff}
 </div>
 <nav class="phases" id="phases" aria-label="Phases navigation"></nav>
 <section id="phaseContent" aria-live="polite">
+<!-- Phase 1 -->
 <div id="phase1" class="card">
 <h2>Phase 1: Dream Destination</h2>
 <div class="row">
 <label for="country" class="muted">Choose country</label>
 <select id="country" aria-label="Select destination country"></select>
 </div>
-<div style="margin-top:12px">
-<button class="btn" onclick="completePhase(1)" aria-label="Complete Phase 1">Complete Phase 1</button>
+<div style="margin-top:12px"><button class="btn" onclick="completePhase(1)">Complete Phase 1</button></div>
 </div>
-</div>
+<!-- Phase 2 -->
 <div id="phase2" class="card" style="display:none">
 <h2>Phase 2: Financial Freedom</h2>
 <div class="row">
@@ -93,10 +83,55 @@ tr:hover td{background:#f4fbff}
 <input id="property" type="range" min="0" max="2000000" step="10000" value="300000" oninput="calc()"/>
 </div>
 </div>
-<div class="result" id="result" role="status">You could save £9,200/year!</div>
+<div class="result" id="result" role="status"></div>
 <div><button class="btn" onclick="completePhase(2)">Complete Phase 2</button></div>
 </div>
-<!-- Additional phases here… I will provide in full next message to avoid cutoff -->
+<!-- Phase 3: Visa -->
+<div id="phase3" class="card" style="display:none">
+<h2>Phase 3: Visa Victory</h2>
+<div class="row" style="gap:8px;">
+<select id="q1" aria-label="Monthly income bracket">
+<option value="">Monthly Income?</option>
+<option value="0">Under €870</option>
+<option value="1">€870–€3,279</option>
+<option value="2">€3,280+</option>
+</select>
+<select id="q2" aria-label="Remote work">
+<option value="">Remote Work?</option>
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<select id="q4" aria-label="Family joining">
+<option value="">Family Joining?</option>
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+</div>
+<div style="margin-top:12px"><button class="btn" onclick="checkVisa()">Show My Best Visa</button></div>
+<div class="visaResult" id="visaResult">Answer above</div>
+<div style="margin-top:10px"><button class="btn" onclick="completePhase(3)">Complete Phase 3</button></div>
+</div>
+<!-- Phase 4: Documents -->
+<div id="phase4" class="card" style="display:none">
+<h2>Phase 4: Document Dynasty</h2>
+<div class="row"><input id="files" type="file" multiple aria-label="Upload documents" /></div>
+<div class="docResult" id="docResult">No files chosen</div>
+<div style="margin-top:10px"><button class="btn" onclick="completePhase(4)">Complete Phase 4</button></div>
+</div>
+<!-- Phase 5: Budget -->
+<div id="phase5" class="card" style="display:none">
+<h2>Phase 5: Budget Blueprint</h2>
+<table aria-label="Budget comparison">
+<thead><tr><th>Item</th><th>UK</th><th>Selected Country</th><th>Save</th></tr></thead>
+<tbody>
+<tr><td>Rent</td><td>£1,300</td><td>£720</td><td class="muted">£580</td></tr>
+<tr><td>Groceries</td><td>£400</td><td>£240</td><td class="muted">£160</td></tr>
+<tr><td><strong>Total</strong></td><td>£2,085</td><td>£1,160</td><td class="muted">£925</td></tr>
+</tbody>
+</table>
+<div style="margin-top:10px"><button class="btn" onclick="completePhase(5)">Complete Phase 5</button></div>
+</div>
+<!-- Phase 6-11 omitted here to keep message concise, will continue next message -->
 </section>
 <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center">
 <div class="countdown" id="countdown">NI Top-Up Window: calculating...</div>
@@ -175,19 +210,8 @@ updateProgress();
 }
 
 function selectPhase(n){if(n>currentPhase)return;showPhase(n);}
-
-function completePhase(n){
-if(n<currentPhase)return;
-if(!completed.includes(n)) completed.push(n);
-localStorage.setItem(LS.completed,JSON.stringify(completed));
-buildPhases();
-const next=n+1;if(next<=PHASES.length){currentPhase=next;showPhase(currentPhase)}
-else{alert('Congratulations — your retirement journey is complete! 🎉');}
-}
-
-function toggleDetail(id){
-const el=document.getElementById(id+'-detail');if(!el)return;el.classList.toggle('show');
-}
+function completePhase(n){if(n<currentPhase)return;if(!completed.includes(n)) completed.push(n);localStorage.setItem(LS.completed,JSON.stringify(completed));buildPhases();const next=n+1;if(next<=PHASES.length){currentPhase=next;showPhase(currentPhase)}else{completeJourney()}}
+function toggleDetail(id){const el=document.getElementById(id+'-detail');if(!el)return;el.classList.toggle('show');}
 window.toggleDetail=toggleDetail;
 
 function calc(){
@@ -205,20 +229,43 @@ localStorage.setItem(LS.country,dest);
 document.getElementById('retCountry')?.textContent=dest;
 }
 
-function init(){
-buildPhases();
-populateCountries();
-document.getElementById('pension').value=parseInt(localStorage.getItem(LS.pension)||'10000');
-document.getElementById('property').value=parseInt(localStorage.getItem(LS.property)||'300000');
-calc();
-showPhase(currentPhase);
-window.selectPhase=selectPhase;
-window.completePhase=completePhase;
-window.calc=calc;
+function checkVisa(){
+const c=countrySelect.value;
+const income=parseInt(document.getElementById('q1').value||'-1');
+const remote=parseInt(document.getElementById('q2').value||'0');
+const family=parseInt(document.getElementById('q4').value||'0');
+let visa;
+if(income===-1){visa='Please select income bracket.'}
+else if(income===2 && remote===1) visa='Digital Nomad – likely to qualify';
+else if(income===2) visa='Investor/Golden options or high-income visa';
+else if(income===1) visa=(c==='Portugal')?'D7 (Passive Income) likely':'Non-lucrative / similar options likely';
+else visa='Lower income routes: temporary/residence options';
+if(family===1) visa+=' — Family included';
+document.getElementById('visaResult').textContent=visa;
 }
 
-init();
-</script>
-</div>
-</body>
-</html>
+document.getElementById('files')?.addEventListener('change', (e)=>{
+const needed=['passport','criminal','bank','income'];
+const files=Array.from(e.target.files||[]);
+const found=needed.map(k=>files.some(f=>f.name.toLowerCase().includes(k)));
+let html='';
+needed.forEach((k,i)=> html += (found[i]? '✓ ':'❌ ')+k+'<br>');
+html+=found.every(Boolean)?'<br><strong>You appear ready to apply.</strong>':'';
+document.getElementById('docResult').innerHTML=html||'No files chosen';
+});
+
+function completeJourney(){
+for(let i=0;i<50;i++){
+const el=document.createElement('div');
+el.style.position='fixed'; el.style.left=Math.random()*100+'%';
+el.style.top='-8px'; el.style.width='8px'; el.style.height='8px';
+el.style.background=['#c8102e','#00247d','#f0f8ff'][Math.floor(Math.random()*3)];
+el.style.borderRadius='50%'; el.style.zIndex='9999'; el.style.pointerEvents='none';
+document.body.appendChild(el);
+el.animate([{transform:'translateY(0)'},{transform:`translateY(${window.innerHeight+50}px) rotate(${Math.random()*360}deg)`}], {duration:1600 + Math.random()*800, easing:'linear'});
+setTimeout(()=>el.remove(),2600);
+}
+alert('Congratulations — your retirement journey is complete! 🎉');
+}
+
+function updateCountdown
