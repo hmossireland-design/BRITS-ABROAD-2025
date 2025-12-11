@@ -3,9 +3,7 @@ const FILES_TO_CACHE = [
   '/BRITS-ABROAD-2025/',
   '/BRITS-ABROAD-2025/index.html',
   '/BRITS-ABROAD-2025/manifest.json',
-  '/BRITS-ABROAD-2025/sw.js',
-  '/BRITS-ABROAD-2025/icons/icon-192.svg',
-  '/BRITS-ABROAD-2025/icons/icon-512.svg'
+  '/BRITS-ABROAD-2025/sw.js'
 ];
 
 self.addEventListener('install', event => {
