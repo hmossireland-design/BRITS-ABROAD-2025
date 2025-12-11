@@ -4,91 +4,478 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#00247d"/>
-<title>BRITS ABROAD 2025 – Retirement Roadmap</title>
-
-<!-- Manifest embedded -->
-<script type="application/manifest+json">
-{
-  "name": "BRITS ABROAD 2025",
-  "short_name": "BRITSABROAD",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#00247d",
-  "theme_color": "#00247d",
-  "icons": [
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192'><rect width='192' height='192' fill='%2300247d'/></svg>",
-      "sizes": "192x192",
-      "type": "image/svg+xml"
-    },
-    {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='512' height='512' fill='%2300247d'/></svg>",
-      "sizes": "512x512",
-      "type": "image/svg+xml"
-    }
-  ]
-}
-</script>
-
-<!-- Favicon inline SVG -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192'><rect width='192' height='192' fill='%2300247d'/></svg>" type="image/svg+xml">
+<title>BRITS ABROAD 2025 — Retirement Roadmap</title>
 
 <style>
-/* ---------- Your previous CSS here ---------- */
-:root{--blue:#00247d;--red:#c8102e;--muted:#e6f2ff;--card-bg:#fff;--success:#28a745;--glass:rgba(255,255,255,0.6);}
-*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:linear-gradient(180deg,#f0f8ff 0%,#e6f2ff 100%);color:var(--blue);text-align:center;padding:18px;line-height:1.45;display:flex;flex-direction:column;align-items:center;}
-/* ---------- App container ---------- */
-.app{width:100%;max-width:980px;margin:0 auto;flex:1;display:flex;flex-direction:column;gap:18px;}
-header{padding:8px 10px}h1{font-size:1.9rem;margin:10px 0 6px;letter-spacing:-0.02em;font-weight:800}p.subtitle{margin:0 0 10px;font-size:1rem;color:var(--blue);opacity:0.9}
-/* ---------- Progress ---------- */
-.progress-wrap{width:100%;padding:6px 0}.progress-bar{height:10px;background:#e9eef8;border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0%;background:var(--red);transition:width .45s ease}
-/* ---------- Phases ---------- */
-.phases{display:flex;gap:10px;padding:10px 6px;justify-content:center;flex-wrap:wrap}.phase{width:84px;min-width:84px;height:84px;border-radius:16px;background:var(--muted);display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:transform .18s ease, background .18s ease, box-shadow .18s ease;font-size:0.86rem;box-shadow:0 6px 18px rgba(0,0,0,0.06)}.phase:hover{transform:translateY(-4px)}.phase .phase-icon{font-size:1.4rem}.phase.active{background:var(--red);color:#fff;transform:scale(1.04)}.phase.completed{background:var(--success);color:#fff}
-/* ---------- Cards ---------- */
-.card{background:var(--card-bg);border-radius:14px;padding:20px;max-width:760px;margin:0 auto;box-shadow:0 10px 30px rgba(0,0,0,0.07);animation:fadeIn .35s ease}.card h2{margin:0 0 12px;font-size:1.2rem}select,input[type=range],input[type=file],.btn{font-size:1rem;outline:none;}select{padding:10px 12px;border-radius:10px;border:2px solid var(--red);background:#fff;min-width:180px}.row{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}.muted{color:#445;opacity:.75;font-size:.95rem}input[type=range]{width:100%;accent-color:var(--red);margin:8px 0;}.range-labels{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px}.result,.visaResult,.docResult{display:inline-block;font-size:1rem;background:var(--red);color:#fff;padding:12px 14px;border-radius:10px;margin-top:12px;min-width:160px}table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.95rem}th,td{padding:10px;text-align:left;border-bottom:1px solid #ecf0f6}th{background:var(--blue);color:#fff;font-weight:600}tr:hover td{background:#f4fbff}.detail{display:none;background:#f8fbff;padding:10px;border-radius:8px;margin-top:6px}.detail.show{display:block}.countdown{font-weight:700;color:var(--red);padding:12px 16px;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.06)}.cta{background:var(--red);color:#fff;padding:22px;border-radius:14px;box-shadow:0 15px 40px rgba(200,16,46,0.18)}.cta .buy{background:#fff;color:var(--red);padding:14px 28px;border-radius:40px;font-weight:700;text-decoration:none;display:inline-block;margin-top:10px}@media(max-width:640px){.phase{width:72px;height:72px;font-size:.78rem}.card{padding:14px}h1{font-size:1.6rem}}@media(prefers-color-scheme:dark){body{background:#081024;color:#f3f7ff}.card{background:#0f1724}table th{background:#071133}.detail{background:#071133}}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* ---- Theme / base ---- */
+:root{
+  --bg1: #f0f8ff;
+  --bg2: #e6f2ff;
+  --blue: #00247d;
+  --red: #c8102e;
+  --muted: #eaf4ff;
+  --card: #ffffff;
+  --accent: #c8102e;
+  --success: #28a745;
+  --shadow: 0 10px 30px rgba(0,0,0,0.07);
+  --radius: 14px;
+  --maxw: 980px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  background: linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--blue);
+  display:flex;
+  justify-content:center;
+  padding:18px;
+  line-height:1.45;
+}
+
+/* ---- layout ---- */
+.app { width:100%; max-width:var(--maxw); }
+.header { text-align:center; margin-bottom:10px; }
+.h1 { font-size:1.9rem; margin:6px 0; font-weight:800; letter-spacing:-0.01em; color:var(--blue); }
+.lead { color: rgba(0,36,125,0.9); margin:0 0 12px; }
+
+/* ---- cards ---- */
+.card { background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); margin-bottom:14px; }
+.row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.controls { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+
+/* ---- progress / phases ---- */
+.progress { height:12px; background:#eef6ff; border-radius:999px; overflow:hidden; margin:12px 0; }
+.progress .fill { height:100%; background:var(--accent); width:0%; transition:width .45s ease; }
+.phases { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:6px; }
+.phase { width:76px; height:76px; border-radius:12px; background:var(--muted); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,0.04); }
+.phase .icon { font-size:1.4rem; margin-bottom:6px; }
+.phase .label { font-size:0.82rem; text-align:center; }
+.phase.active { background:var(--accent); color:#fff; transform:scale(1.04); }
+.phase.completed { background:var(--success); color:#fff; }
+
+/* ---- form controls ---- */
+select, input[type=range], input[type=file], button { font-family:inherit; font-size:1rem; }
+select { padding:10px; border-radius:10px; border:2px solid var(--accent); background:#fff; min-width:160px; }
+input[type=range] { width:100%; -webkit-appearance:none; height:8px; background:#eef6ff; border-radius:8px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; background:var(--accent); border-radius:50%; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+.small { font-size:.9rem; color:#445; }
+
+/* ---- result / CTA ---- */
+.result { background:var(--accent); color:#fff; padding:12px 14px; border-radius:10px; display:inline-block; font-weight:700; margin-top:12px; }
+.btn { background:var(--accent); color:#fff; padding:12px 16px; border-radius:10px; border:0; cursor:pointer; font-weight:700; }
+.btn.ghost { background:transparent; color:var(--accent); border:2px solid var(--accent); }
+.buy { background:gold; color:var(--accent); padding:14px 20px; border-radius:30px; font-weight:800; box-shadow:0 8px 26px rgba(0,0,0,0.12); text-decoration:none; display:inline-block; }
+
+/* ---- tables ---- */
+table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.95rem; }
+th, td { padding:10px; border-bottom:1px solid #eef6ff; text-align:left; }
+th { background:var(--blue); color:#fff; font-weight:700; }
+
+/* ---- small screens ---- */
+@media (max-width:640px){
+  .phase { width:68px; height:68px; }
+  .h1 { font-size:1.6rem; }
+  .card { padding:14px; }
+}
+
+/* ---- animations ---- */
+@keyframes floatUp { from { transform: translateY(0); } to { transform: translateY(-8px); } }
 </style>
 </head>
 <body>
-<div class="app" role="application" aria-label="Brits Abroad 2025">
-<header>
-<h1>BRITS ABROAD 2025</h1>
-<p class="subtitle">Escape the 2025 Budget squeeze — Your Retirement Roadmap</p>
-</header>
-<div class="progress-wrap card" aria-hidden="false">
-<div class="progress-bar" aria-hidden="true"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
-</div>
-<nav class="phases" id="phases" aria-label="Phases navigation"></nav>
-<section id="phaseContent" aria-live="polite">
-<!-- Your phase cards go here (phase1→phase11) -->
-</section>
-<div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center">
-<div class="countdown" id="countdown">NI Top-Up Window: calculating...</div>
-<div class="card cta" style="max-width:460px">
-<h3 style="margin:0">Unlock the Full 2025 Relocation Pack</h3>
-<p style="margin:8px 0 10px">30-page premium PDF • Visa templates • Lawyer contacts • Checklists</p>
-<a class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">BUY NOW – ONLY £9.97</a>
-</div>
-</div>
-</div>
+<main class="app" id="app" role="application" aria-label="Brits Abroad 2025">
+
+  <header class="header">
+    <div class="h1">BRITS ABROAD 2025</div>
+    <div class="lead">Escape the 2025 Budget squeeze — your professional relocation roadmap</div>
+  </header>
+
+  <div class="card">
+    <div class="progress"><div class="fill" id="progressFill" style="width:0%"></div></div>
+    <div class="phases" id="phases" aria-hidden="false"></div>
+  </div>
+
+  <!-- MAIN INTERACTIVE CARD -->
+  <section class="card" id="mainCard" aria-live="polite">
+
+    <div class="row" style="justify-content:space-between;align-items:flex-end;">
+      <div style="flex:1; min-width:160px;">
+        <label class="small" for="country">Destination</label>
+        <select id="country" aria-label="Destination country"></select>
+      </div>
+
+      <div style="flex:1; min-width:160px;">
+        <label class="small">Annual Pension: £<span id="pensionVal">25,000</span></label>
+        <input id="pension" type="range" min="0" max="100000" step="1000" value="25000" />
+      </div>
+
+      <div style="flex:1; min-width:180px;">
+        <label class="small">UK Property Value: £<span id="propertyVal">500,000</span></label>
+        <input id="property" type="range" min="0" max="3000000" step="10000" value="500000" />
+      </div>
+    </div>
+
+    <div style="margin-top:12px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <div class="result" id="result">You could save <strong>£15,625</strong>/year</div>
+      <button class="btn" id="nextBtn">Next Phase</button>
+      <a class="buy" id="buyBtn" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">UNLOCK FULL PACK £9.97</a>
+    </div>
+    <div class="small" style="margin-top:10px; color:#556">Your entered values are stored locally on this device only.</div>
+  </section>
+
+  <!-- PHASE 11: retirement table (revealed when reached) -->
+  <section class="card" id="phase11" style="display:none;">
+    <h2 style="margin:0 0 8px;">Retirement Visa Comparison</h2>
+    <div class="small">Tap a row for details</div>
+    <table>
+      <thead><tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr></thead>
+      <tbody>
+        <tr class="tog" data-id="portugal"><td>Portugal</td><td>D7</td><td>€870</td><td>—</td><td>5 yrs</td></tr>
+        <tr id="portugal" class="detail"><td colspan="5">10% flat pension tax (NHR options). Family included. Apply via official portal.</td></tr>
+
+        <tr class="tog" data-id="spain"><td>Spain</td><td>Non-Lucrative</td><td>€2,400</td><td>—</td><td>5 yrs</td></tr>
+        <tr id="spain" class="detail"><td colspan="5">No work allowed. Health insurance required. Golden visa options exist for investors.</td></tr>
+
+        <tr class="tog" data-id="uae"><td>UAE</td><td>Retirement Visa</td><td>AED 20,000</td><td>55+</td><td>No PR</td></tr>
+        <tr id="uae" class="detail"><td colspan="5">Property investment or savings route; no personal income tax.</td></tr>
+
+        <tr class="tog" data-id="thailand"><td>Thailand</td><td>O-A / Elite</td><td>THB 65,000</td><td>50+</td><td>No</td></tr>
+        <tr id="thailand" class="detail"><td colspan="5">Elite fast-track for long stays available for fees.</td></tr>
+
+        <tr class="tog" data-id="cyprus"><td>Cyprus</td><td>Category F</td><td>€10,000</td><td>—</td><td>5 yrs</td></tr>
+        <tr id="cyprus" class="detail"><td colspan="5">Permanent residency via investment purchase options available.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CTA + countdown -->
+  <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:12px;">
+    <div class="card" style="min-width:240px; text-align:center;">
+      <div id="countdown" class="countdown">NI Top-Up Window: calculating...</div>
+    </div>
+    <div class="card cta" style="min-width:260px; text-align:center;">
+      <div style="font-weight:800; font-size:1rem;">Unlock the Full Relocation Pack</div>
+      <div style="margin:8px 0; font-size:.95rem;">30-page PDF • Visa templates • Lawyer contacts • Checklists</div>
+      <a class="buy" href="https://buy.stripe.com/28o8x57XJ5rT8w8fYY" target="_blank" rel="noopener">BUY NOW £9.97</a>
+    </div>
+  </div>
+
+</main>
 
 <script>
-// ===== Your full JS logic (phases, calc, visa, files, countdown, completeJourney) =====
-</script>
-
-<!-- Inline Service Worker -->
-<script>
-const CACHE_NAME = 'brits-abroad-v1';
-const FILES_TO_CACHE = [
-  '.',
-  'index.html'
+/* ============================
+   App data & state
+   ============================ */
+const PHASES = [
+  {id:1,title:'Dream',icon:'🌍'},
+  {id:2,title:'Finance',icon:'💰'},
+  {id:3,title:'Visa',icon:'📋'},
+  {id:4,title:'Docs',icon:'📁'},
+  {id:5,title:'Budget',icon:'📊'},
+  {id:6,title:'Move',icon:'🚚'},
+  {id:7,title:'Settle',icon:'🏠'},
+  {id:8,title:'Community',icon:'👥'},
+  {id:9,title:'Tax',icon:'💼'},
+  {id:10,title:'Celebrate',icon:'🎉'},
+  {id:11,title:'Retire',icon:'👴'}
 ];
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register(URL.createObjectURL(new Blob([`
-    const CACHE='${CACHE_NAME}';
-    self.addEventListener('install', e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(${JSON.stringify(FILES_TO_CACHE)}))));
-    self.addEventListener('fetch', e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});
-  `],{type:'application/javascript'}))).catch(console.warn);
+
+// country multipliers (simple)
+const COUNTRIES = {
+  Portugal:1, Spain:1.05, UAE:1.6, Thailand:0.6, Cyprus:1, Greece:1.1,
+  Italy:1.2, France:1.25, Poland:0.5, Malta:1.05
+};
+
+const LS = {
+  phase:'ba_phase',
+  pension:'ba_pension',
+  property:'ba_property',
+  country:'ba_country',
+  completed:'ba_completed'
+};
+
+let currentPhase = parseInt(localStorage.getItem(LS.phase) || '1');
+let completed = JSON.parse(localStorage.getItem(LS.completed) || '[]');
+
+/* ============================
+   DOM refs
+   ============================ */
+const phasesEl = document.getElementById('phases');
+const progressFill = document.getElementById('progressFill');
+const countryEl = document.getElementById('country');
+const pensionEl = document.getElementById('pension');
+const propertyEl = document.getElementById('property');
+const pensionVal = document.getElementById('pensionVal');
+const propertyVal = document.getElementById('propertyVal');
+const resultEl = document.getElementById('result');
+const nextBtn = document.getElementById('nextBtn');
+const phase11Card = document.getElementById('phase11');
+const countdownEl = document.getElementById('countdown');
+
+/* ============================
+   Build UI
+   ============================ */
+function buildPhases(){
+  phasesEl.innerHTML = '';
+  PHASES.forEach(p=>{
+    const d = document.createElement('div');
+    d.className = 'phase' + (completed.includes(p.id) ? ' completed' : '') + (p.id===currentPhase ? ' active' : '');
+    d.dataset.phase = p.id;
+    d.innerHTML = `<div class="icon">${p.icon}</div><div class="label">${p.title}</div>`;
+    d.addEventListener('click', ()=> selectPhase(p.id));
+    phasesEl.appendChild(d);
+  });
+  updateProgress();
 }
+
+function populateCountries(){
+  countryEl.innerHTML = '';
+  Object.keys(COUNTRIES).forEach(c=>{
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    countryEl.appendChild(opt);
+  });
+  const saved = localStorage.getItem(LS.country) || 'Portugal';
+  countryEl.value = saved;
+}
+
+/* ============================
+   Phase controls
+   ============================ */
+function updateProgress(){
+  const pct = Math.round((currentPhase / PHASES.length) * 100);
+  progressFill.style.width = pct + '%';
+  document.querySelectorAll('.phase').forEach(el=>{
+    el.classList.toggle('active', parseInt(el.dataset.phase) === currentPhase);
+  });
+}
+
+function showPhase(n){
+  PHASES.forEach(p=>{
+    const el = document.getElementById('phase' + p.id);
+    if(el) el.style.display = (p.id === n ? 'block' : 'none');
+  });
+  // show/hide phase11
+  phase11Card.style.display = (n >= 11 ? 'block' : 'none');
+  localStorage.setItem(LS.phase, String(n));
+  currentPhase = n;
+  updateProgress();
+}
+
+function selectPhase(n){
+  // prevent jumping ahead
+  if(n > currentPhase) return;
+  currentPhase = n;
+  updateProgress();
+  // scroll to main card for mobile
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(currentPhase >= 11) phase11Card.style.display = 'block';
+}
+
+/* Move to next phase (button) */
+nextBtn.addEventListener('click', ()=>{
+  if(currentPhase < PHASES.length){
+    // mark current completed
+    if(!completed.includes(currentPhase)) completed.push(currentPhase);
+    localStorage.setItem(LS.completed, JSON.stringify(completed));
+    // advance
+    currentPhase++;
+    localStorage.setItem(LS.phase, String(currentPhase));
+    buildPhases();
+    updateProgress();
+    if(currentPhase >= 11) phase11Card.style.display = 'block';
+    // small float animation
+    nextBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'}],{duration:260,iterations:1});
+  } else {
+    celebrate();
+  }
+});
+
+/* ============================
+   Calculations & controls
+   ============================ */
+function calc(){
+  const p = parseInt(pensionEl.value || '0',10);
+  const r = parseInt(propertyEl.value || '0',10);
+  pensionVal.textContent = p.toLocaleString();
+  propertyVal.textContent = r.toLocaleString();
+  const c = countryEl.value || 'Portugal';
+  const mult = COUNTRIES[c] || 1;
+  const savings = Math.round((p * 0.35 + r * 0.0025) * mult);
+  resultEl.innerHTML = `You could save <strong>£${savings.toLocaleString()}</strong>/year in ${c}!`;
+  // persist
+  localStorage.setItem(LS.pension, String(p));
+  localStorage.setItem(LS.property, String(r));
+  localStorage.setItem(LS.country, c);
+}
+
+pensionEl.addEventListener('input', calc);
+propertyEl.addEventListener('input', calc);
+countryEl.addEventListener('change', calc);
+
+/* ============================
+   Toggle details in retirement table
+   ============================ */
+document.addEventListener('click', (ev) => {
+  const t = ev.target.closest('.tog');
+  if(t){
+    const id = t.dataset.id;
+    const detail = document.getElementById(id);
+    if(detail) detail.classList.toggle('show');
+  }
+});
+
+/* ============================
+   Countdown
+   ============================ */
+function updateCountdown(){
+  // Example NI top-up deadline used earlier
+  const deadline = new Date('2025-04-05T00:00:00Z');
+  const now = new Date();
+  const diff = deadline - now;
+  if(diff <= 0){
+    countdownEl.textContent = 'NI Top-Up Window: CLOSED';
+    return;
+  }
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
+  countdownEl.innerHTML = `NI Top-Up Window: <strong>${days} days ${hours} hours left</strong>`;
+}
+setInterval(updateCountdown, 60*60*1000);
+updateCountdown();
+
+/* ============================
+   Confetti / celebration
+   ============================ */
+function celebrate(){
+  for(let i=0;i<70;i++){
+    const dot = document.createElement('div');
+    dot.style.position='fixed';
+    dot.style.left = Math.random()*100 + '%';
+    dot.style.top = '-6px';
+    dot.style.width = (6 + Math.random()*10) + 'px';
+    dot.style.height = dot.style.width;
+    dot.style.background = ['#c8102e','#00247d','#ffd700'][Math.floor(Math.random()*3)];
+    dot.style.borderRadius = '50%';
+    dot.style.zIndex = 9999;
+    dot.style.pointerEvents = 'none';
+    document.body.appendChild(dot);
+    const endX = (Math.random()*200) - 100;
+    const dur = 1400 + Math.random()*1600;
+    dot.animate([
+      { transform: 'translateY(0) translateX(0)', opacity:1 },
+      { transform: `translateY(${window.innerHeight + 200}px) translateX(${endX}px) rotate(${Math.random()*720}deg)`, opacity:0.8 }
+    ], { duration: dur, easing:'linear' });
+    setTimeout(()=> dot.remove(), dur+200);
+  }
+}
+
+/* ============================
+   File input hint checker
+   ============================ */
+const filesInput = document.createElement('input');
+filesInput.type = 'file';
+filesInput.multiple = true;
+// reuse previous DOM file input if you add one in the full cards; this is an example hook
+
+/* ============================
+   Init
+   ============================ */
+function init(){
+  buildPhases();
+  populateCountries();
+  // restore saved values
+  const sP = parseInt(localStorage.getItem(LS.pension) || '25000',10);
+  const sR = parseInt(localStorage.getItem(LS.property) || '500000',10);
+  pensionEl.value = sP;
+  propertyEl.value = sR;
+  calc();
+  // show retirement if complete
+  if(currentPhase >= 11) phase11Card.style.display = 'block';
+  // expose for debugging / shortcuts
+  window.completeJourney = celebrate;
+}
+
+init();
+
+/* ============================
+   Persist on unload
+   ============================ */
+window.addEventListener('beforeunload', ()=>{
+  localStorage.setItem(LS.phase, String(currentPhase));
+  localStorage.setItem(LS.completed, JSON.stringify(completed));
+});
 </script>
+
+<!-- =========================
+     Inline manifest creation (so no separate manifest file required)
+     This creates a blob manifest and attaches it to the page as <link rel="manifest">
+     ========================= -->
+<script>
+(function createManifest(){
+  const manifest = {
+    name: "BRITS ABROAD 2025",
+    short_name: "BritsAbroad",
+    start_url: ".",
+    display: "standalone",
+    background_color: "#f0f8ff",
+    theme_color: "#00247d",
+    icons: [
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect width='192' height='192' fill='%2300247d'/%3E%3C/svg%3E", sizes: "192x192", type: "image/svg+xml" },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect width='512' height='512' fill='%2300247d'/%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml" }
+    ]
+  };
+  const s = JSON.stringify(manifest);
+  const blob = new Blob([s], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  let link = document.querySelector('link[rel="manifest"]');
+  if(!link){
+    link = document.createElement('link');
+    link.rel = 'manifest';
+    document.head.appendChild(link);
+  }
+  link.href = url;
+})();
+</script>
+
+<!-- =========================
+     Inline Service Worker registration using a blob script
+     This keeps everything in one file for easy upload. On GitHub Pages this works
+     because the script is same-origin (blob). Keep CACHE name change to update cache.
+     ========================= -->
+<script>
+(function registerInlineSW(){
+  if(!('serviceWorker' in navigator)) return;
+  // service worker source
+  const swSource = `
+  const CACHE_NAME = 'brits-abroad-v1';
+  const FILES = ['.','index.html'];
+  self.addEventListener('install', e=>{
+    e.waitUntil(
+      caches.open(CACHE_NAME).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())
+    );
+  });
+  self.addEventListener('activate', e=>{
+    e.waitUntil(
+      caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())
+    );
+  });
+  self.addEventListener('fetch', e=>{
+    e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)).catch(()=>{}));
+  });
+  `;
+  const blob = new Blob([swSource], {type:'application/javascript'});
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).then(reg=>{
+    console.log('Inline SW registered', reg);
+  }).catch(err=>{
+    console.warn('SW register failed', err);
+  });
+})();
+</script>
+
 </body>
 </html>
