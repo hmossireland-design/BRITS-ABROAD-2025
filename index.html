@@ -6,20 +6,139 @@
   <title>BRITS ABROAD 2025 – Retirement Roadmap</title>
   <link rel="manifest" href="/BRITS-ABROAD-2025/manifest.json">
   <style>
-    body {font-family: 'Inter', Arial, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #e6f2ff); color: #00247d; text-align: center; margin: 0; padding: 20px; line-height: 1.6;}
-    h1 {font-size: 2.8em; color: #00247d; margin: 20px; font-weight: 700;}
-    p.subtitle {font-size: 1.5em; margin-bottom: 30px;}
-    select {font-size: 1.4em; padding: 12px; border-radius: 12px; margin: 20px; border: 2px solid #c8102e; background: white;}
-    .card {background: white; border-radius: 20px; padding: 30px; margin: 20px auto; max-width: 460px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); animation: fadeIn 0.5s;}
-    input[type=range] {width: 100%; height: 40px; margin: 15px 0; background: #e2e8f0; border-radius: 20px;}
-    input[type=range]::-webkit-slider-thumb {background: #c8102e; width: 24px; height: 24px; border-radius: 50%; cursor: pointer;}
-    button {background: #c8102e; color: white; padding: 16px 32px; font-size: 1.4em; border: none; border-radius: 50px; cursor: pointer; margin: 20px 0; transition: all 0.3s;}
-    button:hover {background: #a30d25; transform: scale(1.05);}
-    .result, .visaResult, .docResult {font-size: 1.6em; background: #c8102e; color: white; padding: 20px; border-radius: 16px; margin: 25px 0; animation: pulse 0.5s;}
-    table {width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);}
-    th, td {padding: 12px; text-align: left; border-bottom: 1px solid #ddd;}
-    th {background: #00247d; color: white;}
-    .save {color: #c8102e; font-weight: bold;}
-    .countdown {font-size: 1.8em; color: #c8102e; margin: 30px; font-weight: bold; background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);}
-    .phases {display: flex; justify-content: space-around; margin: 40px 0; flex-wrap: wrap;}
-    .phase {width: 100px; height: 100px
+    body {font-family:Arial,sans-serif;background:#f0f8ff;color:#00247d;margin:0;padding:20px;line-height:1.5;}
+    h1{font-size:2.8em;margin:20px;}
+    .card{background:white;border-radius:20px;padding:25px;margin:20px auto;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+    select,input[type=range]{width:100%;padding:15px;margin:15px 0;border-radius:15px;font-size:1.2em;}
+    input[type=range]::-webkit-slider-thumb{background:#c8102e;width:30px;height:30px;border-radius:50%;}
+    .result{font-size:2.2em;background:#c8102e;color:white;padding:25px;border-radius:20px;margin:30px 0;}
+    button{background:#c8102e;color:white;padding:16px 40px;border:none;border-radius:50px;font-size:1.4em;margin:10px;cursor:pointer;}
+    button.buy{background:gold;color:#c8102e;font-size:2.2em;padding:20px 60px;box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+    .progress{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:30px 0;}
+    .fill{height:100%;background:#c8102e;width:0%;transition:width 0.6s;}
+    .phase{width:70px;height:70px;background:#00247d;color:white;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:8px;font-size:2em;}
+    .phase.active{background:#c8102e;transform:scale(1.2);}
+    .phase.completed{background:#28a745;}
+    table{width:100%;border-collapse:collapse;margin:20px 0;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+    th{background:#00247d;color:white;padding:15px;text-align:left;}
+    td{padding:15px;border-bottom:1px solid #ddd;cursor:pointer;}
+    tr:hover{background:#f0f8ff;}
+    .detail{background:#e6f2ff;display:none;padding:15px;border-radius:8px;}
+    .detail.show{display:table-row;}
+  </style>
+</head>
+<body>
+<h1>BRITS ABROAD 2025</h1>
+<p style="font-size:1.6em;">Escape the 2025 Budget squeeze</p>
+
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<div>
+  <div class="phase completed">1</div><div class="phase active" id="p2">2</div><div class="phase" id="p3">3</div>
+  <div class="phase" id="p4">4</div><div class="phase" id="p5">5</div><div class="phase" id="p6">6</div>
+  <div class="phase" id="p7">7</div><div class="phase" id="p8">8</div><div class="phase" id="p9">9</div>
+  <div class="phase" id="p10">10</div><div class="phase" id="p11">11</div>
+</div>
+
+<div class="card">
+  <select id="country" onchange="calc()">
+    <option>Portugal</option><option>Spain</option><option>UAE</option><option>Thailand</option><option>Cyprus</option>
+    <option>Greece</option><option>Italy</option><option>France</option><option>Poland</option><option>Malta</option>
+  </select>
+
+  <label>Annual Pension: £<span id="pensionVal">25,000</span></label>
+  <input type="range" min="0" max="100000" value="25000" step="1000" id="pension" oninput="calc()">
+
+  <label>UK Property Value: £<span id="propertyVal">500,000</span></label>
+  <input type="range" min="0" max="3000000" value="500000" step="10000" id="property" oninput="calc()">
+
+  <div class="result" id="result">You could save <strong>£15,625</strong>/year abroad!</div>
+
+  <button class="buy" onclick="window.location.href='https://buy.stripe.com/28o8x57XJ5rT8w8fYY'">
+    UNLOCK FULL PACK – ONLY £9.97
+  </button>
+  <p>30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
+</div>
+
+<!-- RETIREMENT VISA TABLE -->
+<div class="card" id="phase11" style="display:none;">
+  <h2>Phase 11 – Retirement Visa Comparison</h2>
+  <table>
+    <tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Portugal</td><td>D7</td><td>€870/mo</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">10% flat tax on pensions • Family included • Golden Visa €250k option</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Spain</td><td>Non-Lucrative</td><td>€2,400/mo</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">No work allowed • Golden Visa €500k property</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>UAE</td><td>Retirement Visa</td><td>£4,200/mo</td><td>55+</td><td>No</td></tr>
+    <tr class="detail"><td colspan="5">0% income tax • Property purchase AED 1M</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Thailand</td><td>O-A / Elite</td><td>£1,500/mo</td><td>50+</td><td>No</td></tr>
+    <tr class="detail"><td colspan="5">Elite Visa £15k one-off • Very popular with Brits</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Cyprus</td><td>Category F</td><td>£8,400/yr</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">Permanent residency €300k property • EU access</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Greece</td><td>FIP</td><td>€3,500/mo</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">Golden Visa €250k • Beautiful islands</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Italy</td><td>Elective Residence</td><td>€31k/yr</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">Flat 7% tax in south Italy • Lifestyle heaven</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>France</td><td>Long-Stay Visitor</td><td>€1,800/mo</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">UK pension tax treaty • Free healthcare via S1</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Malta</td><td>Retirement Programme</td><td>€10k/yr</td><td>55+</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">15% tax on foreign income • English-speaking</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Poland</td><td>Temporary Residence</td><td>£160/mo</td><td>None</td><td>5 yrs</td></tr>
+    <tr class="detail"><td colspan="5">Cheapest in EU • Low cost of living</td></tr>
+  </table>
+</div>
+
+<script>
+let phase = 1;
+const total = 11;
+
+function calc() {
+  const p = parseInt(document.getElementById('pension').value)||0;
+  const r = parseInt(document.getElementById('property').value)||0;
+  const c = document.getElementById('country').value;
+  document.getElementById('pensionVal').textContent = p.toLocaleString();
+  document.getElementById('propertyVal').textContent = r.toLocaleString();
+  const savings = Math.round(p*0.35 + r*0.0025);
+  document.getElementById('result').innerHTML = `You could save <strong>£\( {savings.toLocaleString()}</strong>/year in \){c}!`;
+  document.getElementById('progressFill').style.width = (phase/total*100)+'%';
+}
+calc();
+
+function nextPhase() {
+  if (phase < total) {
+    phase++;
+    document.getElementById('p'+(phase-1)).classList.replace('active','completed');
+    document.getElementById('p'+phase).classList.add('active');
+    calc();
+    if (phase === 11) document.getElementById('phase11').style.display = 'block';
+    if (phase === total) confetti();
+  }
+}
+
+function confetti() {
+  for(let i=0;i<120;i++){
+    const c=document.createElement('div');
+    c.style.position='fixed';c.style.left=Math.random()*100+'vw';
+    c.style.top='-10px';c.style.width='12px';c.style.height='12px';
+    c.style.background=['#c8102e','#00247d','gold'][i%3];
+    c.style.pointerEvents='none';c.style.zIndex='9999';
+    document.body.appendChild(c);
+    c.animate([{top:'100vh'},{transform:`translateX(\( {Math.random()*200-100}px) rotate( \){Math.random()*360}deg)`}],{duration:3000});
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
+</script>
+</body>
+</html>
