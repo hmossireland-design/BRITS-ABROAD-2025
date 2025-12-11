@@ -14,11 +14,17 @@
   .result{font-size:2.2em;background:#c8102e;color:white;padding:25px;border-radius:20px;margin:30px 0;}
   button{background:#c8102e;color:white;padding:16px 40px;border:none;border-radius:50px;font-size:1.4em;margin:10px;cursor:pointer;}
   button.buy{background:gold;color:#c8102e;font-size:2.2em;padding:20px 60px;box-shadow:0 10px 30px rgba(0,0,0,0.4);}
-  .phase{width:70px;height:70px;background:#00247d;color:white;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:10px;font-size:2em;}
-  .phase.active{background:#c8102e;transform:scale(1.2);}
-  .phase.completed{background:#28a745;}
   .progress{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:30px 0;}
   .fill{height:100%;background:#c8102e;width:0%;transition:width 0.6s;}
+  .phase{width:70px;height:70px;background:#00247d;color:white;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:8px;font-size:2em;}
+  .phase.active{background:#c8102e;transform:scale(1.2);}
+  .phase.completed{background:#28a745;}
+  table{width:100%;border-collapse:collapse;margin:20px 0;}
+  th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left;}
+  th{background:#00247d;color:white;}
+  tr:hover{background:#f0f8ff;}
+  .detail{display:none;background:#e6f2ff;padding:10px;border-radius:8px;}
+  .detail.show{display:table-row;}
 </style>
 </head>
 <body>
@@ -61,54 +67,106 @@
   <p>30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
 </div>
 
+<!-- PHASE 11 — RETIREMENT VISA TABLE -->
+<div class="card" id="phase11" style="display:none;">
+  <h2>Phase 11 – Retirement Visa Comparison</h2>
+  <table>
+    <tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr>
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Portugal</td><td>D7</td><td>€870/mo</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">10% flat tax on pensions • Family included • Golden Visa €250k option</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Spain</td><td>Non-Lucrative</td><td>€2,400/mo</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">No work allowed • Golden Visa €500k property</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>UAE</td><td>Retirement Visa</td><td>£4,200/mo</td><td>55+</td><td>No</td>
+    </tr>
+    <tr class="detail"><td colspan="5">0% income tax • Property purchase AED 1M</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Thailand</td><td>O-A / Elite</td><td>£1,500/mo</td><td>50+</td><td>No</td>
+    </tr>
+    <tr class="detail"><td colspan="5">Elite Visa £15k one-off • Very popular with Brits</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Cyprus</td><td>Category F</td><td>£8,400/yr</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">Permanent residency €300k property</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Greece</td><td>FIP</td><td><td>€3,500/mo</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">Golden Visa €250k • Lovely islands</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Italy</td><td>Elective Residence</td><td>€31k/yr</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">Beautiful lifestyle • Flat 7% tax option in south</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>France</td><td>Long-Stay Visitor</td><td>€1,800/mo</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">UK pension tax treaty • Healthcare via S1</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Malta</td><td>Retirement Programme</td><td>€10k/yr</td><td>55+</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">15% tax on foreign income • English-speaking</td></tr>
+
+    <tr onclick="this.nextElementSibling.classList.toggle('show')">
+      <td>Poland</td><td>Temporary Residence</td><td>£160/mo</td><td>None</td><td>5 yrs</td>
+    </tr>
+    <tr class="detail"><td colspan="5">Cheapest in EU • Very low cost of living</td></tr>
+  </table>
+</div>
+
 <script>
 let phase = 1;
-const totalPhases = 11;
+const total = 11;
 
 function calc() {
-  const pension = parseInt(document.getElementById('pension').value) || 0;
-  const property = parseInt(document.getElementById('property').value) || 0;
-  const country = document.getElementById('country').value;
-
-  document.getElementById('pensionVal').textContent = pension.toLocaleString();
-  document.getElementById('propertyVal').textContent = property.toLocaleString();
-
-  const savings = Math.round(pension * 0.35 + property * 0.0025);
-  document.getElementById('result').innerHTML = 
-    `You could save <strong>£\( {savings.toLocaleString()}</strong>/year in \){country}!`;
-
-  // Update progress
-  const progress = Math.min(100, phase / totalPhases * 100);
-  document.getElementById('progressFill').style.width = progress + '%';
+  const p = parseInt(document.getElementById('pension').value)||0;
+  const r = parseInt(document.getElementById('property').value)||0;
+  const c = document.getElementById('country').value;
+  document.getElementById('pensionVal').textContent = p.toLocaleString();
+  document.getElementById('propertyVal').textContent = r.toLocaleString();
+  const savings = Math.round(p*0.35 + r*0.0025);
+  document.getElementById('result').innerHTML = `You could save <strong>£\( {savings.toLocaleString()}</strong>/year in \){c}!`;
+  document.getElementById('progressFill').style.width = (phase/total*100)+'%';
 }
 calc();
 
-// Phase completion (you can add more logic later)
 function nextPhase() {
-  if (phase < totalPhases) {
+  if (phase < total) {
     phase++;
     document.getElementById('p'+(phase-1)).classList.replace('active','completed');
     document.getElementById('p'+phase).classList.add('active');
     calc();
-    if (phase === totalPhases) confetti();
+    if (phase === 11) document.getElementById('phase11').style.display = 'block';
+    if (phase === total) confetti();
   }
 }
 
-// Simple confetti
 function confetti() {
-  for(let i=0;i<100;i++){
+  for(let i=0;i<120;i++){
     const c=document.createElement('div');
     c.style.position='fixed';c.style.left=Math.random()*100+'vw';
-    c.style.top='-10px';c.style.width='10px';c.style.height='10px';
+    c.style.top='-10px';c.style.width='12px';c.style.height='12px';
     c.style.background=['#c8102e','#00247d','gold'][i%3];
     c.style.pointerEvents='none';c.style.zIndex='9999';
     document.body.appendChild(c);
-    c.animate([{top:'100vh'},{transform:`translateX(${Math.random()*200-100}px)`}],{duration:3000});
+    c.animate([{top:'100vh'},{transform:`translateX(\( {Math.random()*200-100}px) rotate( \){Math.random()*360}deg)`}],{duration:3000});
     setTimeout(()=>c.remove(),3000);
   }
 }
 
-// PWA
+// Auto-advance example (remove if you want manual buttons)
+setTimeout(()=>nextPhase(),2000); // remove this line if you want users to click
+
 if('serviceWorker' in navigator) navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
 </script>
 </body>
