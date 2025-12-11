@@ -3,7 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRITS ABROAD 2025 – Retirement Roadmap</title>
+  <title>BRITS ABROAD 2025 – Escape the Budget Squeeze</title>
+  <link rel="manifest" href="/BRITS-ABROAD-2025/manifest.json">
   <style>
-    body {font-family: 'Inter', Arial, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #e6f2ff); color: #00247d; text-align: center; margin: 0; padding: 20px; line-height: 1.6;}
-    h1 {font-size: 2.8em; color: #00247d; margin: 20px
+    body {font-family: 'Inter', Arial, sans-serif; background: linear-gradient(to bottom, #f0f8ff, #e6f2ff); color: #00247d; text-align: center; margin:0; padding:20px; line-height:1.5;}
+    h1 {font-size:3em; margin:20px;}
+    select, input[type=range] {width:100%; padding:15px; margin:15px 0; border-radius:15px; font-size:1.2em;}
+    input[type=range]::-webkit-slider-thumb {background:#c8102e; width:30px; height:30px; border-radius:50%;}
+    .result {font-size:2.5em; background:#c8102e; color:white; padding:25px; border-radius:20px; margin:30px 0; font-weight:bold;}
+    button.buy {background:gold; color:#c8102e; font-size:2.2em; padding:20px 60px; border:none; border-radius:50px; margin:30px 0; font-weight:bold; box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+    button.buy:hover {transform:scale(1.05);}
+    .progress {height:10px; background:#ddd; border-radius:5px; overflow:hidden; margin:20px 0;}
+    .fill {height:100%; background:#c8102e; width:0%; transition:width 0.6s;}
+    .phase {background:#00247d; color:white; border-radius:50%; width:70px; height:70px; margin:10px; display:inline-flex; align-items:center; justify-content:center; font-size:2em;}
+    .phase.active {background:#c8102e; transform:scale(1.2);}
+    .phase.completed {background:#28a745;}
+  </style>
+</head>
+<body>
+  <h1>BRITS ABROAD 2025</h1>
+  <p style="font-size:1.6em;">Escape the 2025 Budget squeeze</p>
+
+  <select id="country" onchange="calc()">
+    <option value="Portugal">Portugal</option>
+    <option value="Spain">Spain</option>
+    <option value="UAE">UAE</option>
+    <option value="Thailand">Thailand</option>
+    <option value="Cyprus">Cyprus</option>
+    <option value="Greece">Greece</option>
+    <option value="Italy">Italy</option>
+    <option value="France">France</option>
+    <option value="Poland">Poland</option>
+    <option value="Malta">Malta</option>
+  </select>
+
+  <label>Annual Pension: £<span id="pensionVal">25,000</span></label>
+  <input type="range" min="0" max="100000" value="25000" step="1000" id="pension" oninput="calc()">
+
+  <label>UK Property Value: £<span id="propertyVal">500,000</span></label>
+  <input type="range" min="0" max="3000000" value="500000" step="10000" id="property" oninput="calc()">
+
+  <div class="result" id="result">You could save <strong>£15,625</strong>/year abroad!</div>
+
+  <div class="progress"><div class="fill" id="progressFill" style="width:0%"></div></div>
+
+  <div>
+    <span class="phase completed">1</span>
+    <span class="phase active" id="phase2">2</span>
+    <span class="phase" id="phase3">3</span>
+    <span class="phase" id="phase4">4</span>
+    <span class="phase" id="phase5">5</span>
+  </div>
+
+  <button class="buy" onclick="window.location.href='https://buy.stripe.com/28o8x57XJ5rT8w8fYY'">
+    UNLOCK FULL PACK – ONLY £9.97
+  </button>
+
+  <p>30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
+
+  <button onclick="shareResult()" style="background:#1877F2;color:white;padding:15px 30px;border-radius:50px;margin-top:20px;">
+    Share My Savings on Facebook
+  </button>
+
+<script>
+function calc() {
+  const pension = parseInt(document.getElementById('pension').value) || 0;
+  const property = parseInt(document.getElementById('property').value) || 0;
+  const country = document.getElementById('country').value;
+
+  document.getElementById('pensionVal').textContent = pension.toLocaleString();
+  document.getElementById('propertyVal').textContent = property.toLocaleString();
+
+  const savings = Math.round(pension * 0.35 + property * 0.0025);
+  document.getElementById('result').innerHTML = 
+    `You could save <strong>£\( {savings.toLocaleString()}</strong>/year in \){country}!`;
+
+  const progress = Math.min(100, (pension/100000 + property/3000000)*50 + 50);
+  document.getElementById('progressFill').style.width = progress + '%';
+}
+calc();
+
+function shareResult() {
+  const text = document.getElementById('result').innerText;
+  const url = window.location.href;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=\( {url}&quote= \){text}`, '_blank');
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/BRITS-ABROAD-2025/sw.js');
+}
+</script>
+</body>
+</html>
