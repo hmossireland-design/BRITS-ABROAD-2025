@@ -1,250 +1,425 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BRITS ABROAD 2025 – Interactive Retirement Roadmap</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRITS ABROAD 2025 – Ultimate Relocation Hub</title>
 <style>
   /* ---------- Base ---------- */
   :root{
-    --primary:#ff6f61; --secondary:#ffb347; --accent:#fff;
-    --bg:#fff8f0; --card-bg:#ffffff; --text:#222;
-    --success:#28a745; --warning:#ffc107;
+    --primary:#c8102e;
+    --secondary:#00247d;
+    --accent:#f0c040;
+    --muted:#f8f8f8;
+    --card-bg:#ffffff;
+    --success:#28a745;
+    --glass: rgba(255,255,255,0.6);
   }
   *{box-sizing:border-box;}
-  body{margin:0; font-family:sans-serif; background:var(--bg); color:var(--text);}
-  h1,h2,h3{margin:0; font-weight:700;}
-  h1{font-size:2.5rem; margin-bottom:12px;}
-  h2{font-size:1.8rem; margin-bottom:10px;}
-  p{margin:0 0 10px;}
-  .app{max-width:900px; margin:0 auto; padding:20px;}
-  .hero{background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#fff; padding:40px 20px; border-radius:16px; text-align:center; margin-bottom:24px;}
-  .hero h1{font-size:3rem;}
-  .progress-wrap{background:#eee; border-radius:12px; overflow:hidden; height:14px; margin-bottom:24px;}
-  .progress-fill{height:100%; width:0%; background:var(--primary); transition:width .5s ease;}
-  .phases{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;}
-  .phase{flex:1 1 80px; padding:10px; border-radius:12px; background:#fff; text-align:center; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.08); transition:0.2s;}
-  .phase.active{background:var(--primary); color:#fff;}
+  body{margin:0;font-family:Inter, system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5;color:#00247d;background:linear-gradient(180deg,#fff7f0,#fefcfb);display:flex;flex-direction:column;align-items:center;}
+  h1,h2,h3{margin:0;}
+  h1{font-size:2.5rem; font-weight:900; margin-bottom:0.3em;}
+  h2{font-size:1.8rem; margin-bottom:0.2em;}
+  h3{font-size:1.2rem;}
+  .app{width:100%; max-width:980px; padding:12px; display:flex; flex-direction:column; gap:18px;}
+  .hero{background:var(--secondary); color:#fff; padding:36px 12px; text-align:center; border-radius:14px; position:relative;}
+  .hero h1{color:#fff; font-size:3rem;}
+  .progress-wrap{width:100%; padding:6px 0;}
+  .progress-bar{height:12px; background:#e9eef8; border-radius:999px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--primary); transition:width .45s ease;}
+  .phases{display:flex; gap:10px; padding:10px 6px; justify-content:center; flex-wrap:wrap;}
+  .phase{width:96px; min-width:96px; height:96px; border-radius:16px; background:var(--muted);
+    display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;
+    transition:transform .18s ease, background .18s ease, box-shadow .18s ease; font-size:0.9rem;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);}
+  .phase:hover{transform:translateY(-4px);}
+  .phase .phase-icon{font-size:1.8rem;}
+  .phase.active{background:var(--primary); color:#fff; transform:scale(1.05);}
   .phase.completed{background:var(--success); color:#fff;}
-  .card{background:var(--card-bg); padding:20px; border-radius:12px; box-shadow:0 4px 14px rgba(0,0,0,0.06); margin-bottom:20px;}
-  select,input[type=range],input[type=file],button{padding:8px 12px; border-radius:8px; border:1px solid #ccc; font-size:1rem;}
-  input[type=range]{width:100%; margin:6px 0;}
-  button{cursor:pointer; background:var(--primary); color:#fff; border:none; transition:0.2s;}
-  button:hover{opacity:0.9;}
-  .result{margin-top:10px; padding:10px; border-radius:8px; background:var(--secondary); color:#fff;}
-  .ai-result{margin-top:12px; padding:12px; border-radius:10px; background:#222; color:#fff; min-height:40px;}
+  .card{background:var(--card-bg); border-radius:14px; padding:20px; max-width:760px; margin:0 auto; box-shadow:0 10px 30px rgba(0,0,0,0.07);}
+  label{font-weight:600;}
+  input, select, button{padding:10px; border-radius:8px; border:1px solid #ccc; font-size:1rem;}
+  button{background:var(--primary); color:#fff; border:none; cursor:pointer; transition:background .25s;}
+  button:hover{background:var(--secondary);}
+  .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+  .muted{color:#555; font-size:0.95rem;}
+  .result,.aiResult{margin-top:12px; padding:12px; border-radius:10px; background:var(--primary); color:#fff; font-weight:600;}
   table{width:100%; border-collapse:collapse; margin-top:12px;}
   th,td{padding:10px; border-bottom:1px solid #eee;}
-  th{background:var(--primary); color:#fff;}
+  th{background:var(--secondary); color:#fff;}
+  .detail{display:none; background:#f4f8ff; padding:10px; border-radius:8px; margin-top:6px;}
+  .detail.show{display:block;}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="hero">
     <h1>BRITS ABROAD 2025</h1>
-    <p>Your Interactive Retirement Roadmap</p>
+    <p>Ultimate Relocation Hub – Plan your move with confidence</p>
   </div>
-  <div class="progress-wrap"><div id="progressFill" class="progress-fill"></div></div>
-  <div class="phases" id="phases"></div>
 
-  <div id="phaseContent">
-    <!-- Phase 1: Destination -->
+  <div class="progress-wrap">
+    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+  </div>
+
+  <nav class="phases" id="phases">
+    <!-- Phases dynamically generated -->
+  </nav>
+
+  <section id="phaseContent">
+    <!-- PHASE 1: Work Rights Comparator -->
     <div id="phase1" class="card">
-      <h2>Phase 1: Dream Destination</h2>
-      <select id="countrySelect"></select>
-      <div class="result" id="phase1Result">Select a country</div>
+      <h2>Phase 1: Work Rights Comparator</h2>
+      <div class="row">
+        <label>Nationality:</label>
+        <select id="wrkNation">
+          <option>UK</option>
+          <option>EU</option>
+          <option>Non-EU</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>Destination Country:</label>
+        <select id="wrkDest">
+          <option>Portugal</option>
+          <option>Spain</option>
+          <option>UAE</option>
+          <option>Thailand</option>
+          <option>Cyprus</option>
+        </select>
+      </div>
+      <div class="result" id="wrkResult">Select nationality & country to view work rights</div>
       <button onclick="completePhase(1)">Complete Phase 1</button>
     </div>
 
-    <!-- Phase 2: Financial Freedom -->
-    <div id="phase2" class="card" style="display:none;">
-      <h2>Phase 2: Financial Freedom</h2>
-      <label>Pension (£/year): <span id="pensionVal">10000</span></label>
-      <input type="range" id="pensionRange" min="0" max="100000" step="1000" value="10000" oninput="updatePhase2()">
-      <label>Property Value (£): <span id="propertyVal">250000</span></label>
-      <input type="range" id="propertyRange" min="0" max="2000000" step="5000" value="250000" oninput="updatePhase2()">
-      <div class="result" id="phase2Result"></div>
+    <!-- PHASE 2: UK State Pension Planner -->
+    <div id="phase2" class="card" style="display:none">
+      <h2>Phase 2: UK State Pension Planner</h2>
+      <div class="row">
+        <label>Years NI Contributions:</label>
+        <input type="range" min="0" max="50" value="30" id="niYears" oninput="calcPension()">
+        <span id="niVal">30</span> years
+      </div>
+      <div class="result" id="pensionResult">Estimated Pension: £12,000/year</div>
       <button onclick="completePhase(2)">Complete Phase 2</button>
     </div>
 
-    <!-- Phase 3: Visa Planning -->
-    <div id="phase3" class="card" style="display:none;">
-      <h2>Phase 3: Visa Victory</h2>
-      <select id="incomeLevel">
-        <option value="">Monthly Income?</option>
-        <option value="low">Under €1,000</option>
-        <option value="medium">€1,000–€3,000</option>
-        <option value="high">€3,000+</option>
-      </select>
-      <select id="remoteWork">
-        <option value="">Remote Work?</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <div class="result" id="phase3Result"></div>
+    <!-- PHASE 3: 2025 Budget Impact Scanner -->
+    <div id="phase3" class="card" style="display:none">
+      <h2>Phase 3: 2025 Budget Impact</h2>
+      <div class="row">
+        <label>Annual Income (£):</label>
+        <input type="number" id="budgetIncome" value="40000">
+      </div>
+      <div class="result" id="budgetResult">Estimated impact: £-</div>
       <button onclick="completePhase(3)">Complete Phase 3</button>
     </div>
 
-    <!-- Phase 4: Document Checklist -->
-    <div id="phase4" class="card" style="display:none;">
-      <h2>Phase 4: Document Checklist</h2>
-      <input type="file" id="docFiles" multiple>
-      <div class="result" id="phase4Result">No files chosen</div>
+    <!-- PHASE 4: Company Formation Wizard -->
+    <div id="phase4" class="card" style="display:none">
+      <h2>Phase 4: Company Formation</h2>
+      <div class="row">
+        <label>Country:</label>
+        <select id="compCountry">
+          <option>Portugal</option>
+          <option>Cyprus</option>
+          <option>UAE</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>Company Type:</label>
+        <select id="compType">
+          <option>LLC</option>
+          <option>Ltd</option>
+          <option>Branch</option>
+        </select>
+      </div>
+      <div class="result" id="compResult">Estimated cost: £-</div>
       <button onclick="completePhase(4)">Complete Phase 4</button>
     </div>
 
-    <!-- Phase 5: Budget -->
-    <div id="phase5" class="card" style="display:none;">
-      <h2>Phase 5: Budget Blueprint</h2>
-      <table>
-        <thead><tr><th>Item</th><th>UK</th><th>Abroad</th></tr></thead>
-        <tbody>
-          <tr><td>Rent</td><td>£1,200</td><td>£700</td></tr>
-          <tr><td>Groceries</td><td>£400</td><td>£250</td></tr>
-          <tr><td>Utilities</td><td>£200</td><td>£120</td></tr>
-        </tbody>
-      </table>
+    <!-- PHASE 5: Healthcare & S1/GHIC Tracker -->
+    <div id="phase5" class="card" style="display:none">
+      <h2>Phase 5: Healthcare Tracker</h2>
+      <div class="row">
+        <label>S1/GHIC Coverage?</label>
+        <select id="healthCov">
+          <option>No</option>
+          <option>Yes</option>
+        </select>
+      </div>
+      <div class="result" id="healthResult">Coverage details will appear here</div>
       <button onclick="completePhase(5)">Complete Phase 5</button>
     </div>
 
-    <!-- Phase 6: Move Mastery -->
-    <div id="phase6" class="card" style="display:none;">
-      <h2>Phase 6: Move Mastery</h2>
-      <label>Shipping Cost (£): <span id="shippingVal">2000</span></label>
-      <input type="range" id="shippingRange" min="0" max="5000" step="100" value="2000" oninput="updateShipping()">
-      <div class="result" id="phase6Result"></div>
+    <!-- PHASE 6: Cost of Living & Salary Comparator -->
+    <div id="phase6" class="card" style="display:none">
+      <h2>Phase 6: Cost of Living</h2>
+      <div class="row">
+        <label>Monthly Salary (£):</label>
+        <input type="number" id="salary" value="3000">
+      </div>
+      <div class="row">
+        <label>Destination Country:</label>
+        <select id="colDest">
+          <option>Portugal</option>
+          <option>Spain</option>
+          <option>UAE</option>
+          <option>Thailand</option>
+          <option>Cyprus</option>
+        </select>
+      </div>
+      <div class="result" id="colResult">Estimated cost: £-</div>
       <button onclick="completePhase(6)">Complete Phase 6</button>
     </div>
 
-    <!-- Phase 7: Healthcare -->
-    <div id="phase7" class="card" style="display:none;">
-      <h2>Phase 7: Healthcare Planning</h2>
-      <select id="healthcare">
-        <option value="">Select Plan</option>
-        <option value="basic">Basic</option>
-        <option value="premium">Premium</option>
-      </select>
-      <div class="result" id="phase7Result"></div>
+    <!-- PHASE 7: Banking & Money Transfer -->
+    <div id="phase7" class="card" style="display:none">
+      <h2>Phase 7: Banking & Transfers</h2>
+      <div class="row">
+        <label>Transfer Amount (£):</label>
+        <input type="number" id="bankAmount" value="5000">
+      </div>
+      <div class="result" id="bankResult">Suggested bank & fees: £-</div>
       <button onclick="completePhase(7)">Complete Phase 7</button>
     </div>
 
-    <!-- Phase 8: Community -->
-    <div id="phase8" class="card" style="display:none;">
-      <h2>Phase 8: Community Connections</h2>
-      <select id="community">
-        <option value="">Interested in Expat Groups?</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <div class="result" id="phase8Result"></div>
+    <!-- PHASE 8: Housing & School Finder -->
+    <div id="phase8" class="card" style="display:none">
+      <h2>Phase 8: Housing & School Finder</h2>
+      <div class="row">
+        <label>City/Region:</label>
+        <input type="text" id="houseCity" placeholder="Lisbon, Madrid...">
+      </div>
+      <div class="result" id="houseResult">Property and school options: -</div>
       <button onclick="completePhase(8)">Complete Phase 8</button>
     </div>
 
-    <!-- Phase 9: Tax Planning -->
-    <div id="phase9" class="card" style="display:none;">
-      <h2>Phase 9: Tax Triumph</h2>
-      <input type="checkbox" id="doubleTax" /> Double Tax Treaty?
-      <div class="result" id="phase9Result"></div>
+    <!-- PHASE 9: Moving Checklist & Pet Relocation -->
+    <div id="phase9" class="card" style="display:none">
+      <h2>Phase 9: Moving & Pets</h2>
+      <div class="row">
+        <label>Pets to move?</label>
+        <select id="petsMove">
+          <option>No</option>
+          <option>Yes</option>
+        </select>
+      </div>
+      <div class="result" id="moveResult">Checklist summary: -</div>
       <button onclick="completePhase(9)">Complete Phase 9</button>
     </div>
 
-    <!-- Phase 10: Celebration -->
-    <div id="phase10" class="card" style="display:none;">
-      <h2>Phase 10: Celebration</h2>
-      <p>You're nearly ready! 🎉</p>
-      <div class="result" id="phase10Result"></div>
+    <!-- PHASE 10: Document Vault -->
+    <div id="phase10" class="card" style="display:none">
+      <h2>Phase 10: Document Vault</h2>
+      <div class="row">
+        <input type="file" id="docs" multiple>
+      </div>
+      <div class="result" id="docsResult">No files uploaded</div>
       <button onclick="completePhase(10)">Complete Phase 10</button>
     </div>
 
-    <!-- Phase 11: AI Summary -->
-    <div id="phase11" class="card" style="display:none;">
+    <!-- PHASE 11: AI Summary -->
+    <div id="phase11" class="card" style="display:none">
       <h2>Phase 11: AI Summary</h2>
-      <button onclick="runAI()">Get AI Summary</button>
-      <div class="ai-result" id="aiResult">Your AI summary will appear here.</div>
+      <div class="row">
+        <button onclick="generateAI()">Generate Recommendations</button>
+      </div>
+      <div class="aiResult" id="aiResult">AI summary will appear here</div>
     </div>
-
-  </div>
+  </section>
 </div>
 
 <script>
-const PHASES = [
-  {id:1,title:'Destination'}, {id:2,title:'Financial'}, {id:3,title:'Visa'},
-  {id:4,title:'Documents'}, {id:5,title:'Budget'}, {id:6,title:'Move'},
-  {id:7,title:'Healthcare'}, {id:8,title:'Community'}, {id:9,title:'Tax'},
-  {id:10,title:'Celebration'}, {id:11,title:'AI Summary'}
-];
+  // ---- PHASES SETUP ----
+  const PHASES = [
+    {id:1,title:"Work Rights"},
+    {id:2,title:"State Pension"},
+    {id:3,title:"Budget Impact"},
+    {id:4,title:"Company Formation"},
+    {id:5,title:"Healthcare Tracker"},
+    {id:6,title:"Cost of Living"},
+    {id:7,title:"Banking & Transfers"},
+    {id:8,title:"Housing & School"},
+    {id:9,title:"Moving & Pets"},
+    {id:10,title:"Document Vault"},
+    {id:11,title:"AI Summary"}
+  ];
+  let currentPhase = 1;
+  const completed = [];
 
-let currentPhase = 1;
-const completed = [];
+  function buildPhases(){
+    const container = document.getElementById("phases");
+    container.innerHTML="";
+    PHASES.forEach(p=>{
+      const div = document.createElement("div");
+      div.className="phase"+(completed.includes(p.id)?" completed":"")+(p.id===currentPhase?" active":"");
+      div.dataset.phase=p.id;
+      div.innerHTML=`<div class="phase-icon">📌</div><div>${p.title}</div>`;
+      div.onclick=()=>{showPhase(p.id)};
+      container.appendChild(div);
+    });
+    updateProgress();
+  }
 
-function buildPhases(){
-  const phasesEl = document.getElementById('phases');
-  phasesEl.innerHTML='';
-  PHASES.forEach(p=>{
-    const d=document.createElement('div');
-    d.className='phase'+(currentPhase===p.id?' active':'')+(completed.includes(p.id)?' completed':'');
-    d.textContent=p.title;
-    d.onclick=()=>showPhase(p.id);
-    phasesEl.appendChild(d);
-  });
-  updateProgress();
-}
+  function showPhase(n){
+    PHASES.forEach(p=>{
+      const el=document.getElementById("phase"+p.id);
+      if(el) el.style.display=(p.id===n?"block":"none");
+    });
+    currentPhase=n;
+    updateProgress();
+  }
 
-function updateProgress(){
-  const fill=document.getElementById('progressFill');
-  fill.style.width=(currentPhase/PHASES.length*100)+'%';
-}
+  function completePhase(n){
+    if(!completed.includes(n)) completed.push(n);
+    if(currentPhase<n) currentPhase=n;
+    buildPhases();
+    const next = n+1;
+    if(next<=PHASES.length) showPhase(next);
+  }
 
-function showPhase(n){
-  currentPhase=n;
-  PHASES.forEach(p=>{
-    const el=document.getElementById('phase'+p.id);
-    if(el) el.style.display=(p.id===n?'block':'none');
-  });
+  function updateProgress(){
+    const width=(currentPhase/PHASES.length)*100;
+    document.getElementById("progressFill").style.width=width+"%";
+    document.querySelectorAll(".phase").forEach(el=>{
+      el.classList.toggle("active",parseInt(el.dataset.phase)===currentPhase);
+    });
+  }
+
+  // ---- WORK RIGHTS ----
+  function updateWorkRights(){
+    const nation=document.getElementById("wrkNation").value;
+    const dest=document.getElementById("wrkDest").value;
+    let msg="-";
+    if(nation==="UK" && dest==="Portugal") msg="Can work with D7 Visa";
+    else if(nation==="EU") msg="Free work rights in EU";
+    else msg="Visa required";
+    document.getElementById("wrkResult").textContent=msg;
+  }
+  document.getElementById("wrkNation").onchange=updateWorkRights;
+  document.getElementById("wrkDest").onchange=updateWorkRights;
+
+  // ---- PENSION CALC ----
+  function calcPension(){
+    const years=parseInt(document.getElementById("niYears").value);
+    document.getElementById("niVal").textContent=years;
+    const est=Math.round(years*400);
+    document.getElementById("pensionResult").textContent=`Estimated Pension: £${est}/year`;
+  }
+
+  // ---- BUDGET IMPACT ----
+  function calcBudget(){
+    const inc=parseInt(document.getElementById("budgetIncome").value);
+    const impact=Math.round(inc*0.1);
+    document.getElementById("budgetResult").textContent=`Estimated 2025 Budget impact: £${impact}`;
+  }
+  document.getElementById("budgetIncome").oninput=calcBudget;
+
+  // ---- COMPANY FORMATION ----
+  function calcCompany(){
+    const type=document.getElementById("compType").value;
+    let cost=0;
+    if(type==="LLC") cost=1200;
+    if(type==="Ltd") cost=800;
+    if(type==="Branch") cost=1500;
+    document.getElementById("compResult").textContent=`Estimated cost: £${cost}`;
+  }
+  document.getElementById("compType").onchange=calcCompany;
+
+  // ---- HEALTHCARE ----
+  function calcHealth(){
+    const cov=document.getElementById("healthCov").value;
+    const msg=(cov==="Yes")?"Covered abroad":"Coverage required";
+    document.getElementById("healthResult").textContent=msg;
+  }
+  document.getElementById("healthCov").onchange=calcHealth;
+
+  // ---- COST OF LIVING ----
+  function calcCOL(){
+    const sal=parseInt(document.getElementById("salary").value);
+    const dest=document.getElementById("colDest").value;
+    const multiplier=dest==="UAE"?1.6:1;
+    const est=Math.round(sal*multiplier*0.8);
+    document.getElementById("colResult").textContent=`Estimated monthly cost in ${dest}: £${est}`;
+  }
+  document.getElementById("salary").oninput=calcCOL;
+  document.getElementById("colDest").onchange=calcCOL;
+
+  // ---- BANKING ----
+  function calcBank(){
+    const amt=parseInt(document.getElementById("bankAmount").value);
+    document.getElementById("bankResult").textContent=`Suggested bank fees for £${amt}: £${Math.round(amt*0.02)}`;
+  }
+  document.getElementById("bankAmount").oninput=calcBank;
+
+  // ---- HOUSING ----
+  function calcHouse(){
+    const city=document.getElementById("houseCity").value;
+    document.getElementById("houseResult").textContent=`Property & school options in ${city || "-"}`;
+  }
+  document.getElementById("houseCity").oninput=calcHouse;
+
+  // ---- MOVING ----
+  function calcMove(){
+    const pets=document.getElementById("petsMove").value;
+    document.getElementById("moveResult").textContent=pets==="Yes"?"Include pet relocation
+      document.getElementById("moveResult").textContent = pets === "Yes" ? "Include pet relocation in checklist" : "No pets to move";
+  }
+  document.getElementById("petsMove").onchange = calcMove;
+
+  // ---- DOCUMENT VAULT ----
+  document.getElementById("docs").onchange = function(){
+    const files = Array.from(this.files).map(f=>f.name).join(", ");
+    document.getElementById("docsResult").textContent = files || "No files uploaded";
+  }
+
+  // ---- AI SUMMARY PLACEHOLDER ----
+  function generateAI(){
+    const wrk = document.getElementById("wrkResult").textContent;
+    const pension = document.getElementById("pensionResult").textContent;
+    const budget = document.getElementById("budgetResult").textContent;
+    const comp = document.getElementById("compResult").textContent;
+    const health = document.getElementById("healthResult").textContent;
+    const col = document.getElementById("colResult").textContent;
+    const bank = document.getElementById("bankResult").textContent;
+    const house = document.getElementById("houseResult").textContent;
+    const move = document.getElementById("moveResult").textContent;
+    const docs = document.getElementById("docsResult").textContent;
+
+    const summary = `
+      AI Relocation Summary:
+      ---------------------
+      Work Rights: ${wrk}
+      Pension: ${pension}
+      2025 Budget Impact: ${budget}
+      Company Formation: ${comp}
+      Healthcare: ${health}
+      Cost of Living: ${col}
+      Banking: ${bank}
+      Housing & School: ${house}
+      Moving & Pets: ${move}
+      Documents: ${docs}
+      ---------------------
+      Next Steps: Review all details, check visa and health insurance requirements, and prepare for relocation.
+    `;
+    document.getElementById("aiResult").textContent = summary;
+  }
+
+  // ---- INITIALIZATION ----
   buildPhases();
-}
+  showPhase(1);
 
-/* Phase 1 */
-const countries=['Portugal','Spain','Thailand','UAE','Cyprus'];
-const countrySelect=document.getElementById('countrySelect');
-countries.forEach(c=>{
-  const opt=document.createElement('option');
-  opt.value=c; opt.textContent=c;
-  countrySelect.appendChild(opt);
-});
-countrySelect.onchange=()=>{document.getElementById('phase1Result').textContent='Selected: '+countrySelect.value;};
-
-/* Phase 2 */
-function updatePhase2(){
-  const pension=parseInt(document.getElementById('pensionRange').value);
-  const property=parseInt(document.getElementById('propertyRange').value);
-  document.getElementById('pensionVal').textContent=pension;
-  document.getElementById('propertyVal').textContent=property;
-  const savings=Math.round((pension*0.35 + property*0.0025));
-  document.getElementById('phase2Result').textContent='Estimated savings: £'+savings;
-}
-
-/* Phase 6 */
-function updateShipping(){
-  const shipping=parseInt(document.getElementById('shippingRange').value);
-  document.getElementById('shippingVal').textContent=shipping;
-  document.getElementById('phase6Result').textContent='Shipping cost set: £'+shipping;
-}
-
-/* Phase AI */
-function runAI(){
-  const summary='AI placeholder: With your selections, you could move smoothly to '+countrySelect.value+', save money, and plan your retirement efficiently.';
-  document.getElementById('aiResult').textContent=summary;
-}
-
-function completePhase(n){
-  if(!completed.includes(n)) completed.push(n);
-  const next=n+1;
-  if(next<=PHASES.length) showPhase(next);
-}
-
-buildPhases();
-showPhase(currentPhase);
+  // ---- UPDATE ALL CALCS INITIALLY ----
+  updateWorkRights();
+  calcPension();
+  calcBudget();
+  calcCompany();
+  calcHealth();
+  calcCOL();
+  calcBank();
+  calcHouse();
+  calcMove();
 </script>
 </body>
 </html>
