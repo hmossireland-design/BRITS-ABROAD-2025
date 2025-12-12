@@ -1,790 +1,226 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>BRITS ABROAD 2025 — Mediterranean Luxury (Multi-Page SPA)</title>
-<meta name="theme-color" content="#F5ECE0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BRITS ABROAD 2025</title>
+
 <style>
-  /* ---------- Theme (Mediterranean warm) ---------- */
-  :root{
-    --bg:#fbf7f2;
-    --panel:#ffffff;
-    --muted:#a58f7b;
-    --text:#2b2b2b;
-    --accent:#c65a3a;   /* terracotta */
-    --accent-2:#e8cfa6; /* sand */
-    --success:#28a745;
-    --glass: rgba(255,255,255,0.9);
-    --radius:14px;
-    --shadow: 0 8px 30px rgba(0,0,0,0.06);
-    --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:#f5f8ff;
+    color:#1a1a1a;
+    line-height: 1.7;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#f3ece4);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .app{max-width:980px;margin:0 auto;padding:12px;}
-  header.app-header{display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--radius);background:linear-gradient(90deg,#fff,#fff);box-shadow:var(--shadow);margin-bottom:12px}
-  header h1{font-size:1.5rem;margin:0;color:var(--accent)}
-  header p{margin:0;color:var(--muted);font-size:.95rem}
-  /* Tab nav */
-  .tabs{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .tabbar{display:flex;gap:8px}
-  .tab{background:linear-gradient(180deg,#fff,#fff);padding:10px 12px;border-radius:10px;cursor:pointer;border:1px solid rgba(0,0,0,0.04);box-shadow:0 6px 18px rgba(0,0,0,0.04);display:flex;gap:8px;align-items:center}
-  .tab.active{background:linear-gradient(180deg,var(--accent),#b84629);color:#fff;transform:scale(1.02)}
-  .tab .ico{font-size:1.1rem}
-  /* content */
-  main.page {min-height:60vh}
-  .card{background:var(--panel);border-radius:12px;padding:16px;border:1px solid rgba(0,0,0,0.03);box-shadow:var(--shadow);margin-bottom:12px}
-  h2{margin:0 0 8px;font-size:1.1rem;color:var(--accent)}
-  label{display:block;margin:6px 0;font-size:.95rem;color:var(--text)}
-  select,input,textarea,button{font-family:var(--font);font-size:1rem}
-  select,input[type=number],textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
-  input[type=range]{width:100%;margin:8px 0;accent-color:var(--accent)}
-  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .muted{color:var(--muted);font-size:.95rem}
-  button{background:var(--accent);border:none;color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer}
-  button.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
-  .summary{background:linear-gradient(90deg,#fff,#fff);padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);white-space:pre-wrap}
-  .small{font-size:.92rem;color:var(--muted)}
-  .progress{height:12px;background:#f6efe6;border-radius:999px;overflow:hidden;margin-bottom:10px}
-  .progressFill{height:100%;width:0%;background:var(--accent);transition:width .35s}
-  table{width:100%;border-collapse:collapse;margin-top:8px}
-  th,td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.04);text-align:left}
-  th{background:var(--accent);color:#fff}
-  footer{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:10px 12px;background:linear-gradient(180deg,rgba(255,255,255,0.9), rgba(255,255,255,0.95));box-shadow:0 -6px 20px rgba(0,0,0,0.04)}
-  .bottom-nav{display:flex;gap:8px}
-  .bottom-btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);background:#fff;cursor:pointer}
-  @media (max-width:720px){header h1{font-size:1.2rem}.card{padding:12px}}
+
+  /* HERO HEADER */
+  .hero {
+    width: 100%;
+    height: 280px;
+    background: #0a1b3d url('hero-placeholder.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    text-align: center;
+    padding: 20px;
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  /* MAIN CARD */
+  .card {
+    background: white;
+    margin: 20px auto;
+    max-width: 760px;
+    padding: 30px 28px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    font-size: 2em;
+    color:#0a1b3d;
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 20px;
+    display: block;
+  }
+
+  select,
+  input[type=range] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 1.4em;
+    margin: 12px 0 25px;
+  }
+
+  .ai-box {
+    margin-top: 25px;
+    padding: 20px;
+    background:#eef3ff;
+    border-radius: 15px;
+  }
+
+  .ai-box button {
+    background:#0a1b3d;
+    color:white;
+    padding:15px 30px;
+    border:none;
+    border-radius: 10px;
+    font-size: 1.3em;
+    width:100%;
+    cursor:pointer;
+  }
+
+  /* PHASES */
+  details {
+    margin: 20px 0;
+    padding: 20px;
+    background:white;
+    border-radius:16px;
+    border:1px solid #d8d8d8;
+  }
+
+  summary {
+    font-size: 1.6em;
+    font-weight: bold;
+    cursor:pointer;
+  }
+
+  .phase-content {
+    padding-top: 20px;
+    font-size:1.3em;
+  }
+
+  /* RESULT BOX */
+  .result-box {
+    background:#002c89;
+    color:white;
+    padding:25px;
+    margin-top:20px;
+    border-radius:18px;
+    font-size:1.8em;
+    text-align:center;
+  }
+
 </style>
 </head>
+
 <body>
-  <div class="app">
-    <header class="app-header">
-      <div>
-        <h1>BRITS ABROAD 2025</h1>
-        <p class="small">Mediterranean Luxury — relocation & retirement assistant</p>
-      </div>
-    </header>
 
-    <!-- top tabs -->
-    <div class="tabs">
-      <div class="tabbar" id="tabbar">
-        <div class="tab active" data-page="home"><span class="ico">🏠</span> Home</div>
-        <div class="tab" data-page="planner"><span class="ico">🗺️</span> Planner</div>
-        <div class="tab" data-page="ai"><span class="ico">🤖</span> AI</div>
-        <div class="tab" data-page="report"><span class="ico">📄</span> Report</div>
-      </div>
-      <div class="small muted">Saved to device (localStorage)</div>
-    </div>
+<!-- HERO SECTION -->
+<div class="hero">
+  <h1>BRITS ABROAD 2025 – Your Relocation Blueprint</h1>
+</div>
 
-    <!-- page area -->
-    <main id="pageHome" class="page">
-      <!-- HOME PAGE -->
-      <section id="home" class="card">
-        <h2>Welcome</h2>
-        <p class="muted">Use the Planner to enter your relocation details. When ready, go to AI to generate a luxury consultant report. Your progress auto-saves in the browser.</p>
-        <div style="margin-top:12px" class="row">
-          <button onclick="showPage('planner')">Open Planner</button>
-          <button class="ghost" onclick="showPage('ai')">Open AI</button>
-        </div>
-      </section>
+<!-- MAIN CARD -->
+<div class="card">
 
-      <!-- Quick stats -->
-      <section class="card">
-        <div class="progress"><div id="progressFill" class="progressFill"></div></div>
-        <div class="row" style="justify-content:space-between;align-items:center">
-          <div>
-            <div class="small">Current destination</div>
-            <div id="quickCountry" style="font-weight:700">—</div>
-          </div>
-          <div>
-            <div class="small">Budget surplus</div>
-            <div id="quickBudget" style="font-weight:700">—</div>
-          </div>
-          <div>
-            <div class="small">Readiness</div>
-            <div id="quickReady" style="font-weight:700">—</div>
-          </div>
-        </div>
-      </section>
-    </main>
+<h2>Choose Your Scenario</h2>
 
-    <!-- PLANNER PAGE -->
-    <main id="pagePlanner" class="page" style="display:none">
-      <!-- Planner header -->
-      <section class="card">
-        <h2>Planner</h2>
-        <p class="small">Work through the 11 phases. Tap any phase to edit it. Use Next/Save to move forward.</p>
-      </section>
+<label>Country:</label>
+<select id="country" onchange="calculate()">
+  <option>Cyprus</option>
+  <option>Portugal</option>
+  <option>Spain</option>
+  <option>Italy</option>
+  <option>Thailand</option>
+  <option>UAE</option>
+  <option>France</option>
+  <option>Malta</option>
+</select>
 
-      <!-- Phase strip -->
-      <section class="card">
-        <div class="row" style="align-items:center;">
-          <div style="flex:1">
-            <div id="phaseStrip" class="row" style="overflow:auto"></div>
-          </div>
-        </div>
-      </section>
+<label>Annual UK Pension: £<span id="pensionValue">25,000</span></label>
+<input type="range" id="pension" min="0" max="100000" value="25000" step="500" oninput="calculate()">
 
-      <!-- Phase details area (the pages for each phase) -->
-      <section id="phaseContent" class="card">
-        <!-- PHASE UI will be injected here by JS -->
-        <div id="phaseArea"></div>
-      </section>
-    </main>
+<label>UK Property Value: £<span id="propertyValue">400,000</span></label>
+<input type="range" id="property" min="0" max="2000000" value="400000" step="5000" oninput="calculate()">
 
-    <!-- AI PAGE -->
-    <main id="pageAI" class="page" style="display:none">
-      <section class="card">
-        <h2>AI Assistant (in-browser)</h2>
-        <p class="small">Generates a professional consultant-style report (placeholder AI). No data leaves your device.</p>
-        <div style="margin-top:12px" class="row">
-          <button onclick="generateAIReport()">Generate Full Report</button>
-          <button class="ghost" onclick="generateExecutiveSummary()">Exec. Summary</button>
-          <button class="ghost" onclick="generateFriendlySummary()">Friendly Chat</button>
-        </div>
-      </section>
-      <section class="card">
-        <h3>AI Result</h3>
-        <div id="aiOutput" class="summary">No summary yet — press Generate</div>
-        <div style="margin-top:12px" class="row">
-          <button onclick="exportFinal()">Export JSON</button>
-          <button class="ghost" onclick="copyAI()">Copy</button>
-        </div>
-      </section>
-    </main>
+<div class="result-box" id="resultBox">Enter details to calculate your savings…</div>
 
-    <!-- REPORT PAGE -->
-    <main id="pageReport" class="page" style="display:none">
-      <section class="card">
-        <h2>Professional Report</h2>
-        <p class="small">Formatted consultant-style output and numeric breakdown.</p>
-      </section>
-      <section id="reportContent" class="card">
-        <div id="reportHtml" class="summary">No report yet. Generate via AI first.</div>
-        <div id="reportNumbers" style="margin-top:12px"></div>
-      </section>
-    </main>
+<!-- AI BOX -->
+<div class="ai-box">
+  <h2>Ask the AI Relocation Assistant</h2>
+  <textarea id="aiInput" placeholder="Ask anything about visas, taxes, healthcare, rent, cost of living…" style="width:100%;height:120px;font-size:1.2em;border-radius:12px;padding:12px;"></textarea>
+  <button onclick="fakeAI()">Ask AI</button>
+  <div id="aiOutput" style="margin-top:20px;font-size:1.3em;"></div>
+</div>
 
-    <footer>
-      <div class="bottom-nav">
-        <div class="bottom-btn" onclick="showPage('home')">Home</div>
-        <div class="bottom-btn" onclick="showPage('planner')">Planner</div>
-        <div class="bottom-btn" onclick="showPage('ai')">AI</div>
-        <div class="bottom-btn" onclick="showPage('report')">Report</div>
-      </div>
-    </footer>
+<h2>Your Relocation Phases</h2>
+
+<!-- PHASES -->
+<details>
+  <summary>1. Budget & Lifestyle Match</summary>
+  <div class="phase-content">
+    <p>Enter your pension and property value above. This phase will show estimated annual savings based on tax, cost of living and property leverage.</p>
   </div>
+</details>
+
+<details>
+  <summary>2. Residency & Visas</summary>
+  <div class="phase-content">
+    <p>Select your country above. When AI is fully added, this phase will show the exact visa pathway, income requirement and residency timeline.</p>
+  </div>
+</details>
+
+<details>
+  <summary>3. Healthcare & Insurance</summary>
+  <div class="phase-content">
+    <p>Add your requirements and we will generate healthcare options such as Cyprus GESY, Portugal SNS, or expat plans for Thailand/UAE.</p>
+  </div>
+</details>
+
+<details>
+  <summary>4. Property Strategy</summary>
+  <div class="phase-content">
+    <p>Select your home value above. This will calculate release equity, rental yields and cost of ownership abroad.</p>
+  </div>
+</details>
+
+<details>
+  <summary>5. Cost of Living Calculator</summary>
+  <div class="phase-content">
+    <p>Full calculator coming soon: groceries, utilities, transport, healthcare, rent/mortgage.</p>
+  </div>
+</details>
+
+</div><!-- END CARD -->
 
 <script>
-/* ========= App data and helpers ========= */
-const PHASES = [
-  {id:1,name:'Dream Destination',icon:'🌍'},
-  {id:2,name:'Financial Freedom',icon:'💰'},
-  {id:3,name:'Visa Victory',icon:'📋'},
-  {id:4,name:'Document Checklist',icon:'📁'},
-  {id:5,name:'Budget Blueprint',icon:'📊'},
-  {id:6,name:'Move Mastery',icon:'🚚'},
-  {id:7,name:'Settlement Success',icon:'🏠'},
-  {id:8,name:'Community Connections',icon:'👥'},
-  {id:9,name:'Tax Triumph',icon:'💼'},
-  {id:10,name:'Celebration Station',icon:'🎉'},
-  {id:11,name:'Retirement Roadmap',icon:'👴'}
-];
+function calculate() {
+  const pension = parseInt(document.getElementById("pension").value);
+  const property = parseInt(document.getElementById("property").value);
 
-const COUNTRIES = {Portugal:1,Spain:1.05,UAE:1.6,Thailand:0.6,Cyprus:1,Greece:1.1,Italy:1.2,France:1.25,Poland:0.6,Malta:1.05};
+  document.getElementById("pensionValue").innerText = pension.toLocaleString();
+  document.getElementById("propertyValue").innerText = property.toLocaleString();
 
-/* Local state and keys */
-const LS_DRAFT = 'ba_draft_v3';
-const LS_FINAL = 'ba_final_v3';
-let state = {}; // will hold collected values
-let completed = [];
+  const savings = Math.round((pension * 0.32) + (property * 0.002));
 
-/* ========== Utility ========== */
-function saveDraft(){
-  localStorage.setItem(LS_DRAFT, JSON.stringify({state, completed}));
-}
-function loadDraft(){
-  try{
-    const raw = localStorage.getItem(LS_DRAFT);
-    if(!raw) return;
-    const parsed = JSON.parse(raw);
-    state = parsed.state || {};
-    completed = parsed.completed || [];
-  }catch(e){ console.warn('loadDraft failed', e) }
-}
-function exportJSON(obj){
-  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'brits-abroad-plan.json'; a.click();
-  URL.revokeObjectURL(url);
-}
-function nice(n){ return Number(n||0).toLocaleString(); }
-
-/* ========== Navigation ========== */
-function setActiveTab(name){
-  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.page === name));
-  document.getElementById('pageHome').style.display = (name==='home') ? 'block' : 'none';
-  document.getElementById('pagePlanner').style.display = (name==='planner') ? 'block' : 'none';
-  document.getElementById('pageAI').style.display = (name==='ai') ? 'block' : 'none';
-  document.getElementById('pageReport').style.display = (name==='report') ? 'block' : 'none';
-  // update quick summary on home
-  updateQuickSummary();
-}
-document.getElementById('tabbar').addEventListener('click', (e)=>{
-  const tab = e.target.closest('.tab');
-  if(!tab) return;
-  setActiveTab(tab.dataset.page);
-});
-
-/* ========== Planner UI ========== */
-function buildPhaseStrip(){
-  const strip = document.getElementById('phaseStrip');
-  strip.innerHTML = '';
-  PHASES.forEach(p=>{
-    const el = document.createElement('div');
-    el.className = 'phase';
-    el.dataset.phase = p.id;
-    el.innerHTML = `<div class="ico">${p.icon}</div><div style="font-size:.85rem">${p.name}</div>`;
-    el.addEventListener('click', ()=> openPhase(p.id));
-    if(completed.includes(p.id)) el.classList.add('completed');
-    strip.appendChild(el);
-  });
-  updateProgressBar();
+  document.getElementById("resultBox").innerHTML =
+    "Estimated savings abroad: <br><strong>£" + savings.toLocaleString() + "/year</strong>";
 }
 
-function updateProgressBar(){
-  const pct = Math.round((completed.length / PHASES.length) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-}
-
-/* Phase rendering */
-function openPhase(id){
-  // render form for phase id into phaseArea
-  const area = document.getElementById('phaseArea');
-  area.innerHTML = ''; // reset
-  switch(id){
-    case 1: renderPhase1(area); break;
-    case 2: renderPhase2(area); break;
-    case 3: renderPhase3(area); break;
-    case 4: renderPhase4(area); break;
-    case 5: renderPhase5(area); break;
-    case 6: renderPhase6(area); break;
-    case 7: renderPhase7(area); break;
-    case 8: renderPhase8(area); break;
-    case 9: renderPhase9(area); break;
-    case 10: renderPhase10(area); break;
-    case 11: renderPhase11(area); break;
-    default: area.innerHTML = '<div class="card">Phase not found</div>';
+function fakeAI() {
+  const userInput = document.getElementById("aiInput").value;
+  if (!userInput.trim()) {
+    document.getElementById("aiOutput").innerText = "Please enter a question.";
+    return;
   }
-  // highlight selected phase in strip
-  document.querySelectorAll('#phaseStrip .phase').forEach(n => n.classList.toggle('active', Number(n.dataset.phase) === id));
-}
-
-/* each phase renderer creates inputs & binds events and populates from state */
-
-function renderPhase1(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 1 — Dream Destination</h2>
-      <label>Choose country</label>
-      <select id="s_country">${Object.keys(COUNTRIES).map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
-      <label style="margin-top:8px">City / area preference (optional)</label>
-      <input id="s_city" type="text" placeholder="e.g. Algarve, Lisbon" />
-      <div style="margin-top:10px" class="row">
-        <button id="save1">Save</button>
-        <button class="ghost" onclick="openPhase(2)">Next</button>
-      </div>
-    </div>`;
-  // restore values
-  document.getElementById('s_country').value = state.country || 'Portugal';
-  document.getElementById('s_city').value = state.cityPref || '';
-  document.getElementById('save1').addEventListener('click', ()=>{
-    state.country = document.getElementById('s_country').value;
-    state.cityPref = document.getElementById('s_city').value;
-    markCompleted(1);
-    saveDraft();
-    updateQuickSummary();
-    alert('Saved');
-  });
-}
-
-function renderPhase2(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 2 — Financial Freedom</h2>
-      <label>Annual pension (£)</label>
-      <input id="s_pension" type="range" min="0" max="60000" value="${state.pension||10000}" />
-      <div class="small">£<span id="s_pension_text">${nice(state.pension||10000)}</span></div>
-
-      <label style="margin-top:8px">UK property value (£)</label>
-      <input id="s_property" type="range" min="0" max="2000000" step="10000" value="${state.property||300000}" />
-      <div class="small">£<span id="s_property_text">${nice(state.property||300000)}</span></div>
-
-      <div style="margin-top:12px" class="summary">Estimated savings: <strong id="s_fin_est">…</strong></div>
-
-      <div style="margin-top:10px" class="row">
-        <button id="save2">Save</button>
-        <button class="ghost" onclick="openPhase(3)">Next</button>
-      </div>
-    </div>`;
-  const p = document.getElementById('s_pension');
-  const pText = document.getElementById('s_pension_text');
-  const prop = document.getElementById('s_property');
-  const propText = document.getElementById('s_property_text');
-  const estEl = document.getElementById('s_fin_est');
-
-  function refresh(){
-    const pension = Number(p.value), property = Number(prop.value);
-    pText.textContent = nice(pension);
-    propText.textContent = nice(property);
-    const mult = COUNTRIES[state.country || 'Portugal'] || 1;
-    const savings = Math.round((pension * 0.35 + property * 0.0025) * mult);
-    estEl.textContent = `£${nice(savings)}/year (mult ${mult})`;
-  }
-  p.addEventListener('input', refresh);
-  prop.addEventListener('input', refresh);
-  refresh();
-
-  document.getElementById('save2').addEventListener('click', ()=>{
-    state.pension = Number(p.value);
-    state.property = Number(prop.value);
-    markCompleted(2);
-    saveDraft();
-    updateQuickSummary();
-    alert('Saved');
-  });
-}
-
-function renderPhase3(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 3 — Visa Victory</h2>
-      <label>Monthly income bracket</label>
-      <select id="s_q1">
-        <option value="">Select</option>
-        <option value="0">Under €870</option>
-        <option value="1">€870–€3,279</option>
-        <option value="2">€3,280+</option>
-      </select>
-      <label style="margin-top:8px">Remote work?</label>
-      <select id="s_q2"><option value="">Select</option><option value="0">No</option><option value="1">Yes</option></select>
-      <label style="margin-top:8px">Family joining?</label>
-      <select id="s_q4"><option value="">Select</option><option value="0">No</option><option value="1">Yes</option></select>
-
-      <div style="margin-top:12px" class="summary" id="s_visa_summary">Visa guidance will appear here</div>
-
-      <div style="margin-top:10px" class="row">
-        <button id="save3">Save</button>
-        <button class="ghost" onclick="openPhase(4)">Next</button>
-      </div>
-    </div>`;
-  // restore
-  if(state.incomeBracket) document.getElementById('s_q1').value = state.incomeBracket;
-  if(state.remoteWork) document.getElementById('s_q2').value = state.remoteWork;
-  if(state.familyJoin) document.getElementById('s_q4').value = state.familyJoin;
-
-  function refreshVisa(){
-    const inc = document.getElementById('s_q1').value;
-    const remote = document.getElementById('s_q2').value;
-    const fam = document.getElementById('s_q4').value;
-    let advice = '';
-    if(!inc) advice = 'Select income to get visa guidance.';
-    else {
-      if(inc === '2' && remote === '1') advice = 'Digital Nomad – likely route for remote high earners.';
-      else if(inc === '2') advice = 'Investor / Golden visa options recommended for high income.';
-      else if(inc === '1') advice = 'Passive income visas (D7, Non-lucrative) are likely fits.';
-      else advice = 'Lower income routes may need local work permits or lower-cost countries.';
-      if(fam === '1') advice += ' Family inclusion usually possible — check rules.';
-    }
-    document.getElementById('s_visa_summary').textContent = advice;
-  }
-  ['s_q1','s_q2','s_q4'].forEach(id => document.getElementById(id).addEventListener('change', refreshVisa));
-  refreshVisa();
-
-  document.getElementById('save3').addEventListener('click', ()=>{
-    state.incomeBracket = document.getElementById('s_q1').value;
-    state.remoteWork = document.getElementById('s_q2').value;
-    state.familyJoin = document.getElementById('s_q4').value;
-    markCompleted(3); saveDraft(); alert('Saved');
-  });
-}
-
-function renderPhase4(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 4 — Document Checklist</h2>
-      <label class="small">Upload documents (local filenames only)</label>
-      <input id="s_docs" type="file" multiple />
-      <div style="margin-top:8px" class="summary small" id="s_docs_list">No files chosen</div>
-      <div style="margin-top:10px" class="row">
-        <button id="save4">Save</button>
-        <button class="ghost" onclick="openPhase(5)">Next</button>
-      </div>
-    </div>`;
-  const filesInput = document.getElementById('s_docs');
-  const list = document.getElementById('s_docs_list');
-  // restore info
-  if(state.docs && state.docs.length) list.textContent = state.docs.join(' | ');
-  filesInput.addEventListener('change', ()=>{
-    const names = Array.from(filesInput.files || []).map(f => f.name);
-    list.textContent = names.length ? names.join(' | ') : 'No files chosen';
-  });
-  document.getElementById('save4').addEventListener('click', ()=>{
-    const names = Array.from(filesInput.files || []).map(f => f.name);
-    state.docs = names;
-    markCompleted(4); saveDraft(); alert('Saved (filenames stored locally)');
-  });
-}
-
-function renderPhase5(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 5 — Budget Blueprint</h2>
-      <label>Monthly income (£)</label>
-      <input id="s_income" type="number" min="0" value="${state.budgetIncome||2000}" />
-      <label style="margin-top:8px">Monthly expenses (£)</label>
-      <input id="s_expenses" type="number" min="0" value="${state.budgetExpenses||1200}" />
-      <div style="margin-top:10px" class="summary" id="s_budget_summary">Balance will appear here</div>
-      <div style="margin-top:10px" class="row">
-        <button id="save5">Save</button>
-        <button class="ghost" onclick="openPhase(6)">Next</button>
-      </div>
-    </div>`;
-  function refresh(){
-    const income = Number(document.getElementById('s_income').value || 0);
-    const expenses = Number(document.getElementById('s_expenses').value || 0);
-    document.getElementById('s_budget_summary').textContent = `Monthly surplus: £${nice(income - expenses)}`;
-  }
-  document.getElementById('s_income').addEventListener('input', refresh);
-  document.getElementById('s_expenses').addEventListener('input', refresh);
-  refresh();
-  document.getElementById('save5').addEventListener('click', ()=>{
-    state.budgetIncome = Number(document.getElementById('s_income').value||0);
-    state.budgetExpenses = Number(document.getElementById('s_expenses').value||0);
-    markCompleted(5); saveDraft(); updateQuickSummary(); alert('Saved');
-  });
-}
-
-function renderPhase6(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 6 — Move Mastery</h2>
-      <div class="row">
-        <label><input id="s_pack1" type="checkbox" /> Book movers</label>
-        <label><input id="s_pack2" type="checkbox" /> Arrange storage</label>
-        <label><input id="s_pack3" type="checkbox" /> Notify bank & utilities</label>
-      </div>
-      <div style="margin-top:10px" class="summary" id="s_move_summary">Tasks</div>
-      <div style="margin-top:10px" class="row">
-        <button id="save6">Save</button>
-        <button class="ghost" onclick="openPhase(7)">Next</button>
-      </div>
-    </div>`;
-  // restore
-  ['s_pack1','s_pack2','s_pack3'].forEach(id => {
-    if(state[id]) document.getElementById(id).checked = !!state[id];
-    document.getElementById(id).addEventListener('change', ()=>{
-      const done = ['s_pack1','s_pack2','s_pack3'].filter(k => document.getElementById(k).checked).map(k => document.getElementById(k).parentNode.textContent.trim());
-      document.getElementById('s_move_summary').textContent = done.length ? `Completed: ${done.join(', ')}` : 'No tasks ticked';
-    });
-  });
-  document.getElementById('save6').addEventListener('click', ()=>{
-    state.s_pack1 = document.getElementById('s_pack1').checked;
-    state.s_pack2 = document.getElementById('s_pack2').checked;
-    state.s_pack3 = document.getElementById('s_pack3').checked;
-    markCompleted(6); saveDraft(); alert('Saved');
-  });
-}
-
-function renderPhase7(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 7 — Settlement Success</h2>
-      <label>Rent / mortgage target (£/month)</label>
-      <input id="s_rent" type="number" min="0" value="${state.propertyRent||1200}" />
-      <label style="margin-top:8px">Preferred area</label>
-      <input id="s_area" type="text" value="${state.settleArea||''}" placeholder="e.g. Old Town" />
-      <div style="margin-top:10px" class="summary" id="s_settle_summary">Settlement summary</div>
-      <div style="margin-top:10px" class="row">
-        <button id="save7">Save</button>
-        <button class="ghost" onclick="openPhase(8)">Next</button>
-      </div>
-    </div>`;
-  function refresh(){ document.getElementById('s_settle_summary').textContent = `Target: £${nice(Number(document.getElementById('s_rent').value||0))}/month — Area: ${document.getElementById('s_area').value||'—'}`; }
-  document.getElementById('s_rent').addEventListener('input', refresh);
-  document.getElementById('s_area').addEventListener('input', refresh);
-  refresh();
-  document.getElementById('save7').addEventListener('click', ()=>{
-    state.propertyRent = Number(document.getElementById('s_rent').value || 0);
-    state.settleArea = document.getElementById('s_area').value;
-    markCompleted(7); saveDraft(); alert('Saved');
-  });
-}
-
-function renderPhase8(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 8 — Community Connections</h2>
-      <div class="row">
-        <label><input id="s_conn1" type="checkbox"> Join expat group</label>
-        <label><input id="s_conn2" type="checkbox"> Learn local language</label>
-        <label><input id="s_conn3" type="checkbox"> Attend meetups</label>
-      </div>
-      <div style="margin-top:10px" class="summary" id="s_conn_summary">Connections status</div>
-      <div style="margin-top:10px" class="row"><button id="save8">Save</button><button class="ghost" onclick="openPhase(9)">Next</button></div>
-    </div>`;
-  ['s_conn1','s_conn2','s_conn3'].forEach(id => {
-    if(state[id]) document.getElementById(id).checked = !!state[id];
-    document.getElementById(id).addEventListener('change', ()=> {
-      const picks = ['s_conn1','s_conn2','s_conn3'].filter(k=>document.getElementById(k).checked).map(k=>document.getElementById(k).parentNode.textContent.trim());
-      document.getElementById('s_conn_summary').textContent = picks.length ? `Planned: ${picks.join(', ')}` : 'No connections planned';
-    });
-  });
-  document.getElementById('save8').addEventListener('click', ()=>{
-    state.s_conn1 = document.getElementById('s_conn1').checked;
-    state.s_conn2 = document.getElementById('s_conn2').checked;
-    state.s_conn3 = document.getElementById('s_conn3').checked;
-    markCompleted(8); saveDraft(); alert('Saved');
-  });
-}
-
-function renderPhase9(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 9 — Tax Triumph</h2>
-      <label>Tax residency plan</label>
-      <select id="s_tax">
-        <option value="UK">Remain UK</option>
-        <option value="Host">Host country</option>
-        <option value="Split">Split / Dual</option>
-      </select>
-      <div style="margin-top:10px" class="summary" id="s_tax_summary">Tax summary</div>
-      <div style="margin-top:10px" class="row"><button id="save9">Save</button><button class="ghost" onclick="openPhase(10)">Next</button></div>
-    </div>`;
-  if(state.taxStatus) document.getElementById('s_tax').value = state.taxStatus;
-  document.getElementById('s_tax').addEventListener('change', ()=> {
-    const v = document.getElementById('s_tax').value;
-    document.getElementById('s_tax_summary').textContent = v === 'UK' ? 'Remain UK resident — review split-year rules' : v==='Host' ? 'Plan for host country tax residency' : 'Consider split/dual residency planning';
-  });
-  document.getElementById('save9').addEventListener('click', ()=>{
-    state.taxStatus = document.getElementById('s_tax').value;
-    markCompleted(9); saveDraft(); alert('Saved');
-  });
-}
-
-function renderPhase10(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 10 — Celebration Station</h2>
-      <label>Celebration plan notes</label>
-      <input id="s_celebrate" type="text" placeholder="Dinner, drinks, invite list" value="${state.celebrationPlan||''}" />
-      <div style="margin-top:10px" class="summary" id="s_celebrate_summary">Party notes</div>
-      <div style="margin-top:10px" class="row"><button id="save10">Save</button><button class="ghost" onclick="openPhase(11)">Next</button></div>
-    </div>`;
-  document.getElementById('s_celebrate').addEventListener('input', ()=>document.getElementById('s_celebrate_summary').textContent = document.getElementById('s_celebrate').value || 'No plan');
-  document.getElementById('save10').addEventListener('click', ()=>{
-    state.celebrationPlan = document.getElementById('s_celebrate').value;
-    markCompleted(10); saveDraft(); alert('Saved');
-  });
-}
-
-function renderPhase11(container){
-  container.innerHTML = `
-    <div>
-      <h2>Phase 11 — Retirement Roadmap</h2>
-      <p class="small">When you’re ready, generate the final report on the AI tab — or click below to generate a quick summary now.</p>
-      <div style="margin-top:12px" class="row">
-        <button onclick="generateAIReport()">Generate full report now</button>
-        <button class="ghost" onclick="markCompleted(11); saveDraft(); alert('Marked complete')">Mark Complete</button>
-      </div>
-    </div>`;
-}
-
-/* ===== Completed marker ===== */
-function markCompleted(n){
-  if(!completed.includes(n)) completed.push(n);
-  saveDraft();
-  buildPhaseStrip();
-  updateQuickSummary();
-}
-
-/* ===== Quick summary cards (Home) ===== */
-function updateQuickSummary(){
-  document.getElementById('quickCountry').textContent = state.country || '—';
-  const surplus = (Number(state.budgetIncome||0) - Number(state.budgetExpenses||0));
-  document.getElementById('quickBudget').textContent = surplus ? `£${nice(surplus)}/mo` : '—';
-  // readiness estimate
-  let r=40;
-  if(state.docs && state.docs.length) r+=15;
-  if(surplus > 300) r+=15;
-  if(state.pension && state.pension > 8000) r+=10;
-  if(completed.length > 5) r += 10;
-  r = Math.min(100, r);
-  document.getElementById('quickReady').textContent = `${r}/100`;
-}
-
-/* ===== In-browser "AI" generator (placeholder logic, professional + conversational hybrid) ===== */
-function generateAIReport(){
-  // collect state
-  const data = collectState();
-  // compute estimates
-  const mult = COUNTRIES[data.country] || 1;
-  const monthlyBudget = Number(data.budgetIncome || 2000);
-  const estMonthly = Math.round(monthlyBudget * mult);
-  const estAnnual = estMonthly * 12;
-  const pension = Number(data.pension || 0);
-  const propVal = Number(data.property || 0);
-  // readiness scoring
-  let readiness = 50;
-  if(data.docs && data.docs.length) readiness += 10;
-  if((Number(data.budgetIncome||0) - Number(data.budgetExpenses||0)) > 300) readiness += 10;
-  if(pension > 8000) readiness += 10;
-  if(data.s_pack1 && data.s_pack2) readiness += 10;
-  if(data.s_conn1) readiness += 5;
-  readiness = Math.min(100, readiness);
-
-  // Professional section
-  const professional = [];
-  professional.push(`BRITS ABROAD 2025 — Professional Relocation Report`);
-  professional.push(`Generated: ${new Date().toLocaleString()}`);
-  professional.push(`\n1) Destination Overview:\n- Country: ${data.country || 'Not chosen'}${data.cityPref ? ` — ${data.cityPref}` : ''}\n- Estimated monthly living cost (approx): £${nice(estMonthly)} (approx £${nice(estAnnual)} / yr).`);
-  professional.push(`\n2) Financial Summary:\n- Pension (annual): £${nice(pension)}\n- UK property value: £${nice(propVal)}\n- Budget surplus (monthly): £${nice(Number(data.budgetIncome||0)-Number(data.budgetExpenses||0))}`);
-  professional.push(`\n3) Visa Recommendation:\n- ${visaAdviceText(data)}`);
-  professional.push(`\n4) Documents:\n- ${data.docs && data.docs.length ? `Uploaded: ${data.docs.join(', ')}` : 'No documents uploaded. You should prepare passport, bank statements, proof of income, and police checks.'}`);
-  professional.push(`\n5) Practical Roadmap (next 3 months):\n- Finalise & certify documents.\n- Book viewing trip or virtual viewings.\n- Arrange initial healthcare/insurance registration.\n- Reserve flexible shipping & movers.\n`);
-  professional.push(`6) Readiness score: ${readiness}/100 — ${ readiness > 75 ? 'Very ready' : readiness > 50 ? 'Some preparation left' : 'More preparation recommended' }.`);
-
-  // Conversational friendly tone
-  const friendly = [];
-  friendly.push(`Hi — here's a quick friendly summary:`);
-  friendly.push(`You're thinking about moving to ${data.country || 'a destination yet to choose'}. Based on your inputs, a comfortable monthly budget would be around £${nice(estMonthly)}. Your pension is £${nice(pension)}, your UK property is £${nice(propVal)}.`)
-  friendly.push(`To make this smooth: get your documents in order, book a viewing trip, and chat with a visa specialist for the best route. I can produce templates next (cover letters, checklist).`);
-
-  // Combined output
-  const finalText = professional.join('\n\n') + '\n\n---\n\n' + friendly.join('\n\n');
-  document.getElementById('aiOutput').textContent = finalText;
-  // fill Report page with formatted HTML
-  document.getElementById('reportHtml').innerHTML = `<pre style="white-space:pre-wrap">${escapeHtml(finalText)}</pre>`;
-  // numeric table
-  const tbody = document.createElement('div');
-  const rows = [
-    ['Estimated monthly cost', `£${nice(estMonthly)}`],
-    ['Estimated annual cost', `£${nice(estAnnual)}`],
-    ['Pension (annual)', `£${nice(pension)}`],
-    ['UK property value', `£${nice(propVal)}`],
-    ['Budget surplus (monthly)', `£${nice(Number(data.budgetIncome||0)-Number(data.budgetExpenses||0))}`],
-    ['Readiness score', `${readiness}/100`]
-  ];
-  let html = '<table><thead><tr><th>Item</th><th>Estimate</th></tr></thead><tbody>';
-  rows.forEach(r=> html += `<tr><td style="padding:8px">${r[0]}</td><td style="padding:8px">${r[1]}</td></tr>`);
-  html += '</tbody></table>';
-  document.getElementById('reportNumbers').innerHTML = html;
-  // save final
-  const finalPlan = {generatedAt: new Date().toISOString(), professional: professional, friendly: friendly, rows, collected: data};
-  localStorage.setItem(LS_FINAL, JSON.stringify(finalPlan));
-  // switch to Report page
-  setActiveTab('report');
-}
-
-/* convenience variants */
-function generateExecutiveSummary(){ generateAIReport(); /* same now; could be different */ }
-function generateFriendlySummary(){ generateAIReport(); }
-
-/* small helpers for AI */
-function visaAdviceText(d){
-  if(!d.incomeBracket) return 'Income bracket required for accurate advice.';
-  if(d.incomeBracket === '2' && d.remoteWork === '1') return 'Digital Nomad is a strong option; confirm remote-worker visa requirements and tax rules.';
-  if(d.incomeBracket === '2') return 'High-income visas or investor routes (Golden/Investor) likely.';
-  if(d.incomeBracket === '1') return 'Passive-income visas (D7, Non-lucrative) could be suitable.';
-  return 'Lower-income routes may need local permits or lower-cost countries.';
-}
-
-/* helpers */
-function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-function collectState(){
-  // gather values (from state + UI)
-  const docInput = document.getElementById('s_docs') || document.getElementById('docs') || null;
-  const docs = docInput ? Array.from(docInput.files || []).map(f=>f.name) : (state.docs || []);
-  return {
-    country: state.country || (document.querySelector('#phaseArea #s_country') ? document.querySelector('#s_country').value : (state.country||'Portugal')),
-    cityPref: state.cityPref || '',
-    pension: state.pension || Number(document.getElementById('s_pension') ? document.getElementById('s_pension').value : (state.pension || 0)),
-    property: state.property || Number(document.getElementById('s_property') ? document.getElementById('s_property').value : (state.property || 0)),
-    docs: docs,
-    budgetIncome: state.budgetIncome || Number(document.getElementById('s_income') ? document.getElementById('s_income').value : (state.budgetIncome || 0)),
-    budgetExpenses: state.budgetExpenses || Number(document.getElementById('s_expenses') ? document.getElementById('s_expenses').value : (state.budgetExpenses || 0)),
-    incomeBracket: state.incomeBracket || (document.getElementById('s_q1') ? document.getElementById('s_q1').value : state.incomeBracket),
-    remoteWork: state.remoteWork || (document.getElementById('s_q2') ? document.getElementById('s_q2').value : state.remoteWork),
-    familyJoin: state.familyJoin || (document.getElementById('s_q4') ? document.getElementById('s_q4').value : state.familyJoin),
-    s_pack1: state.s_pack1 || false,
-    s_pack2: state.s_pack2 || false,
-    s_pack3: state.s_pack3 || false,
-    s_conn1: state.s_conn1 || false,
-    propertyRent: state.propertyRent || 0,
-    settleArea: state.settleArea || ''
-  };
-}
-
-/* ====== Export / Copy / Reset functions ====== */
-function exportFinal(){
-  const raw = localStorage.getItem(LS_FINAL) || JSON.stringify({collected: collectState(), generatedAt: new Date().toISOString()});
-  exportJSON(JSON.parse(raw));
-}
-function copyAI(){
-  const raw = localStorage.getItem(LS_FINAL);
-  if(!raw){ alert('Generate the AI report first'); return; }
-  const plan = JSON.parse(raw);
-  const text = (plan.professional || []).join('\n\n') + '\n\n' + (plan.friendly || []).join('\n\n');
-  navigator.clipboard?.writeText(text).then(()=> alert('Copied to clipboard'), ()=> alert('Copy failed'));
-}
-function resetAll(){
-  if(!confirm('Reset all saved progress?')) return;
-  localStorage.removeItem(LS_DRAFT);
-  localStorage.removeItem(LS_FINAL);
-  state = {}; completed = [];
-  buildPhaseStrip();
-  openPhase(1);
-  updateQuickSummary();
-  alert('Reset done');
-}
-
-/* ====== restore draft & init UI ====== */
-function initApp(){
-  loadDraft();
-  // ensure state fields exist
-  state = state || {};
-  completed = completed || [];
-  // populate home quicks
-  updateQuickSummary();
-  // build phase strip & open default
-  buildPhaseStrip();
-  openPhase(1);
-  // set active tab handling
-  setActiveTab('home');
-  // autosave interval
-  setInterval(saveDraft, 2000);
-  // Countdown (example)
-  function updateCountdown(){
-    const deadline = new Date('2025-04-05T00:00:00Z');
-    const diff = deadline - new Date();
-    const el = document.getElementById('countdown');
-    if(diff <= 0) { el.textContent = 'NI Top-Up Window: CLOSED'; return; }
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    el.innerHTML = `NI Top-Up Window: <strong>${days} days ${hours} hours left</strong>`;
-  }
-  updateCountdown(); setInterval(updateCountdown, 60*60*1000);
-}
-initApp();
-
-/* helper to show page programmatically */
-function showPage(page){
-  setActiveTab(page);
-  // if Planner open: build strip again
-  if(page === 'planner'){ buildPhaseStrip(); if(!document.querySelector('#phaseArea').innerHTML) openPhase(1); }
+  document.getElementById("aiOutput").innerHTML =
+    "<em>AI response coming soon…</em><br>For now, here's a placeholder: Moving abroad can reduce tax, cost of living and improve lifestyle when planned correctly.";
 }
 </script>
+
 </body>
 </html>
