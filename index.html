@@ -5,84 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BRITS ABROAD 2025 – Ultimate Relocation Planner</title>
 <style>
-  /* ---------- Base Styles ---------- */
   :root {
-    --primary:#ff6f61; 
-    --secondary:#ffe5d9; 
-    --accent:#ff3b30; 
-    --text:#222; 
-    --card:#fff; 
+    --primary:#ff6f61;
+    --secondary:#ffe5d9;
+    --accent:#ff3b30;
+    --text:#222;
+    --card:#fff;
     --shadow:0 10px 25px rgba(0,0,0,0.1);
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0; font-family:'Inter', system-ui, sans-serif;
-    background:linear-gradient(180deg,#fff5f0,#ffe5d9);
-    color:var(--text); line-height:1.6;
-  }
+  body{margin:0;font-family:'Inter', system-ui, sans-serif;background:linear-gradient(180deg,#fff5f0,#ffe5d9);color:var(--text);line-height:1.6;}
   h1,h2,h3{margin:0;}
-  h1{font-size:2.5rem; margin-bottom:0.5rem;}
-  h2{font-size:1.8rem; margin-bottom:0.5rem;}
-  h3{font-size:1.2rem; margin-bottom:0.3rem;}
+  h1{font-size:3rem;margin-bottom:0.5rem;}
+  h2{font-size:2rem;margin-bottom:0.5rem;}
+  h3{font-size:1.2rem;margin-bottom:0.3rem;}
   p{margin:0.3rem 0;}
-
-  /* ---------- Hero ---------- */
-  .hero{
-    background:#ff6f61 url('placeholder-hero.jpg') center/cover no-repeat;
-    text-align:center; color:#fff; padding:60px 20px;
-    box-shadow:var(--shadow);
-  }
-  .hero h1{font-size:3rem;}
-  .hero p{font-size:1.2rem;}
-
-  /* ---------- Container ---------- */
+  .hero{background:#ff6f61 url('placeholder-hero.jpg') center/cover no-repeat;text-align:center;color:#fff;padding:60px 20px;box-shadow:var(--shadow);}
+  .hero h1{font-size:3.5rem;}
+  .hero p{font-size:1.3rem;}
   .container{max-width:960px;margin:20px auto;padding:0 20px;}
-
-  /* ---------- Cards ---------- */
-  .card{
-    background:var(--card); border-radius:16px; padding:20px;
-    margin-bottom:20px; box-shadow:var(--shadow);
-  }
-
-  /* ---------- Phases Navigation ---------- */
+  .card{background:var(--card);border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow);}
   .phases{display:flex; gap:12px; flex-wrap:wrap; justify-content:center;margin-bottom:20px;}
-  .phase{
-    flex:1 1 100px; min-width:100px; text-align:center; padding:14px; border-radius:12px;
-    cursor:pointer; transition:all 0.2s; background:var(--secondary);
-  }
+  .phase{flex:1 1 100px; min-width:100px; text-align:center; padding:14px; border-radius:12px; cursor:pointer; transition:all 0.2s; background:var(--secondary);}
   .phase.active{background:var(--primary); color:#fff; transform:scale(1.05);}
   .phase.completed{background:var(--accent); color:#fff;}
-
-  /* ---------- Inputs ---------- */
-  select, input[type=range], input[type=file], button{
-    width:100%; padding:10px 12px; margin:8px 0; border-radius:10px; border:2px solid var(--primary);
-    font-size:1rem;
-  }
+  select, input[type=range], input[type=file], button{width:100%; padding:10px 12px; margin:8px 0; border-radius:10px; border:2px solid var(--primary); font-size:1rem;}
   button{background:var(--primary); color:#fff; font-weight:bold; cursor:pointer; border:none;}
   button:hover{opacity:0.9;}
-
-  /* ---------- Results ---------- */
   .result, .aiResult{padding:12px; background:var(--primary); color:#fff; border-radius:10px; margin-top:12px;}
-
-  /* ---------- Responsive ---------- */
   @media(max-width:640px){ h1{font-size:2rem;} h2{font-size:1.5rem;} }
-
 </style>
 </head>
 <body>
 
-<!-- Hero Section -->
 <section class="hero">
   <h1>BRITS ABROAD 2025</h1>
-  <p>Your Ultimate Luxury Relocation Planner</p>
+  <p>Ultimate Luxury Relocation Planner</p>
 </section>
 
 <div class="container">
 
-  <!-- Phases Navigation -->
   <div class="phases" id="phases"></div>
 
-  <!-- Phase Content -->
   <div id="phaseContent">
     <!-- Phase 1: Dream Destination -->
     <div id="phase1" class="card">
@@ -96,7 +60,6 @@
     <!-- Phase 2: Financial Freedom -->
     <div id="phase2" class="card" style="display:none">
       <h2>Phase 2: Financial Freedom</h2>
-      <p>Set your UK Pension and Property Value</p>
       <label>Pension: £<span id="pensionVal">10000</span></label>
       <input id="pension" type="range" min="0" max="60000" value="10000" oninput="updateFinances()">
       <label>Property Value: £<span id="propertyVal">300000</span></label>
@@ -209,137 +172,23 @@
 </div>
 
 <script>
-/************* Data *************/
-const PHASES = [
-  {id:1,title:'Dream Destination'},
-  {id:2,title:'Financial Freedom'},
-  {id:3,title:'Visa & Work Rights'},
-  {id:4,title:'Document Vault'},
-  {id:5,title:'Budget Blueprint'},
-  {id:6,title:'Move Mastery'},
-  {id:7,title:'Banking & Transfers'},
-  {id:8,title:'Community Connections'},
-  {id:9,title:'Tax Triumph'},
-  {id:10,title:'Celebration Station'},
-  {id:11,title:'Retirement Roadmap'}
-];
-
-const COUNTRIES = ["Portugal","Spain","UAE","Thailand","Cyprus","Greece","Italy","France","Poland","Malta"];
-
-/************* State *************/
-let currentPhase = 1;
-let completed = [];
-
-/************* DOM *************/
-const phasesEl = document.getElementById('phases');
-
-/************* Build Phases Navigation *************/
-function buildPhases(){
-  phasesEl.innerHTML='';
-  PHASES.forEach(p=>{
-    const el=document.createElement('div');
-    el.className='phase';
-    el.dataset.phase=p.id;
-    el.textContent=p.title;
-    if(completed.includes(p.id)) el.classList.add('completed');
-    if(p.id===currentPhase) el.classList.add('active');
-    el.onclick=()=>selectPhase(p.id);
-    phasesEl.appendChild(el);
-  });
-}
-
-/************* Show Phase *************/
-function showPhase(n){
-  PHASES.forEach(p=>{
-    const el=document.getElementById('phase'+p.id);
-    if(el) el.style.display=(p.id===n)?'block':'none';
-  });
-  currentPhase=n;
-  buildPhases();
-}
-
-/************* Select Phase *************/
-function selectPhase(n){
-  if(n>currentPhase) return;
-  showPhase(n);
-}
-
-/************* Complete Phase *************/
-function completePhase(n){
-  if(!completed.includes(n)) completed.push(n);
-  const next = n+1;
-  showPhase(next<=PHASES.length?next:n);
-}
-
-/************* Populate Countries *************/
-const countrySelect=document.getElementById('countrySelect');
-COUNTRIES.forEach(c=>{
-  const o=document.createElement('option'); o.value=c; o.textContent=c;
-  countrySelect.appendChild(o);
-});
-countrySelect.onchange=()=>document.getElementById('destinationResult').textContent=`Country: ${countrySelect.value}`;
-
-/************* Financial Sliders *************/
-function updateFinances(){
-  const p=parseInt(document.getElementById('pension').value);
-  const r=parseInt(document.getElementById('property').value);
-  document.getElementById('pensionVal').textContent=p.toLocaleString();
-  document.getElementById('propertyVal').textContent=r.toLocaleString();
-  const savings=Math.round((p*0.35+r*0.0025)*1.0);
-  document.getElementById('financeResult').textContent=`Estimated Savings: £${savings.toLocaleString()}/year`;
-}
-
-/************* Shipping Slider *************/
-function updateShipping(){
-  const val=parseInt(document.getElementById('shipping').value);
-  document.getElementById('shippingVal').textContent=val.toLocaleString();
-  document.getElementById('shippingResult').textContent=`Shipping Cost: £${val.toLocaleString()}`;
-}
-
-/************* Visa Logic *************/
-function checkVisa(){
-  const income=document.getElementById('incomeSelect').value;
-  const remote=document.getElementById('remoteSelect').value;
-  const family=document.getElementById('familySelect').value;
-  let visa="Visa info: N/A";
-  if(income!==""){
-    visa="Eligible Visa: ";
-    if(income==2 && remote==1) visa+="Digital Nomad";
-    else if(income==2) visa+="Investor/High Income";
-    else visa+="Standard Residency";
-    if(family==1) visa+=" + Family";
-  }
-  document.getElementById('visaResult').textContent=visa;
-}
-
-/************* Document Vault *************/
-document.getElementById('docUpload').onchange=(e)=>{
-  const files=Array.from(e.target.files);
-  const names=files.map(f=>f.name).join(', ');
-  document.getElementById('docResult').textContent=names||"No files uploaded";
-}
-
-/************* AI Placeholders *************/
-function runAI(){
-  const country=countrySelect.value;
-  const pension=parseInt(document.getElementById('pension').value);
-  const property=parseInt(document.getElementById('property').value);
-  const shipping=parseInt(document.getElementById('shipping').value);
-  document.getElementById('aiSummary').textContent=
-    `AI Summary: Moving to ${country}. Pension £${pension.toLocaleString()}, Property £${property.toLocaleString()}, Shipping £${shipping.toLocaleString()}.`;
-}
-function runRetirementAI(){
-  const country=countrySelect.value;
-  document.getElementById('retirementSummary').textContent=
-    `Retirement Projection: Based on your inputs, retiring in ${country} looks feasible with estimated savings and pension plan in place.`;
-}
-
-/************* Init *************/
-buildPhases();
-showPhase(currentPhase);
-updateFinances();
-updateShipping();
+const PHASES=[{id:1,title:'Dream Destination'},{id:2,title:'Financial Freedom'},{id:3,title:'Visa & Work Rights'},{id:4,title:'Document Vault'},{id:5,title:'Budget Blueprint'},{id:6,title:'Move Mastery'},{id:7,title:'Banking & Transfers'},{id:8,title:'Community Connections'},{id:9,title:'Tax Triumph'},{id:10,title:'Celebration Station'},{id:11,title:'Retirement Roadmap'}];
+const COUNTRIES=["Portugal","Spain","UAE","Thailand","Cyprus","Greece","Italy","France","Poland","Malta"];
+let currentPhase=1;
+let completed=[];
+const phasesEl=document.getElementById('phases');
+function buildPhases(){phasesEl.innerHTML='';PHASES.forEach(p=>{const el=document.createElement('div');el.className='phase';el.dataset.phase=p.id;el.textContent=p.title;if(completed.includes(p.id))el.classList.add('completed');if(p.id===currentPhase)el.classList.add('active');el.onclick=()=>selectPhase(p.id);phasesEl.appendChild(el);});}
+function showPhase(n){PHASES.forEach(p=>{const el=document.getElementById('phase'+p.id);if(el)el.style.display=(p.id===n)?'block':'none';});currentPhase=n;buildPhases();}
+function selectPhase(n){if(n>currentPhase)return;showPhase(n);}
+function completePhase(n){if(!completed.includes(n))completed.push(n);const next=n+1;showPhase(next<=PHASES.length?next:n);}
+const countrySelect=document.getElementById('countrySelect');COUNTRIES.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;countrySelect.appendChild(o);});countrySelect.onchange=()=>document.getElementById('destinationResult').textContent=`Country: ${countrySelect.value}`;
+function updateFinances(){const p=parseInt(document.getElementById('pension').value);const r=parseInt(document.getElementById('property').value);document.getElementById('pensionVal').textContent=p.toLocaleString();document.getElementById('propertyVal').textContent=r.toLocaleString();const savings=Math.round((p*0.35+r*0.0025)*1.0);document.getElementById('financeResult').textContent=`Estimated Savings: £${savings.toLocaleString()}/year`;}
+function updateShipping(){const val=parseInt(document.getElementById('shipping').value);document.getElementById('shippingVal').textContent=val.toLocaleString();document.getElementById('shippingResult').textContent=`Shipping Cost: £${val.toLocaleString()}`;}
+function checkVisa(){const income=document.getElementById('incomeSelect').value;const remote=document.getElementById('remoteSelect').value;const family=document.getElementById('familySelect').value;let visa="Visa info: N/A";if(income!==""){visa="Eligible Visa: ";if(income==2 && remote==1) visa+="Digital Nomad";else if(income==2) visa+="Investor/High Income";else visa+="Standard Residency";if(family==1) visa+=" + Family";}document.getElementById('visaResult').textContent=visa;}
+document.getElementById('docUpload').onchange=(e)=>{const files=Array.from(e.target.files);const names=files.map(f=>f.name).join(', ');document.getElementById('docResult').textContent=names||"No files uploaded";}
+function runAI(){const country=countrySelect.value;const pension=parseInt(document.getElementById('pension').value);const property=parseInt(document.getElementById('property').value);const shipping=parseInt(document.getElementById('shipping').value);document.getElementById('aiSummary').textContent=`AI Summary: Moving to ${country}. Pension £${pension.toLocaleString()}, Property £${property.toLocaleString()}, Shipping £${shipping.toLocaleString()}. Cost of Living & 2025 Budget impacts calculated.`;}
+function runRetirementAI(){const country=countrySelect.value;const pension=parseInt(document.getElementById('pension').value);const property=parseInt(document.getElementById('property').value);document.getElementById('retirementSummary').textContent=`Retirement Projection: Retiring in ${country} with estimated savings £${pension.toLocaleString()} & property £${property.toLocaleString()}. UK State Pension and 2025 Budget scenarios included.`;}
+buildPhases();showPhase(currentPhase);updateFinances();updateShipping();
 </script>
-
 </body>
 </html>
