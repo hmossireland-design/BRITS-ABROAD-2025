@@ -1,151 +1,403 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRITS ABROAD 2025 – Escape the Budget Squeeze</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BRITS ABROAD 2025 — Champagne (Working)</title>
+<meta name="theme-color" content="#efe7dd"/>
 <style>
-  body {font-family:Arial,sans-serif;background:#f0f8ff;color:#00247d;margin:0;padding:20px;line-height:1.5;}
-  h1{font-size:2.8em;margin:20px;}
-  .card{background:white;border-radius:20px;padding:25px;margin:20px auto;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
-  select,input[type=range]{width:100%;padding:15px;margin:15px 0;border-radius:15px;font-size:1.2em;}
-  input[type=range]::-webkit-slider-thumb{background:#c8102e;width:30px;height:30px;border-radius:50%;}
-  .result{font-size:2.2em;background:#c8102e;color:white;padding:25px;border-radius:20px;margin:30px 0;}
-  button{background:#c8102e;color:white;padding:16px 40px;border:none;border-radius:50px;font-size:1.4em;margin:10px;cursor:pointer;}
-  button.buy{background:gold;color:#c8102e;font-size:2.2em;padding:20px 60px;box-shadow:0 10px 30px rgba(0,0,0,0.4);}
-  .progress{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:30px 0;}
-  .fill{height:100%;background:#c8102e;width:0%;transition:width 0.6s;}
-  .phase{width:70px;height:70px;background:#00247d;color:white;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:8px;font-size:2em;}
-  .phase.active{background:#c8102e;transform:scale(1.2);}
-  .phase.completed{background:#28a745;}
-  table{width:100%;border-collapse:collapse;margin:20px 0;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
-  th{background:#00247d;color:white;padding:15px;text-align:left;}
-  td{padding:15px;border-bottom:1px solid #ddd;cursor:pointer;}
-  tr:hover{background:#f0f8ff;}
-  .detail{background:#e6f2ff;display:none;padding:15px;border-radius:8px;}
-  .detail.show{display:table-row;}
+  :root{
+    --bg1:#fbf7f3; --bg2:#efe7dd; --panel:#fffaf7; --text:#1f1b16;
+    --gold:#d4af37; --gold-dark:#b48f2b; --muted:#f5efe8; --card-radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:var(--text)}
+  body{background:linear-gradient(180deg,var(--bg1),var(--bg2));padding:18px;display:flex;justify-content:center}
+  .app{width:100%;max-width:980px}
+  .header{text-align:center;margin-bottom:12px}
+  h1{margin:6px 0;font-size:1.9rem;font-weight:800}
+  .lead{color:rgba(31,27,22,0.85);margin-bottom:10px}
+  .card{background:var(--panel);border-radius:var(--card-radius);padding:18px;box-shadow:0 12px 30px rgba(31,27,22,0.06);margin-bottom:14px}
+  .progress{height:12px;background:rgba(31,27,22,0.03);border-radius:999px;overflow:hidden;margin:10px 0}
+  .progress .fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-dark));transition:width .4s}
+  .phases{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+  .phase{width:84px;height:84px;border-radius:12px;background:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;padding:8px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+  .phase .icon{font-size:1.4rem;margin-bottom:8px}
+  .phase .title{font-size:.8rem;text-align:center}
+  .phase.active{background:linear-gradient(180deg,var(--gold),var(--gold-dark));color:#fff;transform:scale(1.02)}
+  .phase.completed{background:linear-gradient(180deg,#efe2b3,#e6d188);color:var(--text)}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  select,input[type=range],button,input[type=file]{font-size:1rem;padding:8px;border-radius:8px;border:1px solid rgba(31,27,22,0.06)}
+  input[type=range]{width:100%}
+  .muted{color:rgba(31,27,22,0.7)}
+  .result{display:inline-block;background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#fff;padding:10px 14px;border-radius:10px;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin-top:10px}
+  th,td{padding:10px;border-bottom:1px solid rgba(31,27,22,0.03);text-align:left}
+  th{color:var(--gold);font-weight:700}
+  .detail{display:none;background:rgba(31,27,22,0.02);padding:10px;border-radius:8px;margin-top:6px}
+  .detail.show{display:block}
+  .small{font-size:.92rem;color:rgba(31,27,22,0.7)}
+  .btn{background:transparent;border:1px solid rgba(31,27,22,0.06);padding:10px 12px;border-radius:8px;cursor:pointer}
+  .btn.primary{background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#fff;border:none}
+  @media(max-width:640px){.phase{width:70px;height:70px}.card{padding:14px}}
 </style>
 </head>
 <body>
-<h1>BRITS ABROAD 2025</h1>
-<p style="font-size:1.6em;">Escape the 2025 Budget squeeze</p>
+  <main class="app">
+    <header class="header">
+      <h1>BRITS ABROAD 2025</h1>
+      <div class="lead">Champagne — working prototype (interactive)</div>
+    </header>
 
-<div class="progress"><div class="fill" id="progressFill"></div></div>
+    <section class="card" aria-hidden="false">
+      <div class="progress"><div id="progressFill" class="fill" style="width:0%"></div></div>
+      <div id="phases" class="phases" aria-label="Phases"></div>
+    </section>
 
-<div>
-  <div class="phase completed">1</div>
-  <div class="phase active" id="p2">2</div>
-  <div class="phase" id="p3">3</div>
-  <div class="phase" id="p4">4</div>
-  <div class="phase" id="p5">5</div>
-  <div class="phase" id="p6">6</div>
-  <div class="phase" id="p7">7</div>
-  <div class="phase" id="p8">8</div>
-  <div class="phase" id="p9">9</div>
-  <div class="phase" id="p10">10</div>
-  <div class="phase" id="p11">11</div>
-</div>
+    <section id="phaseContent" aria-live="polite">
+      <!-- Phase 1 -->
+      <div id="phase1" class="card">
+        <h2>Phase 1 — Dream Destination</h2>
+        <div class="row" style="margin-top:8px;">
+          <label class="small" for="country">Choose country</label>
+          <select id="country" aria-label="Country"></select>
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn primary" onclick="completePhase(1)">Mark Phase 1 Complete</button>
+        </div>
+      </div>
 
-<div class="card">
-  <select id="country" onchange="calc()">
-    <option>Portugal</option><option>Spain</option><option>UAE</option><option>Thailand</option><option>Cyprus</option>
-    <option>Greece</option><option>Italy</option><option>France</option><option>Poland</option><option>Malta</option>
-  </select>
+      <!-- Phase 2 -->
+      <div id="phase2" class="card" style="display:none;">
+        <h2>Phase 2 — Financial Freedom</h2>
+        <div class="row" style="margin-top:8px;">
+          <div style="flex:1;min-width:160px">
+            <div style="display:flex;justify-content:space-between"><span class="small">Annual Pension</span><span class="small">£<span id="pensionVal">10,000</span></span></div>
+            <input id="pension" type="range" min="0" max="100000" step="500" value="10000">
+          </div>
+          <div style="flex:1;min-width:160px">
+            <div style="display:flex;justify-content:space-between"><span class="small">UK Property</span><span class="small">£<span id="propertyVal">300,000</span></span></div>
+            <input id="property" type="range" min="0" max="2000000" step="5000" value="300000">
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div id="savings" class="result">You could save £0/year</div>
+        </div>
+        <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(2)">Mark Phase 2 Complete</button></div>
+      </div>
 
-  <label>Annual Pension: £<span id="pensionVal">25,000</span></label>
-  <input type="range" min="0" max="100000" value="25000" step="1000" id="pension" oninput="calc()">
+      <!-- Phase 3 -->
+      <div id="phase3" class="card" style="display:none;">
+        <h2>Phase 3 — Visa Victory</h2>
+        <div class="row" style="margin-top:8px;">
+          <select id="q1"><option value="">Monthly Income?</option><option value="0">Under €870</option><option value="1">€870–€3,279</option><option value="2">€3,280+</option></select>
+          <select id="q2"><option value="">Remote Work?</option><option value="0">No</option><option value="1">Yes</option></select>
+          <select id="q4"><option value="">Family Joining?</option><option value="0">No</option><option value="1">Yes</option></select>
+        </div>
+        <div style="margin-top:10px">
+          <button class="btn" onclick="checkVisa()">Check Visa</button>
+        </div>
+        <div id="visaResult" style="margin-top:10px" class="small">Select income & options then press "Check Visa".</div>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(3)">Mark Phase 3 Complete</button></div>
+      </div>
 
-  <label>UK Property Value: £<span id="propertyVal">500,000</span></label>
-  <input type="range" min="0" max="3000000" value="500000" step="10000" id="property" oninput="calc()">
+      <!-- Phase 4 -->
+      <div id="phase4" class="card" style="display:none;">
+        <h2>Phase 4 — Document Dynasty</h2>
+        <p class="small">Upload files — the app checks filename hints locally only.</p>
+        <input id="files" type="file" multiple />
+        <div id="docResult" style="margin-top:10px" class="small">No files chosen</div>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(4)">Mark Phase 4 Complete</button></div>
+      </div>
 
-  <div class="result" id="result">You could save <strong>£15,625</strong>/year abroad!</div>
+      <!-- Phase 5 -->
+      <div id="phase5" class="card" style="display:none;">
+        <h2>Phase 5 — Budget Blueprint</h2>
+        <table>
+          <thead><tr><th>Item</th><th>UK</th><th>Selected Country</th><th>Save</th></tr></thead>
+          <tbody>
+            <tr><td>Rent</td><td>£1,300</td><td id="rentSelected">£720</td><td>£580</td></tr>
+            <tr><td>Groceries</td><td>£400</td><td id="grocerySelected">£240</td><td>£160</td></tr>
+            <tr><td><strong>Total</strong></td><td>£2,085</td><td id="totalSelected">£1,160</td><td>£925</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(5)">Mark Phase 5 Complete</button></div>
+      </div>
 
-  <button class="buy" onclick="window.location.href='https://buy.stripe.com/28o8x57XJ5rT8w8fYY'">
-    UNLOCK FULL PACK – ONLY £9.97
-  </button>
-  <p>30-page PDF • Visa templates • Lawyers • Checklists • Instant download</p>
-</div>
+      <!-- Phase 6 -->
+      <div id="phase6" class="card" style="display:none;">
+        <h2>Phase 6 — Move Mastery</h2>
+        <p class="small">Estimate shipping & moving cost</p>
+        <div style="margin-top:6px;display:flex;gap:10px;align-items:center;">
+          <input id="shipping" type="range" min="0" max="5000" value="2000" />
+          <div id="shippingVal" class="small">£2,000</div>
+        </div>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(6)">Mark Phase 6 Complete</button></div>
+      </div>
 
-<!-- RETIREMENT VISA TABLE (PHASE 11) -->
-<div class="card" id="phase11" style="display:none;">
-  <h2>Phase 11 – Retirement Visa Comparison</h2>
-  <table>
-    <tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age</th><th>PR Path</th></tr>
+      <!-- Phase 7 -->
+      <div id="phase7" class="card" style="display:none;">
+        <h2>Phase 7 — Settlement Success</h2>
+        <p class="small">Bank setup, healthcare, community groups — checklist ideas inside.</p>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(7)">Mark Phase 7 Complete</button></div>
+      </div>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Portugal</td><td>D7</td><td>€870/mo</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">10% flat tax on pensions • Family included • Golden Visa €250k option</td></tr>
+      <!-- Phase 8 -->
+      <div id="phase8" class="card" style="display:none;">
+        <h2>Phase 8 — Community Connections</h2>
+        <p class="small">Language classes, expat groups, social events — find local meetups.</p>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(8)">Mark Phase 8 Complete</button></div>
+      </div>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Spain</td><td>Non-Lucrative</td><td>€2,400/mo</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">No work allowed • Golden Visa €500k property</td></tr>
+      <!-- Phase 9 -->
+      <div id="phase9" class="card" style="display:none;">
+        <h2>Phase 9 — Tax Triumph</h2>
+        <p class="small">Tax filing, double taxation treaties, accountant tips — start researching local rules.</p>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completePhase(9)">Mark Phase 9 Complete</button></div>
+      </div>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>UAE</td><td>Retirement Visa</td><td>£4,200/mo</td><td>55+</td><td>No</td></tr>
-    <tr class="detail"><td colspan="5">0% income tax • Property purchase AED 1M</td></tr>
+      <!-- Phase 10 -->
+      <div id="phase10" class="card" style="display:none;">
+        <h2>Phase 10 — Celebration Station</h2>
+        <p class="small">You're nearly there — a little confetti below!</p>
+        <div style="margin-top:10px"><button class="btn primary" onclick="completeJourney()">Celebrate!</button></div>
+      </div>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Thailand</td><td>O-A / Elite</td><td>£1,500/mo</td><td>50+</td><td>No</td></tr>
-    <tr class="detail"><td colspan="5">Elite Visa £15k one-off • Very popular with Brits</td></tr>
+      <!-- Phase 11 -->
+      <div id="phase11" class="card" style="display:none;">
+        <h2>Phase 11 — Retirement Roadmap</h2>
+        <p class="small">Selected country: <strong id="retCountry">Portugal</strong></p>
+        <table>
+          <thead><tr><th>Country</th><th>Visa</th><th>Min Income</th><th>Age Req.</th><th>PR Path</th></tr></thead>
+          <tbody>
+            <tr class="tog" data-id="portugal"><td>Portugal</td><td>D7</td><td>€870</td><td>—</td><td>PR after 5 yrs</td></tr>
+            <tr id="portugal-detail" class="detail"><td colspan="5">Notes: Pension tax options exist (NHR). Family included. Golden Visa variants.</td></tr>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Cyprus</td><td>Category F</td><td>£8,400/yr</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">Permanent residency €300k property • EU access</td></tr>
+            <tr class="tog" data-id="spain"><td>Spain</td><td>Non-Lucrative</td><td>€2,400</td><td>—</td><td>PR after 5 yrs</td></tr>
+            <tr id="spain-detail" class="detail"><td colspan="5">Notes: No work permitted on this visa. Private health insurance required.</td></tr>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Greece</td><td>FIP</td><td>€3,500/mo</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">Golden Visa €250k • Beautiful islands</td></tr>
+            <tr class="tog" data-id="uae"><td>UAE</td><td>Retirement Visa</td><td>AED20,000</td><td>55+</td><td>No PR</td></tr>
+            <tr id="uae-detail" class="detail"><td colspan="5">Notes: 0% income tax; property-based options available.</td></tr>
+          </tbody>
+        </table>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Italy</td><td>Elective Residence</td><td>€31k/yr</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">Flat 7% tax in south Italy • Lifestyle heaven</td></tr>
+        <div style="margin-top:12px"><button class="btn primary" onclick="completePhase(11)">Mark Phase 11 Complete</button></div>
+      </div>
+    </section>
 
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>France</td><td>Long-Stay Visitor</td><td>€1,800/mo</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">UK pension tax treaty • Free healthcare via S1</td></tr>
-
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Malta</td><td>Retirement Programme</td><td>€10k/yr</td><td>55+</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">15% tax on foreign income • English-speaking</td></tr>
-
-    <tr onclick="this.nextElementSibling.classList.toggle('show')"><td>Poland</td><td>Temporary Residence</td><td>£160/mo</td><td>None</td><td>5 yrs</td></tr>
-    <tr class="detail"><td colspan="5">Cheapest in EU • Low cost of living</td></tr>
-  </table>
-</div>
+    <section style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px;">
+      <div class="card" style="min-width:220px;text-align:center;">
+        <div id="countdown" class="small">NI Top-Up Window: calculating...</div>
+      </div>
+      <div class="card" style="min-width:240px;text-align:center;">
+        <div style="font-weight:800">App progress</div>
+        <div class="small" style="margin-top:8px">Use the phases above to work through your move. Save is local to your device.</div>
+      </div>
+    </section>
+  </main>
 
 <script>
-let phase = 1;
-const total = 11;
+/* ===== data ===== */
+const PHASES = [
+  {id:1,title:'Dream'}, {id:2,title:'Finance'}, {id:3,title:'Visa'}, {id:4,title:'Docs'},
+  {id:5,title:'Budget'}, {id:6,title:'Move'}, {id:7,title:'Settle'}, {id:8,title:'Community'},
+  {id:9,title:'Tax'}, {id:10,title:'Celebrate'}, {id:11,title:'Retire'}
+];
+const COUNTRIES = { Portugal:1, Spain:1.05, UAE:1.6, Thailand:0.6, Cyprus:1, Greece:1.1, Italy:1.2, France:1.25, Poland:0.5 };
+const LS = { phase:'ba_phase', pension:'ba_pension', property:'ba_property', country:'ba_country', completed:'ba_completed' };
 
-function calc() {
-  const p = parseInt(document.getElementById('pension').value)||0;
-  const r = parseInt(document.getElementById('property').value)||0;
-  const c = document.getElementById('country').value;
-  document.getElementById('pensionVal').textContent = p.toLocaleString();
-  document.getElementById('propertyVal').textContent = r.toLocaleString();
-  const savings = Math.round(p*0.35 + r*0.0025);
-  document.getElementById('result').innerHTML = `You could save <strong>£\( {savings.toLocaleString()}</strong>/year in \){c}!`;
-  document.getElementById('progressFill').style.width = (phase/total*100)+'%';
+/* ===== state ===== */
+let currentPhase = parseInt(localStorage.getItem(LS.phase) || '1', 10);
+let completed = JSON.parse(localStorage.getItem(LS.completed) || '[]');
+
+/* ===== dom refs ===== */
+const phasesEl = document.getElementById('phases');
+const progressFill = document.getElementById('progressFill');
+const countryEl = document.getElementById('country');
+const pensionEl = document.getElementById('pension');
+const propertyEl = document.getElementById('property');
+const pensionVal = document.getElementById('pensionVal');
+const propertyVal = document.getElementById('propertyVal');
+const savingsEl = document.getElementById('savings');
+const retCountryEl = document.getElementById('retCountry');
+const shippingEl = document.getElementById('shipping');
+const shippingValEl = document.getElementById('shippingVal');
+
+/* ===== build phases UI ===== */
+function buildPhases(){
+  phasesEl.innerHTML = '';
+  PHASES.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'phase' + (completed.includes(p.id)?' completed':'') + (p.id===currentPhase?' active':'');
+    el.dataset.phase = p.id;
+    el.innerHTML = `<div class="icon">${phaseIcon(p.id)}</div><div class="title">${p.title}</div>`;
+    el.addEventListener('click', ()=> {
+      const id = parseInt(el.dataset.phase, 10);
+      if(id <= currentPhase) { showPhase(id); }
+    });
+    phasesEl.appendChild(el);
+  });
+  updateProgress();
 }
-calc();
+function phaseIcon(id){
+  const map = {1:'🌍',2:'💰',3:'📋',4:'📁',5:'📊',6:'🚚',7:'🏠',8:'👥',9:'💼',10:'🎉',11:'👴'};
+  return map[id] || '•';
+}
 
-function nextPhase() {
-  if (phase < total) {
-    phase++;
-    document.getElementById('p'+(phase-1)).classList.replace('active','completed');
-    document.getElementById('p'+phase).classList.add('active');
-    calc();
-    if (phase === 11) document.getElementById('phase11').style.display = 'block';
-    if (phase === total) confetti();
+/* ===== utilities ===== */
+function updateProgress(){
+  const pct = Math.round((currentPhase / PHASES.length) * 100);
+  progressFill.style.width = pct + '%';
+  document.querySelectorAll('.phase').forEach(node=>{
+    node.classList.toggle('active', parseInt(node.dataset.phase,10)===currentPhase);
+  });
+}
+
+function populateCountries(){
+  countryEl.innerHTML = '';
+  Object.keys(COUNTRIES).forEach(c=>{
+    const opt = document.createElement('option'); opt.value = c; opt.textContent = c;
+    countryEl.appendChild(opt);
+  });
+  const saved = localStorage.getItem(LS.country) || 'Portugal';
+  countryEl.value = saved;
+  if(retCountryEl) retCountryEl.textContent = saved;
+}
+
+/* ===== show a given phase content (1..11) ===== */
+function showPhase(n){
+  for(let i=1;i<=11;i++){
+    const el = document.getElementById('phase' + i);
+    if(el) el.style.display = (i===n ? 'block' : 'none');
   }
+  currentPhase = n;
+  localStorage.setItem(LS.phase, String(currentPhase));
+  updateProgress();
+  // update retCountry shown in phase11
+  if(retCountryEl) retCountryEl.textContent = countryEl.value;
 }
 
-function confetti() {
-  for(let i=0;i<120;i++){
-    const c=document.createElement('div');
-    c.style.position='fixed';c.style.left=Math.random()*100+'vw';
-    c.style.top='-10px';c.style.width='12px';c.style.height='12px';
-    c.style.background=['#c8102e','#00247d','gold'][i%3];
-    c.style.pointerEvents='none';c.style.zIndex='9999';
-    document.body.appendChild(c);
-    c.animate([{top:'100vh'},{transform:`translateX(\( {Math.random()*200-100}px) rotate( \){Math.random()*360}deg)`}],{duration:3000});
-    setTimeout(()=>c.remove(),3000);
+/* ===== complete phase (marks completed and advances) ===== */
+function completePhase(n){
+  if(n < currentPhase) return;
+  if(!completed.includes(n)) completed.push(n);
+  localStorage.setItem(LS.completed, JSON.stringify(completed));
+  buildPhases();
+  const next = n + 1;
+  if(next <= PHASES.length){ currentPhase = next; localStorage.setItem(LS.phase, String(currentPhase)); showPhase(currentPhase); }
+  else { completeJourney(); }
+}
+
+/* ===== calculations & handlers ===== */
+function calcSavings(){
+  const p = parseInt(pensionEl.value || '0', 10);
+  const r = parseInt(propertyEl.value || '0', 10);
+  pensionVal.textContent = p.toLocaleString();
+  propertyVal.textContent = r.toLocaleString();
+  const dest = countryEl.value || 'Portugal';
+  const mult = COUNTRIES[dest] || 1;
+  const saved = Math.round((p * 0.35 + r * 0.0025) * mult);
+  savingsEl.textContent = `You could save £${saved.toLocaleString()}/year in ${dest}!`;
+  localStorage.setItem(LS.pension, String(p));
+  localStorage.setItem(LS.property, String(r));
+  localStorage.setItem(LS.country, dest);
+  if(retCountryEl) retCountryEl.textContent = dest;
+}
+
+/* visa helper */
+function checkVisa(){
+  const income = document.getElementById('q1').value;
+  const remote = document.getElementById('q2').value;
+  const family = document.getElementById('q4').value;
+  let advice = '';
+  if(income === '') advice = 'Please select an income bracket.';
+  else if(income === '2' && remote === '1') advice = 'Digital Nomad likely — check digital nomad requirements for selected country.';
+  else if(income === '2') advice = 'High-income or investor routes likely.';
+  else if(income === '1') advice = (countryEl.value === 'Portugal') ? 'D7 (Passive Income) likely.' : 'Non-lucrative or similar visas likely.';
+  else advice = 'Consider temporary/low-income routes (Poland, Argentina).';
+  if(family === '1') advice += ' Family inclusion may be possible.';
+  document.getElementById('visaResult').textContent = advice;
+}
+
+/* files check */
+document.getElementById('files').addEventListener('change', function(e){
+  const names = Array.from(e.target.files || []).map(f => f.name.toLowerCase());
+  const needed = ['passport','criminal','bank','income'];
+  const found = needed.map(k => names.some(n => n.includes(k)));
+  let html = '';
+  needed.forEach((k,i)=> html += (found[i] ? '✓ ' : '❌ ') + k + '<br>');
+  if(found.every(Boolean)) html += '<br><strong>All basic file hints found — good start.</strong>';
+  document.getElementById('docResult').innerHTML = html || 'No files chosen';
+});
+
+/* shipping */
+shippingEl.addEventListener('input', function(){ shippingValEl.textContent = '£' + parseInt(shippingEl.value || '0',10).toLocaleString(); });
+
+/* confetti / completion */
+function completeJourney(){
+  for(let i=0;i<80;i++){
+    const d = document.createElement('div');
+    d.style.position='fixed'; d.style.left = Math.random()*100 + '%';
+    d.style.top = '-10px'; d.style.width = '10px'; d.style.height = '10px';
+    d.style.background = ['#d4af37','#fff','#b48f2b'][i%3];
+    d.style.borderRadius='50%'; d.style.zIndex = 9999; d.style.pointerEvents='none';
+    document.body.appendChild(d);
+    const tx = (Math.random()*200)-100;
+    d.animate([{transform:'translateY(0) translateX(0)'},{transform:`translateY(${window.innerHeight+100}px) translateX(${tx}px)`}], {duration:2000 + Math.random()*1500, easing:'linear'});
+    setTimeout(()=>d.remove(), 3800);
   }
+  alert('Journey complete — congratulations 🎉');
 }
 
-// Optional: auto-advance for demo (remove if you want manual clicks)
-// setInterval(nextPhase, 3000);
+/* countdown */
+function updateCountdown(){
+  const deadline = new Date('2025-04-05T00:00:00Z');
+  const diff = deadline - new Date();
+  const el = document.getElementById('countdown');
+  if(!el) return;
+  if(diff <= 0){ el.textContent = 'NI Top-Up Window: CLOSED'; return; }
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  el.innerHTML = `NI Top-Up Window: <strong>${days} days ${hours} hours left</strong>`;
+}
+
+/* detail toggle in retirement table */
+document.addEventListener('click', function(e){
+  const row = e.target.closest('.tog');
+  if(row){ const id = row.dataset.id + '-detail'; document.getElementById(id).classList.toggle('show'); }
+});
+
+/* ===== initialization on DOM loaded ===== */
+document.addEventListener('DOMContentLoaded', function(){
+  // wire slider events
+  pensionEl.addEventListener('input', calcSavings);
+  propertyEl.addEventListener('input', calcSavings);
+  countryEl.addEventListener('change', calcSavings);
+
+  // visa selects
+  document.getElementById('q1').addEventListener('change', ()=>{ document.getElementById('visaResult').textContent=''; });
+  document.getElementById('q2').addEventListener('change', ()=>{ document.getElementById('visaResult').textContent=''; });
+  document.getElementById('q4').addEventListener('change', ()=>{ document.getElementById('visaResult').textContent=''; });
+
+  // populate UI
+  populateCountries();
+  buildPhases();
+
+  // restore sliders from storage if present
+  const sp = parseInt(localStorage.getItem(LS.pension) || '10000',10);
+  const sr = parseInt(localStorage.getItem(LS.property) || '300000',10);
+  pensionEl.value = sp; propertyEl.value = sr;
+
+  // shipping restore
+  const sh = parseInt(localStorage.getItem('ba_shipping')||'2000',10);
+  shippingEl.value = sh; shippingValEl.textContent = '£' + sh.toLocaleString();
+
+  // initial calc & show
+  calcSavings();
+  showPhase(currentPhase);
+  updateCountdown();
+  setInterval(updateCountdown, 60*60*1000);
+});
 </script>
 </body>
 </html>
