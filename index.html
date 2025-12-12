@@ -6,40 +6,32 @@
 <meta name="theme-color" content="#FF7F50">
 <title>BRITS ABROAD 2025 – Luxury Relocation Planner</title>
 <style>
-  /* Base */
   :root{
-    --primary:#FF7F50; 
-    --secondary:#FFDAB9; 
-    --bg:#FFF5EE; 
-    --card:#FFFFFF; 
+    --primary:#FF7F50;
+    --secondary:#FFDAB9;
+    --bg:#FFF5EE;
+    --card:#FFFFFF;
     --text:#333;
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;align-items:center;padding:0;}
   h1,h2,h3{margin:0;padding:0;}
-  /* Hero */
   .hero{width:100%;padding:40px 20px;text-align:center;background:linear-gradient(to bottom, #FF7F50, #FFDAB9);color:#fff;}
   .hero h1{font-size:2.5rem;margin-bottom:10px;}
   .hero p{font-size:1.2rem;}
-  /* App container */
   .app{width:100%;max-width:1000px;margin:20px auto;display:flex;flex-direction:column;gap:20px;}
   .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,0.1);}
-  /* Progress */
   .progress-bar{height:12px;background:#eee;border-radius:6px;overflow:hidden;margin-bottom:20px;}
   .progress-fill{height:100%;width:0%;background:var(--primary);transition:width .5s;}
-  /* Phases */
   .phases{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px;}
-  .phase{width:100px;height:100px;background:var(--secondary);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:0.3s; text-align:center;font-size:0.9rem;}
+  .phase{width:100px;height:100px;background:var(--secondary);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:0.3s;text-align:center;font-size:0.9rem;}
   .phase.active{background:var(--primary);color:#fff;}
   .phase.completed{background:#28a745;color:#fff;}
-  /* Inputs */
   input, select, button{font-size:1rem;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ccc;outline:none;}
   button{cursor:pointer;background:var(--primary);color:#fff;border:none;transition:0.3s;}
   button:hover{opacity:0.9;}
-  /* AI box */
   #aiBox{display:flex;flex-direction:column;gap:8px;margin-top:20px;}
   #aiOutput{min-height:60px;padding:10px;border:1px solid #ccc;border-radius:8px;background:#f9f9f9;}
-  /* Responsive */
   @media(max-width:640px){.hero h1{font-size:2rem;}.phase{width:80px;height:80px;font-size:0.8rem;}}
 </style>
 </head>
@@ -50,22 +42,26 @@
 </div>
 
 <div class="app">
-  <!-- Progress -->
   <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
-
-  <!-- Phases -->
   <div class="phases" id="phases"></div>
 
-  <!-- Phase content -->
   <div id="phaseContent">
-    <!-- Phase templates -->
+
+    <!-- Phase 1 -->
     <div id="phase1" class="card">
       <h2>Phase 1: Dream Destination</h2>
       <label for="country">Select Country:</label>
-      <select id="country"></select>
+      <select id="country">
+        <option value="Portugal">Portugal</option>
+        <option value="Spain">Spain</option>
+        <option value="Cyprus">Cyprus</option>
+        <option value="Malta">Malta</option>
+        <option value="Non-EU">Other Non-EU</option>
+      </select>
       <button onclick="completePhase(1)">Complete Phase 1</button>
     </div>
 
+    <!-- Phase 2 -->
     <div id="phase2" class="card" style="display:none">
       <h2>Phase 2: Financial Freedom</h2>
       <label>UK Pension (£): <span id="pensionVal">10000</span></label>
@@ -76,6 +72,7 @@
       <button onclick="completePhase(2)">Complete Phase 2</button>
     </div>
 
+    <!-- Phase 3 -->
     <div id="phase3" class="card" style="display:none">
       <h2>Phase 3: Visa & Work Rights</h2>
       <label>Monthly Income:</label>
@@ -93,6 +90,7 @@
       <button onclick="completePhase(3)">Complete Phase 3</button>
     </div>
 
+    <!-- Phase 4 -->
     <div id="phase4" class="card" style="display:none">
       <h2>Phase 4: Document Vault</h2>
       <input type="file" id="files" multiple>
@@ -100,27 +98,109 @@
       <button onclick="completePhase(4)">Complete Phase 4</button>
     </div>
 
-    <!-- Placeholder phases 5-11 -->
-    <div id="phase5" class="card" style="display:none"><h2>Phase 5: Budget Blueprint</h2><p>Interactive budget inputs here</p><button onclick="completePhase(5)">Complete Phase 5</button></div>
-    <div id="phase6" class="card" style="display:none"><h2>Phase 6: Move Mastery</h2><p>Shipping & relocation checklist</p><button onclick="completePhase(6)">Complete Phase 6</button></div>
-    <div id="phase7" class="card" style="display:none"><h2>Phase 7: Settlement Success</h2><p>Banking, healthcare, community setup</p><button onclick="completePhase(7)">Complete Phase 7</button></div>
-    <div id="phase8" class="card" style="display:none"><h2>Phase 8: Community Connections</h2><p>Social networks, expat groups</p><button onclick="completePhase(8)">Complete Phase 8</button></div>
-    <div id="phase9" class="card" style="display:none"><h2>Phase 9: Tax Triumph</h2><p>UK tax filing & double taxation</p><button onclick="completePhase(9)">Complete Phase 9</button></div>
-    <div id="phase10" class="card" style="display:none"><h2>Phase 10: Celebration Station</h2><p>Congrats! 🎉</p><button onclick="completePhase(10)">Complete Phase 10</button></div>
-    <div id="phase11" class="card" style="display:none"><h2>Phase 11: Retirement Roadmap</h2><p>Retirement summary here</p><button onclick="completePhase(11)">Complete Phase 11</button></div>
+    <!-- Phase 5 -->
+    <div id="phase5" class="card" style="display:none">
+      <h2>Phase 5: Budget Blueprint</h2>
+      <label>Rent/Mortgage (£):</label>
+      <input type="number" id="rent" value="1000">
+      <label>Utilities (£):</label>
+      <input type="number" id="utilities" value="200">
+      <label>Food (£):</label>
+      <input type="number" id="food" value="300">
+      <label>Transport (£):</label>
+      <input type="number" id="transport" value="150">
+      <div id="budgetTotal">Total: £0</div>
+      <button onclick="calculateBudget();completePhase(5)">Complete Phase 5</button>
+    </div>
 
-    <!-- AI Section -->
+    <!-- Phase 6 -->
+    <div id="phase6" class="card" style="display:none">
+      <h2>Phase 6: Move Mastery</h2>
+      <label>Pets to move:</label>
+      <input type="number" id="pets" value="0">
+      <label>Moving Checklist Completed:</label>
+      <select id="checklist">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <button onclick="completePhase(6)">Complete Phase 6</button>
+    </div>
+
+    <!-- Phase 7 -->
+    <div id="phase7" class="card" style="display:none">
+      <h2>Phase 7: Settlement Success</h2>
+      <label>Bank setup completed:</label>
+      <select id="bank">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <label>Money transfer method:</label>
+      <select id="transfer">
+        <option value="Bank">Bank</option>
+        <option value="Wise">Wise</option>
+        <option value="Revolut">Revolut</option>
+      </select>
+      <button onclick="completePhase(7)">Complete Phase 7</button>
+    </div>
+
+    <!-- Phase 8 -->
+    <div id="phase8" class="card" style="display:none">
+      <h2>Phase 8: Community Connections</h2>
+      <label>School Finder used:</label>
+      <select id="school">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <label>Healthcare S1/GHIC:</label>
+      <select id="healthcare">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <button onclick="completePhase(8)">Complete Phase 8</button>
+    </div>
+
+    <!-- Phase 9 -->
+    <div id="phase9" class="card" style="display:none">
+      <h2>Phase 9: Tax Triumph</h2>
+      <label>UK Tax Filing Done:</label>
+      <select id="tax">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <label>Double Taxation Checked:</label>
+      <select id="doubleTax">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <button onclick="completePhase(9)">Complete Phase 9</button>
+    </div>
+
+    <!-- Phase 10 -->
+    <div id="phase10" class="card" style="display:none">
+      <h2>Phase 10: Celebration Station</h2>
+      <p>🎉 All phases completed! Review your selections.</p>
+      <button onclick="completePhase(10)">Complete Phase 10</button>
+    </div>
+
+    <!-- Phase 11 -->
+    <div id="phase11" class="card" style="display:none">
+      <h2>Phase 11: Retirement Roadmap</h2>
+      <div id="retirementSummary">Your retirement summary will appear here.</div>
+      <button onclick="completePhase(11)">Complete Phase 11</button>
+    </div>
+
+    <!-- AI Box -->
     <div id="aiBox" class="card">
       <h2>AI Summary</h2>
       <input type="text" id="aiInput" placeholder="Ask AI about your relocation">
       <button onclick="generateAI()">Get AI Response</button>
       <div id="aiOutput">AI output will appear here</div>
     </div>
+
   </div>
 </div>
 
 <script>
-/************ App Logic ************/
 const PHASES=[1,2,3,4,5,6,7,8,9,10,11];
 let currentPhase=1;
 let completed=[];
@@ -137,9 +217,7 @@ function buildPhases(){
   });
   updateProgress();
 }
-function updateProgress(){
-  document.getElementById('progressFill').style.width=((currentPhase/PHASES.length)*100)+'%';
-}
+function updateProgress(){document.getElementById('progressFill').style.width=((currentPhase/PHASES.length)*100)+'%';}
 function showPhase(n){
   PHASES.forEach(p=>{document.getElementById('phase'+p).style.display=(p===n)?'block':'none';});
   currentPhase=n;
@@ -159,14 +237,17 @@ function updateSliders(){
   const savings=Math.round((p*0.35+r*0.0025));
   document.getElementById('savings').textContent=`You could save £${savings.toLocaleString()}/year!`;
 }
-/******** Visa placeholder ********/
-function checkVisa(){
-  const income=document.getElementById('income').value;
-  const remote=document.getElementById('remote').value;
-  let msg='Visa info placeholder';
-  document.getElementById('visaResult').textContent=msg;
+/******** Budget ********/
+function calculateBudget(){
+  const rent=Number(document.getElementById('rent').value);
+  const utilities=Number(document.getElementById('utilities').value);
+  const food=Number(document.getElementById('food').value);
+  const transport=Number(document.getElementById('transport').value);
+  document.getElementById('budgetTotal').textContent=`Total: £${(rent+utilities+food+transport).toLocaleString()}`;
 }
-/******** File placeholder ********/
+/******** Visa ********/
+function checkVisa(){document.getElementById('visaResult').textContent='Visa info placeholder';}
+/******** File Vault ********/
 document.getElementById('files').addEventListener('change',e=>{
   const files=Array.from(e.target.files).map(f=>f.name).join(', ');
   document.getElementById('docResult').textContent=files||'No files chosen';
