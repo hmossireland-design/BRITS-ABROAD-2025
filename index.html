@@ -1,234 +1,546 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brits Abroad – Luxury Relocation Planner</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BRITS ABROAD — AI Relocation Planner (Luxury)</title>
+<meta name="theme-color" content="#0b0b0b"/>
 <style>
-    /* LUXURY THEME */
-    body {
-        margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background: #0d0d0d;
-        color: #e8e8e8;
-    }
-
-    header {
-        padding: 25px;
-        text-align: center;
-        background: linear-gradient(135deg, #111, #222);
-        border-bottom: 2px solid gold;
-    }
-    header h1 {
-        color: gold;
-        letter-spacing: 1px;
-        margin: 0;
-        font-weight: 600;
-    }
-
-    /* CONTAINER */
-    .container {
-        padding: 20px;
-        max-width: 800px;
-        margin: auto;
-    }
-
-    /* SELECT BOX */
-    select, input, textarea {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
-        border: 1px solid #444;
-        background: #1b1b1b;
-        color: #fff;
-        border-radius: 8px;
-        font-size: 15px;
-    }
-
-    /* PHASE CARDS */
-    .phase-card {
-        background: #141414;
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 18px;
-        border-left: 4px solid gold;
-        box-shadow: 0 0 10px rgba(255,215,0,0.15);
-    }
-
-    .phase-card h2 {
-        margin-top: 0;
-        color: gold;
-        font-size: 20px;
-        letter-spacing: .5px;
-    }
-
-    .slider-container {
-        margin-top: 20px;
-    }
-
-    input[type=range] {
-        width: 100%;
-    }
-
-    /* BUTTONS */
-    button {
-        width: 100%;
-        padding: 14px;
-        margin-top: 12px;
-        background: gold;
-        color: #000;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    button:hover {
-        background: #cda400;
-    }
-
-    .output-box {
-        background: #1d1d1d;
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 12px;
-        border: 1px solid #333;
-        color: #ccc;
-    }
+  /* ===== Luxury Black & Gold Theme ===== */
+  :root{
+    --bg:#070707; --panel:#0f0f10; --muted:#151515; --text:#f3efe6;
+    --gold:#d4af37; --gold-dark:#b48f2b; --glass: rgba(255,255,255,0.03);
+    --card-radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:linear-gradient(180deg,var(--bg),#0a0a0a);color:var(--text);-webkit-font-smoothing:antialiased}
+  header{padding:22px;text-align:center;border-bottom:1px solid rgba(212,175,55,0.06)}
+  h1{margin:0;font-size:1.6rem;color:var(--gold);letter-spacing:0.6px}
+  p.lead{margin:6px 0 0;color:rgba(243,239,230,0.8)}
+  main{max-width:980px;margin:18px auto;padding:12px}
+  .toprow{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+  .card{background:linear-gradient(180deg,var(--panel),#0d0d0d);border-radius:var(--card-radius);padding:16px;box-shadow:0 10px 30px rgba(0,0,0,0.6);border:1px solid rgba(212,175,55,0.06)}
+  .phases{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+  .phase{min-width:78px;height:78px;border-radius:12px;background:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+  .phase .ico{font-size:20px;margin-bottom:6px}
+  .phase .txt{font-size:12px;color:rgba(243,239,230,0.9);text-align:center}
+  .phase.active{background:linear-gradient(180deg,var(--gold),var(--gold-dark));color:#060606;transform:scale(1.03);box-shadow:0 8px 30px rgba(180,143,43,0.12)}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  label{display:block;font-size:13px;color:rgba(243,239,230,0.85);margin-bottom:6px}
+  select,input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:#0b0b0b;color:var(--text);font-size:14px}
+  textarea{min-height:88px;resize:vertical}
+  input[type=range]{width:100%}
+  .muted{color:rgba(243,239,230,0.7);font-size:13px}
+  .small{font-size:13px;color:rgba(243,239,230,0.75)}
+  .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#080808}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)}
+  .result-badge{background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#080808;padding:10px;border-radius:10px;font-weight:700;display:inline-block}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}
+  th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+  th{color:var(--gold);font-weight:800}
+  .summary{margin-top:14px;white-space:pre-wrap;line-height:1.45}
+  .flex{display:flex;gap:12px;align-items:center}
+  .right{margin-left:auto}
+  @media(max-width:720px){.toprow{flex-direction:column;align-items:stretch}.phases{justify-content:flex-start;overflow:auto;padding-bottom:6px}}
 </style>
-
 </head>
 <body>
-
 <header>
-    <h1>Brits Abroad – Luxury Relocation Planner</h1>
+  <h1>BRITS ABROAD — AI Relocation Planner</h1>
+  <p class="lead">Luxury planner — advanced offline "AI" summary engine. Fill phases and tap <strong>Generate Final Plan</strong>.</p>
 </header>
 
-<div class="container">
-
-    <!-- COUNTRY SELECT -->
-    <label><strong>Select Destination Country</strong></label>
-    <select id="countrySelector" onchange="loadCountry()">
+<main>
+  <!-- Top controls -->
+  <div class="toprow">
+    <div style="flex:1" class="card">
+      <label for="country">Destination country</label>
+      <select id="country">
         <option value="">Choose country...</option>
-        <option value="Portugal">Portugal</option>
-        <option value="Spain">Spain</option>
-        <option value="Cyprus">Cyprus</option>
-        <option value="Malta">Malta</option>
-        <option value="Greece">Greece</option>
-    </select>
-
-    <div id="countryOutput" class="output-box" style="display:none;"></div>
-
-    <hr style="border:1px solid #333; margin: 25px 0;">
-
-    <!-- PHASES -->
-    <div id="phases">
-
-        <!-- PHASE 1 -->
-        <div class="phase-card">
-            <h2>Phase 1: Initial Assessment</h2>
-            <textarea id="p1" placeholder="Describe goals, budget, family situation, lifestyle needs..."></textarea>
-        </div>
-
-        <!-- PHASE 2 -->
-        <div class="phase-card">
-            <h2>Phase 2: Cost of Living & Budget</h2>
-            <label>Monthly Budget (€):</label>
-            <input type="range" id="budget" min="500" max="10000" value="2000" oninput="updateBudget()">
-            <div id="budgetValue" class="output-box">€2000</div>
-        </div>
-
-        <!-- PHASE 3 -->
-        <div class="phase-card">
-            <h2>Phase 3: Housing Requirements</h2>
-            <textarea id="p3" placeholder="Apartment, villa, country house? Bedrooms? Areas you prefer?"></textarea>
-        </div>
-
-        <!-- PHASE 4 -->
-        <div class="phase-card">
-            <h2>Phase 4: Legal & Residency</h2>
-            <textarea id="p4" placeholder="Residency type, visa, paperwork needed..."></textarea>
-        </div>
-
-        <!-- PHASE 5 -->
-        <div class="phase-card">
-            <h2>Phase 5: Work, Income & Tax Planning</h2>
-            <textarea id="p5" placeholder="Remote work? Local employment? Company setup? NHR tax benefits?"></textarea>
-        </div>
-
-        <!-- PHASE 6 -->
-        <div class="phase-card">
-            <h2>Phase 6: Healthcare Planning</h2>
-            <textarea id="p6" placeholder="Private insurance, public system, medication needs..."></textarea>
-        </div>
-
-        <!-- PHASE 7 -->
-        <div class="phase-card">
-            <h2>Phase 7: Moving Logistics</h2>
-            <textarea id="p7" placeholder="Pets, movers, storage, shipping..."></textarea>
-        </div>
-
-        <!-- PHASE 8 -->
-        <div class="phase-card">
-            <h2>Phase 8: Schooling & Family</h2>
-            <textarea id="p8" placeholder="Children's needs, schools, activities..."></textarea>
-        </div>
-
-        <!-- PHASE 9 -->
-        <div class="phase-card">
-            <h2>Phase 9: Lifestyle Mapping</h2>
-            <textarea id="p9" placeholder="Beaches? Nature? City life? Hobbies?"></textarea>
-        </div>
-
-        <!-- PHASE 10 -->
-        <div class="phase-card">
-            <h2>Phase 10: Timeline Planning</h2>
-            <textarea id="p10" placeholder="Move date? Preparation stages?"></textarea>
-        </div>
-
-        <!-- PHASE 11 -->
-        <div class="phase-card">
-            <h2>Phase 11: Retirement & Asset Planning</h2>
-            <label>UK State Pension Estimate (£):</label>
-            <input type="range" id="ukPension" min="0" max="12000" value="8000" oninput="updatePension()">
-            <div id="pensionOutput" class="output-box">£8000</div>
-
-            <label>Current UK Property Value (£):</label>
-            <input type="range" id="ukProperty" min="0" max="1000000" value="250000" oninput="updateProperty()">
-            <div id="propertyOutput" class="output-box">£250000</div>
-        </div>
-
+        <option>Portugal</option><option>Spain</option><option>Cyprus</option><option>Greece</option><option>Malta</option><option>Thailand</option><option>UAE</option><option>Poland</option><option>Argentina</option>
+      </select>
+      <div style="margin-top:8px" class="small">Select a country — the AI summary tailors recommendations accordingly.</div>
     </div>
-</div>
+
+    <div style="width:260px" class="card">
+      <div class="small">Quick sliders</div>
+      <label>Monthly target budget (€)</label>
+      <input id="monthlyBudget" type="range" min="500" max="10000" step="50" value="2000">
+      <div class="flex" style="margin-top:6px"><div class="result-badge" id="monthlyBudgetLabel">€2,000</div></div>
+
+      <label style="margin-top:12px">UK State Pension estimate (£)</label>
+      <input id="ukPension" type="range" min="0" max="20000" step="100" value="8000">
+      <div class="flex" style="margin-top:6px"><div class="small">£<span id="ukPensionLabel">8,000</span></div></div>
+    </div>
+  </div>
+
+  <!-- Phases strip -->
+  <div class="card">
+    <div class="phases" id="phaseBar" role="tablist" aria-label="Phases navigation"></div>
+  </div>
+
+  <!-- Phase content area -->
+  <div id="phaseContent">
+    <!-- Phase templates (1..11). Free navigation; each phase editable -->
+    <section id="p1" class="card" data-phase="1">
+      <h3>Phase 1 — Personal Profile & Goals</h3>
+      <label>Short description (goals, family, essential needs)</label>
+      <textarea id="goalText" placeholder="Why are you moving? What matters most?"></textarea>
+    </section>
+
+    <section id="p2" class="card" data-phase="2" style="margin-top:12px">
+      <h3>Phase 2 — Financial Snapshot</h3>
+      <label>Annual pension income (UK) — £</label>
+      <input id="pension" type="range" min="0" max="50000" step="100" value="10000">
+      <div class="flex" style="margin-top:8px"><div class="small">£<span id="pensionLabel">10,000</span></div></div>
+
+      <label style="margin-top:12px">Current UK property value (£)</label>
+      <input id="propertyVal" type="range" min="0" max="1500000" step="1000" value="250000">
+      <div class="flex" style="margin-top:8px"><div class="small">£<span id="propertyValLabel">250,000</span></div></div>
+    </section>
+
+    <section id="p3" class="card" data-phase="3" style="margin-top:12px">
+      <h3>Phase 3 — Housing Preferences</h3>
+      <label>Bedrooms desired</label>
+      <select id="beds"><option>1</option><option>2</option><option selected>3</option><option>4+</option></select>
+
+      <label style="margin-top:8px">Preferred setting</label>
+      <select id="setting"><option>City</option><option selected>Coast</option><option>Countryside</option></select>
+
+      <label style="margin-top:8px">Monthly rent or mortgage target (€)</label>
+      <input id="housingTarget" type="range" min="200" max="8000" step="50" value="900">
+      <div class="flex"><div class="small">€<span id="housingTargetLabel">900</span></div></div>
+    </section>
+
+    <section id="p4" class="card" data-phase="4" style="margin-top:12px">
+      <h3>Phase 4 — Visa & Residency</h3>
+      <label>Do you plan to work abroad?</label>
+      <select id="workStatus"><option value="no">No (retire/ passive)</option><option value="remote">Remote work</option><option value="local">Seek local work</option></select>
+
+      <label style="margin-top:8px">Family joining?</label>
+      <select id="familyJoin"><option value="no">No</option><option value="yes">Yes</option></select>
+    </section>
+
+    <section id="p5" class="card" data-phase="5" style="margin-top:12px">
+      <h3>Phase 5 — Documents Check</h3>
+      <label>Upload files (local filenames only checked)</label>
+      <input id="docs" type="file" multiple>
+      <div id="docChecklist" class="small" style="margin-top:8px">No files chosen</div>
+    </section>
+
+    <section id="p6" class="card" data-phase="6" style="margin-top:12px">
+      <h3>Phase 6 — Moving & Shipping</h3>
+      <label>Estimated shipping budget (£)</label>
+      <input id="shipping" type="range" min="0" max="8000" step="50" value="2000">
+      <div class="small" style="margin-top:8px">£<span id="shippingLabel">2,000</span></div>
+    </section>
+
+    <section id="p7" class="card" data-phase="7" style="margin-top:12px">
+      <h3>Phase 7 — Healthcare</h3>
+      <label>Need regular medication / special care?</label>
+      <select id="healthNeeds"><option value="no">No</option><option value="yes">Yes</option></select>
+      <label style="margin-top:8px">Prefer public system or private insurance?</label>
+      <select id="healthPref"><option value="private">Private</option><option value="public">Public</option></select>
+    </section>
+
+    <section id="p8" class="card" data-phase="8" style="margin-top:12px">
+      <h3>Phase 8 — Community & Lifestyle</h3>
+      <label>Important lifestyle features</label>
+      <textarea id="lifestyle" placeholder="Beaches, hiking, nightlife, quiet, expat community..."></textarea>
+    </section>
+
+    <section id="p9" class="card" data-phase="9" style="margin-top:12px">
+      <h3>Phase 9 — Taxes & Retirement</h3>
+      <label>Have you used your capital gains exemption?</label>
+      <select id="cgtUsed"><option value="no">No</option><option value="yes">Yes</option></select>
+
+      <label style="margin-top:8px">Want a retirement tax-friendly country?</label>
+      <select id="taxPref"><option value="no">No</option><option value="yes">Yes</option></select>
+    </section>
+
+    <section id="p10" class="card" data-phase="10" style="margin-top:12px">
+      <h3>Phase 10 — Timeline</h3>
+      <label>Planned move month/year (approx)</label>
+      <input id="moveDate" type="month" />
+      <label style="margin-top:8px">How ready do you feel (1–10)?</label>
+      <input id="readiness" type="range" min="1" max="10" value="4">
+      <div class="small">Score: <span id="readinessLabel">4</span>/10</div>
+    </section>
+
+    <section id="p11" class="card" data-phase="11" style="margin-top:12px">
+      <h3>Phase 11 — Final Notes & Priorities</h3>
+      <label>Top 3 priorities</label>
+      <textarea id="priorities" placeholder="1) ... 2) ... 3) ..."></textarea>
+    </section>
+  </div>
+
+  <!-- Actions -->
+  <div class="card" style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <div style="flex:1">
+      <button id="generateBtn" class="btn gold">Generate Final Plan — AI Summary</button>
+    </div>
+    <div style="min-width:220px;text-align:right">
+      <button id="exportBtn" class="btn ghost">Export plan (JSON)</button>
+      <button id="copyBtn" class="btn ghost">Copy summary</button>
+    </div>
+  </div>
+
+  <!-- Summary output -->
+  <div id="summaryCard" class="card" style="margin-top:14px;display:none">
+    <h3 style="margin:0 0 8px;color:var(--gold)">Final Relocation Plan — AI Summary</h3>
+    <div id="summaryText" class="summary small"></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <div><button id="toggleDetails" class="btn ghost">Show numeric breakdown</button></div>
+      <div class="right"><button id="resetBtn" class="btn ghost">Reset saved data</button></div>
+    </div>
+
+    <div id="breakdown" style="margin-top:12px;display:none">
+      <table>
+        <thead><tr><th>Item</th><th>Estimate</th></tr></thead>
+        <tbody id="breakRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
 
 <script>
-    function loadCountry() {
-        const c = document.getElementById("countrySelector").value;
-        const out = document.getElementById("countryOutput");
+/* ===== Data & multipliers (simple offline model) ===== */
+const COUNTRY_PROFILES = {
+  Portugal: { costMult:1.0, currency:'€', notes:'D7, Non-Lucrative, Golden Visa options. EU access.' },
+  Spain: { costMult:1.15, currency:'€', notes:'Non-Lucrative common; higher living cost in cities.' },
+  Cyprus: { costMult:0.95, currency:'€', notes:'Category F, property options, warmer climate.' },
+  Greece: { costMult:0.9, currency:'€', notes:'FIP & Golden Visa; island living varies by cost.' },
+  Malta: { costMult:1.05, currency:'€', notes:'English widely spoken, retirement schemes.' },
+  Thailand: { costMult:0.55, currency:'฿', notes:'O-A retirement & Elite visa options; non-EU.' },
+  UAE: { costMult:1.8, currency:'AED', notes:'Retirement visa; 0% income tax but higher costs.' },
+  Poland: { costMult:0.6, currency:'PLN', notes:'Low cost EU option; good access to EU.' },
+  Argentina: { costMult:0.5, currency:'USD or ARS', notes:'Very low living costs; residency possible.' }
+};
 
-        if (!c) { out.style.display = "none"; return; }
+/* ===== Helpers ===== */
+const $ = id => document.getElementById(id);
+function fmt(num){ if(isNaN(num)) return '-'; return Number(Math.round(num)).toLocaleString(); }
 
-        out.innerHTML = `<strong>Selected Country:</strong> ${c}<br><br>
-            Your planning phases will automatically adapt to ${c}.`;
-        out.style.display = "block";
+/* ===== Persist keys ===== */
+const LS_KEYS = {
+  phase: 'ba_phase', data: 'ba_data_v1'
+};
+
+/* ===== Initialize UI & restore saved data ===== */
+function init(){
+  // build phase bar
+  const phases = document.querySelectorAll('[data-phase]');
+  const bar = $('phaseBar');
+  bar.innerHTML = '';
+  phases.forEach(sec => {
+    const n = sec.dataset.phase;
+    const title = sec.querySelector('h3')?.textContent || ('Phase ' + n);
+    const div = document.createElement('div');
+    div.className = 'phase';
+    div.innerHTML = `<div class="ico">${phaseIcon(n)}</div><div class="txt">${title.replace('Phase '+n+' — ','')}</div>`;
+    div.addEventListener('click', ()=> { showPhase(Number(n)); });
+    bar.appendChild(div);
+  });
+
+  // restore saved data
+  try{
+    const raw = localStorage.getItem(LS_KEYS.data);
+    if(raw){
+      const saved = JSON.parse(raw);
+      applySavedData(saved);
     }
+  }catch(e){}
+  // wire controls
+  wireControls();
+  showPhase(1);
+}
 
-    function updateBudget() {
-        document.getElementById("budgetValue").innerHTML = "€" + 
-        document.getElementById("budget").value;
-    }
+/* small icons map */
+function phaseIcon(n){
+  const map = {1:'🌍',2:'💰',3:'🏡',4:'🛂',5:'📁',6:'🚚',7:'💊',8:'👥',9:'💼',10:'📅',11:'👴'};
+  return map[n]||'•';
+}
 
-    function updatePension() {
-        document.getElementById("pensionOutput").innerHTML = "£" + 
-        document.getElementById("ukPension").value;
-    }
+/* show a phase section */
+function showPhase(n){
+  document.querySelectorAll('[data-phase]').forEach(el => {
+    el.style.display = (Number(el.dataset.phase) === Number(n)) ? 'block' : 'none';
+  });
+  // highlight phase bar item
+  document.querySelectorAll('#phaseBar .phase').forEach((p,i)=>{
+    p.classList.toggle('active', (i+1)===Number(n));
+  });
+  // scroll to top of main for mobile
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-    function updateProperty() {
-        document.getElementById("propertyOutput").innerHTML = "£" + 
-        document.getElementById("ukProperty").value;
-    }
+/* Wire input controls and restore states */
+function wireControls(){
+  // quick elements
+  const country = $('country');
+  const monthly = $('monthlyBudget');
+  const monthlyLabel = $('monthlyBudgetLabel');
+  const ukPension = $('ukPension');
+  const ukPensionLabel = $('ukPensionLabel');
+  const pension = $('pension');
+  const pensionLabel = $('pensionLabel');
+  const propertyVal = $('propertyVal');
+  const propertyValLabel = $('propertyValLabel');
+  const housingTarget = $('housingTarget');
+  const housingTargetLabel = $('housingTargetLabel');
+  const beds = $('beds');
+  const shipping = $('shipping');
+  const shippingLabel = $('shippingLabel');
+  const readiness = $('readiness');
+  const readinessLabel = $('readinessLabel');
+
+  // set initial displays
+  monthlyLabel.textContent = formatCurrency(monthly.value);
+  ukPensionLabel.textContent = fmt(ukPension.value);
+  pensionLabel.textContent = fmt(pension.value);
+  propertyValLabel.textContent = fmt(propertyVal.value);
+  housingTargetLabel.textContent = fmt(housingTarget.value);
+  shippingLabel.textContent = fmt(shipping.value);
+  readinessLabel.textContent = readiness.value;
+
+  // event listeners with saving
+  monthly.addEventListener('input', ()=>{ monthlyLabel.textContent = formatCurrency(monthly.value); saveDraft(); });
+  ukPension.addEventListener('input', ()=>{ ukPensionLabel.textContent = fmt(ukPension.value); saveDraft(); });
+  pension.addEventListener('input', ()=>{ pensionLabel.textContent = fmt(pension.value); saveDraft(); });
+  propertyVal.addEventListener('input', ()=>{ propertyValLabel.textContent = fmt(propertyVal.value); saveDraft(); });
+  housingTarget.addEventListener('input', ()=>{ housingTargetLabel.textContent = fmt(housingTarget.value); saveDraft(); });
+  shipping.addEventListener('input', ()=>{ shippingLabel.textContent = fmt(shipping.value); saveDraft(); });
+  readiness.addEventListener('input', ()=>{ readinessLabel.textContent = readiness.value; saveDraft(); });
+
+  country.addEventListener('change', ()=>{ saveDraft(); });
+
+  // docs file input check
+  $('docs').addEventListener('change', (e)=>{
+    const files = Array.from(e.target.files||[]).map(f=>f.name.toLowerCase());
+    const needed = ['passport','criminal','bank','income'];
+    const found = needed.map(k=> files.some(n=> n.includes(k)));
+    const out = found.map((f,i)=> (f? '✓ ':'✖ ') + needed[i]).join(' | ');
+    $('docChecklist').textContent = out;
+    saveDraft();
+  });
+
+  // generate / export / copy / reset
+  $('generateBtn').addEventListener('click', generateFinalPlan);
+  $('exportBtn').addEventListener('click', exportJSON);
+  $('copyBtn').addEventListener('click', copySummary);
+  $('toggleDetails').addEventListener('click', ()=>{ const b=$('breakdown'); b.style.display=(b.style.display==='block')?'none':'block'; });
+  $('resetBtn').addEventListener('click', resetAll);
+}
+
+/* Format currency euro-ish */
+function formatCurrency(v){
+  const n = Number(v);
+  if(n>=1000) return '€' + n.toLocaleString();
+  return '€' + n;
+}
+
+/* ===== Save & Restore draft ===== */
+function collectData(){
+  // gather all form values into a JS object
+  const data = {
+    country: $('country').value || '',
+    monthlyBudget: Number($('monthlyBudget').value||0),
+    ukPension: Number($('ukPension').value||0),
+    pension: Number($('pension').value||0),
+    propertyVal: Number($('propertyVal').value||0),
+    beds: $('beds').value,
+    setting: $('setting').value,
+    housingTarget: Number($('housingTarget').value||0),
+    workStatus: $('workStatus').value,
+    familyJoin: $('familyJoin').value,
+    files: Array.from($('docs').files||[]).map(f=>f.name),
+    shipping: Number($('shipping').value||0),
+    healthNeeds: $('healthNeeds').value,
+    healthPref: $('healthPref').value,
+    lifestyle: $('lifestyle').value,
+    cgtUsed: $('cgtUsed').value,
+    taxPref: $('taxPref').value,
+    moveDate: $('moveDate').value,
+    readiness: Number($('readiness').value||0),
+    priorities: $('priorities').value,
+    goalText: $('goalText').value,
+    timestamp: new Date().toISOString()
+  };
+  return data;
+}
+function saveDraft(){ localStorage.setItem(LS_KEYS.data, JSON.stringify(collectData())); }
+function applySavedData(obj){
+  try{
+    if(!obj) return;
+    if(obj.country) $('country').value = obj.country;
+    if(obj.monthlyBudget) $('monthlyBudget').value = obj.monthlyBudget;
+    if(obj.ukPension) $('ukPension').value = obj.ukPension;
+    if(obj.pension) $('pension').value = obj.pension;
+    if(obj.propertyVal) $('propertyVal').value = obj.propertyVal;
+    if(obj.beds) $('beds').value = obj.beds;
+    if(obj.setting) $('setting').value = obj.setting;
+    if(obj.housingTarget) $('housingTarget').value = obj.housingTarget;
+    if(obj.workStatus) $('workStatus').value = obj.workStatus;
+    if(obj.familyJoin) $('familyJoin').value = obj.familyJoin;
+    if(obj.shipping) $('shipping').value = obj.shipping;
+    if(obj.healthNeeds) $('healthNeeds').value = obj.healthNeeds;
+    if(obj.healthPref) $('healthPref').value = obj.healthPref;
+    if(obj.lifestyle) $('lifestyle').value = obj.lifestyle;
+    if(obj.cgtUsed) $('cgtUsed').value = obj.cgtUsed;
+    if(obj.taxPref) $('taxPref').value = obj.taxPref;
+    if(obj.moveDate) $('moveDate').value = obj.moveDate;
+    if(obj.readiness) $('readiness').value = obj.readiness;
+    if(obj.priorities) $('priorities').value = obj.priorities;
+    if(obj.goalText) $('goalText').value = obj.goalText;
+    if(obj.files && obj.files.length) $('docChecklist').textContent = obj.files.join(', ');
+    // update visible labels (call small updates)
+    document.querySelectorAll('input[type=range]').forEach(inp => inp.dispatchEvent(new Event('input')));
+  }catch(e){ console.warn('applySavedData fail', e); }
+}
+
+/* ===== The "AI" summary engine (offline rule-based) ===== */
+function generateFinalPlan(){
+  const d = collectData();
+  saveDraft();
+
+  // basic country profile
+  const profile = COUNTRY_PROFILES[d.country] || { costMult:1.0, currency:'€', notes:'General' };
+
+  // cost estimates
+  const baseLiving = d.monthlyBudget || 2000; // user target
+  const livingEstimate = Math.round(baseLiving * profile.costMult);
+  const annualEstimate = Math.round(livingEstimate * 12);
+
+  // housing fit analysis (simple rules)
+  const bedrooms = Number(d.beds) || 2;
+  const housingTarget = d.housingTarget || Math.round(livingEstimate*0.4);
+  let housingAdvice = '';
+  if(housingTarget < livingEstimate*0.25) housingAdvice = 'Your housing budget looks modest compared to typical living costs; consider increasing budget to avoid poor housing areas.';
+  else if(housingTarget <= livingEstimate*0.6) housingAdvice = 'Your housing budget is reasonable — should secure comfortable 2–3 bed options in many regions.';
+  else housingAdvice = 'Your housing budget is generous — good chance of high-quality properties or low-maintenance options.';
+
+  // visa recommendation rules
+  let visaAdvice = '';
+  if(d.workStatus === 'remote' && d.familyJoin === 'no') visaAdvice = 'Digital Nomad visa / remote-worker routes are worth exploring; often simpler than full residency.';
+  else if(d.workStatus === 'no') visaAdvice = 'Retirement / passive-income residency (e.g., D7 in Portugal) may be suitable; prepare proof of income/bank statements.';
+  else visaAdvice = 'If planning to work locally, investigate work permits and local tax/residency rules; hiring a local immigration advisor is recommended.';
+
+  // docs readiness
+  const fileNames = (d.files||[]).map(s=>s.toLowerCase());
+  const requiredHints = ['passport','criminal','bank','income'];
+  const docsFound = requiredHints.map(h=> fileNames.some(fn => fn.includes(h)));
+  const docsReady = docsFound.every(Boolean);
+
+  // tax & retirement
+  const retirementScore = Math.round((Math.min(1, (d.ukPension||0)/15000) * 50) + (d.propertyVal? Math.min(1,d.propertyVal/500000)*30 : 0) + (d.readiness*2));
+  const taxAdvice = (d.taxPref === 'yes') ? 'Look for countries with favourable pension tax rules and double taxation treaties with the UK.' : 'Standard tax planning recommended; consult an accountant for cross-border cases.';
+
+  // shipping & movers
+  const moversCost = Math.round(d.shipping || 2000);
+
+  // timeline readiness
+  const readinessScore = Math.round((d.readiness || 3) * 10);
+  let timelineAdvice = '';
+  if(readinessScore < 40) timelineAdvice = 'You may need more time to gather documents and arrange logistics.';
+  else if(readinessScore < 70) timelineAdvice = 'A 3–6 month plan is realistic with focused preparation.';
+  else timelineAdvice = 'You look ready — a 1–3 month timeline is plausible if documentation is in order.';
+
+  // build AI-style written plan
+  const aiLines = [];
+  aiLines.push(`Relocation summary for ${d.country || 'your chosen destination'} — generated ${new Date().toLocaleDateString()}.`);
+  aiLines.push('');
+  aiLines.push(`Estimated recurring costs: ${profile.currency} ${fmt(livingEstimate)} / month (${profile.currency} ${fmt(annualEstimate)} / year). This uses a country cost multiplier (${profile.currency} multiplier ${profile.costMult}).`);
+  aiLines.push('');
+  aiLines.push(`Housing: ${housingAdvice} Target housing budget: €${fmt(housingTarget)}. Bedrooms desired: ${d.beds || 'N/A'}, setting: ${d.setting || 'N/A'}.`);
+  aiLines.push('');
+  aiLines.push(`Visa & residency: ${visaAdvice} ${profile.notes}`);
+  aiLines.push('');
+  aiLines.push(`Documents: ${docsReady ? 'Good — basic documents detected by filename hints.' : 'Missing or incomplete — ensure passport, bank statements, proof of income and police/criminal record checks.'}`);
+  aiLines.push('');
+  aiLines.push(`Tax & retirement: ${taxAdvice} Retirement-readiness score (0–100): ${retirementScore}.`);
+  aiLines.push('');
+  aiLines.push(`Moving & logistics: estimated movers/shipping cost £${fmt(moversCost)}. Consider phased shipping to reduce upfront cost.`);
+  aiLines.push('');
+  aiLines.push(`Timeline & readiness: ${timelineAdvice} Readiness score: ${readinessScore}/100.`);
+  aiLines.push('');
+  aiLines.push(`Practical next steps (concise):`);
+  aiLines.push(`1) Confirm documentation list & get certified copies (passport, bank, income, criminal checks).`);
+  aiLines.push(`2) Book medical/insurance quotes and decide public vs private healthcare.`);
+  aiLines.push(`3) Shortlist 3 towns/regions and book 1–2 viewing trips or virtual tours.`);
+  aiLines.push(`4) Speak with a local immigration lawyer before applying; use the prepared templates.`);
+  aiLines.push(`5) Prepare a 90-day moving timeline and reserve flexible shipping.`);
+
+  // numeric breakdown for table
+  const breakdown = [
+    {k:'Monthly living estimate', v:(profile.currency+' '+fmt(livingEstimate))},
+    {k:'Annual living estimate', v:(profile.currency+' '+fmt(annualEstimate))},
+    {k:'Housing target', v:'€ '+fmt(housingTarget)},
+    {k:'UK pension (annual est)', v:'£ '+fmt(d.ukPension || 0)},
+    {k:'UK property (current)', v:'£ '+fmt(d.propertyVal || 0)},
+    {k:'Estimated movers/shipping', v:'£ '+fmt(moversCost)},
+    {k:'Readiness score', v: readinessScore + '/100'},
+    {k:'Retirement score', v: retirementScore + '/100'}
+  ];
+
+  // render summary
+  $('summaryCard').style.display = 'block';
+  $('summaryText').textContent = aiLines.join('\n');
+  const br = $('breakRows'); br.innerHTML = '';
+  breakdown.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.k}</td><td>${r.v}</td>`;
+    br.appendChild(tr);
+  });
+
+  // store final plan in localStorage (for export/copy)
+  const finalPlan = { data: d, profile, estimates:{ livingEstimate, annualEstimate, moversCost, housingTarget, readinessScore, retirementScore }, aiText: aiLines.join('\n'), breakdown };
+  localStorage.setItem('ba_final_plan', JSON.stringify(finalPlan));
+}
+
+/* Export JSON */
+function exportJSON(){
+  const raw = localStorage.getItem('ba_final_plan');
+  if(!raw){ alert('No final plan generated yet. Please press Generate Final Plan.'); return; }
+  const blob = new Blob([raw], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'BRITS-ABROAD-FINAL-PLAN.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* Copy summary to clipboard */
+function copySummary(){
+  const raw = localStorage.getItem('ba_final_plan');
+  if(!raw){ alert('No final plan found — generate first'); return; }
+  const plan = JSON.parse(raw);
+  const text = plan.aiText || JSON.stringify(plan, null, 2);
+  navigator.clipboard?.writeText(text).then(()=> alert('Summary copied to clipboard'), ()=> alert('Copy failed — please long-press the text to copy'));
+}
+
+/* Reset saved data */
+function resetAll(){
+  if(!confirm('Reset all saved inputs and final plan?')) return;
+  localStorage.removeItem(LS_KEYS.data);
+  localStorage.removeItem('ba_final_plan');
+  location.reload();
+}
+
+/* utility DOM helper */
+function $(id){ return document.getElementById(id); }
+
+/* init on load */
+document.addEventListener('DOMContentLoaded', function(){
+  init();
+});
+
+/* expose some functions for manual use */
+window.generateFinalPlan = generateFinalPlan;
+window.exportJSON = exportJSON;
+window.copySummary = copySummary;
+window.resetAll = resetAll;
 </script>
-
 </body>
 </html>
