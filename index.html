@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRITS ABROAD 2025 – Ultimate Luxury Relocation App</title>
+<title>BRITS ABROAD 2025 – Luxury Relocation Hub</title>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <!-- Chart.js CDN -->
@@ -65,8 +65,20 @@ canvas{background:#fff4f0;border-radius:16px;padding:12px;}
   <div class="phases" id="phases"></div>
 
   <section id="phaseContent">
-    <!-- Phases go here (same as previous) -->
+    <!-- Interactive Phase Cards -->
+    <!-- Phase templates -->
+    ${[...Array(11).keys()].map(i=>`
+    <div class="card" id="phase${i+1}" style="display:none;">
+      <h3>${['Work Rights','State Pension','Budget Impact','Company Setup','Healthcare','Cost of Living','Banking','Housing & School','Moving Checklist','Document Vault','Retirement Roadmap'][i]}</h3>
+      <div class="row" id="phase${i+1}Content">
+        <!-- Placeholder for inputs, sliders, dropdowns -->
+        <input type="text" placeholder="Enter value..." id="phase${i+1}Input">
+      </div>
+      <button onclick="completePhase(${i+1})">Complete Phase</button>
+    </div>`).join('')}
   </section>
+
+  <button style="margin:16px auto;padding:12px 24px;font-size:1rem;border-radius:12px;" onclick="runAI()">Get AI Advice</button>
 
   <div id="finalSummary" class="summary" style="display:none;">
     <h2>Final Relocation AI Summary</h2>
@@ -136,33 +148,32 @@ function completePhase(n){
 }
 
 // ---------- AI / Chart Simulation ----------
-function showFinalSummary(){
+function runAI(){
+  // Placeholder: simulate AI advice based on input values
   const summary=document.getElementById('finalSummary');
   const content=document.getElementById('summaryContent');
 
-  const workRights=document.getElementById('phase1Country')?.value||'N/A';
-  const pension=document.getElementById('pensionCalc')?.textContent||'0';
-  const budget=document.getElementById('budgetCalc')?.textContent||'0';
-  const salary=document.getElementById('salaryValue')?.textContent||'0';
-  const retirement=document.getElementById('retirementCountry')?.value||'N/A';
+  let aiText='AI Recommendations:\n\n';
+  PHASES.forEach(p=>{
+    const val=document.getElementById(`phase${p.id}Input`)?.value || 'N/A';
+    aiText+=`${p.title}: Suggestion based on input "${val}"\n`;
+  });
 
-  content.innerHTML=`<p><strong>Work Rights:</strong> ${workRights}</p>
-  <p><strong>Estimated Pension:</strong> £${pension}/year</p>
-  <p><strong>2025 Budget Impact:</strong> £${budget}</p>
-  <p><strong>Salary Comparison:</strong> £${salary}/month</p>
-  <p><strong>Retirement Plan Country:</strong> ${retirement}</p>
-  <p>All other phases: interactive guidance and AI insights placeholders.</p>`;
+  content.innerHTML=`<pre>${aiText}</pre>`;
 
-  // ---------- Interactive Chart ----------
+  // Chart.js: display dummy data from phases
   const ctx=document.getElementById('summaryChart').getContext('2d');
   new Chart(ctx,{
     type:'bar',
     data:{
-      labels:['Pension','Budget','Salary'],
+      labels:PHASES.map(p=>p.title),
       datasets:[{
-        label:'Values',
-        data:[parseInt(pension.replace(/,/g,'')),parseInt(budget.replace(/,/g,'')),parseInt(salary.replace(/,/g,''))],
-        backgroundColor:['#28a745','#ff6f61','#00247d']
+        label:'Phase Values',
+        data:PHASES.map(p=>{
+          const val=parseInt(document.getElementById(`phase${p.id}Input`)?.value)||0;
+          return val;
+        }),
+        backgroundColor:PHASES.map((_,i)=>i%2===0?'#ff6f61':'#00247d')
       }]
     },
     options:{
