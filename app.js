@@ -126,3 +126,17 @@ function getAIAdvice() {
   document.getElementById("ai-output").innerText =
     "Based on your inputs, Portugal and Cyprus offer the best tax efficiency and lifestyle balance for 2025.";
 }
+// ===============================
+// START BUTTON CLICK (MOBILE SAFE)
+// ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("startBtn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      document
+        .getElementById("phases-container")
+        .scrollIntoView({ behavior: "smooth" });
+    });
+  }
+});
