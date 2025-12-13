@@ -8,13 +8,14 @@
 
 /* HERO */
 .hero {
-  height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero-background.jpg') center/cover no-repeat;
+  height: 100vh; /* full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   text-align: center;
+  color: white;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero-background.jpg') center/cover no-repeat;
+  font-family: 'Playfair Display', serif;
 }
 
 .hero h1 {
