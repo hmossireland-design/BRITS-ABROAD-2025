@@ -9,8 +9,7 @@
 /* HERO */
 .hero {
   height: 80vh;
-  background: linear-gradient(270deg, #ffcc66, #ff9966, #ff6699, #cc66ff);
-  background-size: 800% 800%;
+  background: linear-gradient(135deg, #fcb900, #ffdd57);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +17,52 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  animation: gradientShift 15s ease infinite, heroFadeIn 2s ease-in-out;
+  animation: heroGradient 10s ease infinite;
+}
+
+.hero-overlay {
+  max-width: 90%;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  animation: fadeInUp 1.3s ease forwards;
+}
+
+.hero button {
+  padding: 1em 2.5em;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  animation: fadeInUp 1.6s ease forwards;
+}
+
+.hero button:hover {
+  background: #444;
+}
+
+/* ANIMATIONS */
+@keyframes heroGradient {
+  0% {background: linear-gradient(135deg, #fcb900, #ffdd57);}
+  50% {background: linear-gradient(135deg, #ffdd57, #fcb900);}
+  100% {background: linear-gradient(135deg, #fcb900, #ffdd57);}
+}
+
+@keyframes fadeInUp {
+  0% {opacity: 0; transform: translateY(20px);}
+  100% {opacity: 1; transform: translateY(0);}
 }
 
 /* Hero overlay for text */
