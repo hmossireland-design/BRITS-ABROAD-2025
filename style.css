@@ -181,3 +181,34 @@ body {
     transform: translateX(0);
   }
 }
+/* =========================
+   PROGRESS BAR
+========================= */
+#progress-wrapper {
+  position: sticky;
+  top: 0;
+  background: #111;
+  padding: 0.8em 1.5em;
+  z-index: 1000;
+}
+
+#progress-text {
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 0.4em;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #fcb900, #ffdd57);
+  transition: width 0.4s ease;
+}
