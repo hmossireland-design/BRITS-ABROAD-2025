@@ -89,3 +89,8 @@ function updateChart(field, value) {
   if(field.toLowerCase().includes('savings')) budgetChart.data.datasets[0].data[2] = parseInt(value);
   budgetChart.update();
 }
+// Smooth scroll to phases
+function startApp() {
+  document.getElementById('phases-container')
+    .scrollIntoView({ behavior: 'smooth' });
+}
