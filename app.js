@@ -1,104 +1,189 @@
-/* ===============================
-   BRITS ABROAD 2025 – APP LOGIC
-   =============================== */
+/********** Brits Abroad 2025 – Full App JS **********/
+
+// ---------- Phase & State Management ----------
+const PHASES = [
+  { id:1, title:'Dream Destination', icon:'🌍' },
+  { id:2, title:'Financial Freedom', icon:'💰' },
+  { id:3, title:'Visa Victory', icon:'📋' },
+  { id:4, title:'Document Vault', icon:'📁' },
+  { id:5, title:'Budget Blueprint', icon:'📊' },
+  { id:6, title:'Move Mastery', icon:'🚚' },
+  { id:7, title:'Healthcare & S1/GHIC', icon:'🏥' },
+  { id:8, title:'Banking & Money Transfers', icon:'💳' },
+  { id:9, title:'Housing & Schools', icon:'🏠' },
+  { id:10, title:'Checklist & Pet Relocation', icon:'📋' },
+  { id:11, title:'Retirement Roadmap', icon:'👴' }
+];
 
 let currentPhase = 1;
-const totalPhases = 11;
-
-/* -------- DATA -------- */
-const countries = {
-  Portugal: { tax: 0.10, cost: 0.75 },
-  Spain: { tax: 0.18, cost: 0.85 },
-  Cyprus: { tax: 0.05, cost: 0.70 },
-  Greece: { tax: 0.15, cost: 0.78 },
-  Thailand: { tax: 0.00, cost: 0.55 },
-  UAE: { tax: 0.00, cost: 1.00 }
+let completed = [];
+let userData = {
+  country: 'Portugal',
+  pension: 10000,
+  property: 300000,
+  shipping: 2000,
+  visaAnswers: {},
+  aiSummary: ''
 };
 
-/* -------- INIT -------- */
-document.addEventListener("DOMContentLoaded", () => {
-  updatePhase();
+// DOM references
+const phasesEl = document.getElementById('phases') || null;
+const phaseContentEl = document.getElementById('phaseContent') || null;
+const progressEl = document.getElementById('progressFill') || null;
+
+// ---------- Initialize App ----------
+function startApp(){
+  document.querySelector('.hero').style.display = 'none';
+  buildPhases();
+  showPhase(currentPhase);
+  updateProgress();
   populateCountries();
-});
+  setupInputs();
+}
 
-/* -------- PHASE CONTROL -------- */
-function updatePhase() {
-  document.querySelectorAll(".phase-card").forEach(card => {
-    card.style.display = "none";
+// ---------- Build Phase Navigation ----------
+function buildPhases(){
+  if(!phasesEl) return;
+  phasesEl.innerHTML = '';
+  PHASES.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'phase';
+    div.dataset.phase = p.id;
+    div.innerHTML = `<div class="phase-icon">${p.icon}</div><div>${p.title}</div>`;
+    div.onclick = () => selectPhase(p.id);
+    if(completed.includes(p.id)) div.classList.add('completed');
+    if(p.id===currentPhase) div.classList.add('active');
+    phasesEl.appendChild(div);
   });
-
-  const active = document.getElementById(`phase-${currentPhase}`);
-  if (active) active.style.display = "block";
-
-  const progress = document.getElementById("progress-fill");
-  if (progress) progress.style.width = `${(currentPhase / totalPhases) * 100}%`;
 }
 
-function nextPhase() {
-  if (currentPhase < totalPhases) {
-    currentPhase++;
-    updatePhase();
-  }
+// ---------- Show Phase ----------
+function showPhase(n){
+  currentPhase = n;
+  if(!phaseContentEl) return;
+  const allPhases = phaseContentEl.querySelectorAll('.phase-card');
+  allPhases.forEach(card => card.style.display = 'none');
+  const thisPhase = document.getElementById('phase'+n);
+  if(thisPhase) thisPhase.style.display = 'block';
+  updateProgress();
 }
 
-function prevPhase() {
-  if (currentPhase > 1) {
-    currentPhase--;
-    updatePhase();
-  }
+// ---------- Select Phase ----------
+function selectPhase(n){
+  // Allow free navigation
+  showPhase(n);
 }
 
-/* -------- COUNTRY -------- */
-function populateCountries() {
-  const select = document.getElementById("country");
-  if (!select) return;
+// ---------- Complete Phase ----------
+function completePhase(n){
+  if(!completed.includes(n)) completed.push(n);
+  buildPhases();
+  if(n<PHASES.length) showPhase(n+1);
+  else alert('Congratulations! You completed the relocation plan 🎉');
+}
 
-  select.innerHTML = "";
-  Object.keys(countries).forEach(c => {
-    const opt = document.createElement("option");
+// ---------- Update Progress ----------
+function updateProgress(){
+  if(!progressEl) return;
+  const pct = (currentPhase/PHASES.length)*100;
+  progressEl.style.width = pct+'%';
+  document.querySelectorAll('.phase').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.phase)===currentPhase);
+    el.classList.toggle('completed', completed.includes(parseInt(el.dataset.phase)));
+  });
+}
+
+// ---------- Populate Country Dropdown ----------
+function populateCountries(){
+  const countries = ['Portugal','Spain','UAE','Thailand','Cyprus','Greece','Italy','France','Poland','Latvia','Costa Rica','Malta','Hungary','Argentina','USA'];
+  const sel = document.getElementById('country');
+  if(!sel) return;
+  sel.innerHTML = '';
+  countries.forEach(c => {
+    const opt = document.createElement('option');
     opt.value = c;
     opt.textContent = c;
-    select.appendChild(opt);
+    sel.appendChild(opt);
+  });
+  sel.value = userData.country;
+  sel.onchange = e => {
+    userData.country = e.target.value;
+    updateAIResults();
+  };
+}
+
+// ---------- Setup Interactive Inputs ----------
+function setupInputs(){
+  const pension = document.getElementById('pension');
+  const property = document.getElementById('property');
+  const shipping = document.getElementById('shipping');
+
+  if(pension){
+    pension.value = userData.pension;
+    pension.oninput = e => {
+      userData.pension = parseInt(e.target.value);
+      document.getElementById('pensionVal').textContent = userData.pension.toLocaleString();
+      updateCalculations();
+    };
+  }
+
+  if(property){
+    property.value = userData.property;
+    property.oninput = e => {
+      userData.property = parseInt(e.target.value);
+      document.getElementById('propertyVal').textContent = userData.property.toLocaleString();
+      updateCalculations();
+    };
+  }
+
+  if(shipping){
+    shipping.value = userData.shipping;
+    shipping.oninput = e => {
+      userData.shipping = parseInt(e.target.value);
+      document.getElementById('shippingVal').textContent = userData.shipping.toLocaleString();
+      document.getElementById('shippingResult').textContent = `Shipping cost: £${userData.shipping.toLocaleString()}`;
+    };
+  }
+}
+
+// ---------- Calculations ----------
+function updateCalculations(){
+  const multiplier = 1; // placeholder for country cost adjustments
+  const savings = Math.round((userData.pension*0.35 + userData.property*0.0025)*multiplier);
+  const el = document.getElementById('result');
+  if(el) el.textContent = `You could save £${savings.toLocaleString()}/year in ${userData.country}!`;
+}
+
+// ---------- Placeholder AI Summary ----------
+function updateAIResults(){
+  const el = document.getElementById('aiResult');
+  if(!el) return;
+  el.textContent = `AI Summary for ${userData.country}: Based on your inputs, you are best prepared for relocation in 2025. (This is placeholder AI logic, replace with real AI integration later.)`;
+}
+
+// ---------- File Upload for Document Vault ----------
+const filesInput = document.getElementById('files');
+if(filesInput){
+  filesInput.addEventListener('change', e=>{
+    const files = Array.from(e.target.files || []);
+    const res = document.getElementById('docResult');
+    if(res){
+      res.innerHTML = files.length ? files.map(f=>`✓ ${f.name}`).join('<br>') : 'No files chosen';
+    }
   });
 }
 
-/* -------- CALCULATIONS -------- */
-function calculateSavings() {
-  const pension = Number(document.getElementById("pension").value);
-  const property = Number(document.getElementById("property").value);
-  const country = document.getElementById("country").value;
-
-  const taxRate = countries[country].tax;
-  const costFactor = countries[country].cost;
-
-  const ukTax = pension * 0.20;
-  const abroadTax = pension * taxRate;
-
-  const savings =
-    (ukTax - abroadTax) +
-    (property * 0.002) +
-    ((pension * 0.30) * (1 - costFactor));
-
-  document.getElementById("result").innerText =
-    `Estimated annual benefit: £${Math.round(savings).toLocaleString()}`;
+// ---------- AI Input Button (Placeholder) ----------
+const aiBtn = document.getElementById('aiBtn');
+if(aiBtn){
+  aiBtn.onclick = () => {
+    userData.aiSummary = `AI says: ${userData.country} looks excellent for 2025 relocation!`;
+    updateAIResults();
+  };
 }
 
-/* -------- AI SUMMARY -------- */
-function generateAIInsight() {
-  const country = document.getElementById("country").value;
-  const pension = document.getElementById("pension").value;
-
-  const insight = `
-  Based on your inputs, ${country} offers a strong retirement profile for UK citizens.
-  With your pension level, you are likely eligible for long-term residency options,
-  lower taxation, and improved quality of life versus the UK in 2025.
-  `;
-
-  document.getElementById("ai-output").innerText = insight;
-}
-
-/* -------- SLIDER DISPLAY -------- */
-function updateSlider(id, output) {
-  const val = document.getElementById(id).value;
-  document.getElementById(output).innerText = Number(val).toLocaleString();
-}
+// ---------- Initialize ----------
+document.addEventListener('DOMContentLoaded', () => {
+  const startButton = document.querySelector('.hero button');
+  if(startButton) startButton.onclick = startApp;
+});
