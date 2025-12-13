@@ -371,3 +371,37 @@ input[type=range]::-webkit-slider-thumb:hover {
 #charts-section canvas {
   max-width: 100%;
 }
+/* ============================
+   SMOOTH PAGE ANIMATIONS
+============================ */
+
+/* Fade-in effect for phase cards */
+.phase-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInCard 0.6s forwards;
+}
+
+/* Staggered animation */
+.phase-card:nth-child(1) { animation-delay: 0.1s; }
+.phase-card:nth-child(2) { animation-delay: 0.2s; }
+.phase-card:nth-child(3) { animation-delay: 0.3s; }
+.phase-card:nth-child(4) { animation-delay: 0.4s; }
+.phase-card:nth-child(5) { animation-delay: 0.5s; }
+.phase-card:nth-child(6) { animation-delay: 0.6s; }
+.phase-card:nth-child(7) { animation-delay: 0.7s; }
+.phase-card:nth-child(8) { animation-delay: 0.8s; }
+.phase-card:nth-child(9) { animation-delay: 0.9s; }
+.phase-card:nth-child(10) { animation-delay: 1s; }
+.phase-card:nth-child(11) { animation-delay: 1.1s; }
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
