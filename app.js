@@ -94,3 +94,8 @@ function startApp() {
   document.getElementById('phases-container')
     .scrollIntoView({ behavior: 'smooth' });
 }
+// Smooth scroll to phases
+function startApp() {
+  document.getElementById('phases-container')
+    .scrollIntoView({ behavior: 'smooth' });
+}
