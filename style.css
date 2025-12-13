@@ -268,13 +268,25 @@
   gap: 1.5em;
 }
 
+/* PHASE CARDS */
+#phases-container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
 .phase-card {
-  flex: 0 0 90%;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   padding: 2em;
-  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.phase-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
 
 .phase-card h2 {
