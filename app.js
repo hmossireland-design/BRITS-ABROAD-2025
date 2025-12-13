@@ -3,12 +3,12 @@
  Beginner-safe / No frameworks / GitHub friendly
 **************************************************/
 
-/* GLOBAL USER PROFILE (VERY IMPORTANT) */
+/* GLOBAL USER PROFILE */
 const userProfile = {
   destination: "",
   passport: "UK",
-  workRights: "",
-  monthlyIncome: 0,
+  work: "",
+  monthlyIncome: 1500,
   budgetLevel: "",
 };
 
@@ -16,7 +16,6 @@ const userProfile = {
 const phases = [
   {
     id: 1,
-    title: "Dream Destination",
     html: `
       <h2>🌍 Choose Your Destination</h2>
       <label>Where are you considering moving?</label>
@@ -34,14 +33,12 @@ const phases = [
       <button onclick="savePhase1()">Continue</button>
     `
   },
-
   {
     id: 2,
-    title: "Work & Residency Rights",
     html: `
-      <h2>🛂 Your Legal Rights</h2>
+      <h2>🛂 Work & Residency Rights</h2>
 
-      <label>What passport do you hold?</label>
+      <label>Passport held</label>
       <select id="passport">
         <option value="UK">UK Passport</option>
         <option value="EU">EU Passport</option>
@@ -58,24 +55,23 @@ const phases = [
       <button onclick="savePhase2()">Continue</button>
     `
   },
-
   {
     id: 3,
-    title: "Income & Budget",
     html: `
-      <h2>💰 Financial Reality Check</h2>
+      <h2>💰 Income & Budget</h2>
 
       <label>Monthly Income (£)</label>
-      <input type="range" min="500" max="5000" step="100" id="income" value="1500"
+      <input type="range" min="500" max="5000" step="100"
+        id="income" value="1500"
         oninput="document.getElementById('incomeValue').innerText = this.value" />
       <p>£<span id="incomeValue">1500</span> / month</p>
 
-      <label>How cost-sensitive are you?</label>
+      <label>Budget sensitivity</label>
       <select id="budget">
         <option value="">-- Select --</option>
-        <option value="low">Low (flexible)</option>
+        <option value="low">Low</option>
         <option value="medium">Medium</option>
-        <option value="high">High (tight budget)</option>
+        <option value="high">High</option>
       </select>
 
       <div class="phase-result" id="budget-result"></div>
@@ -86,7 +82,6 @@ const phases = [
 
 /* RENDER PHASES */
 const container = document.getElementById("phases-container");
-
 phases.forEach(phase => {
   const card = document.createElement("section");
   card.className = "phase-card";
@@ -95,116 +90,84 @@ phases.forEach(phase => {
   container.appendChild(card);
 });
 
-/* PHASE 1 LOGIC */
-function savePhase1() {
-  const dest = document.getElementById("destination").value;
-  if (!dest) {
-    alert("Please select a country");
-    return;
-  }
-  userProfile.destination = dest;
-
-  document.getElementById("destination-result").innerHTML =
-    `✔ ${dest} selected. We will analyse visas, tax & lifestyle.`;
-}
-
-/* PHASE 2 LOGIC */
-function savePhase2() {
-  const passport = document.getElementById("passport").value;
-  const work = document.getElementById("work").value;
-
-  if (!work) {
-    alert("Please choose whether you plan to work");
-    return;
-  }
-
-  userProfile.passport = passport;
-  userProfile.workRights = work;
-
-  let msg = "";
-
-  if (passport === "EU") {
-    msg = "✔ You have full freedom to live & work in the EU.";
-  } else if (passport === "UK" && work === "yes") {
-    msg = "⚠ UK citizens usually need a work visa or residency permit.";
-  } else {
-    msg = "✔ Passive income visas may suit you well.";
-  }
-
-  document.getElementById("rights-result").innerHTML = msg;
-}
-
-/* PHASE 3 LOGIC */
-function savePhase3() {
-  const income = document.getElementById("income").value;
-  const budget = document.getElementById("budget").value;
-
-  if (!budget) {
-    alert("Please select a budget level");
-    return;
-  }
-
-  userProfile.monthlyIncome = income;
-  userProfile.budgetLevel = budget;
-
-  let msg = "";
-
-  if (income < 1200) {
-    msg = "⚠ Your income may restrict visa options in Western Europe.";
-  } else if (income < 2000) {
-    msg = "✔ Southern Europe & Eastern Europe are strong options.";
-  } else {
-    msg = "✔ You have strong flexibility across multiple regions.";
-  }
-
-  document.getElementById("budget-result").innerHTML = msg;
-}
-
-/* AI PLACEHOLDER */
-function getAIAdvice() {
-  const out = document.getElementById("ai-output");
-
-  let advice = `Based on your inputs:\n\n`;
-  advice += `Destination: ${userProfile.destination}\n`;
-  advice += `Passport: ${userProfile.passport}\n`;
-  advice += `Income: £${userProfile.monthlyIncome}/month\n\n`;
-
-  if (userProfile.destination === "Portugal" && userProfile.monthlyIncome >= 1200) {
-    advice += "✔ Portugal is a strong match (D7 visa likely).\n";
-  }
-
-  if (userProfile.budgetLevel === "high") {
-    advice += "⚠ You should prioritise low-cost countries.\n";
-  }
-
-  out.innerText = advice;
-}
-
-/* START BUTTON SCROLL */
+/* START APP */
 function startApp() {
   document.getElementById("phase-1").scrollIntoView({ behavior: "smooth" });
 }
-// ============================
-// PROGRESS BAR LOGIC
-// ============================
-const totalPhases = 11;
 
-window.addEventListener("scroll", () => {
-  const phases = document.querySelectorAll(".phase-card");
-  let currentPhase = 1;
-
-  phases.forEach((phase, index) => {
-    const rect = phase.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.5) {
-      currentPhase = index + 1;
-    }
-  });
-
-  const progressPercent = (currentPhase / totalPhases) * 100;
-
-  document.getElementById("progress-fill").style.width =
-    progressPercent + "%";
-
+/* PROGRESS BAR */
+function updateProgress(phaseNumber) {
+  const percent = (phaseNumber / 11) * 100;
+  document.getElementById("progress-fill").style.width = percent + "%";
   document.getElementById("progress-text").innerText =
-    `Phase ${currentPhase} of ${totalPhases}`;
-});
+    `Phase ${phaseNumber} of 11`;
+}
+
+/* PHASE 1 */
+function savePhase1() {
+  const dest = document.getElementById("destination").value;
+  if (!dest) return alert("Please select a destination");
+
+  userProfile.destination = dest;
+
+  document.getElementById("destination-result").innerHTML =
+    `✅ <strong>${dest}</strong> is a popular relocation choice for UK nationals.`;
+
+  updateProgress(1);
+  document.getElementById("phase-2").scrollIntoView({ behavior: "smooth" });
+}
+
+/* PHASE 2 */
+function savePhase2() {
+  userProfile.passport = document.getElementById("passport").value;
+  userProfile.work = document.getElementById("work").value;
+
+  let advice = "";
+
+  if (userProfile.passport === "UK" && userProfile.work === "yes") {
+    advice = "⚠️ You will require a visa or residency permit to work.";
+  } else if (userProfile.passport === "EU") {
+    advice = "✅ You have full EU freedom of movement.";
+  } else {
+    advice = "ℹ️ Non-working residency routes may be available.";
+  }
+
+  document.getElementById("rights-result").innerHTML = advice;
+
+  updateProgress(2);
+  document.getElementById("phase-3").scrollIntoView({ behavior: "smooth" });
+}
+
+/* PHASE 3 */
+function savePhase3() {
+  userProfile.monthlyIncome = document.getElementById("income").value;
+  userProfile.budgetLevel = document.getElementById("budget").value;
+
+  let result = "";
+
+  if (userProfile.monthlyIncome < 1200) {
+    result = "⚠️ Budget will be tight in most Western Europe countries.";
+  } else if (userProfile.monthlyIncome >= 2000) {
+    result = "✅ Comfortable budget for many destinations.";
+  } else {
+    result = "ℹ️ Budget feasible with planning.";
+  }
+
+  document.getElementById("budget-result").innerHTML = result;
+
+  updateProgress(3);
+}
+
+/* AI ADVICE BUTTON */
+function getAIAdvice() {
+  const output = `
+    <strong>Your Relocation Snapshot:</strong><br><br>
+    🌍 Destination: ${userProfile.destination}<br>
+    🛂 Passport: ${userProfile.passport}<br>
+    💼 Working: ${userProfile.work}<br>
+    💰 Income: £${userProfile.monthlyIncome}/month<br><br>
+    <em>This plan looks viable. Next steps: visas, healthcare, and housing.</em>
+  `;
+
+  document.getElementById("ai-output").innerHTML = output;
+}
