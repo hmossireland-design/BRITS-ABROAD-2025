@@ -1,189 +1,206 @@
-/********** Brits Abroad 2025 – Full App JS **********/
+// ======================
+// Brits Abroad 2025 - app.js
+// ======================
 
-// ---------- Phase & State Management ----------
-const PHASES = [
-  { id:1, title:'Dream Destination', icon:'🌍' },
-  { id:2, title:'Financial Freedom', icon:'💰' },
-  { id:3, title:'Visa Victory', icon:'📋' },
-  { id:4, title:'Document Vault', icon:'📁' },
-  { id:5, title:'Budget Blueprint', icon:'📊' },
-  { id:6, title:'Move Mastery', icon:'🚚' },
-  { id:7, title:'Healthcare & S1/GHIC', icon:'🏥' },
-  { id:8, title:'Banking & Money Transfers', icon:'💳' },
-  { id:9, title:'Housing & Schools', icon:'🏠' },
-  { id:10, title:'Checklist & Pet Relocation', icon:'📋' },
-  { id:11, title:'Retirement Roadmap', icon:'👴' }
+// Phase data
+const phases = [
+  {
+    title: "Phase 1: Work Rights Comparator",
+    description: "Compare your EU vs non-EU work rights.",
+    inputs: [
+      { label: "Country", type: "dropdown", options: ["Portugal", "Spain", "France", "Italy", "Greece"] }
+    ]
+  },
+  {
+    title: "Phase 2: UK State Pension Planner",
+    description: "Estimate your UK State Pension in your new country.",
+    inputs: [
+      { label: "Current Age", type: "number", min: 18, max: 70, default: 30 },
+      { label: "Years Contributed", type: "number", min: 0, max: 50, default: 10 }
+    ]
+  },
+  {
+    title: "Phase 3: 2025 Budget Impact Scanner",
+    description: "Understand how the 2025 budget affects your finances.",
+    inputs: [
+      { label: "Annual Income (£)", type: "number", min: 0, max: 200000, default: 50000 }
+    ]
+  },
+  {
+    title: "Phase 4: Company Formation Wizard",
+    description: "Plan your business setup abroad.",
+    inputs: [
+      { label: "Business Type", type: "dropdown", options: ["Sole Trader", "Limited Company", "Partnership"] },
+      { label: "Expected Turnover (£)", type: "number", min: 0, max: 1000000, default: 100000 }
+    ]
+  },
+  {
+    title: "Phase 5: Healthcare & S1/GHIC Tracker",
+    description: "Plan healthcare coverage.",
+    inputs: [
+      { label: "Private Insurance", type: "dropdown", options: ["Yes", "No"] }
+    ]
+  },
+  {
+    title: "Phase 6: Cost of Living & Salary Comparator",
+    description: "Compare local salaries and living costs.",
+    inputs: [
+      { label: "Salary (£)", type: "number", min: 0, max: 200000, default: 30000 }
+    ]
+  },
+  {
+    title: "Phase 7: Banking & Money Transfer Hub",
+    description: "Plan your banking and transfers.",
+    inputs: [
+      { label: "Banking Type", type: "dropdown", options: ["Local Bank", "UK Bank", "Online Bank"] }
+    ]
+  },
+  {
+    title: "Phase 8: Housing & School Finder",
+    description: "Find your perfect home and school.",
+    inputs: [
+      { label: "Number of Bedrooms", type: "number", min: 1, max: 10, default: 2 },
+      { label: "School Type", type: "dropdown", options: ["Public", "Private", "International"] }
+    ]
+  },
+  {
+    title: "Phase 9: Moving Checklist & Pet Relocation",
+    description: "Prepare your moving checklist.",
+    inputs: [
+      { label: "Include Pets?", type: "dropdown", options: ["Yes", "No"] }
+    ]
+  },
+  {
+    title: "Phase 10: Document Vault",
+    description: "Securely store your relocation documents.",
+    inputs: [
+      { label: "Documents Ready?", type: "dropdown", options: ["Yes", "No"] }
+    ]
+  },
+  {
+    title: "Phase 11: Retirement Roadmap",
+    description: "Plan your long-term retirement.",
+    inputs: [
+      { label: "Current Savings (£)", type: "number", min: 0, max: 2000000, default: 50000 },
+      { label: "Target Retirement Age", type: "number", min: 50, max: 75, default: 65 }
+    ]
+  }
 ];
 
-let currentPhase = 1;
-let completed = [];
-let userData = {
-  country: 'Portugal',
-  pension: 10000,
-  property: 300000,
-  shipping: 2000,
-  visaAnswers: {},
-  aiSummary: ''
-};
+// Current phase index
+let currentPhase = 0;
 
-// DOM references
-const phasesEl = document.getElementById('phases') || null;
-const phaseContentEl = document.getElementById('phaseContent') || null;
-const progressEl = document.getElementById('progressFill') || null;
+// ======================
+// Render Phases
+// ======================
+function renderPhase(index) {
+  const container = document.getElementById("phases-container");
+  container.innerHTML = ""; // Clear previous phase
 
-// ---------- Initialize App ----------
-function startApp(){
-  document.querySelector('.hero').style.display = 'none';
-  buildPhases();
-  showPhase(currentPhase);
-  updateProgress();
-  populateCountries();
-  setupInputs();
-}
+  const phase = phases[index];
 
-// ---------- Build Phase Navigation ----------
-function buildPhases(){
-  if(!phasesEl) return;
-  phasesEl.innerHTML = '';
-  PHASES.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'phase';
-    div.dataset.phase = p.id;
-    div.innerHTML = `<div class="phase-icon">${p.icon}</div><div>${p.title}</div>`;
-    div.onclick = () => selectPhase(p.id);
-    if(completed.includes(p.id)) div.classList.add('completed');
-    if(p.id===currentPhase) div.classList.add('active');
-    phasesEl.appendChild(div);
-  });
-}
+  // Create phase card
+  const phaseCard = document.createElement("div");
+  phaseCard.className = "phase-card fade-in";
 
-// ---------- Show Phase ----------
-function showPhase(n){
-  currentPhase = n;
-  if(!phaseContentEl) return;
-  const allPhases = phaseContentEl.querySelectorAll('.phase-card');
-  allPhases.forEach(card => card.style.display = 'none');
-  const thisPhase = document.getElementById('phase'+n);
-  if(thisPhase) thisPhase.style.display = 'block';
-  updateProgress();
-}
+  const title = document.createElement("h2");
+  title.textContent = phase.title;
 
-// ---------- Select Phase ----------
-function selectPhase(n){
-  // Allow free navigation
-  showPhase(n);
-}
+  const desc = document.createElement("p");
+  desc.textContent = phase.description;
 
-// ---------- Complete Phase ----------
-function completePhase(n){
-  if(!completed.includes(n)) completed.push(n);
-  buildPhases();
-  if(n<PHASES.length) showPhase(n+1);
-  else alert('Congratulations! You completed the relocation plan 🎉');
-}
+  phaseCard.appendChild(title);
+  phaseCard.appendChild(desc);
 
-// ---------- Update Progress ----------
-function updateProgress(){
-  if(!progressEl) return;
-  const pct = (currentPhase/PHASES.length)*100;
-  progressEl.style.width = pct+'%';
-  document.querySelectorAll('.phase').forEach(el => {
-    el.classList.toggle('active', parseInt(el.dataset.phase)===currentPhase);
-    el.classList.toggle('completed', completed.includes(parseInt(el.dataset.phase)));
-  });
-}
+  // Create inputs dynamically
+  phase.inputs.forEach(input => {
+    const label = document.createElement("label");
+    label.textContent = input.label;
+    label.className = "input-label";
 
-// ---------- Populate Country Dropdown ----------
-function populateCountries(){
-  const countries = ['Portugal','Spain','UAE','Thailand','Cyprus','Greece','Italy','France','Poland','Latvia','Costa Rica','Malta','Hungary','Argentina','USA'];
-  const sel = document.getElementById('country');
-  if(!sel) return;
-  sel.innerHTML = '';
-  countries.forEach(c => {
-    const opt = document.createElement('option');
-    opt.value = c;
-    opt.textContent = c;
-    sel.appendChild(opt);
-  });
-  sel.value = userData.country;
-  sel.onchange = e => {
-    userData.country = e.target.value;
-    updateAIResults();
-  };
-}
-
-// ---------- Setup Interactive Inputs ----------
-function setupInputs(){
-  const pension = document.getElementById('pension');
-  const property = document.getElementById('property');
-  const shipping = document.getElementById('shipping');
-
-  if(pension){
-    pension.value = userData.pension;
-    pension.oninput = e => {
-      userData.pension = parseInt(e.target.value);
-      document.getElementById('pensionVal').textContent = userData.pension.toLocaleString();
-      updateCalculations();
-    };
-  }
-
-  if(property){
-    property.value = userData.property;
-    property.oninput = e => {
-      userData.property = parseInt(e.target.value);
-      document.getElementById('propertyVal').textContent = userData.property.toLocaleString();
-      updateCalculations();
-    };
-  }
-
-  if(shipping){
-    shipping.value = userData.shipping;
-    shipping.oninput = e => {
-      userData.shipping = parseInt(e.target.value);
-      document.getElementById('shippingVal').textContent = userData.shipping.toLocaleString();
-      document.getElementById('shippingResult').textContent = `Shipping cost: £${userData.shipping.toLocaleString()}`;
-    };
-  }
-}
-
-// ---------- Calculations ----------
-function updateCalculations(){
-  const multiplier = 1; // placeholder for country cost adjustments
-  const savings = Math.round((userData.pension*0.35 + userData.property*0.0025)*multiplier);
-  const el = document.getElementById('result');
-  if(el) el.textContent = `You could save £${savings.toLocaleString()}/year in ${userData.country}!`;
-}
-
-// ---------- Placeholder AI Summary ----------
-function updateAIResults(){
-  const el = document.getElementById('aiResult');
-  if(!el) return;
-  el.textContent = `AI Summary for ${userData.country}: Based on your inputs, you are best prepared for relocation in 2025. (This is placeholder AI logic, replace with real AI integration later.)`;
-}
-
-// ---------- File Upload for Document Vault ----------
-const filesInput = document.getElementById('files');
-if(filesInput){
-  filesInput.addEventListener('change', e=>{
-    const files = Array.from(e.target.files || []);
-    const res = document.getElementById('docResult');
-    if(res){
-      res.innerHTML = files.length ? files.map(f=>`✓ ${f.name}`).join('<br>') : 'No files chosen';
+    let field;
+    if (input.type === "dropdown") {
+      field = document.createElement("select");
+      input.options.forEach(opt => {
+        const option = document.createElement("option");
+        option.value = opt;
+        option.textContent = opt;
+        field.appendChild(option);
+      });
+    } else if (input.type === "number") {
+      field = document.createElement("input");
+      field.type = "number";
+      field.min = input.min;
+      field.max = input.max;
+      field.value = input.default || input.min;
     }
+
+    field.className = "phase-input";
+    phaseCard.appendChild(label);
+    phaseCard.appendChild(field);
   });
+
+  // Navigation buttons
+  const nav = document.createElement("div");
+  nav.className = "phase-nav";
+
+  if (index > 0) {
+    const backBtn = document.createElement("button");
+    backBtn.textContent = "Previous";
+    backBtn.onclick = () => { currentPhase--; renderPhase(currentPhase); };
+    nav.appendChild(backBtn);
+  }
+
+  if (index < phases.length - 1) {
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next";
+    nextBtn.onclick = () => { currentPhase++; renderPhase(currentPhase); };
+    nav.appendChild(nextBtn);
+  }
+
+  phaseCard.appendChild(nav);
+  container.appendChild(phaseCard);
 }
 
-// ---------- AI Input Button (Placeholder) ----------
-const aiBtn = document.getElementById('aiBtn');
-if(aiBtn){
-  aiBtn.onclick = () => {
-    userData.aiSummary = `AI says: ${userData.country} looks excellent for 2025 relocation!`;
-    updateAIResults();
-  };
+// ======================
+// Start App
+// ======================
+function startApp() {
+  currentPhase = 0;
+  renderPhase(currentPhase);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ---------- Initialize ----------
-document.addEventListener('DOMContentLoaded', () => {
-  const startButton = document.querySelector('.hero button');
-  if(startButton) startButton.onclick = startApp;
+// ======================
+// AI Advice Placeholder
+// ======================
+function getAIAdvice() {
+  const output = document.getElementById("ai-output");
+  output.innerHTML = "<p>Analyzing your inputs... (AI logic placeholder)</p>";
+
+  // Simulate AI response
+  setTimeout(() => {
+    output.innerHTML = "<p>Your personalized relocation summary will appear here based on the inputs you provide in each phase.</p>";
+  }, 1500);
+}
+
+// ======================
+// Optional: Animations (fade in)
+document.addEventListener("DOMContentLoaded", () => {
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    .phase-card { padding: 20px; margin: 20px auto; max-width: 600px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);}
+    .phase-nav { margin-top: 15px; display: flex; justify-content: space-between;}
+    .phase-nav button { padding: 8px 16px; font-size: 1rem; cursor: pointer;}
+    .phase-input { margin-bottom: 12px; padding: 6px; width: 100%; }
+    .input-label { display: block; margin-bottom: 4px; font-weight: 600;}
+  `;
+  document.head.appendChild(style);
 });
