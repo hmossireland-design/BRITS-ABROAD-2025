@@ -1,0 +1,186 @@
+/* ================= ROOT THEME ================= */
+:root {
+  --gold: #d4af37;
+  --navy: #0a1a2f;
+  --sand: #f6f1ea;
+  --sun: #ffb703;
+  --card: #ffffff;
+  --text: #1c1c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #fefcf8, #f2ece3);
+  color: var(--text);
+}
+
+/* ================= HERO ================= */
+.hero {
+  height: 75vh;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 500px;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 40px;
+  background: var(--gold);
+  color: #000;
+  cursor: pointer;
+}
+
+/* ================= PROGRESS ================= */
+.progress-wrapper {
+  padding: 20px;
+  background: var(--sand);
+  text-align: center;
+}
+
+.progress-bar {
+  width: 90%;
+  max-width: 600px;
+  height: 10px;
+  background: #ddd;
+  margin: auto;
+  border-radius: 10px;
+}
+
+#progressFill {
+  height: 100%;
+  width: 8%;
+  background: linear-gradient(90deg, var(--sun), var(--gold));
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* ================= APP ================= */
+main {
+  padding: 30px 15px 90px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* ================= PHASE CARDS ================= */
+.phase {
+  display: none;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.5s ease;
+}
+
+.phase.active {
+  display: block;
+}
+
+.phase h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--navy);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+select,
+input[type="range"],
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* ================= INFO BOX ================= */
+.info-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-left: 5px solid var(--gold);
+  background: #faf6ef;
+  border-radius: 8px;
+  min-height: 50px;
+}
+
+/* ================= AI ================= */
+.ai-box {
+  padding: 25px;
+  background: linear-gradient(135deg, #0a1a2f, #102b4e);
+  color: white;
+  border-radius: 16px;
+  font-size: 1.1rem;
+}
+
+/* ================= NAV ================= */
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav button {
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  background: linear-gradient(90deg, var(--sun), var(--gold));
+  cursor: pointer;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
