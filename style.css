@@ -1,195 +1,143 @@
-/* =========================
-   Brits Abroad 2025 - Luxury Style
-   ========================= */
-
-/* ====== Global Styles ====== */
-body {
-    font-family: 'Inter', sans-serif;
-    background: #fdf6f0;
-    margin: 0;
-    padding: 0;
-    color: #333;
+/* GENERAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-h1, h2 {
-    font-family: 'Playfair Display', serif;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size: 3rem;
-}
-
-h2 {
-    font-size: 1.8rem;
-}
-
-p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-/* ====== Hero Section ====== */
+/* HERO SECTION */
 .hero {
-    position: relative;
-    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('your-hero-image.jpg') center/cover no-repeat;
-    height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
+  height: 80vh;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('hero-background.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
 }
 
-.hero-overlay h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 0.5em;
 }
 
-.hero-overlay p {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 1em;
 }
 
-.hero-overlay button {
-    background: #e67e22;
-    color: #fff;
-    padding: 12px 28px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.hero button {
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  border: none;
+  background: #fcb900;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.hero-overlay button:hover {
-    background: #d35400;
-    transform: translateY(-3px);
+.hero button:hover {
+  background: #ffdd57;
 }
 
-/* ====== Phase Cards ====== */
+/* PHASES */
+#phases-container {
+  padding: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5em;
+}
+
 .phase-card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 30px 25px;
-    margin: 25px auto;
-    max-width: 650px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-    transition: all 0.3s ease;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 1.5em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .phase-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.18);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 .phase-card h2 {
-    color: #34495e;
+  margin-bottom: 0.5em;
+  color: #222;
 }
 
-.input-label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #2c3e50;
+.phase-card label {
+  display: block;
+  margin: 0.5em 0 0.2em;
+  font-weight: 600;
 }
 
-.phase-input {
-    margin-bottom: 18px;
-    padding: 10px 12px;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: border 0.3s ease;
+.phase-card input, 
+.phase-card select {
+  width: 100%;
+  padding: 0.6em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+  font-size: 1em;
 }
 
-.phase-input:focus {
-    border-color: #e67e22;
-    outline: none;
+/* SLIDERS */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #f1f1f1;
+  outline: none;
 }
 
-/* ====== Navigation Buttons ====== */
-.phase-nav {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fcb900;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-.phase-nav button {
-    background: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+input[type=range]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fcb900;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-.phase-nav button:hover {
-    background: #2980b9;
-    transform: translateY(-2px);
-}
-
-/* ====== AI Advice Section ====== */
+/* AI ADVICE */
 #ai-advice {
-    max-width: 650px;
-    margin: 40px auto;
-    padding: 25px;
-    border-radius: 15px;
-    background: #fef9f4;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    text-align: center;
+  padding: 2em;
+  text-align: center;
+  background: #f9f9f9;
 }
 
 #ai-advice button {
-    background: #e67e22;
-    color: #fff;
-    border: none;
-    padding: 10px 26px;
-    border-radius: 30px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 0.8em 2em;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 #ai-advice button:hover {
-    background: #d35400;
-    transform: translateY(-2px);
+  background: #444;
 }
 
 #ai-output {
-    margin-top: 20px;
-    font-size: 1.1rem;
-    color: #34495e;
-}
-
-/* ====== Fade-in Animation ====== */
-.fade-in {
-    animation: fadeIn 0.6s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ====== Inputs & Sliders (future-proof) ====== */
-input[type=range] {
-    width: 100%;
-    margin: 12px 0;
-    accent-color: #e67e22;
-}
-
-/* ====== Responsive ====== */
-@media screen and (max-width: 768px) {
-    h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.5rem; }
-    .hero { height: 350px; }
+  margin-top: 1.5em;
+  font-size: 1.1em;
+  color: #222;
 }
