@@ -1,101 +1,128 @@
-// Phases & Fields
+// ===============================
+// PHASE DATA
+// ===============================
+
 const phases = [
-  { id: 1, title: "Work Rights Comparator", fields: ["Country", "Visa Type"] },
-  { id: 2, title: "UK State Pension Planner", fields: ["Years Worked UK", "Current Pension"] },
-  { id: 3, title: "2025 Budget Impact Scanner", fields: ["Annual Salary", "Expenses"] },
-  { id: 4, title: "Company Formation Wizard", fields: ["Business Type", "Country"] },
-  { id: 5, title: "Healthcare & S1/GHIC Tracker", fields: ["Country", "Coverage Type"] },
-  { id: 6, title: "Cost of Living & Salary Comparator", fields: ["Country", "Job Role"] },
-  { id: 7, title: "Banking & Money Transfer Hub", fields: ["Bank Type", "Transfer Frequency"] },
-  { id: 8, title: "Housing & School Finder", fields: ["City", "Budget"] },
-  { id: 9, title: "Moving Checklist & Pet Relocation", fields: ["Pets", "Items"] },
-  { id: 10, title: "Document Vault", fields: ["Document Name", "Upload"] },
-  { id: 11, title: "Retirement Roadmap", fields: ["Target Age", "Savings"] }
+  {
+    title: "Phase 1 – Destination Planner",
+    content: `
+      <label>Choose Country</label>
+      <select>
+        <option>Portugal</option>
+        <option>Spain</option>
+        <option>Cyprus</option>
+        <option>France</option>
+        <option>Italy</option>
+        <option>Greece</option>
+        <option>Thailand</option>
+        <option>UAE</option>
+      </select>
+    `
+  },
+  {
+    title: "Phase 2 – Budget & Cost of Living",
+    content: `
+      <label>Monthly Budget (£)</label>
+      <input type="range" min="500" max="5000" value="2000"
+        oninput="this.nextElementSibling.innerText = '£' + this.value">
+      <div>£2000</div>
+    `
+  },
+  {
+    title: "Phase 3 – Income & Pension",
+    content: `
+      <label>Annual Pension (£)</label>
+      <input type="range" min="0" max="60000" value="25000"
+        oninput="this.nextElementSibling.innerText = '£' + this.value">
+      <div>£25000</div>
+    `
+  },
+  {
+    title: "Phase 4 – Work Rights",
+    content: `
+      <p>EU vs Non-EU work permissions explained.</p>
+      <p><strong>EU:</strong> Limited post-Brexit</p>
+      <p><strong>Non-EU:</strong> Visa dependent</p>
+    `
+  },
+  {
+    title: "Phase 5 – Healthcare Planning",
+    content: `
+      <p>S1, GHIC & private insurance overview.</p>
+    `
+  },
+  {
+    title: "Phase 6 – Housing & Rentals",
+    content: `
+      <p>Typical rents, deposits & buying rules.</p>
+    `
+  },
+  {
+    title: "Phase 7 – Banking & Transfers",
+    content: `
+      <p>UK vs EU accounts, Wise, Revolut, IBAN.</p>
+    `
+  },
+  {
+    title: "Phase 8 – Family & Pets",
+    content: `
+      <p>Schooling, pet relocation, vaccinations.</p>
+    `
+  },
+  {
+    title: "Phase 9 – Moving Checklist",
+    content: `
+      <ul>
+        <li>Cancel UK utilities</li>
+        <li>Notify HMRC</li>
+        <li>Register abroad</li>
+      </ul>
+    `
+  },
+  {
+    title: "Phase 10 – Company Formation",
+    content: `
+      <p>Cyprus, UAE & EU structures overview.</p>
+    `
+  },
+  {
+    title: "Phase 11 – Retirement Strategy",
+    content: `
+      <p>State pension, taxation & residency planning.</p>
+    `
+  }
 ];
 
-let currentPhase = 0;
+// ===============================
+// RENDER PHASES
+// ===============================
 
-// Start App
-function startApp() {
-  currentPhase = 0;
-  renderPhase();
-}
+const container = document.getElementById("phases-container");
 
-// Render Phase
-function renderPhase() {
-  const container = document.getElementById('phases-container');
-  container.innerHTML = '';
-  const phase = phases[currentPhase];
-
-  const card = document.createElement('div');
-  card.className = 'phase-card';
-  card.innerHTML = `<h2>${phase.title}</h2>`;
-
-  phase.fields.forEach(field => {
-    if(field.toLowerCase().includes("upload")){
-      card.innerHTML += `<label>${field}</label><input type="file">`;
-    } else if(field.toLowerCase().includes("years") || field.toLowerCase().includes("salary") || field.toLowerCase().includes("expenses") || field.toLowerCase().includes("savings")) {
-      card.innerHTML += `<label>${field}</label><input type="range" min="0" max="100" value="50" oninput="updateChart('${field}', this.value)">`;
-    } else {
-      card.innerHTML += `<label>${field}</label><input type="text">`;
-    }
-  });
-
-  card.innerHTML += `<button onclick="nextPhase()">Next Phase</button>`;
-
+phases.forEach(phase => {
+  const card = document.createElement("section");
+  card.className = "phase-card";
+  card.innerHTML = `
+    <h2>${phase.title}</h2>
+    ${phase.content}
+  `;
   container.appendChild(card);
-}
-
-// Next Phase
-function nextPhase() {
-  if(currentPhase < phases.length - 1) {
-    currentPhase++;
-    renderPhase();
-  } else {
-    alert("🎉 You've completed all phases! Scroll down for AI advice and interactive charts.");
-  }
-}
-
-// Placeholder AI advice
-function getAIAdvice() {
-  const output = document.getElementById('ai-output');
-  output.innerHTML = "🤖 AI Advice: This feature will give tailored relocation guidance based on your inputs. Coming soon!";
-}
-
-// Interactive Chart
-const ctx = document.getElementById('budgetChart').getContext('2d');
-const budgetChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Salary', 'Expenses', 'Savings'],
-    datasets: [{
-      label: '2025 Budget',
-      data: [50, 50, 50],
-      backgroundColor: ['#fcb900', '#ff8c00', '#22c55e']
-    }]
-  },
-  options: {
-    responsive: true,
-    scales: {
-      y: { beginAtZero: true, max: 100 }
-    }
-  }
 });
 
-// Update chart dynamically
-function updateChart(field, value) {
-  if(field.toLowerCase().includes('salary')) budgetChart.data.datasets[0].data[0] = parseInt(value);
-  if(field.toLowerCase().includes('expenses')) budgetChart.data.datasets[0].data[1] = parseInt(value);
-  if(field.toLowerCase().includes('savings')) budgetChart.data.datasets[0].data[2] = parseInt(value);
-  budgetChart.update();
-}
-// Smooth scroll to phases
+// ===============================
+// START BUTTON SCROLL
+// ===============================
+
 function startApp() {
-  document.getElementById('phases-container')
-    .scrollIntoView({ behavior: 'smooth' });
+  document.getElementById("phases-container")
+    .scrollIntoView({ behavior: "smooth" });
 }
-// Smooth scroll to phases
-function startApp() {
-  document.getElementById('phases-container')
-    .scrollIntoView({ behavior: 'smooth' });
+
+// ===============================
+// AI PLACEHOLDER
+// ===============================
+
+function getAIAdvice() {
+  document.getElementById("ai-output").innerText =
+    "Based on your inputs, Portugal and Cyprus offer the best tax efficiency and lifestyle balance for 2025.";
 }
