@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================
+   RESET & BASE
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,454 +8,176 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* HERO */
+body {
+  background: #f4f6f8;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* =========================
+   HERO
+========================= */
 .hero {
-  height: 80vh;
-  background: linear-gradient(135deg, #fcb900, #ffdd57);
+  height: 85vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  animation: heroGradient 10s ease infinite;
-}
-
-.hero-overlay {
-  max-width: 90%;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  animation: fadeInUp 1s ease forwards;
-}
-
-.hero p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-  animation: fadeInUp 1.3s ease forwards;
-}
-
-.hero button {
-  padding: 1em 2.5em;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 8px;
-  background: #222;
   color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-  animation: fadeInUp 1.6s ease forwards;
-}
-
-.hero button:hover {
-  background: #444;
-}
-
-/* ANIMATIONS */
-@keyframes heroGradient {
-  0% {background: linear-gradient(135deg, #fcb900, #ffdd57);}
-  50% {background: linear-gradient(135deg, #ffdd57, #fcb900);}
-  100% {background: linear-gradient(135deg, #fcb900, #ffdd57);}
-}
-
-@keyframes fadeInUp {
-  0% {opacity: 0; transform: translateY(20px);}
-  100% {opacity: 1; transform: translateY(0);}
-}
-
-/* Hero overlay for text */
-.hero-overlay {
-  z-index: 2;
-  animation: slideUp 1.5s ease-out;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  text-shadow: 2px 2px 12px rgba(0,0,0,0.7);
-}
-
-.hero p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-  text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
-}
-
-.hero button {
-  padding: 1em 2.5em;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 8px;
-  background: #fcb900;
-  color: #000;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.hero button:hover {
-  background: #ffdd57;
-  transform: scale(1.05);
-}
-
-/* ANIMATIONS */
-@keyframes heroFadeIn {
-  0% { opacity: 0; transform: scale(1.05); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* OPTIONAL: Particle overlay using pseudo-element */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://i.ibb.co/f2nLQ4S/particles.png') repeat;
-  opacity: 0.2;
-  z-index: 1;
-  animation: moveParticles 60s linear infinite;
-}
-
-@keyframes moveParticles {
-  0% { background-position: 0 0; }
-  100% { background-position: 1000px 1000px; }
-}
-
-/* Hero overlay for text */
-.hero-overlay {
-  z-index: 2;
-  animation: slideUp 1.5s ease-out;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-}
-
-.hero p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
-}
-
-.hero button {
-  padding: 1em 2.5em;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 8px;
-  background: #fcb900;
-  color: #000;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.hero button:hover {
-  background: #ffdd57;
-  transform: scale(1.05);
-}
-
-/* ANIMATIONS */
-@keyframes heroFadeIn {
-  0% { opacity: 0; transform: scale(1.05); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
 }
 
 .hero-overlay {
-  animation: fadeIn 1.5s ease-in-out forwards;
+  max-width: 700px;
+  animation: fadeUp 1.2s ease;
 }
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slideFadeIn 1s 0.3s forwards;
-}
-
-.hero p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slideFadeIn 1s 0.6s forwards;
-}
-
-.hero button {
-  padding: 1em 2.5em;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 8px;
-  background: #fcb900;
-  color: #000;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slideFadeIn 1s 0.9s forwards;
-}
-
-.hero button:hover {
-  background: #ffdd57;
-  transform: scale(1.05);
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes slideFadeIn {
-  0% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
+  font-size: 3.5rem;
   margin-bottom: 0.5em;
 }
 
 .hero p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
+  font-size: 1.3rem;
+  opacity: 0.9;
+  margin-bottom: 1.5em;
 }
 
 .hero button {
   padding: 1em 2.5em;
-  font-size: 1.2em;
+  font-size: 1.1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
   background: #fcb900;
-  color: #000;
+  color: #111;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.hero button:hover {
-  background: #ffdd57;
-}
-
-/* PHASE CARDS */
-#phases-container {
-  padding: 2em;
-  display: flex;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  gap: 1.5em;
-}
-
-/* PHASE CARDS */
-#phases-container {
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-}
-
-.phase-card {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  padding: 2em;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.phase-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+.hero button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* =========================
+   PHASE CONTAINER
+========================= */
+#phases-container {
+  padding: 4em 1.5em;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* =========================
+   PHASE CARDS
+========================= */
+.phase-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 2.5em;
+  margin-bottom: 3em;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+  animation: slideIn 0.8s ease both;
 }
 
 .phase-card h2 {
   margin-bottom: 1em;
-  color: #222;
+  font-size: 1.8rem;
 }
 
 .phase-card label {
   display: block;
-  margin: 0.5em 0 0.2em;
   font-weight: 600;
+  margin: 1em 0 0.4em;
 }
 
-.phase-card input, 
+.phase-card input,
 .phase-card select {
   width: 100%;
-  padding: 0.6em;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-bottom: 1em;
+  padding: 0.8em;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
 }
 
-/* SLIDERS */
-input[type=range] {
-  width: 100%;
-  height: 12px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #fcb900, #ffdd57);
-  outline: none;
-  transition: background 0.3s ease;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #222;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-input[type=range]::-webkit-slider-thumb:hover {
-  background: #444;
-  transform: scale(1.2);
-}
-
-#ai-advice {
-  padding: 2em;
-  text-align: center;
-  background: #f9f9f9;
-}
-
-#ai-advice button {
-  padding: 1em 2em;
-  font-size: 1.1em;
+.phase-card button {
+  margin-top: 1.5em;
+  padding: 0.9em 2.2em;
+  border-radius: 30px;
   border: none;
-  border-radius: 8px;
-  background: #222;
+  background: #203a43;
   color: #fff;
+  font-size: 1rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-#ai-advice button:hover {
-  background: #444;
+.phase-card button:hover {
+  background: #2c5364;
   transform: translateY(-2px);
 }
 
+/* =========================
+   FEEDBACK TEXT
+========================= */
+.phase-result {
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  background: #f0f7ff;
+  color: #004085;
+  font-weight: 500;
+}
+
+/* =========================
+   AI ADVICE
+========================= */
+#ai-advice {
+  background: #111;
+  color: #fff;
+  padding: 4em 1.5em;
+  text-align: center;
+}
+
+#ai-advice button {
+  background: #fcb900;
+  border: none;
+  border-radius: 30px;
+  padding: 1em 2.5em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 #ai-output {
-  margin-top: 1.5em;
-  font-size: 1.1em;
-  color: #222;
-  min-height: 2em;
+  margin-top: 2em;
+  white-space: pre-line;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* CHART SECTION */
-#charts-section {
-  padding: 2em;
-  background: #fff;
-}
-
-#charts-section canvas {
-  max-width: 100%;
-}
-/* ============================
-   SMOOTH PAGE ANIMATIONS
-============================ */
-
-/* Fade-in effect for phase cards */
-.phase-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInCard 0.6s forwards;
-}
-
-/* Staggered animation */
-.phase-card:nth-child(1) { animation-delay: 0.1s; }
-.phase-card:nth-child(2) { animation-delay: 0.2s; }
-.phase-card:nth-child(3) { animation-delay: 0.3s; }
-.phase-card:nth-child(4) { animation-delay: 0.4s; }
-.phase-card:nth-child(5) { animation-delay: 0.5s; }
-.phase-card:nth-child(6) { animation-delay: 0.6s; }
-.phase-card:nth-child(7) { animation-delay: 0.7s; }
-.phase-card:nth-child(8) { animation-delay: 0.8s; }
-.phase-card:nth-child(9) { animation-delay: 0.9s; }
-.phase-card:nth-child(10) { animation-delay: 1s; }
-.phase-card:nth-child(11) { animation-delay: 1.1s; }
-
-@keyframes fadeInCard {
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-/* ============================
-   HORIZONTAL SWIPE PHASES
-============================ */
 
-#phases-container {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5em;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 2em;
-}
-
-.phase-card {
-  flex: 0 0 90%;
-  scroll-snap-align: start;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-}
-
-/* Hide ugly scrollbar (mobile-friendly) */
-#phases-container::-webkit-scrollbar {
-  display: none;
-}
-/* ============================
-   HORIZONTAL SWIPE PHASES
-============================ */
-
-#phases-container {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5em;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 2em;
-}
-
-.phase-card {
-  flex: 0 0 90%;
-  scroll-snap-align: start;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-}
-
-/* Hide ugly scrollbar (mobile-friendly) */
-#phases-container::-webkit-scrollbar {
-  display: none;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
