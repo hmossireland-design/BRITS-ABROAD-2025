@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Brits Abroad 2025 – The Ultimate Relocation App</title>
+  <title>Brits Abroad 2025 – Ultimate Relocation App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonts -->
@@ -10,6 +10,9 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -31,6 +34,11 @@
   <section id="ai-advice">
     <button onclick="getAIAdvice()">Get AI Advice</button>
     <div id="ai-output"></div>
+  </section>
+
+  <!-- Interactive Chart Section -->
+  <section id="charts-section">
+    <canvas id="budgetChart"></canvas>
   </section>
 
   <!-- Scripts -->
