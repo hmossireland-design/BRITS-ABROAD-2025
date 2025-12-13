@@ -9,8 +9,8 @@
 /* HERO */
 .hero {
   height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-              url('https://picsum.photos/1920/1080') center/cover no-repeat;
+  background: linear-gradient(270deg, #ffcc66, #ff9966, #ff6699, #cc66ff);
+  background-size: 800% 800%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,78 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  animation: heroFadeIn 2s ease-in-out;
+  animation: gradientShift 15s ease infinite, heroFadeIn 2s ease-in-out;
+}
+
+/* Hero overlay for text */
+.hero-overlay {
+  z-index: 2;
+  animation: slideUp 1.5s ease-out;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  text-shadow: 2px 2px 12px rgba(0,0,0,0.7);
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+}
+
+.hero button {
+  padding: 1em 2.5em;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #fcb900;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero button:hover {
+  background: #ffdd57;
+  transform: scale(1.05);
+}
+
+/* ANIMATIONS */
+@keyframes heroFadeIn {
+  0% { opacity: 0; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* OPTIONAL: Particle overlay using pseudo-element */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://i.ibb.co/f2nLQ4S/particles.png') repeat;
+  opacity: 0.2;
+  z-index: 1;
+  animation: moveParticles 60s linear infinite;
+}
+
+@keyframes moveParticles {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
 }
 
 /* Hero overlay for text */
