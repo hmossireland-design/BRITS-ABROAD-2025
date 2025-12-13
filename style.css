@@ -333,7 +333,6 @@ input[type=range]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
 
-/* AI ADVICE */
 #ai-advice {
   padding: 2em;
   text-align: center;
@@ -341,23 +340,26 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 #ai-advice button {
-  padding: 0.8em 2em;
-  font-size: 1em;
+  padding: 1em 2em;
+  font-size: 1.1em;
   border: none;
   border-radius: 8px;
   background: #222;
   color: #fff;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 #ai-advice button:hover {
   background: #444;
+  transform: translateY(-2px);
 }
 
 #ai-output {
   margin-top: 1.5em;
   font-size: 1.1em;
   color: #222;
+  min-height: 2em;
 }
 
 /* CHART SECTION */
