@@ -11,10 +11,9 @@
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<script src="app.js"></script>
 <body>
 
-<!-- ================= HERO ================= -->
+<!-- HERO SECTION -->
 <header class="hero">
   <div class="hero-overlay">
     <h1>Brits Abroad 2025</h1>
@@ -23,163 +22,18 @@
   </div>
 </header>
 
-<!-- ================= PROGRESS ================= -->
-<section class="progress-wrapper">
-  <div class="progress-bar">
-    <div id="progressFill"></div>
-  </div>
-  <p id="progressText">Phase 1 of 12</p>
-</section>
-
-<!-- ================= MAIN APP ================= -->
-<main id="app">
-
-<!-- ========== PHASE 1 ========== -->
-<section class="phase active" data-phase="1">
-  <h2>Phase 1 – Destination Preferences</h2>
-  <label>Preferred Climate</label>
-  <select id="climate">
-    <option value="warm">Warm & Sunny</option>
-    <option value="mixed">Mixed Seasons</option>
-    <option value="cool">Cool Climate</option>
-  </select>
-
-  <label>Preferred Region</label>
-  <select id="region">
-    <option value="eu">European Union</option>
-    <option value="non-eu">Non-EU</option>
-    <option value="any">Anywhere</option>
-  </select>
-</section>
-
-<!-- ========== PHASE 2 ========== -->
-<section class="phase" data-phase="2">
-  <h2>Phase 2 – Work Rights Comparator</h2>
-  <label>Will you need to work?</label>
-  <select id="workIntent">
-    <option value="no">No</option>
-    <option value="remote">Remote / Online</option>
-    <option value="local">Local Employment</option>
-  </select>
-
-  <div class="info-box" id="workRightsInfo"></div>
-</section>
-
-<!-- ========== PHASE 3 ========== -->
-<section class="phase" data-phase="3">
-  <h2>Phase 3 – UK State Pension Planner</h2>
-  <label>Years of NI Contributions</label>
-  <input type="range" id="niYears" min="0" max="35" value="20" />
-  <p><span id="niYearsVal">20</span> years</p>
-
-  <div class="info-box" id="pensionResult"></div>
-</section>
-
-<!-- ========== PHASE 4 ========== -->
-<section class="phase" data-phase="4">
-  <h2>Phase 4 – 2025 Budget Impact Scanner</h2>
-  <label>Annual Income (£)</label>
-  <input type="range" id="income" min="0" max="150000" step="1000" value="30000" />
-  <p>£<span id="incomeVal">30,000</span></p>
-
-  <div class="info-box" id="budgetImpact"></div>
-</section>
-
-<!-- ========== PHASE 5 ========== -->
-<section class="phase" data-phase="5">
-  <h2>Phase 5 – Company Formation Wizard</h2>
-  <label>Are you self-employed or planning a company?</label>
-  <select id="companyPlan">
-    <option value="no">No</option>
-    <option value="yes">Yes</option>
-  </select>
-
-  <div class="info-box" id="companyAdvice"></div>
-</section>
-
-<!-- ========== PHASE 6 ========== -->
-<section class="phase" data-phase="6">
-  <h2>Phase 6 – Healthcare & S1 / GHIC</h2>
-  <label>Your Age</label>
-  <input type="range" id="age" min="18" max="90" value="55" />
-  <p><span id="ageVal">55</span> years</p>
-
-  <div class="info-box" id="healthcareAdvice"></div>
-</section>
-
-<!-- ========== PHASE 7 ========== -->
-<section class="phase" data-phase="7">
-  <h2>Phase 7 – Cost of Living Comparator</h2>
-  <label>Monthly Budget (£)</label>
-  <input type="range" id="monthlyBudget" min="500" max="6000" step="100" value="2000" />
-  <p>£<span id="monthlyBudgetVal">2,000</span></p>
-
-  <div class="info-box" id="costResult"></div>
-</section>
-
-<!-- ========== PHASE 8 ========== -->
-<section class="phase" data-phase="8">
-  <h2>Phase 8 – Banking & Money Transfer</h2>
-  <label>Main Income Currency</label>
-  <select id="currency">
-    <option value="gbp">GBP</option>
-    <option value="eur">EUR</option>
-  </select>
-
-  <div class="info-box" id="bankingAdvice"></div>
-</section>
-
-<!-- ========== PHASE 9 ========== -->
-<section class="phase" data-phase="9">
-  <h2>Phase 9 – Housing & Schools</h2>
-  <label>Do you have children?</label>
-  <select id="children">
-    <option value="no">No</option>
-    <option value="yes">Yes</option>
-  </select>
-
-  <div class="info-box" id="housingAdvice"></div>
-</section>
-
-<!-- ========== PHASE 10 ========== -->
-<section class="phase" data-phase="10">
-  <h2>Phase 10 – Moving & Pet Relocation</h2>
-  <label>Pets?</label>
-  <select id="pets">
-    <option value="no">No</option>
-    <option value="yes">Yes</option>
-  </select>
-
-  <div class="info-box" id="movingAdvice"></div>
-</section>
-
-<!-- ========== PHASE 11 ========== -->
-<section class="phase" data-phase="11">
-  <h2>Phase 11 – Document Vault</h2>
-  <p>This app stores files locally on your device.</p>
-  <input type="file" multiple />
-</section>
-
-<!-- ========== PHASE 12 ========== -->
-<section class="phase" data-phase="12">
-  <h2>Final Phase – AI Relocation Summary</h2>
-  <div id="aiSummary" class="ai-box">
-    Complete all phases to generate your personalised relocation verdict.
-  </div>
-</section>
-
+<!-- PHASES CONTAINER -->
+<main id="phases-container">
+  <!-- All 11+ phases will be dynamically injected via app.js -->
 </main>
 
-<!-- ================= NAVIGATION ================= -->
-<footer class="nav">
-  <button onclick="prevPhase()">Back</button>
-  <button onclick="nextPhase()">Next</button>
-</footer>
+<!-- AI ADVICE PLACEHOLDER -->
+<section id="ai-advice">
+  <button onclick="getAIAdvice()">Get Advice</button>
+  <div id="ai-output"></div>
+</section>
 
-<!-- ================= SCRIPTS ================= -->
-<script src="data.js"></script>
-<script src="ai.js"></script>
+<!-- Scripts -->
 <script src="app.js"></script>
-
 </body>
 </html>
