@@ -405,3 +405,29 @@ input[type=range]::-webkit-slider-thumb:hover {
     transform: translateY(0);
   }
 }
+/* ============================
+   HORIZONTAL SWIPE PHASES
+============================ */
+
+#phases-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5em;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 2em;
+}
+
+.phase-card {
+  flex: 0 0 90%;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+/* Hide ugly scrollbar (mobile-friendly) */
+#phases-container::-webkit-scrollbar {
+  display: none;
+}
