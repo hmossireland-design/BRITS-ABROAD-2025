@@ -184,3 +184,27 @@ function getAIAdvice() {
 function startApp() {
   document.getElementById("phase-1").scrollIntoView({ behavior: "smooth" });
 }
+// ============================
+// PROGRESS BAR LOGIC
+// ============================
+const totalPhases = 11;
+
+window.addEventListener("scroll", () => {
+  const phases = document.querySelectorAll(".phase-card");
+  let currentPhase = 1;
+
+  phases.forEach((phase, index) => {
+    const rect = phase.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.5) {
+      currentPhase = index + 1;
+    }
+  });
+
+  const progressPercent = (currentPhase / totalPhases) * 100;
+
+  document.getElementById("progress-fill").style.width =
+    progressPercent + "%";
+
+  document.getElementById("progress-text").innerText =
+    `Phase ${currentPhase} of ${totalPhases}`;
+});
