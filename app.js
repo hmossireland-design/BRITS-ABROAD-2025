@@ -114,8 +114,9 @@ phases.forEach(phase => {
 // ===============================
 
 function startApp() {
-  document.getElementById("phases-container")
-    .scrollIntoView({ behavior: "smooth" });
+  document
+  .getElementById("app-start")
+  .scrollIntoView({ behavior: "smooth" });
 }
 
 // ===============================
