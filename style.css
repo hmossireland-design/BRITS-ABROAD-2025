@@ -224,3 +224,16 @@ h2 {
   opacity: 1;
   transform: translateY(0);
 }
+/* =========================
+   PHASE CARD ANIMATIONS
+========================= */
+.phase-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.phase-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
