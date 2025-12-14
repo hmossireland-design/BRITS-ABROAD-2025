@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================
+   RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,150 +8,161 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* HERO */
-.hero {
-  height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero-background.jpg') center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* =========================
+   BODY & HERO
+========================= */
+body {
+  background: #f7f7f7;
+  color: #222;
+}
+
+header {
+  background: #004080;
   color: #fff;
   text-align: center;
+  padding: 20px 0;
 }
 
-.hero-overlay h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-}
-
-.hero-overlay p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-}
-
-.hero-overlay button {
-  padding: 1em 2.5em;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 8px;
-  background: #fcb900;
-  color: #000;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.hero-overlay button:hover {
-  background: #ffdd57;
-}
-
-/* PROGRESS BAR */
-#progress-wrapper {
-  padding: 1em 2em;
-  background: #f5f5f5;
-}
-
-#progress-bar {
+.hero-img {
   width: 100%;
-  height: 12px;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+#progress-container {
+  width: 90%;
+  margin: 20px auto 5px auto;
+  height: 20px;
   background: #ddd;
-  border-radius: 6px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
 #progress-fill {
   width: 0%;
   height: 100%;
-  background: #fcb900;
-  transition: width 0.3s ease;
+  background: #004080;
+  transition: width 0.5s ease-in-out;
 }
 
 #progress-text {
-  margin-bottom: 0.5em;
+  text-align: center;
+  margin-bottom: 20px;
   font-weight: 600;
+  font-size: 1.1em;
 }
 
-/* PHASE CARDS */
-#phases-container {
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-}
-
+/* =========================
+   PHASE CARDS
+========================= */
 .phase-card {
   background: #fff;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 25px 20px;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  padding: 2em;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .phase-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
 
 .phase-card h2 {
-  margin-bottom: 1em;
-  color: #222;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #004080;
 }
 
-.phase-card label {
+/* =========================
+   LABELS & INPUTS
+========================= */
+label {
   display: block;
-  margin: 0.5em 0 0.2em;
+  margin-top: 15px;
   font-weight: 600;
 }
 
-.phase-card input, 
-.phase-card select {
+select, input[type="range"] {
   width: 100%;
-  padding: 0.6em;
+  padding: 8px 10px;
+  margin-top: 5px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  margin-bottom: 1em;
+  font-size: 1em;
 }
 
-/* SLIDERS */
-input[type=range] {
-  width: 100%;
-  height: 12px;
-  border-radius: 6px;
+input[type="range"] {
+  -webkit-appearance: none;
   background: #f1f1f1;
-  outline: none;
+  height: 12px;
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
   width: 24px;
   height: 24px;
+  background: #004080;
   border-radius: 50%;
-  background: #fcb900;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-/* AI ADVICE */
-#ai-advice {
-  padding: 2em;
-  text-align: center;
-  background: #f9f9f9;
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #0066cc;
 }
 
-#ai-advice button {
-  padding: 0.8em 2em;
-  font-size: 1em;
+/* =========================
+   BUTTONS
+========================= */
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #004080;
+  color: #fff;
   border: none;
   border-radius: 8px;
-  background: #222;
-  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-#ai-advice button:hover {
-  background: #444;
+button:hover {
+  background: #0066cc;
 }
 
-#ai-output {
-  margin-top: 1.5em;
-  font-size: 1.1em;
-  color: #222;
+/* =========================
+   PHASE RESULTS
+========================= */
+.phase-result {
+  margin-top: 15px;
+  padding: 12px;
+  background: #e6f0ff;
+  border-radius: 6px;
+  display: none;
+  font-size: 0.95em;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .phase-card {
+    padding: 20px 15px;
+  }
+
+  .phase-card h2 {
+    font-size: 1.5em;
+  }
+
+  button {
+    width: 100%;
+  }
 }
