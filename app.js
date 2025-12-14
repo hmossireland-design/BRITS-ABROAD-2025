@@ -1,343 +1,83 @@
-/*************************************************
- BRITS ABROAD 2025 – CORE APP LOGIC
-**************************************************/
+const app = document.getElementById("app");
 
-/* GLOBAL USER PROFILE */
-const userProfile = {
-  destination: "",
-  passport: "UK",
-  work: "",
-  monthlyIncome: 1500,
-  budgetLevel: "",
-  healthStatus: "",
-  statePension: "",
-  housingType: "",
-  housingBudget: 800,
-  locationStyle: ""
-};
+let currentPhase = 1;
 
-/* PHASE DEFINITIONS */
 const phases = [
-  { id: 1, html: `
-    <h2>🌍 Choose Your Destination</h2>
-    <label>Where are you considering moving?</label>
+  { id: 1, html: `<h2>🌍 Destination</h2>
     <select id="destination">
-      <option value="">-- Select Country --</option>
-      <option value="Portugal">Portugal</option>
-      <option value="Spain">Spain</option>
-      <option value="France">France</option>
-      <option value="Cyprus">Cyprus</option>
-      <option value="Thailand">Thailand</option>
-      <option value="UAE">UAE</option>
-    </select>
-    <div class="phase-result" id="destination-result"></div>
-    <button onclick="savePhase1()">Continue</button>
-  `},
-  { id: 2, html: `
-    <h2>🛂 Work & Residency Rights</h2>
-    <label>Passport held</label>
-    <select id="passport">
-      <option value="UK">UK Passport</option>
-      <option value="EU">EU Passport</option>
-    </select>
-    <label>Do you plan to work?</label>
-    <select id="work">
       <option value="">-- Select --</option>
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
+      <option>Portugal</option><option>Spain</option>
+      <option>France</option><option>Cyprus</option>
+      <option>Thailand</option><option>UAE</option>
     </select>
-    <div class="phase-result" id="rights-result"></div>
-    <button onclick="savePhase2()">Continue</button>
-  `},
-  { id: 3, html: `
-    <h2>💰 Income & Budget</h2>
-    <label>Monthly Income (£)</label>
-    <input type="range" min="500" max="5000" step="100" id="income" value="1500"
-      oninput="document.getElementById('incomeValue').innerText=this.value" />
-    <p>£<span id="incomeValue">1500</span> / month</p>
-    <label>Budget sensitivity</label>
-    <select id="budget">
-      <option value="">-- Select --</option>
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
-    <div class="phase-result" id="budget-result"></div>
-    <button onclick="savePhase3()">Continue</button>
-  `},
-  { id: 4, html: `
-    <h2>🏥 Healthcare & S1 Planning</h2>
-    <label>What best describes you?</label>
-    <select id="health-status">
-      <option value="">-- Select --</option>
-      <option value="working">Working / Self-employed</option>
-      <option value="retired">Retired / State Pension</option>
-    </select>
-    <label>Do you receive the UK State Pension?</label>
-    <select id="state-pension">
-      <option value="">-- Select --</option>
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
-    <div class="phase-result" id="healthcare-result"></div>
-    <button onclick="savePhase4()">Continue</button>
-  `},
-  { id: 5, html: `
-    <h2>🏠 Housing & Rent Reality</h2>
-    <label>Do you plan to rent or buy?</label>
-    <select id="housing-type">
-      <option value="">-- Select --</option>
-      <option value="rent">Rent</option>
-      <option value="buy">Buy</option>
-    </select>
-    <label>Monthly housing budget (£)</label>
-    <input type="range" min="300" max="3000" step="50" id="housing-budget" value="800"
-      oninput="document.getElementById('housingValue').innerText=this.value" />
-    <p>£<span id="housingValue">800</span> / month</p>
-    <label>Preferred location style</label>
-    <select id="location-style">
-      <option value="">-- Select --</option>
-      <option value="city">City</option>
-      <option value="town">Town</option>
-      <option value="rural">Rural</option>
-    </select>
-    <div class="phase-result" id="housing-result"></div>
-    <button onclick="savePhase5()">Continue</button>
-  `},
-  {
-  id: 6,
-  html: `
-    <h2>📊 Cost of Living Reality</h2>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <label>How would you rate expected living costs?</label>
-    <select id="cost-level">
-      <option value="">-- Select --</option>
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
+  { id: 2, html: `<h2>🛂 Residency</h2>
+    <select><option>UK Passport</option><option>EU Passport</option></select>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <div class="phase-result" id="cost-result"></div>
-    <button onclick="savePhase6()">Continue</button>
-  `
-},
- {
-  id: 7,
-  html: `
-    <h2>💼 Tax Exposure</h2>
+  { id: 3, html: `<h2>💰 Income</h2>
+    <input type="range" min="500" max="5000" value="1500">
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <label>Will you become tax resident abroad?</label>
-    <select id="tax-resident">
-      <option value="">-- Select --</option>
-      <option value="yes">Yes</option>
-      <option value="no">No / Unsure</option>
-    </select>
+  { id: 4, html: `<h2>🏥 Healthcare</h2>
+    <select><option>Working</option><option>Retired</option></select>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <div class="phase-result" id="tax-result"></div>
-    <button onclick="savePhase7()">Continue</button>
-  `
-},
- {
-  id: 8,
-  html: `
-    <h2>🏦 Banking & Money Transfers</h2>
+  { id: 5, html: `<h2>🏠 Housing</h2>
+    <select><option>Rent</option><option>Buy</option></select>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <label>Will you need international banking?</label>
-    <select id="banking">
-      <option value="">-- Select --</option>
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
+  { id: 6, html: `<h2>💸 Tax Reality</h2>
+    <p>Tax residency, double taxation, reporting obligations.</p>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <div class="phase-result" id="banking-result"></div>
-    <button onclick="savePhase8()">Continue</button>
-  `
-},
- {
-  id: 9,
-  html: `
-    <h2>👨‍👩‍👧‍👦 Family, Pets & Schools</h2>
+  { id: 7, html: `<h2>🏦 Banking</h2>
+    <p>Local vs international banking options.</p>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <label>Are you relocating with family or pets?</label>
-    <select id="family">
-      <option value="">-- Select --</option>
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
+  { id: 8, html: `<h2>📑 Visas</h2>
+    <p>Visa types and renewal risks.</p>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <div class="phase-result" id="family-result"></div>
-    <button onclick="savePhase9()">Continue</button>
-  `
-},
- {
-  id: 10,
-  html: `
-    <h2>🚚 Move Logistics</h2>
+  { id: 9, html: `<h2>🚗 Transport</h2>
+    <p>Driving licences and car imports.</p>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <label>How complex will your move be?</label>
-    <select id="logistics">
-      <option value="">-- Select --</option>
-      <option value="simple">Simple</option>
-      <option value="moderate">Moderate</option>
-      <option value="complex">Complex</option>
-    </select>
+  { id: 10, html: `<h2>📦 Moving</h2>
+    <p>Shipping, pets, personal items.</p>
+    <button onclick="nextPhase()">Continue</button>` },
 
-    <div class="phase-result" id="logistics-result"></div>
-    <button onclick="savePhase10()">Continue</button>
-  `
-},
- {
-  id: 11,
-  html: `
-    <h2>🏁 Relocation Readiness</h2>
-
-    <p>Based on your answers, here is your current readiness level:</p>
-
-    <div class="phase-result" id="final-result"></div>
-
-    <button onclick="savePhase11()">Generate Summary</button>
-  `
-}
+  { id: 11, html: `<h2>✅ Final Score</h2>
+    <p>Your personalised relocation readiness score.</p>` }
 ];
 
-/* RENDER PHASES */
-const container = document.getElementById("phases-container");
-phases.forEach(phase => {
-  const card = document.createElement("section");
+function startApp() {
+  app.innerHTML = "";
+  currentPhase = 1;
+  renderPhase();
+}
+
+function renderPhase() {
+  const phase = phases[currentPhase - 1];
+  const card = document.createElement("div");
   card.className = "phase-card";
   card.id = `phase-${phase.id}`;
   card.innerHTML = phase.html;
-  container.appendChild(card);
-});
-
-/* START APP */
-function startApp() {
-  document.getElementById("phase-1").scrollIntoView({ behavior: "smooth" });
+  app.appendChild(card);
+  updateProgress();
 }
 
-/* PROGRESS BAR */
-function updateProgress(phaseNumber) {
-  const percent = (phaseNumber / 11) * 100;
-  document.getElementById("progress-fill").style.width = percent + "%";
-  document.getElementById("progress-text").innerText = `Phase ${phaseNumber} of 11`;
+function nextPhase() {
+  if (currentPhase < phases.length) {
+    currentPhase++;
+    renderPhase();
+    document.getElementById(`phase-${currentPhase}`).scrollIntoView({ behavior: "smooth" });
+  }
 }
 
-/* PHASE FUNCTIONS */
-function savePhase1() {
-  const dest = document.getElementById("destination").value;
-  if(!dest) return alert("Please select a destination");
-  userProfile.destination = dest;
-  updateProgress(1);
-  document.getElementById("phase-2").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase2() {
-  const pass = document.getElementById("passport").value;
-  const work = document.getElementById("work").value;
-  if(!pass || !work) return alert("Please answer both questions");
-  userProfile.passport = pass;
-  userProfile.work = work;
-  updateProgress(2);
-  document.getElementById("phase-3").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase3() {
-  const income = document.getElementById("income").value;
-  const budget = document.getElementById("budget").value;
-  if(!income || !budget) return alert("Please answer both questions");
-  userProfile.monthlyIncome = income;
-  userProfile.budgetLevel = budget;
-  updateProgress(3);
-  document.getElementById("phase-4").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase4() {
-  const health = document.getElementById("health-status").value;
-  const pension = document.getElementById("state-pension").value;
-  if(!health || !pension) return alert("Please answer both questions");
-  userProfile.healthStatus = health;
-  userProfile.statePension = pension;
-  updateProgress(4);
-  const next = document.getElementById("phase-5");
-  if(next) next.scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase5() {
-  const type = document.getElementById("housing-type").value;
-  const budget = document.getElementById("housing-budget").value;
-  const style = document.getElementById("location-style").value;
-  if(!type || !budget || !style) return alert("Please answer all housing questions");
-  userProfile.housingType = type;
-  userProfile.housingBudget = budget;
-  userProfile.locationStyle = style;
-  updateProgress(5);
-}
-function savePhase6() {
-  const cost = document.getElementById("cost-level").value;
-  if (!cost) return alert("Please select a cost level");
-
-  document.getElementById("cost-result").innerHTML =
-    `Expected cost level: <strong>${cost.toUpperCase()}</strong>`;
-  updateProgress(6);
-  document.getElementById("phase-7").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase7() {
-  const tax = document.getElementById("tax-resident").value;
-  if (!tax) return alert("Please select an option");
-
-  document.getElementById("tax-result").innerHTML =
-    tax === "yes"
-      ? "⚠️ You may need local tax planning."
-      : "ℹ️ Tax exposure may be limited.";
-
-  updateProgress(7);
-  document.getElementById("phase-8").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase8() {
-  const banking = document.getElementById("banking").value;
-  if (!banking) return alert("Please select an option");
-
-  document.getElementById("banking-result").innerHTML =
-    banking === "yes"
-      ? "💡 Consider Wise, Revolut, or local banks."
-      : "✔️ Minimal banking changes needed.";
-
-  updateProgress(8);
-  document.getElementById("phase-9").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase9() {
-  const family = document.getElementById("family").value;
-  if (!family) return alert("Please select an option");
-
-  document.getElementById("family-result").innerHTML =
-    family === "yes"
-      ? "🐶 Additional planning required for pets/schools."
-      : "👍 Solo relocation simplifies the process.";
-
-  updateProgress(9);
-  document.getElementById("phase-10").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase10() {
-  const logistics = document.getElementById("logistics").value;
-  if (!logistics) return alert("Please select an option");
-
-  document.getElementById("logistics-result").innerHTML =
-    `Move complexity: <strong>${logistics}</strong>`;
-
-  updateProgress(10);
-  document.getElementById("phase-11").scrollIntoView({ behavior: "smooth" });
-}
-
-function savePhase11() {
-  document.getElementById("final-result").innerHTML = `
-    ✅ <strong>Your relocation plan is taking shape.</strong><br><br>
-    You have identified legal, financial, healthcare, housing and lifestyle factors.
-    Your next step is optimisation and execution.
-  `;
-
-  updateProgress(11);
+function updateProgress() {
+  document.getElementById("progress-text").innerText = `Phase ${currentPhase} of ${phases.length}`;
+  document.getElementById("progress-fill").style.width =
+    (currentPhase / phases.length) * 100 + "%";
 }
