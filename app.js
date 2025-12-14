@@ -10,11 +10,6 @@ const userProfile = {
   work: "",
   monthlyIncome: 1500,
   budgetLevel: "",
-  healthStatus: "",
-  statePension: "",
-  housingType: "",
-  housingBudget: 800,
-  locationStyle: ""
 };
 
 /* =========================
@@ -127,28 +122,27 @@ const phases = [
   {
     id: 6,
     html: `
-      <h2>📦 Packing & Logistics</h2>
-      <label>Will you ship furniture or buy new?</label>
-      <select id="packing-choice">
-        <option value="">-- Select --</option>
-        <option value="ship">Ship existing furniture</option>
-        <option value="new">Buy new at destination</option>
-      </select>
-      <label>Do you need professional movers?</label>
-      <select id="movers">
+      <h2>🚗 Transportation & Mobility</h2>
+      <label>Do you plan to have a car?</label>
+      <select id="car-plan">
         <option value="">-- Select --</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>
-      <div class="phase-result" id="packing-result"></div>
+      <label>Preferred transport type</label>
+      <select id="transport-type">
+        <option value="">-- Select --</option>
+        <option value="public">Public Transport</option>
+        <option value="bike">Bicycle</option>
+        <option value="walk">Walking</option>
+      </select>
+      <div class="phase-result" id="transport-result"></div>
       <button onclick="savePhase6()">Continue</button>
     `
   }
 ];
 
-/* =========================
-   RENDER PHASES
-========================= */
+/* RENDER PHASES */
 const container = document.getElementById("phases-container");
 phases.forEach(phase => {
   const card = document.createElement("section");
@@ -158,100 +152,83 @@ phases.forEach(phase => {
   container.appendChild(card);
 });
 
-/* =========================
-   START APP
-========================= */
+/* START APP */
 function startApp() {
   document.getElementById("phase-1").scrollIntoView({ behavior: "smooth" });
 }
 
-/* =========================
-   PROGRESS BAR
-========================= */
+/* PROGRESS BAR */
 function updateProgress(phaseNumber) {
   const percent = (phaseNumber / 11) * 100;
   document.getElementById("progress-fill").style.width = percent + "%";
-  document.getElementById("progress-text").innerText =
-    `Phase ${phaseNumber} of 11`;
+  document.getElementById("progress-text").innerText = `Phase ${phaseNumber} of 11`;
 }
 
 /* =========================
-   PHASE SAVE FUNCTIONS
+   SAVE PHASE FUNCTIONS
 ========================= */
 function savePhase1() {
   const dest = document.getElementById("destination").value;
   if (!dest) return alert("Please select a destination");
   userProfile.destination = dest;
   updateProgress(1);
-  const next = document.getElementById("phase-2");
-  if (next) next.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("phase-2").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase2() {
-  const pass = document.getElementById("passport").value;
+  const passport = document.getElementById("passport").value;
   const work = document.getElementById("work").value;
-  if (!pass || !work) return alert("Please answer all questions");
-  userProfile.passport = pass;
+  if (!passport || !work) return alert("Please answer all questions");
+  userProfile.passport = passport;
   userProfile.work = work;
   updateProgress(2);
-  const next = document.getElementById("phase-3");
-  if (next) next.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("phase-3").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase3() {
   const income = document.getElementById("income").value;
   const budget = document.getElementById("budget").value;
-  if (!income || !budget) return alert("Please complete both fields");
+  if (!income || !budget) return alert("Please answer all questions");
   userProfile.monthlyIncome = income;
   userProfile.budgetLevel = budget;
   updateProgress(3);
-  const next = document.getElementById("phase-4");
-  if (next) next.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("phase-4").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase4() {
   const healthStatus = document.getElementById("health-status").value;
   const statePension = document.getElementById("state-pension").value;
+  const resultBox = document.getElementById("healthcare-result");
   if (!healthStatus || !statePension) return alert("Please answer both healthcare questions");
-  userProfile.healthStatus = healthStatus;
-  userProfile.statePension = statePension;
-
-  let message = "";
-  if (healthStatus === "retired" && statePension === "yes") {
-    message = `✅ You are likely eligible for an <strong>S1 form</strong>.`;
-  } else if (healthStatus === "working") {
-    message = `💼 You will normally contribute to local healthcare or use private insurance.`;
-  } else {
-    message = `🏥 You may need private health insurance initially.`;
-  }
-  document.getElementById("healthcare-result").innerHTML = message;
-
+  let message = healthStatus === "retired" && statePension === "yes"
+    ? "✅ You are likely eligible for an S1 form."
+    : healthStatus === "working"
+      ? "💼 You need to contribute to local healthcare or hold private insurance."
+      : "🏥 Private health insurance may be needed.";
+  resultBox.innerHTML = message;
+  resultBox.style.display = "block";
   updateProgress(4);
-  const next = document.getElementById("phase-5");
-  if (next) next.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("phase-5").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase5() {
   const type = document.getElementById("housing-type").value;
   const budget = document.getElementById("housing-budget").value;
-  const style = document.getElementById("location-style").value;
-  if (!type || !budget || !style) return alert("Please answer all housing questions");
-  userProfile.housingType = type;
-  userProfile.housingBudget = budget;
-  userProfile.locationStyle = style;
-
+  const location = document.getElementById("location-style").value;
+  const resultBox = document.getElementById("housing-result");
+  if (!type || !budget || !location) return alert("Please answer all housing questions");
+  resultBox.innerHTML = `You plan to ${type} with a £${budget} budget in a ${location} area.`;
+  resultBox.style.display = "block";
   updateProgress(5);
-  const next = document.getElementById("phase-6");
-  if (next) next.scrollIntoView({ behavior: "smooth" });
+  document.getElementById("phase-6").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase6() {
-  const packing = document.getElementById("packing-choice").value;
-  const movers = document.getElementById("movers").value;
-  if (!packing || !movers) return alert("Please answer all packing questions");
-  userProfile.packingChoice = packing;
-  userProfile.movers = movers;
-
+  const car = document.getElementById("car-plan").value;
+  const transport = document.getElementById("transport-type").value;
+  const resultBox = document.getElementById("transport-result");
+  if (!car || !transport) return alert("Please answer all transport questions");
+  resultBox.innerHTML = `Car: ${car}, Preferred transport: ${transport}.`;
+  resultBox.style.display = "block";
   updateProgress(6);
-  // Scroll to next phase if exists
 }
