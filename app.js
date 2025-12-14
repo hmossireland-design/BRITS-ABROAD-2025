@@ -137,6 +137,22 @@ const phases = [
     <button onclick="savePhase7()">Continue</button>
   `
 },
+ {
+  id: 8,
+  html: `
+    <h2>🏦 Banking & Money Transfers</h2>
+
+    <label>Will you need international banking?</label>
+    <select id="banking">
+      <option value="">-- Select --</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <div class="phase-result" id="banking-result"></div>
+    <button onclick="savePhase8()">Continue</button>
+  `
+},
 ];
 
 /* RENDER PHASES */
