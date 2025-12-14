@@ -195,6 +195,36 @@ function savePhase5() {
   if (nextPhase) {
     nextPhase.scrollIntoView({ behavior: "smooth" });
   }
+},
+{
+  id: 6,
+  html: `
+    <h2>💳 Banking & Money Transfer</h2>
+
+    <label>Do you already have a bank account in your destination country?</label>
+    <select id="bank-account">
+      <option value="">-- Select --</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label>Do you plan to use international money transfer services?</label>
+    <select id="money-transfer">
+      <option value="">-- Select --</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <label>Approximate monthly outgoing (£)</label>
+    <input type="range" min="100" max="5000" step="50"
+      id="transfer-amount" value="500"
+      oninput="document.getElementById('transferValue').innerText = this.value" />
+    <p>£<span id="transferValue">500</span> / month</p>
+
+    <div class="phase-result" id="banking-result"></div>
+
+    <button onclick="savePhase6()">Continue</button>
+  `
 }
 /* =========================
    RENDER PHASES
