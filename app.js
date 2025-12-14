@@ -1,7 +1,6 @@
 const app = document.getElementById("app");
 let currentPhase = 1;
 
-// ================== PHASE DEFINITIONS ==================
 const phases = [
   {
     id: 1,
@@ -106,15 +105,86 @@ const phases = [
       <button onclick="savePhase5()">Continue</button>
     `
   },
-  { id: 6, html: `<h2>💸 Tax Reality</h2><p>Understand tax residency, double taxation, and reporting obligations.</p><button onclick="nextPhase()">Continue</button>` },
-  { id: 7, html: `<h2>🏦 Banking</h2><p>Local vs international banking options explained.</p><button onclick="nextPhase()">Continue</button>` },
-  { id: 8, html: `<h2>📑 Visas</h2><p>Visa types and renewal risks overview.</p><button onclick="nextPhase()">Continue</button>` },
-  { id: 9, html: `<h2>🚗 Transport</h2><p>Driving licences, car imports, and local transport info.</p><button onclick="nextPhase()">Continue</button>` },
-  { id: 10, html: `<h2>📦 Moving</h2><p>Shipping, pets, personal items guidance.</p><button onclick="nextPhase()">Continue</button>` },
-  { id: 11, html: `<h2>✅ Final Score</h2><p>Your personalised relocation readiness score.</p>` }
+  {
+    id: 6,
+    html: `
+      <h2>💸 Tax Reality</h2>
+      <label>Will you be a tax resident in your destination?</label>
+      <select id="tax-residency">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div class="phase-result" id="tax-result"></div>
+      <button onclick="savePhase6()">Continue</button>
+    `
+  },
+  {
+    id: 7,
+    html: `
+      <h2>🏦 Banking</h2>
+      <label>Do you want a local or international bank?</label>
+      <select id="bank-choice">
+        <option value="">-- Select --</option>
+        <option value="local">Local Bank</option>
+        <option value="international">International Bank</option>
+      </select>
+      <div class="phase-result" id="bank-result"></div>
+      <button onclick="savePhase7()">Continue</button>
+    `
+  },
+  {
+    id: 8,
+    html: `
+      <h2>📑 Visas</h2>
+      <label>Do you need a visa?</label>
+      <select id="visa-need">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div class="phase-result" id="visa-result"></div>
+      <button onclick="savePhase8()">Continue</button>
+    `
+  },
+  {
+    id: 9,
+    html: `
+      <h2>🚗 Transport</h2>
+      <label>Do you plan to bring a car?</label>
+      <select id="transport-choice">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div class="phase-result" id="transport-result"></div>
+      <button onclick="savePhase9()">Continue</button>
+    `
+  },
+  {
+    id: 10,
+    html: `
+      <h2>📦 Moving</h2>
+      <label>Do you have pets or large shipments?</label>
+      <select id="moving-choice">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div class="phase-result" id="moving-result"></div>
+      <button onclick="savePhase10()">Continue</button>
+    `
+  },
+  {
+    id: 11,
+    html: `
+      <h2>✅ Final Score</h2>
+      <p>Your personalised relocation readiness score will be calculated.</p>
+    `
+  }
 ];
 
-// ================== RENDER & PROGRESS ==================
+// ========== RENDER & PROGRESS ==========
 function startApp() {
   app.innerHTML = "";
   currentPhase = 1;
@@ -135,34 +205,30 @@ function nextPhase() {
   if (currentPhase < phases.length) {
     currentPhase++;
     renderPhase();
-    const el = document.getElementById(`phase-${currentPhase}`);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(`phase-${currentPhase}`).scrollIntoView({ behavior: "smooth" });
   }
 }
 
 function updateProgress() {
   document.getElementById("progress-text").innerText = `Phase ${currentPhase} of ${phases.length}`;
-  const percent = (currentPhase / phases.length) * 100;
-  document.getElementById("progress-fill").style.width = percent + "%";
+  document.getElementById("progress-fill").style.width = (currentPhase / phases.length * 100) + "%";
 }
 
-// ================== SAVE PHASE FUNCTIONS ==================
+// ========== SAVE PHASE FUNCTIONS ==========
 window.savePhase1 = function() {
-  const dest = document.getElementById("destination").value;
-  if (!dest) return alert("Please select a destination");
-  const box = document.getElementById("destination-result");
-  box.innerHTML = `🌍 You selected <strong>${dest}</strong>`;
-  box.style.display = "block";
+  const val = document.getElementById("destination").value;
+  if(!val) return alert("Please select a destination");
+  document.getElementById("destination-result").innerHTML = `🌍 You chose <strong>${val}</strong>`;
+  document.getElementById("destination-result").style.display = "block";
   nextPhase();
 }
 
 window.savePhase2 = function() {
-  const pass = document.getElementById("passport").value;
-  if (!pass) return alert("Please select passport type");
+  const val = document.getElementById("passport").value;
+  if(!val) return alert("Select passport");
+  const msg = val === "UK" ? "🛂 UK passport: post-Brexit considerations." : "🛂 EU passport: easier residency.";
   const box = document.getElementById("residency-result");
-  box.innerHTML = pass === "UK"
-    ? `🛂 With a UK passport, post-Brexit considerations apply.`
-    : `🛂 With an EU passport, easier residency options are available.`;
+  box.innerHTML = msg;
   box.style.display = "block";
   nextPhase();
 }
@@ -170,9 +236,9 @@ window.savePhase2 = function() {
 window.savePhase3 = function() {
   const income = document.getElementById("income").value;
   const budget = document.getElementById("budget").value;
-  if (!income || !budget) return alert("Please set both income and budget");
+  if(!income || !budget) return alert("Set income and budget");
   const box = document.getElementById("budget-result");
-  box.innerHTML = `💰 You earn £${income}/month with a <strong>${budget}</strong> budget sensitivity.`;
+  box.innerHTML = `💰 £${income}/month, <strong>${budget}</strong> budget sensitivity`;
   box.style.display = "block";
   nextPhase();
 }
@@ -180,16 +246,12 @@ window.savePhase3 = function() {
 window.savePhase4 = function() {
   const health = document.getElementById("health-status").value;
   const pension = document.getElementById("state-pension").value;
-  if (!health || !pension) return alert("Please answer both healthcare questions");
+  if(!health || !pension) return alert("Answer both questions");
   const box = document.getElementById("healthcare-result");
   let msg = "";
-  if (health === "retired" && pension === "yes") {
-    msg = `✅ Likely eligible for an <strong>S1 form</strong> for EU healthcare.`;
-  } else if (health === "working") {
-    msg = `💼 You will normally need local contributions or private insurance.`;
-  } else {
-    msg = `🏥 You may need private health insurance initially.`;
-  }
+  if(health === "retired" && pension === "yes") msg = "✅ Eligible for S1 EU healthcare.";
+  else if(health === "working") msg = "💼 Need local contributions or private insurance.";
+  else msg = "🏥 Private health insurance may be required.";
   box.innerHTML = msg;
   box.style.display = "block";
   nextPhase();
@@ -199,12 +261,55 @@ window.savePhase5 = function() {
   const type = document.getElementById("housing-type").value;
   const budget = document.getElementById("housing-budget").value;
   const loc = document.getElementById("location-style").value;
-  if (!type || !budget || !loc) return alert("Please complete all housing questions");
+  if(!type || !budget || !loc) return alert("Complete all housing questions");
   const box = document.getElementById("housing-result");
-  box.innerHTML = `🏠 You plan to <strong>${type}</strong> with a budget of £${budget}/month in a <strong>${loc}</strong> location.`;
+  box.innerHTML = `🏠 ${type} with £${budget}/month in <strong>${loc}</strong> area.`;
   box.style.display = "block";
   nextPhase();
 }
 
-// ========== Attach start button ==========
-document.getElementById("start-btn").addEventListener("click", startApp);
+// PHASES 6-10
+window.savePhase6 = function() {
+  const val = document.getElementById("tax-residency").value;
+  if(!val) return alert("Select tax residency");
+  const box = document.getElementById("tax-result");
+  box.innerHTML = val === "yes" ? "💸 You will be tax resident." : "💸 You may remain non-resident.";
+  box.style.display = "block";
+  nextPhase();
+}
+
+window.savePhase7 = function() {
+  const val = document.getElementById("bank-choice").value;
+  if(!val) return alert("Select bank type");
+  const box = document.getElementById("bank-result");
+  box.innerHTML = val === "local" ? "🏦 Choose local bank options." : "🏦 International bank recommended.";
+  box.style.display = "block";
+  nextPhase();
+}
+
+window.savePhase8 = function() {
+  const val = document.getElementById("visa-need").value;
+  if(!val) return alert("Select visa option");
+  const box = document.getElementById("visa-result");
+  box.innerHTML = val === "yes" ? "📑 You will need a visa." : "📑 No visa required.";
+  box.style.display = "block";
+  nextPhase();
+}
+
+window.savePhase9 = function() {
+  const val = document.getElementById("transport-choice").value;
+  if(!val) return alert("Select transport option");
+  const box = document.getElementById("transport-result");
+  box.innerHTML = val === "yes" ? "🚗 You plan to bring a car." : "🚗 No car planned.";
+  box.style.display = "block";
+  nextPhase();
+}
+
+window.savePhase10 = function() {
+  const val = document.getElementById("moving-choice").value;
+  if(!val) return alert("Select moving option");
+  const box = document.getElementById("moving-result");
+  box.innerHTML = val === "yes" ? "📦 Prepare for pets and shipments." : "📦 Standard move planned.";
+  box.style.display = "block";
+  nextPhase();
+}
