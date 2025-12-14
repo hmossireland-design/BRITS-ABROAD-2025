@@ -19,7 +19,7 @@ body {
 ========================= */
 .hero {
   height: 80vh;
-  background: #333; /* placeholder dark background */
+  background: #333; 
   display: flex;
   justify-content: center;
   align-items: center;
