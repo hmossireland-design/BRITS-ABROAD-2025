@@ -11,17 +11,19 @@
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Chart.js CDN -->
+  <!-- Chart.js (optional, keep if needed later) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<!-- PROGRESS BAR -->
-<div id="progress-wrapper">
-  <div id="progress-text">Phase 1 of 11</div>
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-wrapper">
+    <div id="progress-text">Phase 1 of 11</div>
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
   </div>
-</div>
+
   <!-- HERO SECTION -->
   <header class="hero">
     <div class="hero-overlay">
@@ -32,23 +34,12 @@
   </header>
 
   <!-- PHASES CONTAINER -->
-  <section id="app-start"></section>
+  <div id="phases-container"></div>
 
-<main id="phases-container">
-  <!-- phases injected -->
-</main>
-
-<section id="ai-advice">
-
-  <!-- AI ADVICE SECTION -->
+  <!-- AI ADVICE (optional) -->
   <section id="ai-advice">
-    <button id="startBtn">Start Your Plan</button>
+    <button onclick="getAIAdvice()">Get Advice</button>
     <div id="ai-output"></div>
-  </section>
-
-  <!-- Interactive Chart Section -->
-  <section id="charts-section">
-    <canvas id="budgetChart"></canvas>
   </section>
 
   <!-- Scripts -->
