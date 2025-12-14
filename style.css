@@ -1,150 +1,160 @@
 /* =========================
-   GLOBAL RESET
+   RESET
 ========================= */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-  font-family: Inter, Arial, sans-serif;
-  background: #f4f6f9;
-  color: #222;
-  line-height: 1.6;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.5;
 }
 
 /* =========================
-   HERO (NO IMAGE)
+   HERO
 ========================= */
 .hero {
-  height: 60vh;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  height: 80vh;
+  background: #333; /* placeholder dark background */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  color: #fff;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-overlay {
-  color: #fff;
-  padding: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 8px;
 }
 
 .hero h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
 }
 
 .hero p {
   font-size: 1.2rem;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
 }
 
 .hero button {
-  padding: 14px 28px;
-  font-size: 1rem;
+  background-color: #ff7f50;
   border: none;
-  border-radius: 30px;
-  background: #fff;
-  color: #1e3c72;
+  padding: 0.8rem 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: 600;
+  transition: background 0.3s ease;
 }
 
 .hero button:hover {
-  background: #e6ecff;
+  background-color: #ff5722;
 }
 
 /* =========================
    PROGRESS BAR
 ========================= */
 #progress-wrapper {
-  padding: 15px;
-  background: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid #ddd;
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto;
 }
 
 #progress-text {
+  margin-bottom: 0.5rem;
   font-weight: 600;
-  margin-bottom: 6px;
 }
 
 #progress-bar {
   width: 100%;
-  height: 8px;
-  background: #eee;
-  border-radius: 4px;
+  height: 15px;
+  background: #ddd;
+  border-radius: 10px;
   overflow: hidden;
 }
 
 #progress-fill {
   width: 0%;
   height: 100%;
-  background: #2a5298;
-  transition: width 0.4s ease;
+  background: #4caf50;
+  transition: width 0.4s ease-in-out;
 }
 
 /* =========================
    PHASE CARDS
 ========================= */
-#phases-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
 .phase-card {
   background: #fff;
-  padding: 30px;
-  margin-bottom: 30px;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.phase-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 .phase-card h2 {
-  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #222;
 }
 
 .phase-card label {
   display: block;
-  margin: 15px 0 6px;
-  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .phase-card select,
 .phase-card input[type="range"] {
   width: 100%;
-  padding: 10px;
-  font-size: 1rem;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .phase-card button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #2a5298;
-  color: #fff;
+  background-color: #4caf50;
   border: none;
-  border-radius: 6px;
+  padding: 0.8rem 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .phase-card button:hover {
-  background: #1e3c72;
+  background-color: #388e3c;
 }
 
 /* =========================
-   RESULTS
+   PHASE RESULT BOX
 ========================= */
 .phase-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
   display: none;
-  margin-top: 15px;
-  padding: 15px;
-  background: #eef3ff;
-  border-left: 5px solid #2a5298;
-  border-radius: 6px;
+  border-radius: 5px;
+  font-size: 0.95rem;
 }
