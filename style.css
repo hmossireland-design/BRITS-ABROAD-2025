@@ -1,166 +1,113 @@
-/* RESET */
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  background: #f4f6f8;
+  color: #222;
 }
 
-/* HERO */
 .hero {
-  height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-              url('hero-background.jpg') center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
+  height: 60vh;
+  background: url("hero.jpg") center / cover no-repeat;
   position: relative;
-  overflow: hidden;
 }
 
-.hero-overlay h1 {
+.hero-overlay {
+  background: rgba(0,0,0,0.55);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  animation: fadeIn 1s ease forwards;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
 
-.hero-overlay p {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-  animation: fadeIn 1.5s ease forwards;
-}
-
-.hero-overlay button {
-  padding: 1em 2.5em;
-  font-size: 1.2em;
+.hero button {
+  padding: 12px 24px;
   border: none;
-  border-radius: 8px;
-  background: #fcb900;
+  background: #ffffff;
   color: #000;
+  font-size: 1rem;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 6px;
 }
 
-.hero-overlay button:hover {
-  background: #ffdd57;
-}
-
-/* FADE IN HERO TEXT */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* PROGRESS BAR */
 #progress-wrapper {
-  width: 90%;
-  margin: 1em auto;
+  padding: 20px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 #progress-bar {
-  width: 100%;
-  background: #e0e0e0;
-  border-radius: 8px;
-  height: 12px;
+  height: 8px;
+  background: #ddd;
+  border-radius: 4px;
   overflow: hidden;
 }
 
 #progress-fill {
-  width: 0%;
   height: 100%;
-  background: #fcb900;
-  border-radius: 8px;
-  transition: width 0.5s ease;
+  width: 0%;
+  background: #2b7cff;
+  transition: width 0.3s ease;
 }
 
 #progress-text {
-  margin-bottom: 0.5em;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 
-/* PHASE CARDS */
-#phases-container {
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
+#app {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 .phase-card {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  padding: 2em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.phase-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  background: white;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .phase-card h2 {
-  margin-bottom: 1em;
-  color: #222;
+  margin-top: 0;
 }
 
-.phase-card label {
+label {
   display: block;
-  margin: 0.5em 0 0.2em;
+  margin-top: 15px;
   font-weight: 600;
 }
 
-.phase-card input,
-.phase-card select {
+select, input[type=range] {
   width: 100%;
-  padding: 0.6em;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-bottom: 1em;
+  margin-top: 6px;
 }
 
-input[type=range] {
-  width: 100%;
-  height: 12px;
-  border-radius: 6px;
-  background: #f1f1f1;
-  outline: none;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #fcb900;
-  cursor: pointer;
-}
-
-/* AI ADVICE */
-#ai-advice {
-  padding: 2em;
-  text-align: center;
-  background: #f9f9f9;
-}
-
-#ai-advice button {
-  padding: 0.8em 2em;
-  font-size: 1em;
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #2b7cff;
+  color: white;
   border: none;
-  border-radius: 8px;
-  background: #222;
-  color: #fff;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-#ai-advice button:hover {
-  background: #444;
-}
-
-#ai-output {
-  margin-top: 1.5em;
-  font-size: 1.1em;
-  color: #222;
+.phase-result {
+  margin-top: 15px;
+  padding: 15px;
+  background: #eef3ff;
+  border-left: 4px solid #2b7cff;
+  display: none;
 }
