@@ -10,6 +10,19 @@ const userProfile = {
   work: "",
   monthlyIncome: 1500,
   budgetLevel: "",
+  healthStatus: "",
+  statePension: "",
+  housingType: "",
+  housingBudget: 800,
+  locationStyle: "",
+  schoolChildren: "",
+  schoolType: "",
+  insuranceHealth: "",
+  insuranceProperty: "",
+  shoppingFrequency: "",
+  shoppingType: "",
+  learnLanguage: "",
+  learningMethod: ""
 };
 
 /* =========================
@@ -122,27 +135,121 @@ const phases = [
   {
     id: 6,
     html: `
-      <h2>🚗 Transportation & Mobility</h2>
-      <label>Do you plan to have a car?</label>
-      <select id="car-plan">
+      <h2>🚗 Transport & Commuting</h2>
+      <label>Do you plan to drive?</label>
+      <select id="drive">
         <option value="">-- Select --</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>
       <label>Preferred transport type</label>
-      <select id="transport-type">
+      <select id="transport">
         <option value="">-- Select --</option>
-        <option value="public">Public Transport</option>
-        <option value="bike">Bicycle</option>
-        <option value="walk">Walking</option>
+        <option value="public">Public transport</option>
+        <option value="car">Car</option>
+        <option value="mixed">Mixed</option>
       </select>
       <div class="phase-result" id="transport-result"></div>
       <button onclick="savePhase6()">Continue</button>
     `
+  },
+  {
+    id: 7,
+    html: `
+      <h2>📚 Education & Schools</h2>
+      <label>Do you have children needing schooling?</label>
+      <select id="school-children">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <label>Preferred school type</label>
+      <select id="school-type">
+        <option value="">-- Select --</option>
+        <option value="public">Public</option>
+        <option value="private">Private</option>
+        <option value="international">International</option>
+      </select>
+      <div class="phase-result" id="school-result"></div>
+      <button onclick="savePhase7()">Continue</button>
+    `
+  },
+  {
+    id: 8,
+    html: `
+      <h2>🛡️ Insurance & Safety</h2>
+      <label>Do you plan to get local health insurance?</label>
+      <select id="insurance-health">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <label>Do you want property insurance?</label>
+      <select id="insurance-property">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div class="phase-result" id="insurance-result"></div>
+      <button onclick="savePhase8()">Continue</button>
+    `
+  },
+  {
+    id: 9,
+    html: `
+      <h2>🛒 Cost of Living & Shopping</h2>
+      <label>How often do you shop for groceries?</label>
+      <select id="shopping-frequency">
+        <option value="">-- Select --</option>
+        <option value="weekly">Weekly</option>
+        <option value="biweekly">Bi-weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
+      <label>Do you prefer local markets or supermarkets?</label>
+      <select id="shopping-type">
+        <option value="">-- Select --</option>
+        <option value="local">Local markets</option>
+        <option value="supermarket">Supermarkets</option>
+      </select>
+      <div class="phase-result" id="shopping-result"></div>
+      <button onclick="savePhase9()">Continue</button>
+    `
+  },
+  {
+    id: 10,
+    html: `
+      <h2>🗣️ Language & Communication</h2>
+      <label>Do you want to learn the local language?</label>
+      <select id="learn-language">
+        <option value="">-- Select --</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <label>Preferred learning method</label>
+      <select id="learning-method">
+        <option value="">-- Select --</option>
+        <option value="classes">Classes</option>
+        <option value="self-study">Self-study</option>
+        <option value="online">Online apps</option>
+      </select>
+      <div class="phase-result" id="language-result"></div>
+      <button onclick="savePhase10()">Continue</button>
+    `
+  },
+  {
+    id: 11,
+    html: `
+      <h2>🎯 Final Review & Summary</h2>
+      <p>All your choices will be summarized here for final review.</p>
+      <div id="summary-result"></div>
+      <button onclick="savePhase11()">Finish</button>
+    `
   }
 ];
 
-/* RENDER PHASES */
+/* =========================
+   RENDER PHASES
+========================= */
 const container = document.getElementById("phases-container");
 phases.forEach(phase => {
   const card = document.createElement("section");
@@ -152,25 +259,29 @@ phases.forEach(phase => {
   container.appendChild(card);
 });
 
-/* START APP */
+/* =========================
+   START APP & PROGRESS
+========================= */
 function startApp() {
   document.getElementById("phase-1").scrollIntoView({ behavior: "smooth" });
 }
 
-/* PROGRESS BAR */
 function updateProgress(phaseNumber) {
   const percent = (phaseNumber / 11) * 100;
   document.getElementById("progress-fill").style.width = percent + "%";
-  document.getElementById("progress-text").innerText = `Phase ${phaseNumber} of 11`;
+  document.getElementById("progress-text").innerText =
+    `Phase ${phaseNumber} of 11`;
 }
 
 /* =========================
-   SAVE PHASE FUNCTIONS
+   SAVE FUNCTIONS FOR ALL PHASES
 ========================= */
+
 function savePhase1() {
   const dest = document.getElementById("destination").value;
   if (!dest) return alert("Please select a destination");
   userProfile.destination = dest;
+  document.getElementById("destination-result").innerHTML = `Selected: ${dest}`;
   updateProgress(1);
   document.getElementById("phase-2").scrollIntoView({ behavior: "smooth" });
 }
@@ -181,6 +292,7 @@ function savePhase2() {
   if (!passport || !work) return alert("Please answer all questions");
   userProfile.passport = passport;
   userProfile.work = work;
+  document.getElementById("rights-result").innerHTML = `Passport: ${passport}, Work: ${work}`;
   updateProgress(2);
   document.getElementById("phase-3").scrollIntoView({ behavior: "smooth" });
 }
@@ -191,6 +303,7 @@ function savePhase3() {
   if (!income || !budget) return alert("Please answer all questions");
   userProfile.monthlyIncome = income;
   userProfile.budgetLevel = budget;
+  document.getElementById("budget-result").innerHTML = `Income: £${income}, Budget: ${budget}`;
   updateProgress(3);
   document.getElementById("phase-4").scrollIntoView({ behavior: "smooth" });
 }
@@ -198,37 +311,100 @@ function savePhase3() {
 function savePhase4() {
   const healthStatus = document.getElementById("health-status").value;
   const statePension = document.getElementById("state-pension").value;
-  const resultBox = document.getElementById("healthcare-result");
-  if (!healthStatus || !statePension) return alert("Please answer both healthcare questions");
-  let message = healthStatus === "retired" && statePension === "yes"
-    ? "✅ You are likely eligible for an S1 form."
-    : healthStatus === "working"
-      ? "💼 You need to contribute to local healthcare or hold private insurance."
-      : "🏥 Private health insurance may be needed.";
-  resultBox.innerHTML = message;
-  resultBox.style.display = "block";
+  if (!healthStatus || !statePension) return alert("Please answer all questions");
+  userProfile.healthStatus = healthStatus;
+  userProfile.statePension = statePension;
+
+  let message = "";
+  if (healthStatus === "retired" && statePension === "yes") {
+    message = "✅ Likely eligible for S1 form.";
+  } else if (healthStatus === "working") {
+    message = "💼 Contribute to local healthcare system or hold private insurance.";
+  } else {
+    message = "🏥 Private health insurance may be needed.";
+  }
+
+  document.getElementById("healthcare-result").innerHTML = message;
   updateProgress(4);
-  document.getElementById("phase-5").scrollIntoView({ behavior: "smooth" });
+  const nextPhase = document.getElementById("phase-5");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase5() {
   const type = document.getElementById("housing-type").value;
   const budget = document.getElementById("housing-budget").value;
-  const location = document.getElementById("location-style").value;
-  const resultBox = document.getElementById("housing-result");
-  if (!type || !budget || !location) return alert("Please answer all housing questions");
-  resultBox.innerHTML = `You plan to ${type} with a £${budget} budget in a ${location} area.`;
-  resultBox.style.display = "block";
+  const style = document.getElementById("location-style").value;
+  if (!type || !budget || !style) return alert("Please answer all housing questions");
+  userProfile.housingType = type;
+  userProfile.housingBudget = budget;
+  userProfile.locationStyle = style;
+  document.getElementById("housing-result").innerHTML = `Type: ${type}, Budget: £${budget}, Style: ${style}`;
   updateProgress(5);
-  document.getElementById("phase-6").scrollIntoView({ behavior: "smooth" });
+  const nextPhase = document.getElementById("phase-6");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase6() {
-  const car = document.getElementById("car-plan").value;
-  const transport = document.getElementById("transport-type").value;
-  const resultBox = document.getElementById("transport-result");
-  if (!car || !transport) return alert("Please answer all transport questions");
-  resultBox.innerHTML = `Car: ${car}, Preferred transport: ${transport}.`;
-  resultBox.style.display = "block";
+  const drive = document.getElementById("drive").value;
+  const transport = document.getElementById("transport").value;
+  if (!drive || !transport) return alert("Please answer all transport questions");
+  document.getElementById("transport-result").innerHTML = `Drive: ${drive}, Transport: ${transport}`;
   updateProgress(6);
+  const nextPhase = document.getElementById("phase-7");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase7() {
+  const children = document.getElementById("school-children").value;
+  const type = document.getElementById("school-type").value;
+  if (!children || !type) return alert("Please answer all education questions");
+  userProfile.schoolChildren = children;
+  userProfile.schoolType = type;
+  document.getElementById("school-result").innerHTML = `Children: ${children}, School type: ${type}`;
+  updateProgress(7);
+  const nextPhase = document.getElementById("phase-8");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase8() {
+  const health = document.getElementById("insurance-health").value;
+  const property = document.getElementById("insurance-property").value;
+  if (!health || !property) return alert("Please answer all insurance questions");
+  userProfile.insuranceHealth = health;
+  userProfile.insuranceProperty = property;
+  document.getElementById("insurance-result").innerHTML = `Health: ${health}, Property: ${property}`;
+  updateProgress(8);
+  const nextPhase = document.getElementById("phase-9");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase9() {
+  const freq = document.getElementById("shopping-frequency").value;
+  const type = document.getElementById("shopping-type").value;
+  if (!freq || !type) return alert("Please answer all shopping questions");
+  userProfile.shoppingFrequency = freq;
+  userProfile.shoppingType = type;
+  document.getElementById("shopping-result").innerHTML = `Frequency: ${freq}, Type: ${type}`;
+  updateProgress(9);
+  const nextPhase = document.getElementById("phase-10");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase10() {
+  const learn = document.getElementById("learn-language").value;
+  const method = document.getElementById("learning-method").value;
+  if (!learn || !method) return alert("Please answer all language questions");
+  userProfile.learnLanguage = learn;
+  userProfile.learningMethod = method;
+  document.getElementById("language-result").innerHTML = `Learn: ${learn}, Method: ${method}`;
+  updateProgress(10);
+  const nextPhase = document.getElementById("phase-11");
+  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase11() {
+  const summaryBox = document.getElementById("summary-result");
+  summaryBox.innerHTML = `<pre>${JSON.stringify(userProfile, null, 2)}</pre>`;
+  updateProgress(11);
+  alert("All phases completed!");
 }
