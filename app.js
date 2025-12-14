@@ -272,3 +272,72 @@ function savePhase5() {
   userProfile.locationStyle = style;
   updateProgress(5);
 }
+function savePhase6() {
+  const cost = document.getElementById("cost-level").value;
+  if (!cost) return alert("Please select a cost level");
+
+  document.getElementById("cost-result").innerHTML =
+    `Expected cost level: <strong>${cost.toUpperCase()}</strong>`;
+  updateProgress(6);
+  document.getElementById("phase-7").scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase7() {
+  const tax = document.getElementById("tax-resident").value;
+  if (!tax) return alert("Please select an option");
+
+  document.getElementById("tax-result").innerHTML =
+    tax === "yes"
+      ? "⚠️ You may need local tax planning."
+      : "ℹ️ Tax exposure may be limited.";
+
+  updateProgress(7);
+  document.getElementById("phase-8").scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase8() {
+  const banking = document.getElementById("banking").value;
+  if (!banking) return alert("Please select an option");
+
+  document.getElementById("banking-result").innerHTML =
+    banking === "yes"
+      ? "💡 Consider Wise, Revolut, or local banks."
+      : "✔️ Minimal banking changes needed.";
+
+  updateProgress(8);
+  document.getElementById("phase-9").scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase9() {
+  const family = document.getElementById("family").value;
+  if (!family) return alert("Please select an option");
+
+  document.getElementById("family-result").innerHTML =
+    family === "yes"
+      ? "🐶 Additional planning required for pets/schools."
+      : "👍 Solo relocation simplifies the process.";
+
+  updateProgress(9);
+  document.getElementById("phase-10").scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase10() {
+  const logistics = document.getElementById("logistics").value;
+  if (!logistics) return alert("Please select an option");
+
+  document.getElementById("logistics-result").innerHTML =
+    `Move complexity: <strong>${logistics}</strong>`;
+
+  updateProgress(10);
+  document.getElementById("phase-11").scrollIntoView({ behavior: "smooth" });
+}
+
+function savePhase11() {
+  document.getElementById("final-result").innerHTML = `
+    ✅ <strong>Your relocation plan is taking shape.</strong><br><br>
+    You have identified legal, financial, healthcare, housing and lifestyle factors.
+    Your next step is optimisation and execution.
+  `;
+
+  updateProgress(11);
+}
