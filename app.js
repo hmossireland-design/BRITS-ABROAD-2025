@@ -105,6 +105,38 @@ const phases = [
   }
 ];
 
+{
+  id: 5,
+  html: `
+    <h2>🏠 Housing & Rent Reality</h2>
+
+    <label>Do you plan to rent or buy?</label>
+    <select id="housing-type">
+      <option value="">-- Select --</option>
+      <option value="rent">Rent</option>
+      <option value="buy">Buy</option>
+    </select>
+
+    <label>Monthly housing budget (£)</label>
+    <input type="range" min="300" max="3000" step="50"
+      id="housing-budget" value="800"
+      oninput="document.getElementById('housingValue').innerText = this.value" />
+    <p>£<span id="housingValue">800</span> / month</p>
+
+    <label>Preferred location style</label>
+    <select id="location-style">
+      <option value="">-- Select --</option>
+      <option value="city">City</option>
+      <option value="town">Town</option>
+      <option value="rural">Rural</option>
+    </select>
+
+    <div class="phase-result" id="housing-result"></div>
+
+    <button onclick="savePhase5()">Continue</button>
+  `
+}
+
 /* =========================
    RENDER PHASES
 ========================= */
