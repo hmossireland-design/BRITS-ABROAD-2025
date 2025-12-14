@@ -79,30 +79,49 @@ const phases = [
     `
   },
 {
-  id: 4,
-  html: `
-    <h2>🏥 Healthcare & S1 Planning</h2>
+  /* PHASE 4 */
+function savePhase4() {
+  const healthStatus = document.getElementById("health-status").value;
+  const statePension = document.getElementById("state-pension").value;
+  const resultBox = document.getElementById("healthcare-result");
 
-    <label>What best describes you?</label>
-    <select id="health-status">
-      <option value="">-- Select --</option>
-      <option value="working">Working / Self-employed</option>
-      <option value="retired">Retired / State Pension</option>
-    </select>
+  if (!healthStatus || !statePension) {
+    alert("Please answer both healthcare questions");
+    return;
+  }
 
-    <label>Do you receive the UK State Pension?</label>
-    <select id="state-pension">
-      <option value="">-- Select --</option>
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select>
+  let message = "";
 
-    <div class="phase-result" id="healthcare-result"></div>
+  if (healthStatus === "retired" && statePension === "yes") {
+    message = `
+      ✅ You are likely eligible for an <strong>S1 form</strong>.<br><br>
+      This means the UK covers your state healthcare costs in many EU countries,
+      allowing you to register with the local healthcare system.
+    `;
+  } else if (healthStatus === "working") {
+    message = `
+      💼 As a worker or self-employed person, you will normally need to
+      contribute to the local healthcare system or hold private insurance
+      until registered.
+    `;
+  } else {
+    message = `
+      🏥 You may need <strong>private health insurance</strong>,
+      especially during your initial residency period.
+    `;
+  }
 
-    <button onclick="savePhase4()">Continue</button>
-  `
+  resultBox.innerHTML = message;
+  resultBox.style.display = "block";
+
+  updateProgress(4);
+
+  // Scroll to Phase 5 when it exists
+  const nextPhase = document.getElementById("phase-5");
+  if (nextPhase) {
+    nextPhase.scrollIntoView({ behavior: "smooth" });
+  }
 }
-];
 
 /* RENDER PHASES */
 const container = document.getElementById("phases-container");
