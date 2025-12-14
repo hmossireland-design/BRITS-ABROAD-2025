@@ -153,6 +153,22 @@ const phases = [
     <button onclick="savePhase8()">Continue</button>
   `
 },
+ {
+  id: 9,
+  html: `
+    <h2>👨‍👩‍👧‍👦 Family, Pets & Schools</h2>
+
+    <label>Are you relocating with family or pets?</label>
+    <select id="family">
+      <option value="">-- Select --</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <div class="phase-result" id="family-result"></div>
+    <button onclick="savePhase9()">Continue</button>
+  `
+},
 ];
 
 /* RENDER PHASES */
