@@ -2,41 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Brits Abroad 2025 – Ultimate Relocation App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRITS ABROAD 2025</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
-    .phase-card { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .phase-result { margin-top: 10px; padding: 10px; background: #eef; border-radius: 5px; display: none; }
-    label { display: block; margin-top: 10px; }
-    select, input[type="range"] { width: 100%; padding: 5px; margin-top: 5px; }
-    button { margin-top: 15px; padding: 10px 20px; background: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #0056b3; }
-    #progress-bar { width: 100%; background: #ddd; height: 25px; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
-    #progress-fill { height: 100%; width: 0%; background: #28a745; transition: width 0.3s; }
-    #progress-text { text-align: center; margin-bottom: 20px; font-weight: bold; }
-    pre { background: #eee; padding: 10px; border-radius: 5px; overflow-x: auto; }
-  </style>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js (if needed later) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-  <h1>BRITS ABROAD 2025 – Draft App</h1>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="hero-overlay">
+      <h1>Brits Abroad 2025</h1>
+      <p>Your all-in-one relocation intelligence engine</p>
+      <button onclick="startApp()">Start Your Plan</button>
+    </div>
+  </header>
 
-  <!-- Progress Bar -->
-  <div id="progress-text">Phase 0 of 11</div>
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
+  <!-- PROGRESS BAR -->
+  <div id="progress-wrapper">
+    <div id="progress-text">Phase 1 of 11</div>
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
   </div>
 
-  <!-- Container where JS renders all phases -->
+  <!-- PHASES -->
   <div id="phases-container"></div>
 
-  <!-- Link JS -->
-  <script src="app.js"></script>
-  <script>
-    // Start app when page loads
-    startApp();
-  </script>
+  <!-- AI ADVICE SECTION -->
+  <section id="ai-advice">
+    <button onclick="getAIAdvice()">Get Advice</button>
+    <div id="ai-output"></div>
+  </section>
 
+  <!-- Scripts -->
+  <script src="app.js"></script>
 </body>
 </html>
