@@ -81,30 +81,28 @@ const phases = [
     `
   },
   {
-    id: 4,
-    html: `
-      <h2>🏥 Healthcare & S1 Planning</h2>
+  id: 4,
+  html: `
+    <h2>🏥 Healthcare & S1 Planning</h2>
 
-      <label>What best describes you?</label>
-      <select id="health-status">
-        <option value="">-- Select --</option>
-        <option value="working">Working / Self-employed</option>
-        <option value="retired">Retired / State Pension</option>
-      </select>
+    <label>What best describes you?</label>
+    <select id="health-status">
+      <option value="">-- Select --</option>
+      <option value="working">Working / Self-employed</option>
+      <option value="retired">Retired / State Pension</option>
+    </select>
 
-      <label>Do you receive the UK State Pension?</label>
-      <select id="state-pension">
-        <option value="">-- Select --</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
+    <label>Do you receive the UK State Pension?</label>
+    <select id="state-pension">
+      <option value="">-- Select --</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
 
-      <div class="phase-result" id="healthcare-result"></div>
-      <button onclick="savePhase4()">Continue</button>
-    `
-  }
-];
-
+    <div class="phase-result" id="healthcare-result"></div>
+    <button onclick="savePhase4()">Continue</button>
+  `
+},
 {
   id: 5,
   html: `
@@ -132,10 +130,10 @@ const phases = [
     </select>
 
     <div class="phase-result" id="housing-result"></div>
-
     <button onclick="savePhase5()">Continue</button>
   `
 }
+];
 
 /* =========================
    RENDER PHASES
