@@ -104,7 +104,23 @@ const phases = [
     <div class="phase-result" id="housing-result"></div>
     <button onclick="savePhase5()">Continue</button>
   `},
-  // PHASES 6–11 can be added below similarly...
+  {
+  id: 6,
+  html: `
+    <h2>📊 Cost of Living Reality</h2>
+
+    <label>How would you rate expected living costs?</label>
+    <select id="cost-level">
+      <option value="">-- Select --</option>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+
+    <div class="phase-result" id="cost-result"></div>
+    <button onclick="savePhase6()">Continue</button>
+  `
+},
 ];
 
 /* RENDER PHASES */
