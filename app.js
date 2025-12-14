@@ -196,7 +196,7 @@ function savePhase5() {
     nextPhase.scrollIntoView({ behavior: "smooth" });
   }
 },
-{
+{,
   id: 6,
   html: `
     <h2>💳 Banking & Money Transfer</h2>
