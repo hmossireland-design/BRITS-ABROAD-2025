@@ -169,6 +169,23 @@ const phases = [
     <button onclick="savePhase9()">Continue</button>
   `
 },
+ {
+  id: 10,
+  html: `
+    <h2>🚚 Move Logistics</h2>
+
+    <label>How complex will your move be?</label>
+    <select id="logistics">
+      <option value="">-- Select --</option>
+      <option value="simple">Simple</option>
+      <option value="moderate">Moderate</option>
+      <option value="complex">Complex</option>
+    </select>
+
+    <div class="phase-result" id="logistics-result"></div>
+    <button onclick="savePhase10()">Continue</button>
+  `
+},
 ];
 
 /* RENDER PHASES */
