@@ -1,6 +1,4 @@
-/* =========================
-   RESET
-========================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -8,9 +6,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+/* HERO */
 .hero {
   height: 80vh;
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero-background.jpg') center/cover no-repeat;
@@ -20,26 +16,20 @@
   color: #fff;
   text-align: center;
   position: relative;
-  overflow: hidden;
 }
 
-.hero-overlay {
-  max-width: 600px;
-  padding: 2em;
-}
-
-.hero h1 {
+.hero-overlay h1 {
   font-family: 'Playfair Display', serif;
   font-size: 3em;
   margin-bottom: 0.5em;
 }
 
-.hero p {
+.hero-overlay p {
   font-size: 1.3em;
   margin-bottom: 1em;
 }
 
-.hero button {
+.hero-overlay button {
   padding: 1em 2.5em;
   font-size: 1.2em;
   border: none;
@@ -50,68 +40,63 @@
   transition: 0.3s;
 }
 
-.hero button:hover {
+.hero-overlay button:hover {
   background: #ffdd57;
 }
 
-/* =========================
-   PROGRESS BAR
-========================= */
+/* PROGRESS BAR */
 #progress-wrapper {
   width: 90%;
-  max-width: 800px;
   margin: 2em auto;
+}
+
+#progress-text {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  text-align: center;
 }
 
 #progress-bar {
   width: 100%;
-  height: 12px;
-  background: #eee;
-  border-radius: 6px;
+  height: 15px;
+  background: #e0e0e0;
+  border-radius: 10px;
   overflow: hidden;
-  margin-top: 0.5em;
 }
 
 #progress-fill {
   width: 0;
   height: 100%;
   background: #fcb900;
-  transition: width 0.3s ease;
+  transition: width 0.5s ease;
 }
 
-#progress-text {
-  font-weight: 600;
-  margin-bottom: 0.3em;
-  text-align: center;
-}
-
-/* =========================
-   PHASE CARDS
-========================= */
+/* PHASE CARDS */
 #phases-container {
   padding: 2em;
   display: flex;
-  flex-direction: column; /* Stack cards vertically */
-  gap: 2em; /* Space between cards */
+  flex-direction: column;
+  gap: 2em;
 }
 
 .phase-card {
   background: #fff;
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   padding: 2em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.phase-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+.phase-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .phase-card h2 {
   margin-bottom: 1em;
   color: #222;
-  font-family: 'Playfair Display', serif;
 }
 
 .phase-card label {
@@ -120,7 +105,7 @@
   font-weight: 600;
 }
 
-.phase-card input,
+.phase-card input, 
 .phase-card select {
   width: 100%;
   padding: 0.6em;
@@ -129,7 +114,7 @@
   margin-bottom: 1em;
 }
 
-/* Sliders inside cards */
+/* RANGE SLIDER */
 input[type=range] {
   width: 100%;
   height: 12px;
@@ -146,9 +131,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-/* =========================
-   AI ADVICE
-========================= */
+/* AI ADVICE */
 #ai-advice {
   padding: 2em;
   text-align: center;
