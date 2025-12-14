@@ -186,6 +186,18 @@ const phases = [
     <button onclick="savePhase10()">Continue</button>
   `
 },
+ {
+  id: 11,
+  html: `
+    <h2>🏁 Relocation Readiness</h2>
+
+    <p>Based on your answers, here is your current readiness level:</p>
+
+    <div class="phase-result" id="final-result"></div>
+
+    <button onclick="savePhase11()">Generate Summary</button>
+  `
+}
 ];
 
 /* RENDER PHASES */
