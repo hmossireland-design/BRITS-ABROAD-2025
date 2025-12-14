@@ -1,63 +1,57 @@
 /* =========================
-   GLOBAL STYLES
+   RESET
 ========================= */
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.6;
-}
-
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-  text-align: center;
-  margin-top: 0.5rem;
-}
-
-h2 {
-  font-size: 1.75rem;
-  margin-top: 1rem;
 }
 
 /* =========================
    HERO SECTION
 ========================= */
 .hero {
-  position: relative;
-  height: 250px;
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1549887530-5b4f0339a1bb?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+  height: 80vh;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero-background.jpg') center/cover no-repeat;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-overlay {
-  text-align: center;
-  color: #fff;
+  max-width: 600px;
+  padding: 2em;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 1em;
 }
 
 .hero button {
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 1em 2.5em;
+  font-size: 1.2em;
   border: none;
-  border-radius: 5px;
-  background-color: #ff7f50;
-  color: #fff;
+  border-radius: 8px;
+  background: #fcb900;
+  color: #000;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s;
 }
 
 .hero button:hover {
-  background-color: #ff5a2e;
+  background: #ffdd57;
 }
 
 /* =========================
@@ -66,174 +60,117 @@ h2 {
 #progress-wrapper {
   width: 90%;
   max-width: 800px;
-  margin: 1rem auto;
-}
-
-#progress-text {
-  margin-bottom: 0.25rem;
-  font-weight: 600;
-  font-size: 0.9rem;
+  margin: 2em auto;
 }
 
 #progress-bar {
   width: 100%;
-  height: 15px;
-  background-color: #ddd;
-  border-radius: 10px;
+  height: 12px;
+  background: #eee;
+  border-radius: 6px;
   overflow: hidden;
+  margin-top: 0.5em;
 }
 
 #progress-fill {
-  width: 0%;
+  width: 0;
   height: 100%;
-  background-color: #4caf50;
-  border-radius: 10px;
-  transition: width 0.4s ease;
+  background: #fcb900;
+  transition: width 0.3s ease;
+}
+
+#progress-text {
+  font-weight: 600;
+  margin-bottom: 0.3em;
+  text-align: center;
 }
 
 /* =========================
    PHASE CARDS
 ========================= */
+#phases-container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  gap: 2em; /* Space between cards */
+}
+
 .phase-card {
-  width: 90%;
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 6px 18px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  padding: 2em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.phase-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.phase-card h2 {
+  margin-bottom: 1em;
+  color: #222;
+  font-family: 'Playfair Display', serif;
 }
 
 .phase-card label {
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.phase-card select,
-.phase-card input[type="range"] {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.phase-card input[type="range"] {
-  cursor: pointer;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-.phase-card button {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
+  margin: 0.5em 0 0.2em;
   font-weight: 600;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: #fff;
+}
+
+.phase-card input,
+.phase-card select {
+  width: 100%;
+  padding: 0.6em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+}
+
+/* Sliders inside cards */
+input[type=range] {
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  background: #f1f1f1;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fcb900;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 1rem;
-}
-
-.phase-card button:hover {
-  background-color: #45a049;
 }
 
 /* =========================
-   PHASE RESULTS
-========================= */
-.phase-result {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  background-color: #e7f9e7;
-  border-left: 5px solid #4caf50;
-  border-radius: 5px;
-  display: none;
-  font-size: 0.95rem;
-}
-
-/* =========================
-   AI ADVICE SECTION
+   AI ADVICE
 ========================= */
 #ai-advice {
-  width: 90%;
-  max-width: 700px;
-  margin: 2rem auto 4rem auto;
+  padding: 2em;
   text-align: center;
+  background: #f9f9f9;
 }
 
 #ai-advice button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 5px;
+  padding: 0.8em 2em;
+  font-size: 1em;
   border: none;
-  background-color: #2196f3;
+  border-radius: 8px;
+  background: #222;
   color: #fff;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
 }
 
 #ai-advice button:hover {
-  background-color: #1976d2;
+  background: #444;
 }
 
 #ai-output {
-  margin-top: 1rem;
-  font-size: 1rem;
-  background-color: #eef5ff;
-  padding: 1rem;
-  border-radius: 8px;
-  border-left: 5px solid #2196f3;
-  min-height: 40px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-  }
-  .phase-card {
-    padding: 1.5rem;
-  }
-}
-/* =========================
-   PHASE CARD ANIMATIONS
-========================= */
-.phase-card {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.phase-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* =========================
-   PHASE CARD ANIMATIONS
-========================= */
-.phase-card {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.phase-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+  margin-top: 1.5em;
+  font-size: 1.1em;
+  color: #222;
 }
