@@ -134,6 +134,34 @@ const phases = [
   `
 }
 ];
+/* PHASE 5 */
+function savePhase5() {
+  const housingType = document.getElementById("housing-type").value;
+  const housingBudget = document.getElementById("housing-budget").value;
+  const locationStyle = document.getElementById("location-style").value;
+  const resultBox = document.getElementById("housing-result");
+
+  if (!housingType || !housingBudget || !locationStyle) {
+    alert("Please complete all housing questions");
+    return;
+  }
+
+  let message = `
+    🏡 You plan to <strong>${housingType}</strong> with a budget of £${housingBudget}/month.<br>
+    Preferred area: <strong>${locationStyle}</strong>.
+  `;
+
+  resultBox.innerHTML = message;
+  resultBox.style.display = "block";
+
+  updateProgress(5);
+
+  // Scroll to Phase 6 if it exists
+  const nextPhase = document.getElementById("phase-6");
+  if (nextPhase) {
+    nextPhase.scrollIntoView({ behavior: "smooth" });
+  }
+}
 
 /* =========================
    RENDER PHASES
