@@ -121,6 +121,22 @@ const phases = [
     <button onclick="savePhase6()">Continue</button>
   `
 },
+ {
+  id: 7,
+  html: `
+    <h2>💼 Tax Exposure</h2>
+
+    <label>Will you become tax resident abroad?</label>
+    <select id="tax-resident">
+      <option value="">-- Select --</option>
+      <option value="yes">Yes</option>
+      <option value="no">No / Unsure</option>
+    </select>
+
+    <div class="phase-result" id="tax-result"></div>
+    <button onclick="savePhase7()">Continue</button>
+  `
+},
 ];
 
 /* RENDER PHASES */
