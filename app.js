@@ -1,5 +1,5 @@
 /*************************************************
- BRITS ABROAD 2025 – FULL APP LOGIC
+ BRITS ABROAD 2025 – CORE APP LOGIC
  Beginner-safe / No frameworks / GitHub friendly
 **************************************************/
 
@@ -15,15 +15,14 @@ const userProfile = {
   housingType: "",
   housingBudget: 800,
   locationStyle: "",
-  schooling: "",
-  taxes: "",
-  transport: "",
-  languageLevel: "",
-  socialLife: "",
+  language: "",
+  schoolNeeds: "",
+  transportMode: "",
+  lifestylePreferences: "",
 };
 
 /* =========================
-   PHASE DEFINITIONS (HTML)
+   PHASE DEFINITIONS
 ========================= */
 const phases = [
   {
@@ -132,29 +131,28 @@ const phases = [
   {
     id: 6,
     html: `
-      <h2>🏫 Schooling & Education</h2>
-      <label>Do you have children or plan to?</label>
-      <select id="schooling">
+      <h2>🗣️ Language Preparation</h2>
+      <label>Do you want to learn the local language?</label>
+      <select id="language">
         <option value="">-- Select --</option>
-        <option value="none">No children</option>
-        <option value="primary">Primary school age</option>
-        <option value="secondary">Secondary school age</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
       </select>
-      <div class="phase-result" id="schooling-result"></div>
+      <div class="phase-result" id="language-result"></div>
       <button onclick="savePhase6()">Continue</button>
     `
   },
   {
     id: 7,
     html: `
-      <h2>💸 Taxes & Cost of Living</h2>
-      <label>Are you familiar with local taxes?</label>
-      <select id="taxes">
+      <h2>🎓 Schooling & Education</h2>
+      <label>Do you have school-age children?</label>
+      <select id="school-needs">
         <option value="">-- Select --</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>
-      <div class="phase-result" id="taxes-result"></div>
+      <div class="phase-result" id="school-result"></div>
       <button onclick="savePhase7()">Continue</button>
     `
   },
@@ -162,11 +160,12 @@ const phases = [
     id: 8,
     html: `
       <h2>🚗 Transport & Mobility</h2>
-      <label>Do you need a car or public transport?</label>
-      <select id="transport">
+      <label>Preferred transport mode</label>
+      <select id="transport-mode">
         <option value="">-- Select --</option>
         <option value="car">Car</option>
         <option value="public">Public Transport</option>
+        <option value="bike">Bike / Walking</option>
       </select>
       <div class="phase-result" id="transport-result"></div>
       <button onclick="savePhase8()">Continue</button>
@@ -175,39 +174,40 @@ const phases = [
   {
     id: 9,
     html: `
-      <h2>🗣 Language Skills</h2>
-      <label>Current level in local language</label>
-      <select id="language-level">
+      <h2>🌿 Lifestyle & Social</h2>
+      <label>Lifestyle preferences</label>
+      <select id="lifestyle-preferences">
         <option value="">-- Select --</option>
-        <option value="none">None</option>
-        <option value="basic">Basic</option>
-        <option value="conversational">Conversational</option>
+        <option value="quiet">Quiet</option>
+        <option value="active">Active</option>
+        <option value="social">Social</option>
       </select>
-      <div class="phase-result" id="language-result"></div>
+      <div class="phase-result" id="lifestyle-result"></div>
       <button onclick="savePhase9()">Continue</button>
     `
   },
   {
     id: 10,
     html: `
-      <h2>🎉 Social & Lifestyle</h2>
-      <label>Preferred social life intensity</label>
-      <select id="social-life">
+      <h2>📅 Timeline & Planning</h2>
+      <label>Desired relocation timeline</label>
+      <select id="timeline">
         <option value="">-- Select --</option>
-        <option value="quiet">Quiet</option>
-        <option value="moderate">Moderate</option>
-        <option value="active">Active</option>
+        <option value="0-3">0-3 months</option>
+        <option value="3-6">3-6 months</option>
+        <option value="6-12">6-12 months</option>
+        <option value="12+">12+ months</option>
       </select>
-      <div class="phase-result" id="social-result"></div>
+      <div class="phase-result" id="timeline-result"></div>
       <button onclick="savePhase10()">Continue</button>
     `
   },
   {
     id: 11,
     html: `
-      <h2>✅ Summary & Next Steps</h2>
-      <div id="summary"></div>
-      <button onclick="showSummary()">Finish</button>
+      <h2>✅ Summary & Recommendations</h2>
+      <div id="summary-result"></div>
+      <button onclick="generateSummary()">Finish</button>
     `
   }
 ];
@@ -216,20 +216,12 @@ const phases = [
    RENDER PHASES
 ========================= */
 const container = document.getElementById("phases-container");
-
 phases.forEach(phase => {
   const card = document.createElement("section");
   card.className = "phase-card";
   card.id = `phase-${phase.id}`;
   card.innerHTML = phase.html;
-  card.style.opacity = 0;
   container.appendChild(card);
-
-  // Fade-in animation
-  setTimeout(() => {
-    card.style.transition = "opacity 0.6s ease";
-    card.style.opacity = 1;
-  }, 100);
 });
 
 /* =========================
@@ -241,46 +233,39 @@ function startApp() {
 
 function updateProgress(phaseNumber) {
   const percent = (phaseNumber / 11) * 100;
-  const fill = document.getElementById("progress-fill");
-  fill.style.transition = "width 0.6s ease-out";
-  fill.style.width = percent + "%";
-  document.getElementById("progress-text").innerText =
-    `Phase ${phaseNumber} of 11`;
+  document.getElementById("progress-fill").style.width = percent + "%";
+  document.getElementById("progress-text").innerText = `Phase ${phaseNumber} of 11`;
 }
 
 /* =========================
-   SAVE FUNCTIONS FOR PHASES
+   SAVE PHASE FUNCTIONS
 ========================= */
-
 function savePhase1() {
-  const val = document.getElementById("destination").value;
-  if (!val) return alert("Please select a destination");
-  userProfile.destination = val;
-  document.getElementById("destination-result").innerHTML = `✅ ${val}`;
+  const dest = document.getElementById("destination").value;
+  if (!dest) return alert("Please select a destination");
+  userProfile.destination = dest;
   updateProgress(1);
-  scrollNext(2);
+  document.getElementById("phase-2").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase2() {
   const pass = document.getElementById("passport").value;
   const work = document.getElementById("work").value;
-  if (!pass || !work) return alert("Please answer all questions");
+  if (!pass || !work) return alert("Please answer both questions");
   userProfile.passport = pass;
   userProfile.work = work;
-  document.getElementById("rights-result").innerHTML = `✅ ${pass}, ${work}`;
   updateProgress(2);
-  scrollNext(3);
+  document.getElementById("phase-3").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase3() {
   const income = document.getElementById("income").value;
   const budget = document.getElementById("budget").value;
-  if (!income || !budget) return alert("Please answer all questions");
+  if (!income || !budget) return alert("Please enter income and budget");
   userProfile.monthlyIncome = income;
   userProfile.budgetLevel = budget;
-  document.getElementById("budget-result").innerHTML = `✅ £${income} / ${budget}`;
   updateProgress(3);
-  scrollNext(4);
+  document.getElementById("phase-4").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase4() {
@@ -289,106 +274,78 @@ function savePhase4() {
   if (!health || !pension) return alert("Please answer both healthcare questions");
   userProfile.healthStatus = health;
   userProfile.statePension = pension;
-
-  let msg = "";
-  if (health === "retired" && pension === "yes") {
-    msg = "✅ You may be eligible for S1 healthcare coverage.";
-  } else if (health === "working") {
-    msg = "💼 You will contribute to local healthcare or use private insurance.";
-  } else {
-    msg = "🏥 Private health insurance may be needed initially.";
-  }
-
-  document.getElementById("healthcare-result").innerHTML = msg;
   updateProgress(4);
-  scrollNext(5);
+  document.getElementById("phase-5").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase5() {
   const type = document.getElementById("housing-type").value;
   const budget = document.getElementById("housing-budget").value;
-  const loc = document.getElementById("location-style").value;
-  if (!type || !budget || !loc) return alert("Please answer all housing questions");
+  const style = document.getElementById("location-style").value;
+  if (!type || !budget || !style) return alert("Please answer all housing questions");
   userProfile.housingType = type;
   userProfile.housingBudget = budget;
-  userProfile.locationStyle = loc;
-  document.getElementById("housing-result").innerHTML = `✅ ${type}, £${budget}, ${loc}`;
+  userProfile.locationStyle = style;
   updateProgress(5);
-  scrollNext(6);
+  document.getElementById("phase-6").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase6() {
-  const school = document.getElementById("schooling").value;
-  if (!school) return alert("Please select schooling option");
-  userProfile.schooling = school;
-  document.getElementById("schooling-result").innerHTML = `✅ ${school}`;
+  const lang = document.getElementById("language").value;
+  if (!lang) return alert("Please select an option");
+  userProfile.language = lang;
   updateProgress(6);
-  scrollNext(7);
+  document.getElementById("phase-7").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase7() {
-  const tax = document.getElementById("taxes").value;
-  if (!tax) return alert("Please select an option");
-  userProfile.taxes = tax;
-  document.getElementById("taxes-result").innerHTML = `✅ ${tax}`;
+  const school = document.getElementById("school-needs").value;
+  if (!school) return alert("Please select an option");
+  userProfile.schoolNeeds = school;
   updateProgress(7);
-  scrollNext(8);
+  document.getElementById("phase-8").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase8() {
-  const transport = document.getElementById("transport").value;
+  const transport = document.getElementById("transport-mode").value;
   if (!transport) return alert("Please select an option");
-  userProfile.transport = transport;
-  document.getElementById("transport-result").innerHTML = `✅ ${transport}`;
+  userProfile.transportMode = transport;
   updateProgress(8);
-  scrollNext(9);
+  document.getElementById("phase-9").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase9() {
-  const lang = document.getElementById("language-level").value;
-  if (!lang) return alert("Please select an option");
-  userProfile.languageLevel = lang;
-  document.getElementById("language-result").innerHTML = `✅ ${lang}`;
+  const life = document.getElementById("lifestyle-preferences").value;
+  if (!life) return alert("Please select an option");
+  userProfile.lifestylePreferences = life;
   updateProgress(9);
-  scrollNext(10);
+  document.getElementById("phase-10").scrollIntoView({ behavior: "smooth" });
 }
 
 function savePhase10() {
-  const social = document.getElementById("social-life").value;
-  if (!social) return alert("Please select an option");
-  userProfile.socialLife = social;
-  document.getElementById("social-result").innerHTML = `✅ ${social}`;
+  const timeline = document.getElementById("timeline").value;
+  if (!timeline) return alert("Please select an option");
+  userProfile.timeline = timeline;
   updateProgress(10);
-  scrollNext(11);
+  document.getElementById("phase-11").scrollIntoView({ behavior: "smooth" });
 }
 
-function showSummary() {
-  const summary = document.getElementById("summary");
-  summary.innerHTML = `
-    <h3>Your Relocation Plan:</h3>
-    <ul>
-      <li>Destination: ${userProfile.destination}</li>
-      <li>Passport: ${userProfile.passport}</li>
-      <li>Work: ${userProfile.work}</li>
-      <li>Income: £${userProfile.monthlyIncome}</li>
-      <li>Budget: ${userProfile.budgetLevel}</li>
-      <li>Healthcare: ${userProfile.healthStatus} / ${userProfile.statePension}</li>
-      <li>Housing: ${userProfile.housingType}, £${userProfile.housingBudget}, ${userProfile.locationStyle}</li>
-      <li>Schooling: ${userProfile.schooling}</li>
-      <li>Taxes: ${userProfile.taxes}</li>
-      <li>Transport: ${userProfile.transport}</li>
-      <li>Language: ${userProfile.languageLevel}</li>
-      <li>Social Life: ${userProfile.socialLife}</li>
-    </ul>
+function generateSummary() {
+  let summary = `
+    <h3>Your Relocation Summary</h3>
+    <p><strong>Destination:</strong> ${userProfile.destination}</p>
+    <p><strong>Passport:</strong> ${userProfile.passport}</p>
+    <p><strong>Work:</strong> ${userProfile.work}</p>
+    <p><strong>Income:</strong> £${userProfile.monthlyIncome}</p>
+    <p><strong>Budget:</strong> ${userProfile.budgetLevel}</p>
+    <p><strong>Healthcare:</strong> ${userProfile.healthStatus}, Pension: ${userProfile.statePension}</p>
+    <p><strong>Housing:</strong> ${userProfile.housingType}, £${userProfile.housingBudget}, ${userProfile.locationStyle}</p>
+    <p><strong>Language:</strong> ${userProfile.language}</p>
+    <p><strong>School Needs:</strong> ${userProfile.schoolNeeds}</p>
+    <p><strong>Transport:</strong> ${userProfile.transportMode}</p>
+    <p><strong>Lifestyle:</strong> ${userProfile.lifestylePreferences}</p>
+    <p><strong>Timeline:</strong> ${userProfile.timeline}</p>
   `;
+  document.getElementById("summary-result").innerHTML = summary;
   updateProgress(11);
-  summary.scrollIntoView({ behavior: "smooth" });
-}
-
-/* =========================
-   HELPER: SCROLL NEXT PHASE
-========================= */
-function scrollNext(id) {
-  const nextPhase = document.getElementById(`phase-${id}`);
-  if (nextPhase) nextPhase.scrollIntoView({ behavior: "smooth" });
 }
