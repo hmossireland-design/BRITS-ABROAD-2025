@@ -1,6 +1,4 @@
-/* =========================
-   RESET
-========================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -8,161 +6,161 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* =========================
-   BODY & HERO
-========================= */
-body {
-  background: #f7f7f7;
-  color: #222;
-}
-
-header {
-  background: #004080;
+/* HERO */
+.hero {
+  height: 80vh;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+              url('hero-background.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
   text-align: center;
-  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero-img {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover;
+.hero-overlay h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  animation: fadeIn 1s ease forwards;
 }
 
-/* =========================
-   PROGRESS BAR
-========================= */
-#progress-container {
+.hero-overlay p {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.hero-overlay button {
+  padding: 1em 2.5em;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 8px;
+  background: #fcb900;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-overlay button:hover {
+  background: #ffdd57;
+}
+
+/* FADE IN HERO TEXT */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PROGRESS BAR */
+#progress-wrapper {
   width: 90%;
-  margin: 20px auto 5px auto;
-  height: 20px;
-  background: #ddd;
-  border-radius: 10px;
+  margin: 1em auto;
+}
+
+#progress-bar {
+  width: 100%;
+  background: #e0e0e0;
+  border-radius: 8px;
+  height: 12px;
   overflow: hidden;
 }
 
 #progress-fill {
   width: 0%;
   height: 100%;
-  background: #004080;
-  transition: width 0.5s ease-in-out;
+  background: #fcb900;
+  border-radius: 8px;
+  transition: width 0.5s ease;
 }
 
 #progress-text {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 0.5em;
   font-weight: 600;
-  font-size: 1.1em;
 }
 
-/* =========================
-   PHASE CARDS
-========================= */
+/* PHASE CARDS */
+#phases-container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
 .phase-card {
   background: #fff;
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 25px 20px;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  padding: 2em;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .phase-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
 .phase-card h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8em;
-  margin-bottom: 15px;
-  color: #004080;
+  margin-bottom: 1em;
+  color: #222;
 }
 
-/* =========================
-   LABELS & INPUTS
-========================= */
-label {
+.phase-card label {
   display: block;
-  margin-top: 15px;
+  margin: 0.5em 0 0.2em;
   font-weight: 600;
 }
 
-select, input[type="range"] {
+.phase-card input,
+.phase-card select {
   width: 100%;
-  padding: 8px 10px;
-  margin-top: 5px;
+  padding: 0.6em;
   border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 1em;
+  margin-bottom: 1em;
 }
 
-input[type="range"] {
-  -webkit-appearance: none;
-  background: #f1f1f1;
+input[type=range] {
+  width: 100%;
   height: 12px;
+  border-radius: 6px;
+  background: #f1f1f1;
+  outline: none;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
+input[type=range]::-webkit-slider-thumb {
   width: 24px;
   height: 24px;
-  background: #004080;
   border-radius: 50%;
+  background: #fcb900;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  background: #0066cc;
+/* AI ADVICE */
+#ai-advice {
+  padding: 2em;
+  text-align: center;
+  background: #f9f9f9;
 }
 
-/* =========================
-   BUTTONS
-========================= */
-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #004080;
-  color: #fff;
+#ai-advice button {
+  padding: 0.8em 2em;
+  font-size: 1em;
   border: none;
   border-radius: 8px;
-  font-size: 1em;
-  font-weight: 600;
+  background: #222;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-button:hover {
-  background: #0066cc;
+#ai-advice button:hover {
+  background: #444;
 }
 
-/* =========================
-   PHASE RESULTS
-========================= */
-.phase-result {
-  margin-top: 15px;
-  padding: 12px;
-  background: #e6f0ff;
-  border-radius: 6px;
-  display: none;
-  font-size: 0.95em;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
-  .phase-card {
-    padding: 20px 15px;
-  }
-
-  .phase-card h2 {
-    font-size: 1.5em;
-  }
-
-  button {
-    width: 100%;
-  }
+#ai-output {
+  margin-top: 1.5em;
+  font-size: 1.1em;
+  color: #222;
 }
