@@ -2,113 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Brits Abroad 2025 – Ultimate Relocation App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRITS ABROAD 2025</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #0055a5;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 10px 20px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
-    }
-    .phase-card {
-      margin-bottom: 40px;
-      padding: 20px;
-      border-bottom: 1px solid #ddd;
-    }
-    .phase-card h2 {
-      margin-top: 0;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
-    select, input[type=range] {
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 5px;
-      font-size: 1em;
-    }
-    button {
-      background: #0055a5;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #003f7f;
-    }
-    .phase-result {
-      margin: 10px 0;
-      padding: 10px;
-      background: #e7f3ff;
-      border-radius: 5px;
-      display: none;
-    }
-    #progress-container {
-      width: 100%;
-      background: #ddd;
-      height: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    #progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #0055a5;
-      transition: width 0.3s ease;
-    }
-    #progress-text {
-      text-align: right;
-      font-size: 0.9em;
-      margin-bottom: 20px;
-    }
-  </style>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<header>
-  <h1>BRITS ABROAD 2025</h1>
-  <p>Plan your move step by step</p>
-</header>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="hero-overlay">
+      <h1>Brits Abroad 2025</h1>
+      <p>Your all-in-one relocation intelligence engine</p>
+      <button onclick="startApp()">Start Your Plan</button>
+    </div>
+  </header>
 
-<div class="container">
-  <div id="progress-container">
-    <div id="progress-fill"></div>
+  <!-- PROGRESS BAR -->
+  <div id="progress-wrapper">
+    <div id="progress-text">Phase 1 of 11</div>
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
   </div>
-  <div id="progress-text">Phase 0 of 11</div>
 
-  <div id="phases-container"></div>
-</div>
+  <!-- PHASES CONTAINER -->
+  <main id="phases-container">
+    <!-- Phase cards are dynamically injected via app.js -->
+  </main>
 
-<!-- JS -->
-<script src="app.js"></script>
-<script>
-  // Start the app once the page loads
-  window.onload = () => {
-    startApp();
-  };
-</script>
+  <!-- AI ADVICE -->
+  <section id="ai-advice">
+    <button onclick="getAIAdvice()">Get Advice</button>
+    <div id="ai-output"></div>
+  </section>
 
+  <!-- Scripts -->
+  <script src="app.js"></script>
 </body>
 </html>
