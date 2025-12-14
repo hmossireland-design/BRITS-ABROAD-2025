@@ -2,49 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Brits Abroad 2025 – Ultimate Relocation App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Chart.js CDN (optional if needed later) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>BRITS ABROAD 2025</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .hero-img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+    }
+    #progress-container {
+      width: 90%;
+      background: #ddd;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #progress-fill {
+      width: 0;
+      height: 20px;
+      background: #004080;
+    }
+    #progress-text {
+      text-align: center;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+    .phase-card {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 700px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input[type="range"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+    }
+    .phase-result {
+      margin-top: 15px;
+      padding: 10px;
+      background: #e6f0ff;
+      border-radius: 5px;
+      display: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0066cc;
+    }
+  </style>
 </head>
 <body>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrapper">
-  <div id="progress-text">Phase 1 of 11</div>
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
-  </div>
-</div>
-
-<!-- HERO SECTION -->
-<header class="hero">
-  <div class="hero-overlay">
-    <h1>Brits Abroad 2025</h1>
-    <p>Your all-in-one relocation intelligence engine</p>
-    <button onclick="startApp()">Start Your Plan</button>
-  </div>
+<header>
+  <h1>BRITS ABROAD 2025</h1>
 </header>
 
-<!-- PHASES CONTAINER -->
+<img src="hero.jpg" alt="BRITS ABROAD" class="hero-img">
+
+<div id="progress-container">
+  <div id="progress-fill"></div>
+</div>
+<div id="progress-text">Phase 0 of 11</div>
+
 <main id="phases-container">
-  <!-- All phases will be injected here by app.js -->
+  <!-- JS will inject phases here -->
 </main>
 
-<!-- AI ADVICE PLACEHOLDER -->
-<section id="ai-advice">
-  <button onclick="getAIAdvice()">Get Advice</button>
-  <div id="ai-output"></div>
-</section>
-
-<!-- Script -->
 <script src="app.js"></script>
+<script>
+  // Start app when page loads
+  window.onload = startApp;
+</script>
+
 </body>
 </html>
