@@ -1,6 +1,3 @@
-/* =========================
-   RESET
-========================= */
 * {
   margin: 0;
   padding: 0;
@@ -14,9 +11,6 @@ body {
   line-height: 1.5;
 }
 
-/* =========================
-   HERO
-========================= */
 .hero {
   height: 80vh;
   background: #333;
@@ -30,7 +24,7 @@ body {
 }
 
 .hero-overlay {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0,0,0,0.3);
   padding: 2rem;
   border-radius: 8px;
 }
@@ -61,9 +55,6 @@ body {
   background-color: #ff5722;
 }
 
-/* =========================
-   PROGRESS BAR
-========================= */
 #progress-wrapper {
   width: 90%;
   max-width: 900px;
@@ -90,9 +81,6 @@ body {
   transition: width 0.4s ease-in-out;
 }
 
-/* =========================
-   PHASE CARDS
-========================= */
 .phase-card {
   background: #fff;
   max-width: 800px;
@@ -146,9 +134,6 @@ body {
   background-color: #388e3c;
 }
 
-/* =========================
-   PHASE RESULT BOX
-========================= */
 .phase-result {
   margin-top: 1rem;
   padding: 1rem;
