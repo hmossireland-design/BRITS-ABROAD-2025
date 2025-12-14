@@ -4,30 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brits Abroad 2025</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-overlay">
-    <h1>Brits Abroad 2025</h1>
-    <p>Your all-in-one relocation intelligence engine</p>
-    <button onclick="startApp()">Start Your Plan</button>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-overlay">
+      <h1>Brits Abroad 2025</h1>
+      <p>Your all-in-one relocation intelligence engine</p>
+      <button onclick="startApp()">Start Your Plan</button>
+    </div>
+  </header>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-wrapper">
+    <div id="progress-text">Phase 1 of 11</div>
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
   </div>
-</header>
 
-<!-- PROGRESS BAR -->
-<div id="progress-wrapper">
-  <div id="progress-text">Phase 1 of 11</div>
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
-  </div>
-</div>
+  <!-- PHASE CARD CONTAINER -->
+  <div id="app"></div>
 
-<!-- APP CONTAINER -->
-<div id="app"></div>
-
-<script src="app.js"></script>
+  <!-- JS -->
+  <script src="app.js"></script>
 </body>
 </html>
