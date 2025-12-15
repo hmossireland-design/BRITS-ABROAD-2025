@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const app = document.getElementById("app");
   let currentPhase = 1;
 
@@ -11,12 +10,36 @@ document.addEventListener("DOMContentLoaded", () => {
         <label>Where are you considering moving?</label>
         <select id="destination">
           <option value="">-- Select --</option>
-          <option>Portugal</option>
-          <option>Spain</option>
-          <option>France</option>
-          <option>Cyprus</option>
-          <option>Thailand</option>
-          <option>UAE</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Spain">Spain</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Australia">Australia</option>
+          <option value="Cyprus">Cyprus</option>
+          <option value="Malta">Malta</option>
+          <option value="France">France</option>
+          <option value="UAE">UAE</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Italy">Italy</option>
+          <option value="Greece">Greece</option>
+          <option value="Canada">Canada</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Panama">Panama</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Costa Rica">Costa Rica</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Poland">Poland</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Mauritius">Mauritius</option>
+          <option value="Belize">Belize</option>
+          <option value="Ecuador">Ecuador</option>
+          <option value="Uruguay">Uruguay</option>
+          <option value="Chile">Chile</option>
+          <option value="Latvia">Latvia</option>
         </select>
         <div class="phase-result" id="destination-result"></div>
         <button onclick="savePhase1()">Continue</button>
@@ -36,84 +59,26 @@ document.addEventListener("DOMContentLoaded", () => {
         <button onclick="savePhase2()">Continue</button>
       `
     },
-    {
-      id: 3,
-      html: `
-        <h2>💰 Income & Budget</h2>
-        <label>Monthly Income (£)</label>
-        <input type="range" min="500" max="5000" value="1500" id="income"
-          oninput="document.getElementById('incomeValue').innerText=this.value">
-        <p>£<span id="incomeValue">1500</span>/month</p>
-
-        <label>Budget sensitivity</label>
-        <select id="budget">
-          <option value="">-- Select --</option>
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-
-        <div class="phase-result" id="budget-result"></div>
-        <button onclick="savePhase3()">Continue</button>
-      `
-    },
-    {
-      id: 4,
-      html: `
-        <h2>🏥 Healthcare</h2>
-        <label>What best describes you?</label>
-        <select id="health-status">
-          <option value="">-- Select --</option>
-          <option value="working">Working / Self-employed</option>
-          <option value="retired">Retired / State Pension</option>
-        </select>
-
-        <label>Do you receive the UK State Pension?</label>
-        <select id="state-pension">
-          <option value="">-- Select --</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-
-        <div class="phase-result" id="healthcare-result"></div>
-        <button onclick="savePhase4()">Continue</button>
-      `
-    },
-    {
-      id: 5,
-      html: `
-        <h2>🏠 Housing</h2>
-        <label>Rent or Buy?</label>
-        <select id="housing-type">
-          <option value="">-- Select --</option>
-          <option>Rent</option>
-          <option>Buy</option>
-        </select>
-
-        <label>Monthly housing budget (£)</label>
-        <input type="range" min="300" max="3000" value="800" id="housing-budget"
-          oninput="document.getElementById('housingValue').innerText=this.value">
-        <p>£<span id="housingValue">800</span>/month</p>
-
-        <label>Preferred location style</label>
-        <select id="location-style">
-          <option value="">-- Select --</option>
-          <option>City</option>
-          <option>Town</option>
-          <option>Rural</option>
-        </select>
-
-        <div class="phase-result" id="housing-result"></div>
-        <button onclick="savePhase5()">Continue</button>
-      `
-    },
-    { id: 6, html: `<h2>💸 Tax Reality</h2><p>Tax residency & obligations explained.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 7, html: `<h2>🏦 Banking</h2><p>Local & international banking options.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 8, html: `<h2>📑 Visas</h2><p>Visa types & renewal risks.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 9, html: `<h2>🚗 Transport</h2><p>Driving & car imports.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 10, html: `<h2>📦 Moving</h2><p>Shipping & pets.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 11, html: `<h2>✅ Final Score</h2><p>Your relocation readiness score.</p>` }
+    { id: 3, html: `<h2>💰 Income & Budget</h2><p>...your existing content...</p>` },
+    { id: 4, html: `<h2>🏥 Healthcare</h2><p>...your existing content...</p>` },
+    { id: 5, html: `<h2>🏠 Housing</h2><p>...your existing content...</p>` },
+    { id: 6, html: `<h2>💸 Tax Reality</h2><p>...your existing content...</p>` },
+    { id: 7, html: `<h2>🏦 Banking</h2><p>...your existing content...</p>` },
+    { id: 8, html: `<h2>📑 Visas</h2><p>...your existing content...</p>` },
+    { id: 9, html: `<h2>🚗 Transport</h2><p>...your existing content...</p>` },
+    { id: 10, html: `<h2>📦 Moving</h2><p>...your existing content...</p>` },
+    { id: 11, html: `<h2>✅ Final Score</h2><p>Your personalised relocation readiness score.</p>` }
   ];
+
+  const residencyDataUK = {
+    // Paste all 30 countries from my previous message here
+  };
+
+  function startApp() {
+    app.innerHTML = "";
+    currentPhase = 1;
+    renderPhase();
+  }
 
   function renderPhase() {
     const phase = phases[currentPhase - 1];
@@ -125,68 +90,56 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgress();
   }
 
-  function updateProgress() {
-    document.getElementById("progress-text").innerText =
-      `Phase ${currentPhase} of ${phases.length}`;
-    document.getElementById("progress-fill").style.width =
-      (currentPhase / phases.length) * 100 + "%";
-  }
-
-  // 🔓 EXPOSE FUNCTIONS
-  window.startApp = function () {
-    app.innerHTML = "";
-    currentPhase = 1;
-    renderPhase();
-  };
-
-  window.nextPhase = function () {
+  function nextPhase() {
     if (currentPhase < phases.length) {
       currentPhase++;
       renderPhase();
-      document.getElementById(`phase-${currentPhase}`)
-        .scrollIntoView({ behavior: "smooth" });
+      const el = document.getElementById(`phase-${currentPhase}`);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }
 
-  window.savePhase1 = function () {
-    const val = destination.value;
-    if (!val) return alert("Select a destination");
-    destination_result.innerHTML = `🌍 Selected: <strong>${val}</strong>`;
-    destination_result.style.display = "block";
-    nextPhase();
-  };
+  function updateProgress() {
+    document.getElementById("progress-text").innerText = `Phase ${currentPhase} of ${phases.length}`;
+    const percent = (currentPhase / phases.length) * 100;
+    document.getElementById("progress-fill").style.width = percent + "%";
+  }
 
-  window.savePhase2 = function () {
-    if (!passport.value) return alert("Select passport");
-    residency_result.innerHTML =
-      passport.value === "UK"
-        ? "Post-Brexit rules apply."
-        : "EU residency is simpler.";
-    residency_result.style.display = "block";
+  window.savePhase1 = function() {
+    const dest = document.getElementById("destination").value;
+    const box = document.getElementById("destination-result");
+    if (!dest) return alert("Please select a destination");
+    box.innerHTML = `🌍 You selected <strong>${dest}</strong>`;
+    box.style.display = "block";
     nextPhase();
-  };
+  }
 
-  window.savePhase3 = function () {
-    if (!budget.value) return alert("Select budget");
-    budget_result.innerHTML = `£${income.value}/month — ${budget.value}`;
-    budget_result.style.display = "block";
-    nextPhase();
-  };
+  window.savePhase2 = function() {
+    const country = document.getElementById("destination").value;
+    const pass = document.getElementById("passport").value;
+    const box = document.getElementById("residency-result");
 
-  window.savePhase4 = function () {
-    healthcare_result.innerHTML =
-      health_status.value === "retired" && state_pension.value === "yes"
-        ? "S1 healthcare likely."
-        : "Private or local insurance required.";
-    healthcare_result.style.display = "block";
-    nextPhase();
-  };
+    if (!pass) return alert("Please select passport type");
 
-  window.savePhase5 = function () {
-    housing_result.innerHTML =
-      `You plan to ${housing_type.value} in a ${location_style.value} area.`;
-    housing_result.style.display = "block";
+    if(pass === "UK") {
+      const data = residencyDataUK[country];
+      if(!data) {
+        box.innerHTML = `No residency info available for ${country}`;
+      } else {
+        box.innerHTML = `
+          🛂 Visa/Residency Type: <strong>${data.visa}</strong><br>
+          Requirements: <strong>${data.requirements}</strong><br>
+          Ease of obtaining residency: <strong>${data.ease}/10</strong><br>
+          Benefits: <strong>${data.benefits}</strong><br>
+          Risks/Drawbacks: <strong>${data.risks}</strong>
+        `;
+      }
+    } else {
+      box.innerHTML = "EU passport selected – easier residency options available.";
+    }
+
+    box.style.display = "block";
     nextPhase();
-  };
+  }
 
 });
