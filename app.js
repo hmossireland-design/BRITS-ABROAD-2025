@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
   let currentPhase = 1;
 
-  /* =========================
-     PHASE DEFINITIONS
-  ========================= */
   const phases = [
     {
       id: 1,
@@ -14,12 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <label>Where are you considering moving?</label>
         <select id="destination">
           <option value="">-- Select --</option>
-          <option value="Portugal">Portugal</option>
-          <option value="Spain">Spain</option>
-          <option value="France">France</option>
-          <option value="Cyprus">Cyprus</option>
-          <option value="Thailand">Thailand</option>
-          <option value="UAE">UAE</option>
+          <option>Portugal</option>
+          <option>Spain</option>
+          <option>France</option>
+          <option>Cyprus</option>
+          <option>Thailand</option>
+          <option>UAE</option>
         </select>
         <div class="phase-result" id="destination-result"></div>
         <button onclick="savePhase1()">Continue</button>
@@ -51,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <label>Budget sensitivity</label>
         <select id="budget">
           <option value="">-- Select --</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
         </select>
 
         <div class="phase-result" id="budget-result"></div>
@@ -89,8 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <label>Rent or Buy?</label>
         <select id="housing-type">
           <option value="">-- Select --</option>
-          <option value="rent">Rent</option>
-          <option value="buy">Buy</option>
+          <option>Rent</option>
+          <option>Buy</option>
         </select>
 
         <label>Monthly housing budget (£)</label>
@@ -101,44 +98,23 @@ document.addEventListener("DOMContentLoaded", () => {
         <label>Preferred location style</label>
         <select id="location-style">
           <option value="">-- Select --</option>
-          <option value="city">City</option>
-          <option value="town">Town</option>
-          <option value="rural">Rural</option>
+          <option>City</option>
+          <option>Town</option>
+          <option>Rural</option>
         </select>
 
         <div class="phase-result" id="housing-result"></div>
         <button onclick="savePhase5()">Continue</button>
       `
     },
-    {
-      id: 6,
-      html: `<h2>💸 Tax Reality</h2><p>Understand tax residency and reporting obligations.</p><button onclick="nextPhase()">Continue</button>`
-    },
-    {
-      id: 7,
-      html: `<h2>🏦 Banking</h2><p>Local vs international banking options.</p><button onclick="nextPhase()">Continue</button>`
-    },
-    {
-      id: 8,
-      html: `<h2>📑 Visas</h2><p>Visa types and renewal risks.</p><button onclick="nextPhase()">Continue</button>`
-    },
-    {
-      id: 9,
-      html: `<h2>🚗 Transport</h2><p>Driving licences and car imports.</p><button onclick="nextPhase()">Continue</button>`
-    },
-    {
-      id: 10,
-      html: `<h2>📦 Moving</h2><p>Shipping, pets, personal items.</p><button onclick="nextPhase()">Continue</button>`
-    },
-    {
-      id: 11,
-      html: `<h2>✅ Final Score</h2><p>Your personalised relocation readiness summary.</p>`
-    }
+    { id: 6, html: `<h2>💸 Tax Reality</h2><p>Tax residency & obligations explained.</p><button onclick="nextPhase()">Continue</button>` },
+    { id: 7, html: `<h2>🏦 Banking</h2><p>Local & international banking options.</p><button onclick="nextPhase()">Continue</button>` },
+    { id: 8, html: `<h2>📑 Visas</h2><p>Visa types & renewal risks.</p><button onclick="nextPhase()">Continue</button>` },
+    { id: 9, html: `<h2>🚗 Transport</h2><p>Driving & car imports.</p><button onclick="nextPhase()">Continue</button>` },
+    { id: 10, html: `<h2>📦 Moving</h2><p>Shipping & pets.</p><button onclick="nextPhase()">Continue</button>` },
+    { id: 11, html: `<h2>✅ Final Score</h2><p>Your relocation readiness score.</p>` }
   ];
 
-  /* =========================
-     CORE RENDERING
-  ========================= */
   function renderPhase() {
     const phase = phases[currentPhase - 1];
     const card = document.createElement("div");
@@ -149,6 +125,20 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgress();
   }
 
+  function updateProgress() {
+    document.getElementById("progress-text").innerText =
+      `Phase ${currentPhase} of ${phases.length}`;
+    document.getElementById("progress-fill").style.width =
+      (currentPhase / phases.length) * 100 + "%";
+  }
+
+  // 🔓 EXPOSE FUNCTIONS
+  window.startApp = function () {
+    app.innerHTML = "";
+    currentPhase = 1;
+    renderPhase();
+  };
+
   window.nextPhase = function () {
     if (currentPhase < phases.length) {
       currentPhase++;
@@ -158,65 +148,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  function updateProgress() {
-    document.getElementById("progress-text").innerText =
-      `Phase ${currentPhase} of ${phases.length}`;
-    document.getElementById("progress-fill").style.width =
-      (currentPhase / phases.length) * 100 + "%";
-  }
-
-  /* =========================
-     START BUTTON (FIXED)
-  ========================= */
-  window.startApp = function () {
-    app.innerHTML = "";
-    currentPhase = 1;
-    renderPhase();
-  };
-
-  /* =========================
-     SAVE PHASE FUNCTIONS
-  ========================= */
   window.savePhase1 = function () {
-    const v = destination.value;
-    if (!v) return alert("Select a destination");
-    destination-result?.style?.display;
-    document.getElementById("destination-result").innerHTML = `🌍 ${v}`;
-    document.getElementById("destination-result").style.display = "block";
+    const val = destination.value;
+    if (!val) return alert("Select a destination");
+    destination_result.innerHTML = `🌍 Selected: <strong>${val}</strong>`;
+    destination_result.style.display = "block";
     nextPhase();
   };
 
   window.savePhase2 = function () {
     if (!passport.value) return alert("Select passport");
-    document.getElementById("residency-result").innerHTML =
+    residency_result.innerHTML =
       passport.value === "UK"
-        ? "🛂 Post-Brexit rules apply"
-        : "🛂 EU freedom of movement";
-    document.getElementById("residency-result").style.display = "block";
+        ? "Post-Brexit rules apply."
+        : "EU residency is simpler.";
+    residency_result.style.display = "block";
     nextPhase();
   };
 
   window.savePhase3 = function () {
-    if (!budget.value) return alert("Select budget sensitivity");
-    document.getElementById("budget-result").innerHTML =
-      `💰 £${income.value}/month — ${budget.value}`;
-    document.getElementById("budget-result").style.display = "block";
+    if (!budget.value) return alert("Select budget");
+    budget_result.innerHTML = `£${income.value}/month — ${budget.value}`;
+    budget_result.style.display = "block";
     nextPhase();
   };
 
   window.savePhase4 = function () {
-    if (!health-status?.value || !state-pension?.value)
-      return alert("Complete healthcare questions");
-    document.getElementById("healthcare-result").innerHTML = "🏥 Healthcare assessed";
-    document.getElementById("healthcare-result").style.display = "block";
+    healthcare_result.innerHTML =
+      health_status.value === "retired" && state_pension.value === "yes"
+        ? "S1 healthcare likely."
+        : "Private or local insurance required.";
+    healthcare_result.style.display = "block";
     nextPhase();
   };
 
   window.savePhase5 = function () {
-    if (!housing-type?.value || !location-style?.value)
-      return alert("Complete housing questions");
-    document.getElementById("housing-result").innerHTML = "🏠 Housing preferences saved";
-    document.getElementById("housing-result").style.display = "block";
+    housing_result.innerHTML =
+      `You plan to ${housing_type.value} in a ${location_style.value} area.`;
+    housing_result.style.display = "block";
     nextPhase();
   };
 
